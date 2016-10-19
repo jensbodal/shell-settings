@@ -168,6 +168,7 @@ filetype plugin on
 
 autocmd BufNewFile,BufRead * setlocal formatoptions-=r
 autocmd BufNewFile,BufRead * setlocal formatoptions+=t
+autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=8
 autocmd Filetype gitcommit setlocal spell textwidth=80
 autocmd FileType sql set filetype=mysql
