@@ -89,9 +89,10 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 
-# Control+Up/Down goes through global shell history
-# Up/Down goes through local shell history
+# Remap up/down arrows to go through local history
+# Map page up/page down to go through global history
 # All history is merged on end of terminal session
+# http://superuser.com/a/691603
 up-line-or-local-history() {
     zle set-local-history 1
     zle up-line-or-history
