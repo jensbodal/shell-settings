@@ -19,6 +19,7 @@ set softtabstop=2
 
 "Keep same spacing on newline
 set autoindent
+set cindent
 
 "How many columns the \t stands for when reading files
 set tabstop=4
@@ -29,10 +30,10 @@ set tabstop=4
 colorscheme molokai
 
 "Adds a column marker at 80 characters wide
-set colorcolumn=120
+set colorcolumn=130
 
 "Set default textwidth to unlimited, change default for file types elsewhere
-set textwidth=120
+set textwidth=130
 
 "Set colorcolumn color
 highlight colorcolumn ctermbg=red
@@ -169,6 +170,7 @@ filetype plugin on
 autocmd BufNewFile,BufRead * setlocal formatoptions-=r
 autocmd BufNewFile,BufRead * setlocal formatoptions+=t
 autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
+autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=8
 autocmd Filetype gitcommit setlocal spell textwidth=80
 autocmd FileType sql set filetype=mysql
