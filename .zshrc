@@ -6,7 +6,7 @@ bindkey -v
 
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/jens_bodal/.oh-my-zsh
+source ~/.zsh-homerc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -67,7 +67,6 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/nfs/stak/students/b/bodalj/bin:/usr/local/sbin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

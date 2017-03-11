@@ -3,6 +3,14 @@
 " please note that some of them (such as colorcolumn and undofile) won't work
 " *****************************************************************************
 
+<<<<<<< HEAD
+=======
+"THESE MUST BE FIRST
+"scriptencoding utf-8
+"set encoding=utf-8
+"
+
+>>>>>>> 88fc2ce4dc341f4b2706f7f23a6fd357f03373ef
 "Turns on highlighting of syntax
 syntax on
 
@@ -30,10 +38,17 @@ set tabstop=4
 colorscheme molokai
 
 "Adds a column marker at 80 characters wide
+<<<<<<< HEAD
 set colorcolumn=140
 
 "Set default textwidth to unlimited, change default for file types elsewhere
 set textwidth=140
+=======
+set colorcolumn=130
+
+"Set default textwidth to unlimited, change default for file types elsewhere
+set textwidth=130
+>>>>>>> 88fc2ce4dc341f4b2706f7f23a6fd357f03373ef
 
 "Set colorcolumn color
 highlight colorcolumn ctermbg=red
@@ -123,7 +138,10 @@ fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
+<<<<<<< HEAD
   retab
+=======
+>>>>>>> 88fc2ce4dc341f4b2706f7f23a6fd357f03373ef
   call cursor(l, c)
 endfun
 
@@ -182,9 +200,12 @@ nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tp :tabp<CR>
 
+<<<<<<< HEAD
 "Toggle line numbers
 nnoremap <C-n> :set invnumber<CR>
 
+=======
+>>>>>>> 88fc2ce4dc341f4b2706f7f23a6fd357f03373ef
 "Keep at least # lines above/below
 set scrolloff=10
 "hi! CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
@@ -196,4 +217,8 @@ runtime macros/matchit.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
 let g:ctrlp_root_markers = ['.ctrlp']
+<<<<<<< HEAD
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+=======
+set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
+>>>>>>> 88fc2ce4dc341f4b2706f7f23a6fd357f03373ef
