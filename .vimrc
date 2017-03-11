@@ -30,10 +30,10 @@ set tabstop=4
 colorscheme molokai
 
 "Adds a column marker at 80 characters wide
-set colorcolumn=130
+set colorcolumn=140
 
 "Set default textwidth to unlimited, change default for file types elsewhere
-set textwidth=130
+set textwidth=140
 
 "Set colorcolumn color
 highlight colorcolumn ctermbg=red
@@ -123,6 +123,7 @@ fun! <SID>StripTrailingWhitespaces()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
+  retab
   call cursor(l, c)
 endfun
 
@@ -180,6 +181,9 @@ nnoremap tt :tabnext<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tp :tabp<CR>
+
+"Toggle line numbers
+nnoremap <C-n> :set invnumber<CR>
 
 "Keep at least # lines above/below
 set scrolloff=10
