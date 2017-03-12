@@ -26,8 +26,8 @@ set tabstop=4
 
 "Color that is easier to see with dark background
 "https://raw.githubusercontent.com/changyuheng/color-scheme-holokai-for-vim/master/colors/holokai.vim
-colorscheme holokai
-"colorscheme molokai
+"colorscheme holokai
+colorscheme molokai
 
 "Adds a column marker at 80 characters wide
 set colorcolumn=140
