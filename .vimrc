@@ -192,8 +192,16 @@ hi! cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white
 hi! cursorline cterm=NONE ctermbg=darkred ctermfg=white
 nnoremap H :set cursorline! cursorcolumn!<CR>
 nnoremap C :set cursorcolumn!<CR>
+
 runtime macros/matchit.vim
+
+"Another method for including a plugin...
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+"Any of these folders will be ignored by ctrlp, notice the '\|' to escape the OR
 let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
+
+"Place a .ctrlp in any folder to make that the 'root' folder for which ctrlp won't search above
 let g:ctrlp_root_markers = ['.ctrlp']
+
 set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
