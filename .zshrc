@@ -1,3 +1,9 @@
+# Installation
+# COPY symlink jens-disagrees theme to ohmyzsh themes folder
+# create ~/.zsh-homerc file containing something like: export ZSH=/home/username/.oh-my-zsh
+# create ~/.aliasrc file
+###########################################################################################
+
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
@@ -6,6 +12,7 @@ bindkey -v
 
 
 # Path to your oh-my-zsh installation.
+# e.g. a file containing something like: export ZSH=/home/username/.oh-my-zsh
 source ~/.zsh-homerc
 
 # Set name of the theme to load.
@@ -139,6 +146,10 @@ jens() {
   fi
 }
 
-# Read aliases from file
+# Global Aliases for all installations
+alias s="source ~/.zshrc"
+alias hist="history"
+
+# Read custom aliases from file
 ALIAS_FILE=~/.aliasrc
 source $ALIAS_FILE
