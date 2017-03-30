@@ -25,3 +25,4 @@ ln -sf $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
 ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
 
 git submodule update --init
+npm config set prefix=$HOME/node
