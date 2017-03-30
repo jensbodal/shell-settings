@@ -1,3 +1,11 @@
+# Using Automated Scripts
+
+1. Install ZSH using your OS package manager or build from source
+2. Install oh-my-zsh using provided script
+3. Run setup script
+4. If npm not installed, install npm
+5. Run post setup instal script
+
 # Use absolute links when symlinking
 
 e.g. `ln -sf /home/owner/shell-settings/folder /home/owner/.vim/folder`
