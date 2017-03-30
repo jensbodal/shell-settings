@@ -23,3 +23,7 @@ ln -sf $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle
 ln -sf $THIS_VIM_FOLDER/colors $HOME/.vim/colors
 ln -sf $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
 ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
+
+echo "export ZSH="$HOME"/.oh-my-zsh" >> ~/.zsh-homerc
+echo "export N_PREFIX="$HOME"/.n" >> ~/.zsh-homerc
+echo "export PATH="$HOME"/local/bin:"$HOME".n/bin":$PATH >> ~/.zsh-homerc
