@@ -94,6 +94,8 @@ main() {
     fi
   fi
 
+  ln -sf $PWD/jens-disagrees.zsh-theme $HOME/.oh-my-zsh/themes/jens-disagrees.zsh-theme
+
   printf "${GREEN}"
   echo '         __                                     __   '
   echo '  ____  / /_     ____ ___  __  __   ____  _____/ /_  '
