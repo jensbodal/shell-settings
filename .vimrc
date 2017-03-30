@@ -2,9 +2,61 @@
 " These options are being used in Vim 7.4. If using an earlier version of VIM
 " please note that some of them (such as colorcolumn and undofile) won't work
 " *****************************************************************************
+" MUST BE AT TOP FOR VUNDLE
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+" init vundle and specify where to store plugins
+call vundle#begin('~/.vundle/plugins')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" Github Plugins
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'leafgarland/typescript-vim'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+"   Plugin 'L9'
+
+" Git plugin not hosted on GitHub
+"   Plugin 'git://git.wincent.com/command-t.git'
+
+" git repos on your local machine (i.e. when working on your own plugin)
+"   Plugin 'file:///home/gmarik/path/to/plugin'
+
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"   Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Turns on highlighting of syntax
 syntax on
+
+"Set custom leader from \ to "
+let mapleader='"'
 
 "Sets shift ('<' and '>') column width
 set shiftwidth=2
@@ -26,8 +78,8 @@ set tabstop=4
 
 "Color that is easier to see with dark background
 "https://raw.githubusercontent.com/changyuheng/color-scheme-holokai-for-vim/master/colors/holokai.vim
-colorscheme holokai
-"colorscheme molokai
+"colorscheme holokai
+colorscheme molokai
 
 "Adds a column marker at 80 characters wide
 set colorcolumn=140
@@ -158,9 +210,6 @@ autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespa
 "Start pathogen manager on startup
 execute pathogen#infect()
 
-"Enable indent on for plugin filetypes
-filetype plugin indent on
-
 "Enables filetype plugin to allow extension spedific overrides
 "e.g. ~/.vim/after/ftplugin/cpp.vim
 "in cpp.vim: setlocal textwidth=80
@@ -184,6 +233,23 @@ nnoremap tp :tabp<CR>
 
 "Toggle line numbers
 nnoremap <C-n> :set invnumber<CR>
+
+"Min number of characters for completion YCM
+let g:ycm_min_num_of_chars_for_completion=1
+
+"Disable YCM by default
+let g:ycm_auto_trigger=0
+
+"turn off YCM
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+"turn on YCM
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+
+fun! ToggleYCM()
+  :let g:ycm_auto_trigger=1
+endfun
+
+map <leader>q :call ToggleYCM()<CR>
 
 "Keep at least # lines above/below
 set scrolloff=10
