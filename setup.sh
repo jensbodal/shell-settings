@@ -23,6 +23,3 @@ ln -sf $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle
 ln -sf $THIS_VIM_FOLDER/colors $HOME/.vim/colors
 ln -sf $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
 ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
-
-git submodule update --init
-npm config set prefix=$HOME/node
