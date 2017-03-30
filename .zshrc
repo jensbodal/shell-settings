@@ -14,6 +14,9 @@ bindkey -v
 # Path to your oh-my-zsh installation.
 # e.g. a file containing something like: export ZSH=/home/username/.oh-my-zsh
 source ~/.zsh-homerc
+# npm config set prefix=$HOME/node
+export PATH=$HOME/node/bin:$PATH
+
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/

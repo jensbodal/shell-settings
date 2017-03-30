@@ -1,4 +1,19 @@
 [submodule ".vim/bundle/ctrlp.vim"]
-    path = .vim/bundle/ctrlp.vim
-    url = https://github.com/ctrlpvim/ctrlp.vim.git
-    ignore = dirty
+  path = .vim/bundle/ctrlp.vim
+  url = https://github.com/ctrlpvim/ctrlp.vim.git
+  ignore = dirty
+[submodule ".vim/bundle/typescript-vim"]
+  path = .vim/bundle/typescript-vim
+  url = https://github.com/leafgarland/typescript-vim.git
+  ignore = dirty
+[submodule ".vim/bundle/vim-fugitive"]
+  path = .vim/bundle/vim-fugitive
+  url = https://github.com/tpope/vim-fugitive
+  ignore = dirty
+[submodule ".vim/bundle/vim-javascript"]
+  path = .vim/bundle/vim-javascript
+  url = https://github.com/pangloss/vim-javascript.git
+  ignore = dirty
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
