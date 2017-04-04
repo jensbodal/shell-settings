@@ -26,4 +26,4 @@ ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
 
 echo "export ZSH="$HOME"/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX="$HOME"/.n" >> ~/.zsh-homerc
-echo "export PATH="$HOME"/local/bin:"$HOME".n/bin":$PATH >> ~/.zsh-homerc
+echo "export PATH="$HOME"/local/bin:"$HOME"/.n/bin":$PATH >> ~/.zsh-homerc
