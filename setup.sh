@@ -30,3 +30,5 @@ mkdir -p "$HOME/local/node"
 echo "export ZSH=$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=$HOME/.n" >> ~/.zsh-homerc
 echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/.n/bin:$PATH" >> ~/.zsh-homerc
+
+source $HOME/.zshrc
