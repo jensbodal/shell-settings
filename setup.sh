@@ -1,4 +1,4 @@
-DATE_SUFFIX=$(date +%Y-%m-%d)
+DATE_SUFFIX=$(date +%Y-%m-%d-%s)
 BACKUP_FOLDER=$HOME'/.shell_settings_backup/'$DATE_SUFFIX
 BACKUP_VIM_FOLDER=$BACKUP_FOLDER/.vim
 THIS_FOLDER=$PWD
