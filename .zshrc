@@ -152,6 +152,17 @@ jens() {
 alias s="source ~/.zshrc"
 alias hist="history"
 
+# find file
+function ff() {
+  find . | grep "$@";
+}
+
+# find in file
+function fif() {
+  grep "$@" -r .
+}
+# END GLOBAL ALIASES
+
 # Read custom aliases from file
 ALIAS_FILE=~/.aliasrc
 source $ALIAS_FILE
