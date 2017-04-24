@@ -29,7 +29,8 @@ ZSH_THEME="jens-disagrees"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 #
-
+# Local environment overrides
+source ~/.zsh-homerc
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -167,5 +168,4 @@ function fif() {
 ALIAS_FILE=~/.aliasrc
 source $ALIAS_FILE
 
-# Local environment overrides
-source ~/.zsh-homerc
+
