@@ -151,6 +151,7 @@ jens() {
 # Global Aliases for all installations
 alias s="source ~/.zshrc"
 alias hist="history"
+alias json="python -m json.tool"
 
 # find file
 function ff() {
