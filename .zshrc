@@ -152,6 +152,7 @@ jens() {
 # Global Aliases for all installations
 alias s="source ~/.zshrc"
 alias hist="history"
+alias dc="docker-compose"
 
 # find file
 function ff() {
@@ -168,4 +169,5 @@ function fif() {
 ALIAS_FILE=~/.aliasrc
 source $ALIAS_FILE
 
-
+export UID
+export GID
