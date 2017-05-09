@@ -13,7 +13,6 @@ bindkey -v
 
 # Path to your oh-my-zsh installation.
 # e.g. a file containing something like: export ZSH=/home/username/.oh-my-zsh
-source ~/.zsh-homerc
 # npm config set prefix=$HOME/node
 
 
@@ -29,7 +28,9 @@ ZSH_THEME="jens-disagrees"
 #ys.zsh-theme
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
+#
+# Local environment overrides
+source ~/.zsh-homerc
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
@@ -87,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='mvim'
+   export EDITOR='vim'
  fi
 
 # Compilation flags
@@ -152,6 +153,9 @@ jens() {
 alias s="source ~/.zshrc"
 alias hist="history"
 alias json="python -m json.tool"
+alias dc="docker-compose"
+alias di="docker image"
+alias cn="docker container"
 
 # find file
 function ff() {
@@ -167,3 +171,6 @@ function fif() {
 # Read custom aliases from file
 ALIAS_FILE=~/.aliasrc
 source $ALIAS_FILE
+
+export UID
+export GID

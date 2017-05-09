@@ -17,8 +17,14 @@ Plugin 'VundleVim/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " Github Plugins
+
+" -- MUST GO BEFORE vim-markdown --
+Plugin 'godlygeek/tabular'
+" ---------------------------------
+Plugin 'plasticboy/vim-markdown'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "   Plugin 'L9'
@@ -75,6 +81,10 @@ set cindent
 
 "How many columns the \t stands for when reading files
 set tabstop=4
+
+"Open files default without folding
+" zM (fold-all) zR (unfold-all) zo (unfold current) zc (close) za (toggle)
+set foldlevel=99
 
 "Color that is easier to see with dark background
 "https://raw.githubusercontent.com/changyuheng/color-scheme-holokai-for-vim/master/colors/holokai.vim
@@ -221,6 +231,8 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=r
 autocmd BufNewFile,BufRead * setlocal formatoptions+=t
 autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
 autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
+autocmd BufNewFile,BufRead *.yaml,*.yml setf yaml
+autocmd BufNewFile,BufRead Dockerfile,dockerfile setf Dockerfile
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=8
 autocmd Filetype gitcommit setlocal spell textwidth=80
 autocmd FileType sql set filetype=mysql
