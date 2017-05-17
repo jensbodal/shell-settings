@@ -34,7 +34,7 @@ mkdir -p "$HOME/local/n"
 
 echo "export ZSH=$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=$HOME/local/n" >> ~/.zsh-homerc
-echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/local/n/bin:$PATH" >> ~/.zsh-homerc
+echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/local/n/bin:\$PATH" >> ~/.zsh-homerc
 
 touch $HOME/.aliasrc
 
