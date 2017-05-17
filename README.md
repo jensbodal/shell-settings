@@ -22,7 +22,7 @@ e.g. `ln -sf /home/owner/shell-settings/folder /home/owner/.vim/folder`
 
 ### Ensure all additional software is installed
 ```bash
-sudo apt-get install build-essential cmake python-dev python3-dev npm rustc
+sudo apt-get install exuberant-ctags npm vim 
 ```
 
 ### Building YouCompleteMe
