@@ -15,6 +15,8 @@ mv -f ~/.vim/colors $BACKUP_VIM_FOLDER
 mv -f ~/.vim/ftplugin $BACKUP_VIM_FOLDER
 mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER
 
+mkdir -p ~/.vim
+
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
 ln -sf $THIS_VIM_FOLDER/after $HOME/.vim/after
