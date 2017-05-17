@@ -9,7 +9,7 @@ filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 " init vundle and specify where to store plugins
-call vundle#begin('~/.vundle/plugins')
+call vundle#begin('~/local/vundle/plugins')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
