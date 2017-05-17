@@ -8,21 +8,14 @@ THIS_VIM_FOLDER=$THIS_FOLDER'/.vim'
 
 mkdir -p $BACKUP_VIM_FOLDER
 
-mv -f ~/.vimrc $BACKUP_FOLDER
-mv -f ~/.zshrc $BACKUP_FOLDER
-mv -f ~/.vim/after $BACKUP_VIM_FOLDER
-mv -f ~/.vim/autoload $BACKUP_VIM_FOLDER
-mv -f ~/.vim/bundle $BACKUP_VIM_FOLDER
-mv -f ~/.vim/colors $BACKUP_VIM_FOLDER
-mv -f ~/.vim/ftplugin $BACKUP_VIM_FOLDER
-mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER
-
-mkdir -p ~/.vim/after
-mkdir -p ~/.vim/autoload
-mkdir -p ~/.vim/bundle
-mkdir -p ~/.vim/colors
-mkdir -p ~/.vim/ftplugin
-mkdir -p ~/.vim/plugin
+mv -f ~/.vimrc $BACKUP_FOLDER 2>/dev/null
+mv -f ~/.zshrc $BACKUP_FOLDER 2>/dev/null
+mv -f ~/.vim/after $BACKUP_VIM_FOLDER 2>/dev/null
+mv -f ~/.vim/autoload $BACKUP_VIM_FOLDER 2>/dev/null
+mv -f ~/.vim/bundle $BACKUP_VIM_FOLDER 2>/dev/null
+mv -f ~/.vim/colors $BACKUP_VIM_FOLDER 2>/dev/null
+mv -f ~/.vim/ftplugin $BACKUP_VIM_FOLDER 2>/dev/null
+mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER 2>/dev/null
 
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
