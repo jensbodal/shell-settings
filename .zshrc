@@ -13,8 +13,6 @@ bindkey -v
 
 # Path to your oh-my-zsh installation.
 # e.g. a file containing something like: export ZSH=/home/username/.oh-my-zsh
-# npm config set prefix=$HOME/node
-
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
