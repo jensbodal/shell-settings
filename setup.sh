@@ -25,10 +25,11 @@ ln -sf $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
 ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
 
 mkdir -p "$HOME/local/bin"
-mkdir -p "$HOME/local/node"
+mkdir -p "$HOME/local/npm"
+mkdir -p "$HOME/local/n"
 
 echo "export ZSH=$HOME/.oh-my-zsh" >> ~/.zsh-homerc
-echo "export N_PREFIX=$HOME/.n" >> ~/.zsh-homerc
-echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/.n/bin:$PATH" >> ~/.zsh-homerc
+echo "export N_PREFIX=$HOME/local/n" >> ~/.zsh-homerc
+echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/local/n/bin:$PATH" >> ~/.zsh-homerc
 
 source $HOME/.zshrc
