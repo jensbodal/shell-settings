@@ -15,7 +15,12 @@ mv -f ~/.vim/colors $BACKUP_VIM_FOLDER
 mv -f ~/.vim/ftplugin $BACKUP_VIM_FOLDER
 mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER
 
-mkdir -p ~/.vim
+mkdir -p ~/.vim/after
+mkdir -p ~/.vim/autoload
+mkdir -p ~/.vim/bundle
+mkdir -p ~/.vim/colors
+mkdir -p ~/.vim/ftplugin
+mkdir -p ~/.vim/plugin
 
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
@@ -33,5 +38,7 @@ mkdir -p "$HOME/local/n"
 echo "export ZSH=$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=$HOME/local/n" >> ~/.zsh-homerc
 echo "export PATH=$HOME/local/bin:$HOME/local/node/bin:$HOME/local/n/bin:$PATH" >> ~/.zsh-homerc
+
+touch $HOME/.aliasrc
 
 source $HOME/.zshrc
