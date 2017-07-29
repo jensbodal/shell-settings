@@ -233,6 +233,7 @@ autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
 autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
 autocmd BufNewFile,BufRead *.yaml,*.yml setf yaml
 autocmd BufNewFile,BufRead Dockerfile,dockerfile setf Dockerfile
+autocmd BufNewFile,BufRead Gruntfile.js setf Gruntfile.js
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=8
 autocmd Filetype gitcommit setlocal spell textwidth=80
 autocmd FileType sql set filetype=mysql

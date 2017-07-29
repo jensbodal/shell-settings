@@ -155,6 +155,14 @@ alias dc="docker-compose"
 alias di="docker image"
 alias cn="docker container"
 
+function cd() {
+  builtin cd $@
+
+  if hash n && [ -f './.nvmrc' ]; then
+    grep -e '[(\d\.\d\.\d)|(latest)|(lts)|(stable)]' './.nvmrc' | xargs -I@ n @
+  fi
+}
+
 # find file
 function ff() {
   find . | grep "$@";
