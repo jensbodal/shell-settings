@@ -23,6 +23,9 @@ bindkey -v
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="crunch"
 ZSH_THEME="jens-disagrees"
+#ZSH_THEME="agnoster"
+DEFAULT_USER="jens_bodal"
+
 #ys.zsh-theme
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
