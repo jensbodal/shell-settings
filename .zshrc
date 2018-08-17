@@ -1,10 +1,12 @@
+# Uncomment to run profiling (also need to uncomment last line of this file)
+#zmodload zsh/zprof
 # Installation
 # COPY symlink jens-disagrees theme to ohmyzsh themes folder
 # create ~/.zsh-homerc file containing something like: export ZSH=/home/username/.oh-my-zsh
 # create ~/.aliasrc file
 ###########################################################################################
 
-HISTFILE=~/.histfile
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=1000
 SAVEHIST=1000
 #setopt appendhistory autocd
@@ -158,13 +160,13 @@ alias dc="docker-compose"
 alias di="docker image"
 alias cn="docker container"
 
-function cd() {
-  builtin cd $@
-
-  if hash n && [ -f './.nvmrc' ]; then
-    grep -e '[(\d\.\d\.\d)|(latest)|(lts)|(stable)]' './.nvmrc' | xargs -I@ n @
-  fi
-}
+# function cd() {
+#   builtin cd $@
+#
+#   if hash n && [ -f './.nvmrc' ]; then
+#     grep -e '[(\d\.\d\.\d)|(latest)|(lts)|(stable)]' './.nvmrc' | xargs -I@ n @
+#   fi
+# }
 
 # find file
 function ff() {
@@ -183,3 +185,6 @@ source $ALIAS_FILE
 
 export UID
 export GID
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#zprof
