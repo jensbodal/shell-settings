@@ -90,6 +90,7 @@ set foldlevel=99
 "https://raw.githubusercontent.com/changyuheng/color-scheme-holokai-for-vim/master/colors/holokai.vim
 "colorscheme holokai
 colorscheme molokai
+"colorscheme solarized8_dark_low_jens
 
 "Adds a column marker at 80 characters wide
 set colorcolumn=140
@@ -229,14 +230,8 @@ filetype plugin on
 
 autocmd BufNewFile,BufRead * setlocal formatoptions-=r
 autocmd BufNewFile,BufRead * setlocal formatoptions+=t
-autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
-autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
-autocmd BufNewFile,BufRead *.yaml,*.yml setf yaml
-autocmd BufNewFile,BufRead Dockerfile,dockerfile setf Dockerfile
-autocmd BufNewFile,BufRead Gruntfile.js setf Gruntfile.js
-autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=8
+
 autocmd Filetype gitcommit setlocal spell textwidth=80
-autocmd FileType sql set filetype=mysql
 
 "Remaps for working with tabs
 nnoremap tt :tabnext<CR>
