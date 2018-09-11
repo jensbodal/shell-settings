@@ -1,0 +1,8 @@
+# ~/.gitconfig
+[includeIf "gitdir/i:/Users/bodal/github/"]
+    path = .gitconfig.github
+
+# ~/.gitconfig.github
+[user]
+  name  = Jens Bodal
+  email = jensbodal@gmail.com
