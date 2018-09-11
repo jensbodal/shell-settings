@@ -24,7 +24,7 @@ bindkey -v
 #ZSH_THEME="crunch"
 ZSH_THEME="jens-disagrees"
 #ZSH_THEME="agnoster"
-DEFAULT_USER="jens_bodal"
+#DEFAULT_USER="jens_bodal"
 
 #ys.zsh-theme
 # Uncomment the following line to use case-sensitive completion.
@@ -121,35 +121,6 @@ bindkey OB down-line-or-local-history
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# vf - fuzzy open with vim from anywhere
-# ex: vf word1 word2 ... (even part of a file name)
-# zsh autoload function
-vf() {
-  local files
-
-  files=(${(f)"$(locate -Ai -0 $@ | grep -z -vE '~$' | fzf --read0 -0 -1 -m)"})
-
-  if [[ -n $files ]]
-  then
-     vim -- $files
-     print -l $files[1]
-  fi
-}
-
-
-alias gf='grep --line-buffered --color=never -r "" * | fzf'
-
-jens() {
-  local file
-  file=$(grep --line-buffered --color=never -r "" * | fzf | sed -r 's#(.*):.*#\1#g')
-
-  if [[ -n $file ]]
-  then
-    vim -- $file
-    print -l $file
-  fi
-}
-
 # Global Aliases for all installations
 alias s="source ~/.zshrc"
 alias hist="history"
@@ -158,22 +129,34 @@ alias dc="docker-compose"
 alias di="docker image"
 alias cn="docker container"
 
-function cd() {
-  builtin cd $@
-
-  if hash n && [ -f './.nvmrc' ]; then
-    grep -e '[(\d\.\d\.\d)|(latest)|(lts)|(stable)]' './.nvmrc' | xargs -I@ n @
-  fi
-}
-
 # find file
-function ff() {
-  find . | grep "$@";
+function grep-file-name() {
+  local needle="${1:- }"
+  local grepopts="$2"
+
+  find . -iname "*$needle*" -type f | grep "$needle" $grepopts
 }
 
 # find in file
 function fif() {
-  grep "$@" -r .
+  grep "$@" -r . | grep "$@"
+}
+
+function brew-update () {
+  # Update Brew Installs
+  brew update
+  brew upgrade
+  brew cask upgrade
+  brew cleanup -s
+  brew cleanup
+  # Run Diagnostics
+  brew doctor
+  brew missing
+}
+
+function git-set-origin() {
+  local currentbranch=$(git rev-parse --abbrev-ref HEAD)
+  git branch --set-upstream-to=origin/$currentbranch $currentbranch
 }
 # END GLOBAL ALIASES
 

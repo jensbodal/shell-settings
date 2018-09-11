@@ -22,7 +22,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'godlygeek/tabular'
 " ---------------------------------
 Plugin 'plasticboy/vim-markdown'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 
@@ -243,6 +242,8 @@ nnoremap tt :tabnext<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
 nnoremap tp :tabp<CR>
+nnoremap tn :tabnew<CR>
+
 
 "Toggle line numbers
 nnoremap <C-n> :set invnumber<CR>
