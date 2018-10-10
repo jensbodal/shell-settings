@@ -23,7 +23,7 @@
 
 #PROMPT='%{$fg[red]%}%{$fg[blue]%}%n%{$fg[red]%}@%{$fg[blue]%}%m%{$fg[red]%}:%{$fg[blue]%}%c%{$fg[red]%} %{$reset_color%}'
 #PROMPT='%{$fg[blue]%}%c%{$fg[red]%} %{$reset_color%}'
-PROMPT='%{$fg[red]%}[%{$fg[blue]%}%c%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
+PROMPT='%{$fg[red]%}[%{$fg[green]%}%c%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
 
 # The right-hand prompt
 

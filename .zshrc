@@ -122,15 +122,35 @@ bindkey OB down-line-or-local-history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Global Aliases for all installations
+# If alias executes a command within $() then it should be called from a function
 alias s="source ~/.zshrc"
 alias hist="history"
 alias json="python -m json.tool"
 alias dc="docker-compose"
 alias di="docker image"
 alias cn="docker container"
+alias git-vim-status=__git-vim-status
+alias ff=__grep-file-name
+alias fif=__fif
+alias cdt=__cd-to
+alias brew-update=__brew-update
+alias git-set-origin=__git-set-origin
+
+function __git-vim-status() {
+  vim -p $(git status -s | sed -r 's#^[AM? ]+(.*)$#\1#')
+}
+
+# cd to file
+function __cd-to() {
+  while [[ $PWD != '/' && ! -d "$1" ]]; do cd ..; done
+}
+
+function cdf() {
+  cd $(dirname "$1")
+}
 
 # find file
-function grep-file-name() {
+function __grep-file-name() {
   local needle="${1:- }"
   local grepopts="$2"
 
@@ -138,11 +158,11 @@ function grep-file-name() {
 }
 
 # find in file
-function fif() {
+function __fif() {
   grep "$@" -r . | grep "$@"
 }
 
-function brew-update () {
+function __brew-update () {
   # Update Brew Installs
   brew update
   brew upgrade
@@ -154,7 +174,7 @@ function brew-update () {
   brew missing
 }
 
-function git-set-origin() {
+function __git-set-origin() {
   local currentbranch=$(git rev-parse --abbrev-ref HEAD)
   git branch --set-upstream-to=origin/$currentbranch $currentbranch
 }
