@@ -137,7 +137,7 @@ alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
 
 function __git-vim-status() {
-  vim -p $(git status -s | sed -r 's#^[AM? ]+(.*)$#\1#')
+  vim -p $(git status -s | sed -r 's#^(.*->)?[ARM? ]+(.*)$#\2#')
 }
 
 # cd to file
