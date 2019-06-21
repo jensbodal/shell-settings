@@ -21,6 +21,7 @@ mkdir -p ~/.vim
 
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
+ln -sf $THIS_FOLDER/.direnvrc $HOME/.direnvrc
 ln -sf $THIS_VIM_FOLDER/after $HOME/.vim/after
 ln -sf $THIS_VIM_FOLDER/autoload $HOME/.vim/autoload
 ln -sf $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle

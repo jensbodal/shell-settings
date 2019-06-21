@@ -137,7 +137,7 @@ alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
 
 function __git-vim-status() {
-  vim -p $(git status -s | sed -r 's#^(.*->)?[ARM? ]+(.*)$#\2#')
+  vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
 }
 
 # cd to file
@@ -186,3 +186,4 @@ source $ALIAS_FILE
 
 export UID
 export GID
+eval "$(direnv hook zsh)"

@@ -91,10 +91,10 @@ set foldlevel=99
 colorscheme molokai
 
 "Adds a column marker at 80 characters wide
-set colorcolumn=140
+set colorcolumn=80
 
 "Set default textwidth to unlimited, change default for file types elsewhere
-set textwidth=140
+set textwidth=80
 
 "Set colorcolumn color
 highlight colorcolumn ctermbg=red
@@ -227,8 +227,12 @@ filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
 
 autocmd BufNewFile,BufRead * setlocal formatoptions-=r
-autocmd BufNewFile,BufRead * setlocal formatoptions+=t
+"don't wrap text
+autocmd BufNewFile,BufRead * setlocal formatoptions-=t
+autocmd BufNewFile,BufRead .gitignore set filetype=zsh
 autocmd BufNewFile,BufRead .aliasrc set filetype=zsh
+autocmd BufNewFile,BufRead .envrc set filetype=zsh
+autocmd BufNewFile,BufRead .direnvrc set filetype=zsh
 autocmd BufNewFile,BufRead .eslintrc set filetype=javascript
 autocmd BufNewFile,BufRead *.yaml,*.yml setf yaml
 autocmd BufNewFile,BufRead Dockerfile,dockerfile setf Dockerfile
