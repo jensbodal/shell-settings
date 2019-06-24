@@ -16,7 +16,7 @@ function __getnodebinpath() {
   echo "$nodebinpath"
 }
 
-function NODE_VERSION() {
+function use_node() {
   local version="$1"
   local NODE_BIN_PATH="$(__getnodebinpath $version)"
   export PATH=$NODE_BIN_PATH:$PATH
