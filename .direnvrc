@@ -1,6 +1,6 @@
 function __getnodebinpath() {
   local targetversion="$1"
-  local nodedir="$HOME/local/n/n/versions/node"
+  local nodedir="$N_PREFIX/n/versions/node"
   local latest=$(ls "$nodedir" | egrep "^$targetversion.*$" | sort --version-sort | tail -n 1)
   local nodebinpath="$nodedir/$latest/bin"
 
