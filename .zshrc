@@ -9,7 +9,7 @@ HISTSIZE=1000
 SAVEHIST=1000
 #setopt appendhistory autocd
 bindkey -v
-
+fpath=($HOME/.zsh_completions $fpath)
 
 # Path to your oh-my-zsh installation.
 # e.g. a file containing something like: export ZSH=/home/username/.oh-my-zsh
