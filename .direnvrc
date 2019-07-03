@@ -1,0 +1,23 @@
+function __getnodebinpath() {
+  local targetversion="$1"
+  local nodedir="$N_PREFIX/n/versions/node"
+  local latest=$(ls "$nodedir" | egrep "^$targetversion.*$" | sort --version-sort | tail -n 1)
+  local nodebinpath="$nodedir/$latest/bin"
+
+  if [ ! -d "$nodebinpath" ]; then
+    echo "Downloading node $targetversion via n ..." >&2
+    currentnodeversion=$(node --version)
+    n $targetversion >&2
+    n $currentnodeversion >&2
+    latest=$(ls "$nodedir" | egrep "^$targetversion.*$" | sort --version-sort | tail -n 1)
+    nodebinpath="$nodedir/$latest/bin"
+  fi
+
+  echo "$nodebinpath"
+}
+
+function use_node() {
+  local version="$1"
+  local NODE_BIN_PATH="$(__getnodebinpath $version)"
+  export PATH=$NODE_BIN_PATH:$PATH
+}

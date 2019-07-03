@@ -1,0 +1,37 @@
+#compdef _zsh_yarn yarn
+# Auto completion function for yarn
+# Requires jq
+#
+# Parses package.json for scripts and adds the script names to autocompletion
+# options for yarn
+# TODO
+# 1. Support yarn commands
+# 2. Support sub commands (how is this done?)
+# 3. Possibly move script commands to run and default commands to default
+
+function _git_root {
+  if [ -d .git ]; then
+    dirname .git
+  else
+    dirname $(git rev-parse --git-dir 2> /dev/null) 2> /dev/null
+  fi
+}
+
+function _git_package_json {
+  echo "$(_git_root)/package.json"
+}
+
+function _zsh_yarn_package_scripts() {
+  echo $(jq -r '.scripts | keys[]' $(_git_package_json))
+}
+
+function _zsh_yarn {
+  if [ -f "$(_git_package_json)" ]; then
+    _arguments -C \
+      "1: :($(_zsh_yarn_package_scripts))" \
+      "*: :_files"
+  else
+    _arguments -C \
+      "*: :_files"
+  fi
+}
