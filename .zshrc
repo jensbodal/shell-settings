@@ -135,6 +135,7 @@ alias fif=__fif
 alias cdt=__cd-to
 alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
+alias whats-my-ip=__whats-my-ip
 
 function __git-vim-status() {
   vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
@@ -177,6 +178,10 @@ function __brew-update () {
 function __git-set-origin() {
   local currentbranch=$(git rev-parse --abbrev-ref HEAD)
   git branch --set-upstream-to=origin/$currentbranch $currentbranch
+}
+
+function __whats-my-ip() {
+  curl ifconfig.co
 }
 # END GLOBAL ALIASES
 

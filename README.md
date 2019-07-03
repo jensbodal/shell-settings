@@ -22,11 +22,20 @@ e.g. `ln -sf /home/owner/shell-settings/folder /home/owner/.vim/folder`
 
 ### Ensure all additional software is installed
 ```bash
-sudo apt-get install exuberant-ctags npm vim 
+sudo apt-get install exuberant-ctags npm vim
 ```
 
 ### Building YouCompleteMe
 ```bash
 cd ~/.vundle/plugins/YouCompleteMe
 ./install.py --all
+```
+
+# Extra packages to install
+
+```
+direnv
+jq
+zsh
+...
 ```
