@@ -123,7 +123,7 @@ bindkey OB down-line-or-local-history
 
 # Global Aliases for all installations
 # If alias executes a command within $() then it should be called from a function
-alias s="source ~/.zshrc"
+alias s="source ~/.zshrc && if type direnv > /dev/null; then direnv reload; fi"
 alias hist="history"
 alias json="python -m json.tool"
 alias dc="docker-compose"

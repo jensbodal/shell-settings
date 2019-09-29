@@ -91,10 +91,10 @@ set foldlevel=99
 colorscheme molokai
 
 "Adds a column marker at 80 characters wide
-set colorcolumn=80
+set colorcolumn=140
 
 "Set default textwidth to unlimited, change default for file types elsewhere
-set textwidth=80
+set textwidth=140
 
 "Set colorcolumn color
 highlight colorcolumn ctermbg=red
@@ -177,6 +177,9 @@ set splitright
 "Carriage return creates a newline, shift CR creates a new line after
 nnoremap <CR> O<Esc>
 nnoremap <S-CR> o<Esc>
+
+"Use comma to repeat macro
+nnoremap , @@
 
 "Function to strip all trailing whitespace from files -- called automatically
 "on save
