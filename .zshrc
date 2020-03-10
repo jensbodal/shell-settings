@@ -132,6 +132,7 @@ alias cn="docker container"
 alias git-vim-status=__git-vim-status
 alias ff=__grep-file-name
 alias fif=__fif
+alias frif=__frif
 alias cdt=__cd-to
 alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
@@ -161,6 +162,24 @@ function __grep-file-name() {
 # find in file
 function __fif() {
   grep "$@" -r . | grep "$@"
+}
+
+function __frif() {
+  targetword="$1"
+  replaceword="$2"
+  doreplace="$3"
+
+  for file in `grep "$targetword" -Rl .`; do
+    if [ "$doreplace" = "-i" ]; then
+      sed -i'' -r "s#$targetword#$replaceword#g" "$file"
+    else
+      sed -r "s#$targetword#$replaceword#g" "$file" | grep "$targetword\|$replaceword"
+    fi
+  done
+
+  if [ ! "$doreplace" = "-i" ]; then
+    echo "\nNote:\n  use \"-i\" flag to actually replace"
+  fi
 }
 
 function __brew-update () {
