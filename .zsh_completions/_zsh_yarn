@@ -18,7 +18,11 @@ function _git_root {
 }
 
 function _git_package_json {
-  echo "$(_git_root)/package.json"
+  if [ -f "package.json" ]; then
+    echo "$(readlink -f package.json)"
+  elif [ -f "$(_git_root)/package.json" ]; then
+    echo "$(_git_root)/package.json"
+  fi
 }
 
 function _zsh_yarn_package_scripts() {
