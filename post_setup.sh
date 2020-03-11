@@ -15,7 +15,7 @@ if type npm>/dev/null; then
   npm config set prefix=$HOME/local/npm
 
   if type yarn>/dev/null; then
-    yarn config set prefix ~/local/yarn
+    yarn config set prefix $HOME/local/yarn
     yarn global add n
     yarn global add jwt-cli
   else
