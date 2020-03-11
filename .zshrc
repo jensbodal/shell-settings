@@ -200,7 +200,8 @@ function __git-set-origin() {
 }
 
 function __whats-my-ip() {
-  curl ifconfig.co
+  dig +short myip.opendns.com @resolver1.opendns.com
+  # curl ifconfig.co
 }
 # END GLOBAL ALIASES
 
