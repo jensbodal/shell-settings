@@ -137,6 +137,7 @@ alias cdt=__cd-to
 alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
 alias whats-my-ip=__whats-my-ip
+alias gs="git status"
 
 function __git-vim-status() {
   vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')

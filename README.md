@@ -34,6 +34,7 @@ cd ~/.vundle/plugins/YouCompleteMe
 # Extra packages to install
 
 ```
+# https://github.com/direnv/direnv/blob/master/docs/development.md
 direnv
 jq
 zsh

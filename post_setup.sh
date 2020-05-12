@@ -25,9 +25,14 @@ else
   echo "Install node: https://nodejs.org/en/download/"
   echo "  1. install node (tar vxf *.tar.xz)"
   echo "  2. symlink node and npm versions to ~/local/bin"
+  echo "     - cd /home/bodal/download/node-v12.16.3-linux-x64/bin"
+  echo "     - ln -s \$(readlink -f node) \$HOME/local/bin/node"
+  echo "     - ln -s \$(readlink -f ../lib/node_modules/npm/bin/npm-cli.js) \$HOME/local/bin/npm"
   echo "  3. install yarn (tar zvxf): https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
-  echo "  4. install n"
-  echo "  5. use n to install node/npm"
-  echo "  6. remove symlinks and manual download of node"
+  echo "     - ln -s $(readlink -f yarn) $HOME/local/bin/yarn"
+  echo "  4. re-run this script"
+  echo "  -. install n"
+  echo "  -. use n to install node/npm"
+  echo "  -. remove symlinks and manual download of node"
 fi
 

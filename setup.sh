@@ -20,7 +20,7 @@ mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER 2>/dev/null
 mkdir -p ~/.vim
 
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
-ln -sf $THIS_FOLDER/.zsh_completions $HOME/.zsh_completions
+ln -sf $THIS_FOLDER/.zsh_completions $HOME
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
 ln -sf $THIS_FOLDER/.direnvrc $HOME/.direnvrc
 ln -sf $THIS_VIM_FOLDER/after $HOME/.vim/after

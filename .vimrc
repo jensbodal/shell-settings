@@ -34,58 +34,8 @@ filetype off                  " required
 " Autoloaded from ~/.vim/autoload
 call plug#begin('$HOME/.vim/bundle/plugged')
   Plug 'https://github.com/tpope/vim-commentary'
+  Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 call plug#end()
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-" init vundle and specify where to store plugins
-call vundle#begin('~/local/vundle/plugins')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" Github Plugins
-
-" -- MUST GO BEFORE vim-markdown --
-Plugin 'godlygeek/tabular'
-" ---------------------------------
-Plugin 'plasticboy/vim-markdown'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-
-" plugin from http://vim-scripts.org/vim/scripts.html
-"   Plugin 'L9'
-
-" Git plugin not hosted on GitHub
-"   Plugin 'git://git.wincent.com/command-t.git'
-
-" git repos on your local machine (i.e. when working on your own plugin)
-"   Plugin 'file:///home/gmarik/path/to/plugin'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-"   Plugin 'ascenator/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Turns on highlighting of syntax
 syntax on
@@ -250,7 +200,7 @@ autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespa
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Start pathogen manager on startup
-execute pathogen#infect()
+" execute pathogen#infect()
 
 "Enables filetype plugin to allow extension spedific overrides
 "e.g. ~/.vim/after/ftplugin/cpp.vim
@@ -311,9 +261,6 @@ nnoremap H :set cursorline! cursorcolumn!<CR>
 nnoremap C :set cursorcolumn!<CR>
 
 runtime macros/matchit.vim
-
-"Another method for including a plugin...
-set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "Any of these folders will be ignored by ctrlp, notice the '\|' to escape the OR
 let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
