@@ -1,3 +1,24 @@
+" Overview of which map command works in which mode.  More details below.
+" --------------------------------------------------------------------------
+"      COMMANDS                    MODES ~
+" :map   :noremap  :unmap     Normal, Visual, Select, Operator-pending
+" :nmap  :nnoremap :nunmap    Normal
+" :vmap  :vnoremap :vunmap    Visual and Select
+" :smap  :snoremap :sunmap    Select
+" :xmap  :xnoremap :xunmap    Visual
+" :omap  :onoremap :ounmap    Operator-pending
+" :map!  :noremap! :unmap!    Insert and Command-line
+" :imap  :inoremap :iunmap    Insert
+" :lmap  :lnoremap :lunmap    Insert, Command-line, Lang-Arg
+" :cmap  :cnoremap :cunmap    Command-line
+" --------------------------------------------------------------------------
+" :map j gg
+" :map Q j
+" :noremap W j
+" j will be mapped to gg.
+" Q will also be mapped to gg, because j will be expanded for the recursive mapping.
+" W will be mapped to j (and not to gg) because j will not be expanded for the non-recursive mapping.
+"
 " *****************************************************************************
 " These options are being used in Vim 7.4. If using an earlier version of VIM
 " please note that some of them (such as colorcolumn and undofile) won't work
@@ -5,6 +26,15 @@
 " MUST BE AT TOP FOR VUNDLE
 set nocompatible              " be iMproved, required
 filetype off                  " required
+
+" vim-plug plugins https://github.com/junegunn/vim-plug
+" Install with PlugInstall
+" Update with PlugUpdate
+" https://github.com/junegunn/vim-plug#commands
+" Autoloaded from ~/.vim/autoload
+call plug#begin('$HOME/.vim/bundle/plugged')
+  Plug 'https://github.com/tpope/vim-commentary'
+call plug#end()
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -291,4 +321,5 @@ let g:ctrlp_custom_ignore = 'node_modules\|bower_components'
 "Place a .ctrlp in any folder to make that the 'root' folder for which ctrlp won't search above
 let g:ctrlp_root_markers = ['.ctrlp']
 
+" :set list
 set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
