@@ -7,6 +7,13 @@ if ! type go>/dev/null; then
   exit 1
 fi
 
+if type brew>/dev/null; then
+  if ! brew info coreutils>/dev/null; then brew install coreutils; fi
+  if ! brew info go>/dev/null; then brew install go; fi
+  if ! brew info jq>/dev/null; then brew install jq; fi
+  if ! brew info yarn>/dev/null; then brew install yarn; fi
+fi
+
 if ! type direnv>/dev/null; then
   echo "Install direnv: https://github.com/direnv/direnv/blob/master/docs/development.md"
   echo "mkdir -p ~/github"
