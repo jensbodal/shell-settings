@@ -8,6 +8,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 #setopt appendhistory autocd
+setopt HIST_IGNORE_ALL_DUPS
 bindkey -v
 fpath=($HOME/.zsh_completions $fpath)
 
@@ -74,7 +75,10 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  history
+  history-substring-search
+)
 
 # User configuration
 
@@ -103,21 +107,41 @@ source $ZSH/oh-my-zsh.sh
 # Map page up/page down to go through global history
 # All history is merged on end of terminal session
 # http://superuser.com/a/691603
-up-line-or-local-history() {
+up-local-history-or-substring-search() {
+  # if we have a buffer and it is equal to the last local buffer, then we are performing a local search
+  # the buffer will differ from the local buffer only when we type additional keys
+  if [ -z $BUFFER ] || [[ $BUFFER == $LOCAL_BUFFER ]]; then
     zle set-local-history 1
     zle up-line-or-history
     zle set-local-history 0
+    LOCAL_BUFFER="$BUFFER"
+  else
+    LOCAL_BUFFER=
+    history-substring-search-up
+  fi
 }
-down-line-or-local-history() {
+down-local-history-or-substring-search() {
+  # if we have a buffer and it is equal to the last local buffer, then we are performing a local search
+  # the buffer will differ from the local buffer only when we type additional keys
+  if [ -z $BUFFER ] || [[ $BUFFER == $LOCAL_BUFFER ]]; then
     zle set-local-history 1
     zle down-line-or-history
     zle set-local-history 0
+    LOCAL_BUFFER="$BUFFER"
+  else
+    LOCAL_BUFFER=
+    history-substring-search-down
+  fi
 }
+# register functions
+zle -N up-local-history-or-substring-search
+zle -N down-local-history-or-substring-search
 
-zle -N up-line-or-local-history
-zle -N down-line-or-local-history
-bindkey OA up-line-or-local-history
-bindkey OB down-line-or-local-history
+# control+v[key] to see the keys
+bindkey OA up-local-history-or-substring-search        # Cursor up
+bindkey OB down-local-history-or-substring-search      # Cursor down
+bindkey "^[[1;5A" up-local-history-or-substring-search   # [CTRL] + Cursor up
+bindkey "^[[1;5B" down-local-history-or-substring-search # [CTRL] + Cursor down
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -213,6 +237,4 @@ source $ALIAS_FILE
 export UID
 export GID
 eval "$(direnv hook zsh)"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true

@@ -35,6 +35,7 @@ filetype off                  " required
 call plug#begin('$HOME/.vim/bundle/plugged')
   Plug 'https://github.com/tpope/vim-commentary'
   Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+  Plug 'https://github.com/tpope/vim-fugitive'
 call plug#end()
 
 "Turns on highlighting of syntax
