@@ -20,6 +20,7 @@ if ! type direnv>/dev/null; then
   echo "cd ~/github"
   echo "git clone https://github.com/direnv/direnv.git"
   echo "cd direnv"
+  echo "You might need 'go env -w GOPROXY=direct'"
   echo "make"
   echo "make install"
   exit 1
@@ -28,6 +29,10 @@ fi
 
 if type npm>/dev/null; then
   npm config set prefix=$HOME/local/npm
+
+  if ! type yarn>/dev/null; then
+    npm install -g yarn
+  fi
 
   if type yarn>/dev/null; then
     yarn config set prefix $HOME/local/yarn
