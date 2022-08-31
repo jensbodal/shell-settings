@@ -27,4 +27,10 @@ function use_node() {
   fi
 
   export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH
+
+  if [ -f /usr/local/bin/node ]; then
+    rm /usr/local/bin/node
+  fi
+
+  ln -s `which node` /usr/local/bin/node
 }

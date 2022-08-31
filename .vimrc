@@ -36,6 +36,7 @@ call plug#begin('$HOME/.vim/bundle/plugged')
   Plug 'https://github.com/tpope/vim-commentary'
   Plug 'https://github.com/ctrlpvim/ctrlp.vim'
   Plug 'https://github.com/tpope/vim-fugitive'
+  Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 "Turns on highlighting of syntax
@@ -57,7 +58,7 @@ set softtabstop=2
 
 "Keep same spacing on newline
 set autoindent
-set cindent
+" set cindent pretty sure this is what is adding tabs after pressing 'o' in commit messages
 
 "How many columns the \t stands for when reading files
 set tabstop=4
@@ -271,3 +272,4 @@ let g:ctrlp_root_markers = ['.ctrlp']
 
 " :set list
 set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
+

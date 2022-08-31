@@ -149,7 +149,7 @@ bindkey "^[[1;5B" down-local-history-or-substring-search # [CTRL] + Cursor down
 # If alias executes a command within $() then it should be called from a function
 alias s="source ~/.zshrc && if type direnv > /dev/null; then direnv reload; fi"
 alias hist="history"
-alias json="python -m json.tool"
+#alias json="python -m json.tool"
 alias dc="docker-compose"
 alias di="docker image"
 alias cn="docker container"
@@ -162,6 +162,7 @@ alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
 alias whats-my-ip=__whats-my-ip
 alias gs="git status"
+alias cd=__cd
 
 function __git-vim-status() {
   vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
@@ -173,7 +174,22 @@ function __cd-to() {
 }
 
 function cdf() {
-  cd $(dirname "$1")
+  cd "$(dirname "$1")"
+}
+
+function __cd() {
+  if [ $# -eq 1 -a -f "$@" ]; then
+    echo "file found, changing to parent directory"
+    cdf "$1"
+    return $?
+  fi
+
+  if [ "$1" != "-" -a ! -d "$@" ]; then
+    echo "no such directory: $@"
+    return 1
+  fi
+
+  builtin cd "$@" && echo "$OLDPWD --> $PWD"
 }
 
 # find file
@@ -238,3 +254,4 @@ export UID
 export GID
 eval "$(direnv hook zsh)"
 test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
+export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"

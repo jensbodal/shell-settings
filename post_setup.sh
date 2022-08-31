@@ -12,6 +12,8 @@ if type brew>/dev/null; then
   if ! brew info go>/dev/null; then brew install go; fi
   if ! brew info jq>/dev/null; then brew install jq; fi
   if ! brew info yarn>/dev/null; then brew install yarn; fi
+  if ! brew info delta>/dev/null; then brew install delta; fi
+  if ! brew info bat>/dev/null; then brew install bat; fi
 fi
 
 if ! type direnv>/dev/null; then
