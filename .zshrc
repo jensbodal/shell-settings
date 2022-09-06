@@ -83,7 +83,6 @@ plugins=(
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -252,6 +251,8 @@ source $ALIAS_FILE
 
 export UID
 export GID
-eval "$(direnv hook zsh)"
+if type direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
 export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"

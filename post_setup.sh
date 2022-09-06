@@ -1,19 +1,10 @@
-#(cd .vim/bundle/vimproc.vim; make)
-
-if ! type go>/dev/null; then
-  echo "Install go"
-  echo "brew install go"
-  echo "brew install coreutils"
-  exit 1
-fi
-
 if type brew>/dev/null; then
-  if ! brew info coreutils>/dev/null; then brew install coreutils; fi
-  if ! brew info go>/dev/null; then brew install go; fi
-  if ! brew info jq>/dev/null; then brew install jq; fi
-  if ! brew info yarn>/dev/null; then brew install yarn; fi
-  if ! brew info delta>/dev/null; then brew install delta; fi
-  if ! brew info bat>/dev/null; then brew install bat; fi
+  brew install coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed
+else
+  echo "############################################################"
+  echo "Not macos, find replacements for:"
+  echo "  coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed"
+  echo "############################################################"
 fi
 
 if ! type direnv>/dev/null; then
@@ -22,9 +13,17 @@ if ! type direnv>/dev/null; then
   echo "cd ~/github"
   echo "git clone https://github.com/direnv/direnv.git"
   echo "cd direnv"
-  echo "You might need 'go env -w GOPROXY=direct'"
+  echo "go env -w GOPROXY=direct"
   echo "make"
-  echo "make install"
+  echo "make install PREFIX=~/local"
+  mkdir -p ~/github && \
+    cd ~/github && \
+    git clone https://github.com/direnv/direnv.git && \
+    cd direnv && \
+    go env -w GOPROXY=direct && \
+    make && \
+    make install PREFIX=~/local && \
+    pwd
   exit 1
 fi
 
@@ -42,6 +41,7 @@ if type npm>/dev/null; then
     yarn global add jwt-cli
   else
     echo "Install yarn: https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
+    brew install yarn
     exit 1
   fi
 else
@@ -56,9 +56,9 @@ else
   echo "     or"
   echo "     - ln -s $(readlink -f yarn) $HOME/local/bin/yarn"
   echo "  4. re-run this script"
-  echo "  -. install n"
-  echo "  -. use n to install node/npm"
-  echo "  -. remove symlinks and manual download of node"
+  echo "      - install n"
+  echo "      - use n to install node/npm"
+  echo "      - remove symlinks and manual download of node"
   exit 1
 fi
 
