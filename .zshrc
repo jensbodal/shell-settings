@@ -246,8 +246,8 @@ function __whats-my-ip() {
 # END GLOBAL ALIASES
 
 # Read custom aliases from file
-ALIAS_FILE=~/.aliasrc
-source $ALIAS_FILE
+source ~/.aliasrc
+source ~/.aliasrc-shell-settings
 
 export UID
 export GID

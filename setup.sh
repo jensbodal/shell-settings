@@ -20,6 +20,7 @@ mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER 2>/dev/null
 mkdir -p ~/.vim
 
 ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
+ln -sf $THIS_FOLDER/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
 ln -sf $THIS_FOLDER/.zsh_completions $HOME
 ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
 ln -sf $THIS_FOLDER/.direnvrc $HOME/.direnvrc
@@ -36,7 +37,14 @@ mkdir -p "$HOME/local/n"
 
 echo "export ZSH=\$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=\$HOME/local/n" >> ~/.zsh-homerc
-echo "export PATH=\$HOME/local/yarn/bin:\$HOME/local/npm/bin:\$HOME/local/n/bin:\$HOME/local/bin:\$PATH" >> ~/.zsh-homerc
+echo "" >> ~/.zsh-homerc
+echo "PATH=\$HOME/local/yarn/bin:\$PATH" >> ~/.zsh-homerc
+echo "PATH=\$HOME/local/npm/bin:\$PATH" >> ~/.zsh-homerc
+echo "PATH=\$HOME/local/n/bin:\$PATH" >> ~/.zsh-homerc
+echo "PATH=\$HOME/local/bin:\$PATH" >> ~/.zsh-homerc
+echo "PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+echo "PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+echo "export PATH" >> ~/.zsh-homerc
 
 touch $HOME/.aliasrc
 
