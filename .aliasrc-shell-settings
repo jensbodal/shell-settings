@@ -8,7 +8,7 @@ __usingport() {
   port=`echo "$@" | egrep -o "\d+"`
   dokill=`echo "$@" | egrep -o "\-k"`
 
-  results=`lsof -i -n -P | grep TCP | egrep ":$port\d+ \(LISTEN\)"`
+  results=`lsof -i -n -P | grep TCP | egrep ":$port \(LISTEN\)"`
   echo "$results" | egrep ":$port"
 
   pids=`echo $results | awk '{print $2}' ORS=' '`
