@@ -3,6 +3,8 @@
 
 alias gs="git status"
 alias usingport=__usingport
+alias ssh=__usemosh
+alias caff=__caff
 
 __usingport() {
   port=`echo "$@" | egrep -o "\d+"`
@@ -25,3 +27,21 @@ __usingport() {
   fi
 }
 
+
+__usemosh() {
+  if ! command -v mosh &> /dev/null
+  then
+    ssh "$@"
+  else
+    mosh "$@"
+  fi
+}
+
+__caff() {
+  if command -v caffeinate &> /dev/null
+  then
+    caffeinate -disu
+  else
+    echo "caffeinate not supported"
+  fi
+}
