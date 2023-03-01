@@ -32,7 +32,7 @@ __usingport() {
 __usemosh() {
   if ! command -v mosh &> /dev/null
   then
-    ssh "$@"
+    /usr/bin/ssh "$@"
   else
     mosh "$@"
   fi
