@@ -5,6 +5,7 @@ alias gs="git status"
 alias usingport=__usingport
 alias ssh=__usemosh
 alias caff=__caff
+alias ssh-keygen-secure=__ssh-keygen-secure
 
 __usingport() {
   port=`echo "$@" | egrep -o "\d+"`
@@ -44,4 +45,8 @@ __caff() {
   else
     echo "caffeinate not supported"
   fi
+}
+
+__ssh-keygen-secure() {
+  ssh-keygen -t ed25519 -a 100
 }
