@@ -6,6 +6,7 @@ alias usingport=__usingport
 alias ssh=__usemosh
 alias caff=__caff
 alias ssh-keygen-secure=__ssh-keygen-secure
+alias whatsmyip=__whatsmyip
 
 __usingport() {
   port=`echo "$@" | egrep -o "\d+"`
@@ -49,4 +50,11 @@ __caff() {
 
 __ssh-keygen-secure() {
   ssh-keygen -t ed25519 -a 100
+}
+
+__whatsmyip() {
+  echo "dig +short myip.opendns.com @resolver1.opendns.com"
+  dig +short myip.opendns.com @resolver1.opendns.com
+  echo "curl ifconfig.co"
+  curl ifconfig.co
 }

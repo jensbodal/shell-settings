@@ -159,7 +159,6 @@ alias frif=__frif
 alias cdt=__cd-to
 alias brew-update=__brew-update
 alias git-set-origin=__git-set-origin
-alias whats-my-ip=__whats-my-ip
 alias gs="git status"
 alias cd=__cd
 
@@ -239,10 +238,6 @@ function __git-set-origin() {
   git branch --set-upstream-to=origin/$currentbranch $currentbranch
 }
 
-function __whats-my-ip() {
-  dig +short myip.opendns.com @resolver1.opendns.com
-  # curl ifconfig.co
-}
 # END GLOBAL ALIASES
 
 # Read custom aliases from file
