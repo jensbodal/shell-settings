@@ -1,10 +1,11 @@
 if type brew>/dev/null; then
-  brew install coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed
+  brew install coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed fzf
 else
-  echo "############################################################"
-  echo "Not macos, find replacements for:"
-  echo "  coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed"
-  echo "############################################################"
+  echo "##########################################################################################"
+  echo "# Not macos, find replacements for:"
+  echo "#"
+  echo "# coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed fzf"
+  echo "##########################################################################################"
 fi
 
 if ! type direnv>/dev/null; then

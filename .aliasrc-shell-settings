@@ -1,12 +1,89 @@
-#!/bin/bash
 # vi: ft=zsh
 
+alias hist="history"
 alias gs="git status"
-alias usingport=__usingport
-alias ssh=__usemosh
+alias s="source ~/.zshrc && if type direnv > /dev/null; then direnv reload; fi"
+
+# functions
 alias caff=__caff
+alias cdf=__cdf
+alias cdt=__cdt
+alias ff=__ff
+alias fif=__fif
+alias git-set-origin=__git-set-origin
+alias git-vim-status=__git-vim-status
+alias ssh=__usemosh
 alias ssh-keygen-secure=__ssh-keygen-secure
+alias usingport=__usingport
 alias whatsmyip=__whatsmyip
+
+################################################################
+# aliasing these to functions breaks functionality
+cd() {
+  if [ $# -eq 1 -a -f "$@" ]; then
+    echo "file found, changing to parent directory"
+    cdf "$1"
+    return $?
+  fi
+
+  if [ "$1" != "-" -a ! -d "$@" ]; then
+    echo "no such directory: $@"
+    return 1
+  fi
+
+  builtin cd "$@" && echo "$OLDPWD --> $PWD"
+}
+################################################################
+
+
+__caff() {
+  if command -v caffeinate &> /dev/null
+  then
+    caffeinate -disu
+  else
+    echo "caffeinate not supported"
+  fi
+}
+
+__cdf() {
+  cd "$(dirname "$1")"
+}
+
+
+# cd to file or folder
+__cdt() {
+  while [[ $PWD != '/' && `basename $PWD` != "$1" && ! -f "$1" ]]; do cd ..; done
+}
+
+# find file
+__ff() {
+  local needle="${1:- }"
+  local grepopts="$2"
+
+  find . -iname "*$needle*" -type f | grep "$needle" $grepopts
+}
+
+# find in file
+__fif() {
+  grep "$@" -r . | grep "$@"
+}
+
+__git-set-origin() {
+  local remote="${1:-origin}"
+  local currentbranch=$(git rev-parse --abbrev-ref HEAD)
+
+  local gitpath="$remote/$currentbranch"
+  echo "Setting upstream to \"$gitpath\""
+  git branch --set-upstream-to="$gitpath"
+}
+
+__git-vim-status() {
+  vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
+}
+
+__ssh-keygen-secure() {
+  ssh-keygen -t ed25519 -a 100
+}
 
 __usingport() {
   port=`echo "$@" | egrep -o "\d+"`
@@ -29,7 +106,6 @@ __usingport() {
   fi
 }
 
-
 __usemosh() {
   if ! command -v mosh &> /dev/null
   then
@@ -39,22 +115,10 @@ __usemosh() {
   fi
 }
 
-__caff() {
-  if command -v caffeinate &> /dev/null
-  then
-    caffeinate -disu
-  else
-    echo "caffeinate not supported"
-  fi
-}
-
-__ssh-keygen-secure() {
-  ssh-keygen -t ed25519 -a 100
-}
-
 __whatsmyip() {
-  echo "dig +short myip.opendns.com @resolver1.opendns.com"
-  dig +short myip.opendns.com @resolver1.opendns.com
+  echo "dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com"
+  dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com
   echo "curl ifconfig.co"
   curl ifconfig.co
 }
+
