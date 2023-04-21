@@ -2,9 +2,11 @@
 
 alias hist="history"
 alias gs="git status"
-alias s="source ~/.zshrc && if type direnv > /dev/null; then direnv reload; fi"
+alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
 
 # functions
+alias asdf-install=__asdf-install
+alias asdf-update=__asdf-update
 alias caff=__caff
 alias cdf=__cdf
 alias cdt=__cdt
@@ -12,7 +14,6 @@ alias ff=__ff
 alias fif=__fif
 alias git-set-origin=__git-set-origin
 alias git-vim-status=__git-vim-status
-alias ssh=__usemosh
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias usingport=__usingport
 alias whatsmyip=__whatsmyip
@@ -35,6 +36,25 @@ cd() {
 }
 ################################################################
 
+__asdf-install() {
+  if [ -z $1 ]; then
+    echo "missing plugin name"
+    return
+  fi
+
+  asdf plugin add "$1"
+  asdf install "$1" latest
+  asdf global "$1" latest
+}
+
+__asdf-update() {
+  asdf update
+  for tool in $(asdf plugin list); do
+    asdf install "${tool}" latest  \
+      &&  asdf global "${tool}" latest  \
+      &&  echo "${tool} set globally"
+    done
+}
 
 __caff() {
   if command -v caffeinate &> /dev/null
@@ -103,15 +123,6 @@ __usingport() {
         echo "\n> pass -k to kill all matching processes"
       fi
     fi
-  fi
-}
-
-__usemosh() {
-  if ! command -v mosh &> /dev/null
-  then
-    /usr/bin/ssh "$@"
-  else
-    mosh "$@"
   fi
 }
 
