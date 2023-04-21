@@ -1,33 +1,37 @@
 if type brew>/dev/null; then
   brew install coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed fzf
 else
-  echo "##########################################################################################"
+  echo "#################################################################################################"
   echo "# Not macos, find replacements for:"
   echo "#"
   echo "# coreutils go jq yarn git-delta bat node switchaudio-osx hyperfine glow gnu-sed fzf"
-  echo "##########################################################################################"
-fi
+  echo "#################################################################################################"
 
-if ! type direnv>/dev/null; then
-  echo "Install direnv: https://github.com/direnv/direnv/blob/master/docs/development.md"
-  echo "mkdir -p ~/github"
-  echo "cd ~/github"
-  echo "git clone https://github.com/direnv/direnv.git"
-  echo "cd direnv"
-  echo "go env -w GOPROXY=direct"
-  echo "make"
-  echo "make install PREFIX=~/local"
-  mkdir -p ~/github && \
-    cd ~/github && \
-    git clone https://github.com/direnv/direnv.git && \
-    cd direnv && \
-    go env -w GOPROXY=direct && \
-    make && \
-    make install PREFIX=~/local && \
-    pwd
-  exit 1
-fi
+  if [ ! -d ~/.asdf ]; then
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+    pushd ~/.asdf
+    git fetch --tags
+    latestAsdfTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+    git checkout $latestAsdfTag
 
+    popd
+    export PATH=$PATH:$HOME/.asdf/bin
+
+    asdf plugin add direnv
+    asdf plugin add nodejs
+    asdf plugin add python
+
+    asdf install direnv latest
+    asdf install nodejs latest
+    asdf install python latest
+
+    asdf global direnv latest
+    asdf global nodejs latest
+    asdf global python latest
+
+    asdf direnv setup --shell zsh --version latest
+  fi
+fi
 
 if type npm>/dev/null; then
   npm config set prefix=$HOME/local/npm

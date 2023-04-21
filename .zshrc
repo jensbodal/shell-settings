@@ -8,6 +8,12 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
+export OS="unknown"
+
+if type uname > /dev/null; then
+  OS=$(uname | tr '[:upper:]' '[:lower:]')
+fi
+
 setopt HIST_IGNORE_ALL_DUPS
 bindkey -v
 fpath=($HOME/.zsh_completions $fpath)
@@ -28,8 +34,14 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  aliases # use with acs
+  asdf
+  direnv
+  fzf
   history
   history-substring-search
+  iterm2
+  ssh-agent
 )
 
 # Preferred editor for local and remote sessions
@@ -80,20 +92,38 @@ bindkey OB down-local-history-or-substring-search      # Cursor down
 bindkey "^[[1;5A" up-local-history-or-substring-search   # [CTRL] + Cursor up
 bindkey "^[[1;5B" down-local-history-or-substring-search # [CTRL] + Cursor down
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Read custom aliases from file
-source ~/.aliasrc
-source ~/.aliasrc-shell-settings
-
 export UID
 export GID
 
-if type direnv > /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
-test -e $HOME/.iterm2_shell_integration.zsh && source $HOME/.iterm2_shell_integration.zsh || true
-#export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
+################################################################################################
+# Read custom aliases from file
+################################################################################################
+source ~/.aliasrc
+source ~/.aliasrc-shell-settings
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+################################################################################################
+# OS specific settings
+################################################################################################
+if [ $OS = "darwin" ]; then
+  zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+fi
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+################################################################################################
+# add asdf-direnv script here so it doesn't get appended to the bottom when enabling the plugin
+################################################################################################
+if type direnv>/dev/null; then
+  if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
+    source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+  fi
+fi
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+################################################################################################
+# load update omz settings and activate
+################################################################################################
 ZSH_THEME="jens-disagrees"
 source $ZSH/oh-my-zsh.sh
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
