@@ -41,6 +41,7 @@ if [ ! -d ~/.asdf ]; then
   asdf-install golang
   asdf-install jq
   asdf-install nodejs
+  asdf-install pnpm
   asdf-install python
   asdf-install rust
   asdf-install yarn
