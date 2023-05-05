@@ -56,8 +56,8 @@ fi
 ################################################################################################
 __promptcommand() {
   local d=`date +"%F %T"`
-  echo "[$d] $(history -n | tail -n 1 | grep "defaults write")" | sed '/^$/d' >> $HOME/.defaults_history
-  echo "[$d] $(history -n | tail -n 1 | grep "sudo")" | sed '/^$/d' >> $HOME/.sudo_history
+  echo "[$d] $(history -n | tail -n 1 | grep "defaults write")" | sed '/^$/d' >> $HOME/.hist_defaults
+  echo "[$d] $(history -n | tail -n 1 | grep "sudo")" | sed '/^$/d' >> $HOME/.hist_sudo
 }
 
 export PROMPT_COMMAND=__promptcommand
