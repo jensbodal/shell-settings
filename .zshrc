@@ -51,6 +51,20 @@ else
   export EDITOR='vim'
 fi
 
+################################################################################################
+# Auto append sudo/defaults commands to log files
+################################################################################################
+__promptcommand() {
+  local d=`date +"%F %T"`
+  echo "[$d] $(history -n | tail -n 1 | grep "defaults write")" | sed '/^$/d' >> $HOME/.defaults_history
+  echo "[$d] $(history -n | tail -n 1 | grep "sudo")" | sed '/^$/d' >> $HOME/.sudo_history
+}
+
+export PROMPT_COMMAND=__promptcommand
+
+precmd() { eval "$PROMPT_COMMAND" }
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # Remap up/down arrows to go through local history
 # Map page up/page down to go through global history
 # All history is merged on end of terminal session
@@ -126,4 +140,5 @@ fi
 ZSH_THEME="jens-disagrees"
 source $ZSH/oh-my-zsh.sh
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
