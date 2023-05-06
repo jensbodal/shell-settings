@@ -35,7 +35,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   aliases # use with acs
-  asdf
   direnv
   fzf
   history
@@ -125,8 +124,16 @@ fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
-# add asdf-direnv script here so it doesn't get appended to the bottom when enabling the plugin
+# asdf
 ################################################################################################
+## source asdf here and set auto-completions because they work better than the zsh plugin
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+  source "$HOME/.asdf/asdf.sh"
+  fpath+=(${ASDF_DIR}/completions)
+  export FZF_BASE=`asdf where fzf`
+fi
+
+## add asdf-direnv script here so it doesn't get appended to the bottom when enabling the plugin
 if type direnv>/dev/null; then
   if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
     source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
@@ -135,10 +142,9 @@ fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
-# load update omz settings and activate
+# load/update omz settings and activate
 ################################################################################################
 ZSH_THEME="jens-disagrees"
 source $ZSH/oh-my-zsh.sh
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 

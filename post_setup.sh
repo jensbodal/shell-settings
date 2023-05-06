@@ -7,7 +7,7 @@ asdf-install() {
 }
 
 if type brew>/dev/null; then
-  brew install bat coreutils gnupg gnu-sed gnu-tar hyperfine switchaudio-osx
+  brew install bat coreutils gnupg gnu-sed gnu-tar hyperfine switchaudio-osx cmatrix
 elif type apt>/dev/null; then
   apt update && \
     apt install -y bat hyperfine # tar gpg
