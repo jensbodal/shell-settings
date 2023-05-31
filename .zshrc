@@ -23,9 +23,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Local environment overrides
-source ~/.zsh-homerc
-
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
@@ -139,6 +136,12 @@ if type direnv>/dev/null; then
     source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
   fi
 fi
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+################################################################################################
+# Local environment overrides
+################################################################################################
+source ~/.zsh-homerc
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
