@@ -15,6 +15,7 @@ alias ff=__ff
 alias fif=__fif
 alias git-set-origin=__git-set-origin
 alias git-vim-status=__git-vim-status
+alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias usingport=__usingport
 alias whatsmyip=__whatsmyip
@@ -100,6 +101,21 @@ __git-set-origin() {
 
 __git-vim-status() {
   vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
+}
+
+__screen() {
+  if [[ ! $1 =~ ^- ]]; then
+    if [[ $1 == "ls" ]]; then
+      command screen -ls
+      return $?
+    fi
+
+    command screen -RR -S "$1"
+    return $?
+  fi
+
+  command screen "$@"
+  return $?
 }
 
 __ssh-keygen-secure() {
