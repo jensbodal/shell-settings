@@ -144,6 +144,8 @@ __usingport() {
 }
 
 __whatsmyip() {
+  echo "curl checkip.amazonaws.com"
+  curl checkip.amazonaws.com
   echo "dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com"
   dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com
   echo "curl ifconfig.co"
