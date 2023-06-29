@@ -28,9 +28,14 @@ function use_node() {
 
   export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH
 
-  if [ -f /usr/local/bin/node ]; then
-    rm /usr/local/bin/node
-  fi
+  # Not sure why I had this here but it was probably because path was wrong?
+  # Or maybe it had to do with the system node version being used?
+  #if [ -f /usr/local/bin/node ]; then
+    #rm /usr/local/bin/node
+    #rm $HOME/local/bin/node
+  #fi
 
-  ln -s `which node` /usr/local/bin/node
+  # TODO remove once we are sure it's not needed
+  #ln -s `which node` /usr/local/bin/node
+  ln -sf `which node` $HOME/local/bin/node
 }
