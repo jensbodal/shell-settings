@@ -19,17 +19,7 @@ mv -f ~/.vim/plugin $BACKUP_VIM_FOLDER 2>/dev/null
 
 mkdir -p ~/.vim
 
-ln -sf $THIS_FOLDER/.zshrc $HOME/.zshrc
-ln -sf $THIS_FOLDER/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
-ln -sf $THIS_FOLDER/.zsh_completions $HOME
-ln -sf $THIS_FOLDER/.vimrc $HOME/.vimrc
-ln -sf $THIS_FOLDER/.direnvrc $HOME/.direnvrc
-ln -sf $THIS_VIM_FOLDER/after $HOME/.vim/after
-ln -sf $THIS_VIM_FOLDER/autoload $HOME/.vim/autoload
-ln -sf $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle
-ln -sf $THIS_VIM_FOLDER/colors $HOME/.vim/colors
-ln -sf $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
-ln -sf $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
+./setup_symlinks.sh
 
 mkdir -p "$HOME/local/bin"
 mkdir -p "$HOME/local/npm"
