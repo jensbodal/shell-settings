@@ -11,6 +11,7 @@ alias asdf-update=__asdf-update
 alias caff=__caff
 alias cdf=__cdf
 alias cdt=__cdt
+alias dns=__dns
 alias ff=__ff
 alias fif=__fif
 alias git-set-origin=__git-set-origin
@@ -75,6 +76,24 @@ __cdf() {
 # cd to file or folder
 __cdt() {
   while [[ $PWD != '/' && `basename $PWD` != "$1" && ! -f "$1" ]]; do cd ..; done
+}
+
+__dns() {
+  domain="$1"
+  echo "[nameservers]"
+  dig +short "$domain" ns
+  echo "[a records]"
+  dig +short "$domain" a
+  echo "[cname records]"
+  dig +short "$domain" cname
+  echo "[txt records]"
+  dig +short "$domain" txt
+  echo "[mx records]"
+  dig +short "$domain" mx
+  echo "[aaaa records]"
+  dig +short "$domain" aaaa
+  echo "[srv records]"
+  dig +short "$domain" srv
 }
 
 # find file
