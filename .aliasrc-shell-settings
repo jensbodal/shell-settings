@@ -23,7 +23,7 @@ alias whatsmyip=__whatsmyip
 
 ################################################################
 # aliasing these to functions breaks functionality
-cd() {
+function cd() {
   if [ $# -eq 1 -a -f "$@" ]; then
     echo "file found, changing to parent directory"
     cdf "$1"

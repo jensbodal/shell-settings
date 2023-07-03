@@ -1,16 +1,58 @@
 #!/bin/bash
 
+os=`uname -s`
+
+islinux() {
+  if [ $os = "Linux" ]; then
+    # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+    sudo apt install build-essential libssl-dev zlib1g-dev build-essential \
+      libbz2-dev libreadline-dev libsqlite3-dev curl \
+      libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+    return 0
+  fi
+  return 1
+}
+
+ismac() {
+  if [ $os = "Darwin" ]; then
+    return 0
+  fi
+  return 1
+}
+
+install_brew_if_needed() {
+  if [ islinux -o ismac ]; then
+    if ! command -v brew &> /dev/null; then
+      echo "brew not found, installing..."
+      sleep 1
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      # Run these two commands in your terminal to add Homebrew to your PATH:
+      # #(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zsh-homerc
+      echo "Run this command to make brew immediately available"
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+      # install build-essential if we need it
+      echo "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH" >> ~/.zsh-homerc
+      echo "export PATH" >> ~/.zsh-homerc
+      source ~/.zsh-homerc
+    fi
+  else
+    return 1
+  fi
+}
+
 asdf-install() {
   asdf plugin add "$1"
   asdf install "$1" latest
   asdf global "$1" latest
 }
 
-if type brew>/dev/null; then
-  brew install bat coreutils gnupg gnu-sed gnu-tar hyperfine switchaudio-osx cmatrix
-elif type apt>/dev/null; then
-  apt update && \
-    apt install -y bat hyperfine # tar gpg
+install_brew_if_needed
+
+if command -v brew &> /dev/null; then
+  brew install gcc bat coreutils gnupg gnu-sed gnu-tar hyperfine switchaudio-osx cmatrix
+elif command -v apt &> /dev/null; then
+  sudo apt update && \
+    sudo apt install -y bat hyperfine # tar gpg
 else
   echo "#################################################################"
   echo "# Not macos/linux, find replacements for:"
@@ -82,4 +124,7 @@ else
   echo "      - remove symlinks and manual download of node"
   exit 1
 fi
+
+echo "Run this command to make brew immediately available"
+echo "eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)\""
 
