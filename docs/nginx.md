@@ -4,7 +4,7 @@
 
 ### nginx
 
-**Just use docker instead...**
+**Just use docker (`nginx:alpine`) instead...**
 
 ```
 # download gpg key and place in shared keyrings
