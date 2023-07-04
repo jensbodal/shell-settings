@@ -2,8 +2,9 @@
 
 ## ubuntu
 
-```
-```
+### nginx
+
+**Just use docker instead...**
 
 ```
 # download gpg key and place in shared keyrings
