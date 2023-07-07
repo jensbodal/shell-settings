@@ -20,6 +20,7 @@ alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias usingport=__usingport
 alias whatsmyip=__whatsmyip
+alias whereami=__whereami
 
 ################################################################
 # aliasing these to functions breaks functionality
@@ -171,3 +172,7 @@ __whatsmyip() {
   curl ifconfig.co
 }
 
+__whereami() {
+  whatsmyip
+  echo "$USER@$HOST [$PWD]"
+}
