@@ -49,7 +49,7 @@ asdf-install() {
 install_brew_if_needed
 
 if command -v brew &> /dev/null; then
-  brew install gcc bat coreutils gnupg gnu-sed gnu-tar hyperfine switchaudio-osx cmatrix
+  brew install gcc bat coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli switchaudio-osx cmatrix
 elif command -v apt &> /dev/null; then
   sudo apt update && \
     sudo apt install -y bat hyperfine # tar gpg
@@ -101,7 +101,6 @@ if type npm>/dev/null; then
   if type yarn>/dev/null; then
     yarn config set prefix $HOME/local/yarn
     yarn global add n
-    yarn global add jwt-cli --ignore-engines
   else
     echo "Install yarn: https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
     brew install yarn
