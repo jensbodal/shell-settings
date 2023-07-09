@@ -101,7 +101,7 @@ if type npm>/dev/null; then
   if type yarn>/dev/null; then
     yarn config set prefix $HOME/local/yarn
     yarn global add n
-    yarn global add jwt-cli
+    yarn global add jwt-cli --ignore-engines
   else
     echo "Install yarn: https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
     brew install yarn
