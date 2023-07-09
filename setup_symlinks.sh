@@ -21,6 +21,8 @@ createsymlink $THIS_FOLDER/.zsh_completions $HOME/.zsh_completions
 createsymlink $THIS_FOLDER/.vimrc $HOME/.vimrc
 createsymlink $THIS_FOLDER/.direnvrc $HOME/.direnvrc
 
+createsymlink $THIS_VIM_FOLDER/jens-disagrees.zsh-theme $HOME/.oh-my-zsh/themes/jens-disagrees.zsh-theme
+
 createsymlink $THIS_VIM_FOLDER/after $HOME/.vim/after
 createsymlink $THIS_VIM_FOLDER/autoload $HOME/.vim/autoload
 createsymlink $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle
