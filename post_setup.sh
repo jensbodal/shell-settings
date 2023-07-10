@@ -2,6 +2,48 @@
 
 os=`uname -s`
 
+exists() {
+  if [ $# -ne 1 ]; then
+    echo "You can only check a single command at a time"
+    exit 1;
+  fi
+
+  command -v "$1" &> /dev/null
+  return $?
+}
+
+i() {
+  if [ $# -eq 0 ]; then
+    return 0
+  fi
+
+  local os=`uname -s`
+  local mgr=
+  local pkgs="$@"
+
+  if exists brew; then
+    mgr="brew install";
+  fi
+
+  if [ $os != "Darwin" ]; then
+    if exists pacman; then
+      mgr="sudo pacman -S";
+    elif exists apt; then
+      mgr="sudo apt install";
+    elif exists yum; then
+      mgr="sudo yum install";
+    fi
+  fi
+
+  eval $(echo "$mgr $pkgs")
+
+  if [ $? -ne 0 -a $os != "Darwin" ]; then
+    if exists brew; then
+      brew install "$pkgs"
+    fi
+  fi
+}
+
 islinux() {
   if [ $os = "Linux" ]; then
     # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
@@ -18,6 +60,12 @@ ismac() {
     return 0
   fi
   return 1
+}
+
+asdf-install() {
+  asdf plugin add "$1"
+  asdf install "$1" latest
+  asdf global "$1" latest
 }
 
 install_brew_if_needed() {
@@ -50,12 +98,6 @@ install_brew_if_needed() {
   return 0
 }
 
-asdf-install() {
-  asdf plugin add "$1"
-  asdf install "$1" latest
-  asdf global "$1" latest
-}
-
 install_brew_if_needed
 
 if command -v brew &> /dev/null; then
@@ -72,6 +114,16 @@ else
   echo "# Not macos/linux or package manager not supported"
   echo "#################################################################"
   exit 1337
+fi
+
+if ! command -v wget &> /dev/null; then
+  echo "[post_setup] Error! Missing \"wget\". Attempting to install with package manager"
+  i wget
+
+  if [ $? -ne 0 ]; then
+    echo "Failed to install wget"
+    exit 187
+  fi
 fi
 
 if [ ! -d ~/.asdf ]; then
@@ -104,39 +156,18 @@ if [ ! -d ~/.asdf ]; then
   asdf direnv setup --shell zsh --version latest
 fi
 
-if type npm>/dev/null; then
+if exists npm; then
   npm config set prefix=$HOME/local/npm
-
-  if ! type yarn>/dev/null; then
-    npm install -g yarn
-  fi
-
-  if type yarn>/dev/null; then
-    yarn config set prefix $HOME/local/yarn
-    yarn global add n
-  else
-    echo "Install yarn: https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
-    brew install yarn
-    exit 1
-  fi
 else
-  echo "Install node: https://nodejs.org/en/download/"
-  echo "  1. install node to $HOME/node-temp (tar vxf *.tar.xz)"
-  echo "  2. symlink node and npm versions to ~/local/bin"
-  echo "     - cd node*/bin"
-  echo "     - ln -s \$(readlink -f node) \$HOME/local/bin/node"
-  echo "     - ln -s \$(readlink -f ../lib/node_modules/npm/bin/npm-cli.js) \$HOME/local/bin/npm"
-  echo "  3. install yarn (tar zvxf): https://classic.yarnpkg.com/en/docs/install/#manual-install-via-tarball"
-  echo "     - brew install yarn"
-  echo "     or"
-  echo "     - ln -s $(readlink -f yarn) $HOME/local/bin/yarn"
-  echo "  4. re-run this script"
-  echo "      - install n"
-  echo "      - use n to install node/npm"
-  echo "      - remove symlinks and manual download of node"
-  exit 1
+  echo "Missing npm; set it up then run:"
+  echo "npm config set prefix=\$HOME/local/npm"
 fi
 
-echo "Run this command to make brew immediately available"
-echo "eval \"\$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)\""
-
+if exists yarn; then
+  yarn config set prefix $HOME/local/yarn
+  yarn global add n
+else
+  echo "Missing yarn; set it up then run:"
+  echo "yarn config set prefix \$HOME/local/yarn"
+  echo "yarn global add n"
+fi
