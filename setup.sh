@@ -25,6 +25,7 @@ mkdir -p "$HOME/local/bin"
 mkdir -p "$HOME/local/npm"
 mkdir -p "$HOME/local/n"
 
+echo "export USER=\$(id -un)" >> ~/.zsh-homerc
 echo "export ZSH=\$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=\$HOME/local/n" >> ~/.zsh-homerc
 echo "" >> ~/.zsh-homerc
