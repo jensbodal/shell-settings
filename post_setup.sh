@@ -32,7 +32,7 @@ install_brew_if_needed() {
     fi
 
     if [ islinux ]; then
-      echo "PATH=/home/linuxbrew/.linuxbrew/bin:$PATH" >> ~/.zsh-homerc
+      echo "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH" >> ~/.zsh-homerc
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     elif [ ismac ]; then
       echo "PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
