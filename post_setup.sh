@@ -59,6 +59,7 @@ asdf-install() {
 install_brew_if_needed
 
 if command -v brew &> /dev/null; then
+  brew tap mike-engel/jwt-cli
   brew install gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
 elif command -v apt &> /dev/null; then
   sudo apt update && \
