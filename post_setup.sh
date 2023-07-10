@@ -29,15 +29,25 @@ install_brew_if_needed() {
       # Run these two commands in your terminal to add Homebrew to your PATH:
       # #(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zsh-homerc
       echo "Run this command to make brew immediately available"
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-      # install build-essential if we need it
-      echo "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH" >> ~/.zsh-homerc
-      echo "export PATH" >> ~/.zsh-homerc
-      source ~/.zsh-homerc
     fi
+
+    if [ islinux ]; then
+      echo "PATH=/home/linuxbrew/.linuxbrew/bin:$PATH" >> ~/.zsh-homerc
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    elif [ ismac ]; then
+      echo "PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+      echo "PATH=$HOMEBREW_PREFIX/opt/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+      echo "PATH=$HOMEBREW_PREFIX/opt/make/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+
+    echo "export PATH" >> ~/.zsh-homerc
+    source ~/.zsh-homerc
   else
     return 1
   fi
+
+  return 0
 }
 
 asdf-install() {
@@ -49,16 +59,18 @@ asdf-install() {
 install_brew_if_needed
 
 if command -v brew &> /dev/null; then
-  brew install gcc bat coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli switchaudio-osx cmatrix
+  brew install gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
 elif command -v apt &> /dev/null; then
   sudo apt update && \
-    sudo apt install -y bat hyperfine # tar gpg
+    sudo apt install -y bat hyperfine make
+elif command -v pacman &> /dev/null; then
+  pacman --noconfirm -Syu && \
+    pacman --noconfirm -S bat hyperfine make
 else
   echo "#################################################################"
-  echo "# Not macos/linux, find replacements for:"
-  echo "#"
-  echo "# bat coreutils sed gpg hyperfine tar"
+  echo "# Not macos/linux or package manager not supported"
   echo "#################################################################"
+  exit 1337
 fi
 
 if [ ! -d ~/.asdf ]; then

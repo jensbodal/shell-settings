@@ -32,8 +32,7 @@ echo "PATH=\$HOME/local/yarn/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/npm/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/n/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/bin:\$PATH" >> ~/.zsh-homerc
-echo "PATH=/opt/homebrew/opt/coreutils/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
-echo "PATH=/opt/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
+
 echo "export PATH" >> ~/.zsh-homerc
 
 touch $HOME/.aliasrc
