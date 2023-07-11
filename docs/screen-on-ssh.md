@@ -25,7 +25,6 @@ msgwait 0
 # if screen fails for some reason.
 
 export LANG=en_US.utf8
-export LC_ALL=en_US.utf8
 export STARTED_SCREEN=${STARTED_SCREEN:-0}
 export TERM=${TERM:-NOTERM}
 
