@@ -20,6 +20,7 @@ alias git-vim-status=__git-vim-status
 alias i=__i
 alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
+alias u=__u
 alias usingport=__usingport
 alias whatsmyip=__whatsmyip
 alias whereami=__whereami
@@ -186,6 +187,23 @@ __screen() {
 
 __ssh-keygen-secure() {
   ssh-keygen -t ed25519 -a 100
+}
+
+__u() {
+  if exists brew; then
+    brew update && brew upgrade
+  fi
+  if exists pacman; then
+    sudo pacman -Syu
+  fi
+  if exists apt; then
+    if apt -v &> /dev/null; then
+      sudo apt update && sudo apt upgrade
+    fi
+  fi
+  if exists yum; then
+    sudo yum update
+  fi
 }
 
 __usingport() {
