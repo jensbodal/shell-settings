@@ -39,6 +39,9 @@ call plug#begin('$HOME/.vim/bundle/plugged')
   Plug 'leafgarland/typescript-vim'
 call plug#end()
 
+"https://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
+set encoding=utf8
+
 "Turns on highlighting of syntax
 syntax on
 
