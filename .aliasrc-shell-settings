@@ -1,5 +1,7 @@
 # vi: ft=zsh
 
+DIR="$(dirname "$(readlink -f "$0")")"
+
 alias gs="git status"
 alias hist="history"
 alias ll="ls -la"
@@ -24,6 +26,9 @@ alias u=__u
 alias usingport=__usingport
 alias whatsmyip=__whatsmyip
 alias whereami=__whereami
+
+# scripts
+alias ipc=$DIR/scripts/ipc
 
 ################################################################
 # aliasing these to functions breaks functionality
