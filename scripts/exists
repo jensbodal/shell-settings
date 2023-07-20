@@ -1,0 +1,13 @@
+#!/bin/bash
+
+__exists() {
+  if [ $# -ne 1 ]; then
+    echo "You can only check a single command at a time"
+    exit 1;
+  fi
+
+  command -v "$1" &> /dev/null
+  return $?
+}
+
+__exists "$@"

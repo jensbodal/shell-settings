@@ -1,0 +1,37 @@
+#!/bin/bash
+
+DIR="$(dirname "$(readlink -f "$0")")"
+
+__i() {
+  if [ $# -eq 0 ]; then
+    return 0
+  fi
+
+  local os=`uname -s`
+  local mgr=
+  local pkgs="$@"
+
+  if exists brew; then
+    mgr="brew install";
+  fi
+
+  if [ $os != "Darwin" ]; then
+    if exists pacman; then
+      mgr="sudo pacman -S";
+    elif exists apt; then
+      mgr="sudo apt install";
+    elif exists yum; then
+      mgr="sudo yum install";
+    fi
+  fi
+
+  eval $(echo "$mgr $pkgs")
+
+  if [ $? -ne 0 -a $os != "Darwin" ]; then
+    if exists brew; then
+      brew install "$pkgs"
+    fi
+  fi
+}
+
+__i "$@"

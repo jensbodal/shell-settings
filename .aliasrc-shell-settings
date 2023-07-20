@@ -14,12 +14,10 @@ alias caff=__caff
 alias cdf=__cdf
 alias cdt=__cdt
 alias dns=__dns
-alias exists=__exists
 alias ff=__ff
 alias fif=__fif
 alias git-set-origin=__git-set-origin
 alias git-vim-status=__git-vim-status
-alias i=__i
 alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias u=__u
@@ -28,7 +26,9 @@ alias whatsmyip=__whatsmyip
 alias whereami=__whereami
 
 # scripts
-alias ipc=$DIR/scripts/ipc
+alias exists=". $DIR/scripts/exists"
+alias i=". $DIR/scripts/i"
+alias ipc=". $DIR/scripts/ipc"
 
 ################################################################
 # aliasing these to functions breaks functionality
@@ -132,48 +132,6 @@ __git-vim-status() {
 }
 
 #!/bin/bash
-
-__exists() {
-  if [ $# -ne 1 ]; then
-    echo "You can only check a single command at a time"
-    exit 1;
-  fi
-
-  command -v "$1" &> /dev/null
-  return $?
-}
-
-__i() {
-  if [ $# -eq 0 ]; then
-    return 0
-  fi
-
-  local os=`uname -s`
-  local mgr=
-  local pkgs="$@"
-
-  if exists brew; then
-    mgr="brew install";
-  fi
-
-  if [ $os != "Darwin" ]; then
-    if exists pacman; then
-      mgr="sudo pacman -S";
-    elif exists apt; then
-      mgr="sudo apt install";
-    elif exists yum; then
-      mgr="sudo yum install";
-    fi
-  fi
-
-  eval $(echo "$mgr $pkgs")
-
-  if [ $? -ne 0 -a $os != "Darwin" ]; then
-    if exists brew; then
-      brew install "$pkgs"
-    fi
-  fi
-}
 
 __screen() {
   if [[ ! $1 =~ ^- ]]; then

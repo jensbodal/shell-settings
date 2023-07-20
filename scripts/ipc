@@ -1,25 +1,47 @@
 #!/bin/bash
 
+DIR="$(dirname "$(readlink -f "$0")")"
+
 os=`uname -s`
 
-get_for_mac() {
-  ipaddress=`ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}'`
+__get_for_mac() {
+  ipaddress=`ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
   gateway=`route -n get default | grep gateway | egrep -o "[0-9\.]+"`
   nameservers=`cat /etc/resolv.conf | egrep -o "[0-9\.]{4,}" | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
 }
 
-main() {
+__get_for_linux() {
+  ipaddress=`ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
+  gateway=`ip r | grep default | awk '{print $3}'`
+  nameservers=`cat /etc/resolv.conf | egrep -o "[0-9\.]{4,}" | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
+}
+
+__main() {
 
   if [ $os = "Darwin" ]; then
-    get_for_mac
+    __get_for_mac
   else
-    get_for_mac
+    __get_for_linux
   fi
 
   echo "OS: $os"
   echo "IP Address: $ipaddress"
   echo "Gateway: $gateway"
   echo "Nameservers: $nameservers"
+
+  if [ $1 = "-a" ]; then
+    echo ""
+    whereami
+
+    if ! command -v neofetch &> /dev/null; then
+      i neofetch
+    fi
+
+    if command -v neofetch &> /dev/null; then
+      echo ""
+      neofetch
+    fi
+  fi
 }
 
-main "$@"
+__main "$@"
