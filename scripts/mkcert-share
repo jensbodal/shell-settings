@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CA_ROOT=`mkcert -CAROOT`
+ROOT_CA="$CA_ROOT/rootCA.pem"
+
+echo ""
+echo "Run this script on the machine you want to share the ROOT CA from"
+echo ""
+
+echo "####################################################################"
+echo ""
+echo "$ROOT_CA"
+echo ""
+echo "####################################################################"
+echo ""
+echo "Copy this file into a directory such as ~/local/mkcert/<hostname>"
+echo ""
+echo "on the machine you want to use this CA run:"
+echo ""
+echo "CAROOT=~/local/mkcert/<hostname> mkcert -install"
+echo ""

@@ -21,9 +21,12 @@
 
 # The prompt
 
-#PROMPT='%{$fg[red]%}%{$fg[blue]%}%n%{$fg[red]%}@%{$fg[blue]%}%m%{$fg[red]%}:%{$fg[blue]%}%c%{$fg[red]%} %{$reset_color%}'
-#PROMPT='%{$fg[blue]%}%c%{$fg[red]%} %{$reset_color%}'
-PROMPT='%{$fg[red]%}[%{$fg[green]%}%c%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
+__hostname() {
+ local h="${HOST:=zsh}"
+ echo "$h" | cut -c1-8
+}
+
+PROMPT='%{$fg[red]%}[%{$fg[green]%}%c%{$fg[red]%}@%{$fg[yellow]%}$(__hostname)%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
 
 # The right-hand prompt
 
