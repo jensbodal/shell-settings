@@ -52,6 +52,9 @@ main() {
     echo "Screen failed! continuing with normal bash startup"
   else
     echo "[~/.zshenv] attached to a new screen session"
+    if [ -f /etc/motd ]; then
+      cat /etc/motd
+    fi
   fi
 }
 
