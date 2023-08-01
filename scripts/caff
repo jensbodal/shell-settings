@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if command -v caffeinate &> /dev/null
+then
+  clear
+  echo "Staying alive, staying alive..."
+  caffeinate -disu
+else
+  echo "caffeinate not supported"
+fi
+

@@ -10,7 +10,6 @@ alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv r
 # functions
 alias asdf-install=__asdf-install
 alias asdf-update=__asdf-update
-alias caff=__caff
 alias cdf=__cdf
 alias cdt=__cdt
 alias dns=__dns
@@ -26,6 +25,7 @@ alias whatsmyip=__whatsmyip
 alias whereami=__whereami
 
 # scripts
+alias caff=". $DIR/scripts/caff"
 alias exists=". $DIR/scripts/exists"
 alias i=". $DIR/scripts/i"
 alias ipc=". $DIR/scripts/ipc"
