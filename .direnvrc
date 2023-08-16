@@ -17,25 +17,28 @@ function __getnodebinpath() {
 }
 
 function use_node() {
+  layout_node
   local version="$1"
-  local NODE_BIN_PATH="$(__getnodebinpath $version)"
-  # for overriding location of global npm version
+
   local NPM_BIN_PATH=""
 
+  # place global npm dir in path if present
   if [ -d "$HOME/local/npm/bin" ]; then
     NPM_BIN_PATH="$HOME/local/npm/bin"
   fi
 
+  if [ ! -z $NODE_VERSION_PREFIX ] && [ ! -z $NODE_VERSIONS ]; then
+    local mv=`echo $version | cut -d. -f1`
+    local folder="$NODE_VERSIONS/$NODE_VERSION_PREFIX$mv"
+
+    if [ -d "$folder" ] && [ -f "$folder/bin/node" ]; then
+      export PATH=$NPM_BIN_PATH:$folder/bin:$PATH
+      export ENVROOT="$folder"
+      return 0
+    fi
+  fi
+
+  local NODE_BIN_PATH="$(__getnodebinpath $version)"
+
   export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH
-
-  # Not sure why I had this here but it was probably because path was wrong?
-  # Or maybe it had to do with the system node version being used?
-  #if [ -f /usr/local/bin/node ]; then
-    #rm /usr/local/bin/node
-    #rm $HOME/local/bin/node
-  #fi
-
-  # TODO remove once we are sure it's not needed
-  #ln -s `which node` /usr/local/bin/node
-  ln -sf `which node` $HOME/local/bin/node
 }
