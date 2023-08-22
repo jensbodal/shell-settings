@@ -32,7 +32,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   aliases # use with acs
-  direnv
   fzf
   history
   history-substring-search
@@ -121,27 +120,29 @@ fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
-# asdf
+# Local environment overrides
 ################################################################################################
-## source asdf here and set auto-completions because they work better than the zsh plugin
-if [ -f "$HOME/.asdf/asdf.sh" ]; then
-  source "$HOME/.asdf/asdf.sh"
-  fpath+=(${ASDF_DIR}/completions)
-  export FZF_BASE=`asdf where fzf`
-fi
+source ~/.zsh-homerc
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## add asdf-direnv script here so it doesn't get appended to the bottom when enabling the plugin
-if type direnv>/dev/null; then
-  if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc" ]; then
-    source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-  fi
+
+################################################################################################
+# rtx
+################################################################################################
+if command -v rtx > /dev/null; then
+  eval "$(rtx activate zsh)"
 fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
-# Local environment overrides
+# direnv
 ################################################################################################
-source ~/.zsh-homerc
+if command -v direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+elif [ -f $HOME/.local/share/rtx/installs/direnv/latest/bin/direnv ]; then
+  eval "$($HOME/.local/share/rtx/installs/direnv/latest/bin/direnv hook zsh)"
+fi
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################

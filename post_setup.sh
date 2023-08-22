@@ -62,10 +62,10 @@ ismac() {
   return 1
 }
 
-asdf-install() {
-  asdf plugin add "$1"
-  asdf install "$1" latest
-  asdf global "$1" latest
+rtx-install() {
+  rtx plugin add "$1"
+  rtx install "$1@latest"
+  rtx global "$1@latest"
 }
 
 install_brew_if_needed() {
@@ -126,34 +126,27 @@ if ! command -v wget &> /dev/null; then
   fi
 fi
 
-if [ ! -d ~/.asdf ]; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-  pushd ~/.asdf
-  git fetch --tags
-  latestAsdfTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-  git checkout $latestAsdfTag
-
-  popd
-  export PATH=$PATH:$HOME/.asdf/bin
-  asdf update
+if ! command -v rtx &> /dev/null; then
+  brew install rtx
+  export PATH=$PATH:$HOMEBREW_PREFIX/bin
 
   # the following do not work on mac so just using native package managers
-  # asdf-install bat
-  # asdf-install hyperfine
+  # rtx-install bat
+  # rtx-install hyperfine
 
-  asdf-install delta
-  asdf-install direnv
-  asdf-install fzf
-  asdf-install glow
-  asdf-install golang
-  asdf-install jq
-  asdf-install nodejs
-  asdf-install pnpm
-  asdf-install python
-  asdf-install rust
-  asdf-install yarn
+  rtx-install delta
+  rtx-install direnv
+  rtx-install fzf
+  rtx-install glow
+  rtx-install golang
+  rtx-install jq
+  rtx-install nodejs
+  rtx-install pnpm
+  rtx-install python
+  rtx-install rust
+  rtx-install yarn
 
-  asdf direnv setup --shell zsh --version latest
+  #rtx direnv setup --shell zsh --version latest
 fi
 
 if exists npm; then

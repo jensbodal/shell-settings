@@ -38,6 +38,12 @@ function use_node() {
     fi
   fi
 
+  if command -v rtx > /dev/null; then
+    rtx use "node@$version"
+    export PATH=$NPM_BIN_PATH:$PATH
+    return 0
+  fi
+
   local NODE_BIN_PATH="$(__getnodebinpath $version)"
 
   export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH

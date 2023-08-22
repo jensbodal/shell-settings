@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# local start_time=$(date +%s.%N)
+# "$@"
+# local end_time=$(date +%s.%N)
+# local execution_time=$(($end_time-$start_time))
+# echo "command took [$(printf "%.2f" $execution_time)] seconds ($(printf "%.2f" $(($execution_time/60))) minutes)"
+hyperfine -m 1 --show-output "$(echo $@)"

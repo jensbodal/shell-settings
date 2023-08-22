@@ -8,8 +8,8 @@ alias ll="ls -la"
 alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
 
 # functions
-alias asdf-install=__asdf-install
-alias asdf-update=__asdf-update
+alias rtx-install=__rtx-install
+alias rtx-update=__rtx-update
 alias cdf=__cdf
 alias cdt=__cdt
 alias dns=__dns
@@ -29,6 +29,7 @@ alias caff=". $DIR/scripts/caff"
 alias exists=". $DIR/scripts/exists"
 alias i=". $DIR/scripts/i"
 alias ipc=". $DIR/scripts/ipc"
+alias jtime=". $DIR/scripts/jtime"
 
 ################################################################
 # aliasing these to functions breaks functionality
@@ -48,22 +49,22 @@ function cd() {
 }
 ################################################################
 
-__asdf-install() {
+__rtx-install() {
   if [ -z $1 ]; then
     echo "missing plugin name"
     return
   fi
 
-  asdf plugin add "$1"
-  asdf install "$1" latest
-  asdf global "$1" latest
+  rtx plugin add "$1"
+  rtx install "$1@latest"
+  rtx global "$1@latest"
 }
 
-__asdf-update() {
-  asdf update
-  for tool in $(asdf plugin list); do
-    asdf install "${tool}" latest  \
-      &&  asdf global "${tool}" latest  \
+__rtx-update() {
+  rtx update
+  for tool in $(rtx plugin list); do
+    rtx install "${tool}" latest  \
+      &&  rtx global "${tool}" latest  \
       &&  echo "${tool} set globally"
     done
 }
@@ -131,8 +132,6 @@ __git-vim-status() {
   vim -p $(git status -s | sed -r 's#^(.*->)?[ARMU? ]+(.*)$#\2#')
 }
 
-#!/bin/bash
-
 __screen() {
   if [[ ! $1 =~ ^- ]]; then
     if [[ $1 == "ls" ]]; then
@@ -154,17 +153,21 @@ __ssh-keygen-secure() {
 
 __u() {
   if exists brew; then
+    echo "updating brew"
     brew update && brew upgrade
   fi
   if exists pacman; then
+    echo "updating pacman"
     sudo pacman -Syu
   fi
   if exists apt; then
     if apt -v &> /dev/null; then
+      echo "updating apt"
       sudo apt update && sudo apt upgrade
     fi
   fi
   if exists yum; then
+    echo "updating yum"
     sudo yum update
   fi
 }
