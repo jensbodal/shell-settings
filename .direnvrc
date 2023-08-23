@@ -48,3 +48,15 @@ function use_node() {
 
   export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH
 }
+
+function use_python() {
+  local version="$1"
+
+  if command -v rtx > /dev/null; then
+    rtx use "python@$version"
+    return 0
+  fi
+
+  echo "[~/.direnvrc] use python is not supported"
+  return 1
+}
