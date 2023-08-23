@@ -3,6 +3,9 @@
     name = {DEFAUL_NAME}
     email = {DEFAULT_EMAIL}
 
+[core]
+    excludesFile = ~/.gitignore
+
 [includeIf "gitdir/i:/Users/bodal/github/"]
     path = .gitconfig.github
 
