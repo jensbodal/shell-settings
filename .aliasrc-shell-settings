@@ -25,11 +25,7 @@ alias whatsmyip=__whatsmyip
 alias whereami=__whereami
 
 # scripts
-alias caff=". $DIR/scripts/caff"
-alias exists=". $DIR/scripts/exists"
-alias i=". $DIR/scripts/i"
-alias ipc=". $DIR/scripts/ipc"
-alias jtime=". $DIR/scripts/jtime"
+export PATH="$DIR/scripts:$PATH"
 
 ################################################################
 # aliasing these to functions breaks functionality

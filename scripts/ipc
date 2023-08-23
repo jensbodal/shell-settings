@@ -29,7 +29,7 @@ __main() {
   echo "Gateway: $gateway"
   echo "Nameservers: $nameservers"
 
-  if [ $1 = "-a" ]; then
+  if [ "$1" = "-a" ]; then
     echo ""
     whereami
 
