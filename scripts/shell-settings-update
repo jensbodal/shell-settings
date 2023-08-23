@@ -1,0 +1,60 @@
+#!/bin/bash
+
+git_dir=$HOME/github/shell-settings
+update_file=~/.config/shell-settings/last_updated
+
+log() {
+  echo "[shell-settings-update] $@"
+}
+
+update_shell_settings() {
+  log "updating shell-settings"
+
+  cd $git_dir && \
+    git pull origin main --rebase --autostash && \
+    date +%s > "$update_file"
+}
+
+since() {
+  log "last updated:"
+  log "  $diff_seconds seconds ago"
+  log "  $diff_minutes minutes ago"
+  log "  $diff_hours hours ago"
+  log "  $diff_days days ago"
+  echo ""
+}
+
+run() {
+  if [ "$1" = "--force" ]; then
+    update_shell_settings
+    return 0
+  fi
+
+  if [ -f "$update_file" ]; then
+    now=$(date +%s)
+    diff_seconds=$((now - `cat $update_file`))
+    diff_minutes=$(($diff_seconds / 60))
+    diff_hours=$(($diff_minutes / 60))
+    diff_days=$(($diff_hours / 24))
+
+    if [ "$1" = "--since" ]; then
+      since
+      return 0
+    fi
+
+    if [ $diff_days -gt 7 ]; then
+      if [ ! -d $git_dir ]; then
+        log "cannot find \"$git_dir\""
+        return 1
+      fi
+
+      since
+      update_shell_settings
+    fi
+  else
+    mkdir -p $(dirname "$update_file")
+    date +%s > "$update_file"
+  fi
+}
+
+run "$@"

@@ -157,3 +157,4 @@ source $ZSH/oh-my-zsh.sh
 
 export AWS_EC2_METADATA_DISABLED=true
 
+shell-settings-update
