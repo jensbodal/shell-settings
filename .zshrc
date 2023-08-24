@@ -157,6 +157,9 @@ source $ZSH/oh-my-zsh.sh
 
 export AWS_EC2_METADATA_DISABLED=true
 
-if [ -d $HOME/github/shell-settings/scripts/shell-settings-update ]; then
+if [ -f $HOME/github/shell-settings/scripts/shell-settings-update ]; then
   shell-settings-update
+else
+  echo "Could not find shell-settings-update script"
 fi
+
