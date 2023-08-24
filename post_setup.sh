@@ -79,10 +79,10 @@ install_brew_if_needed() {
       echo "Run this command to make brew immediately available"
     fi
 
-    if [ islinux ]; then
+    if islinux; then
       echo "PATH=/home/linuxbrew/.linuxbrew/bin:\$PATH" >> ~/.zsh-homerc
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    elif [ ismac ]; then
+    elif ismac; then
       echo "PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
       echo "PATH=$HOMEBREW_PREFIX/opt/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
       echo "PATH=$HOMEBREW_PREFIX/opt/make/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
@@ -102,7 +102,7 @@ install_brew_if_needed
 
 if command -v brew &> /dev/null; then
   brew tap mike-engel/jwt-cli
-  brew install gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
+  brew install fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
 elif command -v apt &> /dev/null; then
   sudo apt update && \
     sudo apt install -y bat hyperfine make
@@ -136,7 +136,8 @@ if ! command -v rtx &> /dev/null; then
 
   rtx-install delta
   rtx-install direnv
-  rtx-install fzf
+  # does not like to work with zsh
+  #rtx-install fzf
   rtx-install glow
   rtx-install golang
   rtx-install jq
