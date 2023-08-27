@@ -10,9 +10,13 @@ log() {
 update_shell_settings() {
   log "updating shell-settings"
 
-  cd $git_dir && \
-    git pull origin main --rebase --autostash && \
-    date +%s > "$update_file"
+  if ping github.com -c1 -t1 > /dev/null; then
+    cd $git_dir && \
+      git pull origin main --rebase --autostash && \
+      date +%s > "$update_file"
+  else
+    echo "could not reach github.com"
+  fi
 }
 
 since() {
