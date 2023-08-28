@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Host from ~/.ssh/config on each machine
+LOCAL_HOST=<from ssh config in remote host>
+REMOTE_HOST=<from ssh config in local host>
+
+run() {
+  local dir="$PWD"
+
+  if [[ "$dir" != /local* ]]; then
+    dir="/local$PWD"
+  fi
+
+  local cmd="/usr/local/bin/code --remote ssh-remote+$REMOTE_HOST $dir"
+  echo "Running [$cmd] on [$LOCAL_HOST]"
+  ssh $LOCAL_HOST "DISPLAY=:0 $cmd"
+}
+
+run "$@"
+
+# DEV_BOX_HOST ~/.ssh/config
+#Host osx_local
+#  HostName localhost
+#  User <user>
+#  PreferredAuthentications publickey
+#  IdentityFile <key>
+#  AddKeysToAgent yes
+#  Port 22222
+#
+# LOCAL_HOST ~/.ssh/config
+#Host remote_host
+#  HostName <hostname>
+#  User <user>
+#  PreferredAuthentications publickey
+#  IdentityFile <key>
+#  AddKeysToAgent yes
+#  RemoteForward 22222 localhost:22

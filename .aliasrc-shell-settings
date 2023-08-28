@@ -2,6 +2,7 @@
 
 DIR="$(dirname "$(readlink -f "$0")")"
 
+alias gdh="gd HEAD"
 alias gs="git status"
 alias hist="history"
 alias ll="ls -la"
