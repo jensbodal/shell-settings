@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# some ideas taken from https://github.com/paulirish/git-open/blob/master/git-open
+
+run() {
+  local tmp=$(mktemp)
+  local origin_url=$(git remote get-url origin)
+
+  sed -E 's#git@(.*):(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
+
+  source $tmp
+  rm $tmp
+
+  open "https://$URL/$GIT_PATH"
+}
+
+run "$@"

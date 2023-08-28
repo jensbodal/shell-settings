@@ -1,4 +1,4 @@
-function __getnodebinpath() {
+__getnodebinpath() {
   local targetversion="$1"
   local nodedir="$N_PREFIX/n/versions/node"
   local latest=$(ls "$nodedir" | egrep "^$targetversion.*$" | sort --version-sort | tail -n 1)
@@ -16,7 +16,51 @@ function __getnodebinpath() {
   echo "$nodebinpath"
 }
 
-function use_node() {
+__get_alias_path() {
+  echo "$HOME/.config/direnv/aliases"
+}
+
+# modified from https://github.com/direnv/direnv/issues/73#issuecomment-1242969787
+__export_alias() {
+  local name=$1
+  shift
+  local alias_dir="$(__get_alias_path)"
+  local target="$alias_dir/$name"
+  local old_path="$PATH"
+
+  mkdir -p "$alias_dir"
+
+  echo "#!/usr/bin/env bash" > "$target"
+  echo "PATH=$old_path" >> "$target"
+  echo "$@" >> "$target"
+  chmod +x "$target"
+}
+
+__rtx_path_add() {
+  local env_path="env_path = [ \"$1\" ]"
+
+  if [ ! -f .rtx.toml ]; then
+    printf '%s\n' "$env_path" > .rtx.toml
+  else
+    if ! grep "env_path" .rtx.toml; then
+      printf '%s\n\n%s\n' "$env_path" "$(cat .rtx.toml)" > .rtx.toml
+    fi
+  fi
+}
+
+use_pnpm() {
+  __export_alias npm 'pnpm "$@"'
+  __export_alias yarn 'pnpm "$@"'
+
+  if command -v rtx > /dev/null; then
+    rtx use --path .rtx.toml pnpm@latest
+  fi
+
+  __rtx_path_add "$(__get_alias_path)"
+  PATH_add "$(__get_alias_path)"
+}
+
+use_node() {
   layout_node
   local version="$1"
 
@@ -32,28 +76,28 @@ function use_node() {
     local folder="$NODE_VERSIONS/$NODE_VERSION_PREFIX$mv"
 
     if [ -d "$folder" ] && [ -f "$folder/bin/node" ]; then
-      export PATH=$NPM_BIN_PATH:$folder/bin:$PATH
+      export PATH=$PATH:$NPM_BIN_PATH:$folder/bin
       export ENVROOT="$folder"
       return 0
     fi
   fi
 
   if command -v rtx > /dev/null; then
-    rtx use "node@$version"
-    export PATH=$NPM_BIN_PATH:$PATH
+    rtx use --path .rtx.toml "node@$version"
+    export PATH=$PATH:$NPM_BIN_PATH
     return 0
   fi
 
   local NODE_BIN_PATH="$(__getnodebinpath $version)"
 
-  export PATH=$NPM_BIN_PATH:$NODE_BIN_PATH:$PATH
+  export PATH=$PATH:$NPM_BIN_PATH:$NODE_BIN_PATH
 }
 
-function use_python() {
+use_python() {
   local version="$1"
 
   if command -v rtx > /dev/null; then
-    rtx use "python@$version"
+    rtx use --path .rtx.toml "python@$version"
     return 0
   fi
 
