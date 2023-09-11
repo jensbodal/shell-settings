@@ -9,6 +9,7 @@ alias ll="ls -la"
 alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
 
 # functions
+alias bunx=__bunx
 alias rtx-install=__rtx-install
 alias rtx-update=__rtx-update
 alias cdf=__cdf
@@ -25,8 +26,18 @@ alias usingport=__usingport
 alias whatsmyip=__whatsmyip
 alias whereami=__whereami
 
-# scripts
+# bash scripts
 export PATH="$DIR/scripts:$PATH"
+
+# node scripts
+__add_node_scripts_to_path() {
+  local nodedir="$DIR/scripts/node"
+  for f in `ls $nodedir`; do
+    local filename=$(basename "$nodedir/$f" .mjs)
+    alias $filename="$nodedir/$f"
+  done
+}
+__add_node_scripts_to_path
 
 ################################################################
 # aliasing these to functions breaks functionality
@@ -44,7 +55,28 @@ function cd() {
 
   builtin cd "$@" && echo "$OLDPWD --> $PWD"
 }
+
+function rm() {
+  if [ "$1" = "-rf" ]; then
+    shift
+    local dir=`mktemp -d`
+    echo "mv $@ $dir"
+    mv "$@" "$dir"
+    echo "rm -rf $dir"
+    command rm -rf "$dir" &
+  else
+    command rm "$@"
+  fi
+}
 ################################################################
+
+__bunx() {
+  if exists bun; then
+    bun x "$@"
+  else
+    rtx-install bun && bun x "$@"
+  fi
+}
 
 __rtx-install() {
   if [ -z $1 ]; then

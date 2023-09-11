@@ -48,7 +48,30 @@ __rtx_path_add() {
   fi
 }
 
+use_bun() {
+  local version="$1"
+  if [ ! -z $version ]; then
+    use_node $version
+  fi
+
+  __export_alias npm 'bun "$@"'
+  __export_alias yarn 'bun "$@"'
+
+  if command -v rtx > /dev/null; then
+    rtx use --path .rtx.toml bun@latest
+  fi
+
+  __rtx_path_add "$(__get_alias_path)"
+  PATH_add "$(__get_alias_path)"
+}
+
+
 use_pnpm() {
+  local version="$1"
+  if [ ! -z $version ]; then
+    use_node $version
+  fi
+
   __export_alias npm 'pnpm "$@"'
   __export_alias yarn 'pnpm "$@"'
 
