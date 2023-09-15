@@ -2,15 +2,35 @@
 
 # some ideas taken from https://github.com/paulirish/git-open/blob/master/git-open
 
+DEBUG=0
+
+debug() {
+  if [ $DEBUG = 1 ]; then
+    echo "$@"
+  fi
+}
+
 run() {
   local tmp=$(mktemp)
   local origin_url=$(git remote get-url origin)
 
-  sed -E 's#git@(.*):(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
+  debug "origin_url: \"$origin_url\""
+
+  if [[ "$origin_url" == https* ]]; then
+    sed -E 's#https:\/\/(.*)\/(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
+  elif [[ "$origin_url" =~ ssh:\/\/git\. ]]; then
+    sed -E 's#ssh:\/\/git\.(.*):[0-9]+\/[a-zA-Z]+\/(.*)#URL=code.\1/packages GIT_PATH=\2#' <<< $origin_url > $tmp
+  else
+    sed -E 's#git(.*):(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
+  fi
+
+  debug "ENV: $(cat $tmp)"
 
   source $tmp
   rm $tmp
 
+  debug "URL: \"$URL\""
+  debug "GIT_PATH: \"$GIT_PATH\""
   open "https://$URL/$GIT_PATH"
 }
 
