@@ -87,6 +87,7 @@ install_brew_if_needed() {
       echo "PATH=$HOMEBREW_PREFIX/opt/homebrew/opt/gnu-sed/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
       echo "PATH=$HOMEBREW_PREFIX/opt/make/libexec/gnubin:\$PATH" >> ~/.zsh-homerc
       eval "$(/opt/homebrew/bin/brew shellenv)"
+      /opt/homebrew/bin/brew autoupdate start
     fi
 
     echo "export PATH" >> ~/.zsh-homerc
