@@ -138,7 +138,7 @@ if ! command -v rtx &> /dev/null; then
   rtx-install delta
   rtx-install direnv
   # does not like to work with zsh
-  #rtx-install fzf
+  rtx-install fzf
   rtx-install glow
   rtx-install golang
   rtx-install jq
