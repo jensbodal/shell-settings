@@ -31,7 +31,12 @@ run() {
 
   debug "URL: \"$URL\""
   debug "GIT_PATH: \"$GIT_PATH\""
-  open "https://$URL/$GIT_PATH"
+
+  if uname -a | grep microsoft > /dev/null; then
+    cmd.exe /C start "https://$URL/$GIT_PATH"
+  else
+    open "https://$URL/$GIT_PATH"
+  fi
 }
 
 run "$@"
