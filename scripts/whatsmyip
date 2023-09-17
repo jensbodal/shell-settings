@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "curl checkip.amazonaws.com"
+curl checkip.amazonaws.com
+error=$?
+
+if [ $error -ne 0 ]; then
+  echo "dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com"
+  dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com
+  error=$?
+fi
+
+if [ $error -ne 0 ]; then
+  echo "curl ifconfig.co"
+  curl ifconfig.co
+  error=$?
+fi

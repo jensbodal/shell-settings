@@ -23,8 +23,6 @@ alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias u=__u
 alias usingport=__usingport
-alias whatsmyip=__whatsmyip
-alias whereami=__whereami
 
 # bash scripts
 export PATH="$DIR/scripts:$PATH"
@@ -222,25 +220,3 @@ __usingport() {
   fi
 }
 
-__whatsmyip() {
-  echo "curl checkip.amazonaws.com"
-  curl checkip.amazonaws.com
-  error=$?
-
-  if [ $error -ne 0 ]; then
-    echo "dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com"
-    dig +time=2 +tries=1 +short myip.opendns.com @resolver1.opendns.com
-    error=$?
-  fi
-
-  if [ $error -ne 0 ]; then
-    echo "curl ifconfig.co"
-    curl ifconfig.co
-    error=$?
-  fi
-}
-
-__whereami() {
-  whatsmyip
-  echo "$USER@$HOST [$PWD]"
-}

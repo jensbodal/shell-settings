@@ -1,0 +1,4 @@
+#!/bin/bash
+
+whatsmyip
+echo "$USER@$HOST [$PWD]"
