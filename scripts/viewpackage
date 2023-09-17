@@ -17,10 +17,13 @@ run() {
   debug "origin_url: \"$origin_url\""
 
   if [[ "$origin_url" == https* ]]; then
-    sed -E 's#https:\/\/(.*)\/(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
+    debug "starts with https*"
+    sed -E 's#https:\/\/(.*)\/(.*)(\.git)*#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
   elif [[ "$origin_url" =~ ssh:\/\/git\. ]]; then
+    debug "starts with ssh://git."
     sed -E 's#ssh:\/\/git\.(.*):[0-9]+\/[a-zA-Z]+\/(.*)#URL=code.\1/packages GIT_PATH=\2#' <<< $origin_url > $tmp
   else
+    debug "starts with git(.*):(.*)/.git"
     sed -E 's#git(.*):(.*)\.git#URL=\1 GIT_PATH=\2#' <<< $origin_url > $tmp
   fi
 
@@ -32,11 +35,17 @@ run() {
   debug "URL: \"$URL\""
   debug "GIT_PATH: \"$GIT_PATH\""
 
+  if [ $DEBUG -eq 1 ]; then
+    return 0
+  fi
+
   if uname -a | grep microsoft > /dev/null; then
     cmd.exe /C start "https://$URL/$GIT_PATH"
   else
     open "https://$URL/$GIT_PATH"
   fi
+
+  echo "Attemped to open \"https://$URL/$GIT_PATH\""
 }
 
 run "$@"
