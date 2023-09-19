@@ -103,7 +103,7 @@ install_brew_if_needed
 
 if command -v brew &> /dev/null; then
   brew tap mike-engel/jwt-cli
-  brew install fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
+  brew install fx fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
 elif command -v apt &> /dev/null; then
   sudo apt update && \
     sudo apt install -y bat hyperfine make
