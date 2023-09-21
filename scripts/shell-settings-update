@@ -46,7 +46,7 @@ run() {
       return 0
     fi
 
-    if [ $diff_days -gt 7 ]; then
+    if [ $diff_days -gt 1 ]; then
       if [ ! -d $git_dir ]; then
         log "cannot find \"$git_dir\""
         return 1
