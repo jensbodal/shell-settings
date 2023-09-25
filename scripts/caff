@@ -2,9 +2,16 @@
 
 if command -v caffeinate &> /dev/null
 then
-  clear
-  echo "Staying alive, staying alive..."
-  caffeinate -disu
+  if [ "$1" -gt 0 ]; then
+    echo "killing automatically after $1 minutes"
+    caffeinate -disu &
+    caff_pid=$!
+    sleep $(($1 * 60 )) && kill -9 $caff_pid
+  else
+    clear
+    echo "Staying alive, staying alive..."
+    caffeinate -disu
+  fi
 else
   echo "caffeinate not supported"
 fi
