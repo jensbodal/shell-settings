@@ -67,6 +67,7 @@ use_bun() {
 
 
 use_pnpm() {
+  layout_node
   local version="$1"
   if [ ! -z $version ]; then
     use_node $version

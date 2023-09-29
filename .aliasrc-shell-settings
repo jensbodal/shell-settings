@@ -7,7 +7,7 @@ alias gs="git status"
 alias hist="history"
 alias ll="ls -la"
 alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
-alias yarn="bun run"
+alias yarn=__yarn
 
 # functions
 alias bunx=__bunx
@@ -219,5 +219,9 @@ __usingport() {
       fi
     fi
   fi
+}
+
+__yarn() {
+  echo "!!! use bun !!!"
 }
 
