@@ -3,6 +3,7 @@
 DIR="$(dirname "$(readlink -f "$0")")"
 
 alias gdh="gd HEAD"
+alias gds="gd --staged"
 alias gs="git status"
 alias hist="history"
 alias ll="ls -la"
@@ -31,8 +32,8 @@ export PATH="$BASH_SCRIPTS_PATH:$PATH"
 
 # bash script aliases
 alias ncdu="$BASH_SCRIPTS_PATH/alias_ncdu"
-alias nnn=ncdu
-alias disknnn=ncdu
+alias nnn="$BASH_SCRIPTS_PATH/alias_nnn"
+alias disknnn="nnn"
 
 # node scripts
 __add_node_scripts_to_path() {
