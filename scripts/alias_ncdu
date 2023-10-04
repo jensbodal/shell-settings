@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! command -v ncdu &> /dev/null; then
+  i ncdu
+fi
+
+ncdu "$@"

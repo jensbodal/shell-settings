@@ -26,7 +26,13 @@ alias u=__u
 alias usingport=__usingport
 
 # bash scripts
-export PATH="$DIR/scripts:$PATH"
+export BASH_SCRIPTS_PATH="$DIR/scripts"
+export PATH="$BASH_SCRIPTS_PATH:$PATH"
+
+# bash script aliases
+alias ncdu="$BASH_SCRIPTS_PATH/alias_ncdu"
+alias nnn=ncdu
+alias disknnn=ncdu
 
 # node scripts
 __add_node_scripts_to_path() {
