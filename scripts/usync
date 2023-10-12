@@ -1,0 +1,146 @@
+#!/bin/bash
+
+export XDG_CONFIG_HOME="${XDH_CONFIG_HOME:=$HOME/.config}"
+export USYNC_CONFIG_DIR="${USYNC_CONFIG_DIR:=$XDG_CONFIG_HOME/usync}"
+
+set -euo pipefail
+
+errored=0
+
+log() {
+  printf "[usync] $@\n"
+}
+
+get_default_config_file() {
+  echo "${USYNC_CONFIG_DIR}$abs_dir/default.prf"
+  return 0
+}
+
+create_default_config_file() {
+  cat << EOF
+root = $abs_dir
+root = ssh://${user}@${host}/${remote_root_dir}
+
+# ignore common build directories and paths
+ignore = Name build
+ignore = Name logs
+ignore = Name dist
+ignore = Name env
+ignore = Name node_modules
+
+# this was in default ignores but not sure why yet
+# src/*/pkg
+
+# Window height
+height = 37
+
+# propogate file modification times
+times = true
+
+# Log actions to the terminal
+log = true
+
+auto = true
+batch = true
+
+# enable unison-fsmonitor
+repeat = watch
+EOF
+}
+
+host=; dir=; user=$USER; remote_root=; config=;
+
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -h) host="$2"; shift 2;;
+    --host) host="${2}"; shift 2;;
+    --host=*) host="${1#*=}"; shift 1;;
+
+    -d) dir="$2"; shift 2;;
+    --dir) dir="${2}"; shift 2;;
+    --dir=*) dir="${1#*=}"; shift 1;;
+
+    -u) user="$2"; shift 2;;
+    --user) user="${2}"; shift 2;;
+    --user=*) user="${1#*=}"; shift 1;;
+
+    -r) remote_root="$2"; shift 2;;
+    --remote-root) remote_root="${2}"; shift 2;;
+    --remote-root=*) remote_root="${1#*=}"; shift 1;;
+
+    -c) config="$2"; shift 2;;
+    --config) config="${2}"; shift 2;;
+    --config=*) config="${1#*=}"; shift 1;;
+
+    -*) log "unknown option: $1" >&2; exit 1;;
+    *) die "unrecognized argument:  $1"; shift 1;;
+  esac
+done
+
+if [ -z $host ]; then
+  log "host is required"
+  errored=1
+fi
+
+if [ -z $dir ]; then
+  log "dir is required"
+  errored=1
+fi
+
+abs_dir=$(readlink -f $dir)
+
+if [ -z $remote_root ]; then
+  log "remote-root is required"
+  errored=1
+fi
+
+remote_root_dir="${remote_root}${abs_dir}"
+
+if [ -z $config ]; then
+  config=$(get_default_config_file)
+  mkdir -p "$(dirname $config)"
+  create_default_config_file > "$config"
+fi
+
+if [ $errored -ne 0 ]; then
+  log "invalid arguments specified"
+  log "csync --host remote.host.in.ssh.config --dir local/directory/root --remote-root remote/directory/root"
+  exit $errored
+fi
+
+# we could check for existence of config file but instead just assume we want to create a new one each time
+# so that if there are updates they are propagated
+#if [ ! -f "$config" ]; then
+#fi
+
+log "Setting UNISON environment variable to $(dirname $config)"
+export UNISON="$(dirname $config)"
+
+echo ""
+log "\n  host: $host\n  dir: $abs_dir\n  remote-root: $remote_root\n  remote_root_dir: $remote_root_dir\n  config: $config\n"
+
+# add debug option
+# log "config file contents:"
+# cat $config
+# echo ""
+
+# create remote directory if it doesn't exist
+ssh $host "mkdir -p $remote_root_dir" 2>&1 > /dev/null
+
+# install unison-fsmonitor to ensure watch is supported for all platforms
+if ! command -v unison-fsmonitor > /dev/null; then
+  log "installing unison-fsmonitor"
+  brew install autozimu/homebrew-formulas/unison-fsmonitor
+  exit 1
+fi
+
+if ! command -v terminal-notifier > /dev/null; then
+  log "installing terminal-notifier"
+  brew install terminal-notifier
+  exit 1
+fi
+
+terminal-notifier -sender com.apple.Terminal -title "usync" -message "sync starting for $(basename $abs_dir)"
+
+unison "$(basename $config)"
+
