@@ -31,6 +31,7 @@ export BASH_SCRIPTS_PATH="$DIR/scripts"
 export PATH="$BASH_SCRIPTS_PATH:$PATH"
 
 # bash script aliases
+alias htop="$BASH_SCRIPTS_PATH/alias_htop"
 alias ncdu="$BASH_SCRIPTS_PATH/alias_ncdu"
 alias nnn="$BASH_SCRIPTS_PATH/alias_nnn"
 alias disknnn="nnn"
@@ -270,5 +271,6 @@ __usingport() {
 
 __yarn() {
   echo "!!! use bun !!!"
+  return 1
 }
 

@@ -22,6 +22,7 @@ root = $abs_dir
 root = ssh://${user}@${host}/${remote_root_dir}
 
 # ignore common build directories and paths
+ignore = Name .rtx.toml
 ignore = Name build
 ignore = Name logs
 ignore = Name dist
