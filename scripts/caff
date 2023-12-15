@@ -1,12 +1,15 @@
 #!/bin/bash
 
+TIME_TO_KILL=${1:-720}
+
 if command -v caffeinate &> /dev/null
 then
-  if [ "$1" -gt 0 ]; then
-    echo "killing automatically after $1 minutes"
+  if [ $TIME_TO_KILL -gt 0 ]; then
+    clear
+    echo "killing automatically after $TIME_TO_KILL minutes"
     caffeinate -disu &
     caff_pid=$!
-    sleep $(($1 * 60 )) && kill -9 $caff_pid
+    sleep $(($TIME_TO_KILL * 60 )) && kill -9 $caff_pid
   else
     clear
     echo "Staying alive, staying alive..."

@@ -26,7 +26,16 @@ __hostname() {
  echo "$h" | cut -c1-8
 }
 
-PROMPT='%{$fg[red]%}[%{$fg[green]%}%c%{$fg[red]%}@%{$fg[yellow]%}$(__hostname)%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
+__location() {
+  if [ -z "$ZSH_L_NAME" ]; then
+    echo %c
+    return
+  fi
+
+  echo "$ZSH_L_NAME"
+}
+
+PROMPT='%{$fg[red]%}[%{$fg[green]%}$(__location)%{$fg[red]%}@%{$fg[yellow]%}$(__hostname)%{$fg[red]%}%{$fg[red]%}] %{$reset_color%}'
 
 # The right-hand prompt
 

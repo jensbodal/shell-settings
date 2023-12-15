@@ -20,14 +20,25 @@ create_default_config_file() {
   cat << EOF
 root = $abs_dir
 root = ssh://${user}@${host}/${remote_root_dir}
+# force changes from this replica to the other
+# this will force a 1-way sync and should only be enabled if you need to force a sync then disabled (unless you want a 1-way sync)
+# #force = $abs_dir
+# prevent file deletions on this replica
+# #nodeletion = /dest/dir
+# prevent file updates on this replica
+# #noupdate = /src/dir
 
 # ignore common build directories and paths
+ignore = Name .DS_Store
+ignore = Name ._.DS_Store
 ignore = Name .rtx.toml
 ignore = Name build
-ignore = Name logs
 ignore = Name dist
 ignore = Name env
+ignore = Name logs
 ignore = Name node_modules
+ignore = Name runtime
+ignore = Name tmp
 
 # this was in default ignores but not sure why yet
 # src/*/pkg

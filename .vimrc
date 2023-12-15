@@ -27,17 +27,29 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" auto install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " vim-plug plugins https://github.com/junegunn/vim-plug
 " Install with PlugInstall
 " Update with PlugUpdate
 " https://github.com/junegunn/vim-plug#commands
-" Autoloaded from ~/.vim/autoload
-call plug#begin('$HOME/.vim/bundle/plugged')
+call plug#begin()
   Plug 'https://github.com/tpope/vim-commentary'
   Plug 'https://github.com/ctrlpvim/ctrlp.vim'
   Plug 'https://github.com/tpope/vim-fugitive'
   Plug 'leafgarland/typescript-vim'
+  Plug 'https://tpope.io/vim/commentary.git'
 call plug#end()
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 
 "https://stackoverflow.com/questions/18321538/vim-error-e474-invalid-argument-listchars-tab-trail
 set encoding=utf8
