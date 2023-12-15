@@ -1,0 +1,19 @@
+# vi: ft=bash
+#!/usr/bin/env bash
+
+folders="apps libs"
+
+main() {
+  for f in $(find $folders -type f -name tsconfig.test.json); do
+    newname="$(echo $f | sed -E 's#test#spec#g')"
+    echo "Renaming \"$f\" to \"$newname\""
+    mv "$f" "$newname"
+  done
+
+  for f in $(grep "tsconfig.test.json" -R $folders -l); do
+    echo "Replacing \"tsconfig.test.json\" with \"tsconfig.spec.json\" in \"$f\""
+    sed -E -i 's#tsconfig.test.json#tsconfig.spec.json#g' $f
+  done
+}
+
+main "$@"
