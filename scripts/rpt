@@ -1,0 +1,20 @@
+#!/bin/bash
+
+main() {
+  if [ $# -eq 0 ]; then
+    echo "rpt 10 \"#\""
+    return 1
+  fi
+
+  local len="$1"
+  local c="$2"
+  local newline="$3"
+
+  if [ -z $newline ]; then
+    printf '%*s\n' $len "" | tr ' ' "$2"
+  else
+    printf '%*s' $len "" | tr ' ' "$2"
+  fi
+}
+
+main "$@"
