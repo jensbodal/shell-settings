@@ -71,12 +71,14 @@ rtx-install() {
 install_brew_if_needed() {
   if [ islinux -o ismac ]; then
     if ! command -v brew &> /dev/null; then
-      echo "brew not found, installing..."
-      sleep 1
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      # Run these two commands in your terminal to add Homebrew to your PATH:
-      # #(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zsh-homerc
-      echo "Run this command to make brew immediately available"
+      if [ $(uname -m) != "aarch64" ]; then
+        echo "brew not found, installing..."
+        sleep 1
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # Run these two commands in your terminal to add Homebrew to your PATH:
+        # #(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> $HOME/.zsh-homerc
+        echo "Run this command to make brew immediately available"
+      fi
     fi
 
     if islinux; then
@@ -130,26 +132,26 @@ fi
 if ! command -v rtx &> /dev/null; then
   brew install rtx
   export PATH=$PATH:$HOMEBREW_PREFIX/bin
-
-  # the following do not work on mac so just using native package managers
-  # rtx-install bat
-  # rtx-install hyperfine
-
-  rtx-install delta
-  rtx-install direnv
-  # does not like to work with zsh
-  rtx-install fzf
-  rtx-install glow
-  rtx-install golang
-  rtx-install jq
-  rtx-install nodejs
-  rtx-install pnpm
-  rtx-install python
-  rtx-install rust
-  rtx-install yarn
-
-  #rtx direnv setup --shell zsh --version latest
 fi
+
+# the following do not work on mac so just using native package managers
+# rtx-install bat
+# rtx-install hyperfine
+
+rtx-install delta
+rtx-install direnv
+# does not like to work with zsh
+rtx-install fzf
+rtx-install glow
+rtx-install golang
+rtx-install jq
+rtx-install nodejs
+rtx-install pnpm
+rtx-install python
+rtx-install rust
+rtx-install yarn
+
+#rtx direnv setup --shell zsh --version latest
 
 if exists npm; then
   npm config set prefix=$HOME/local/npm
