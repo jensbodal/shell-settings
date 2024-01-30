@@ -1,0 +1,120 @@
+#!/usr/bin/env node
+
+const fs = require('node:fs');
+
+const [NODE_PATH, SCRIPT_PATH, IN_FILE]  = process.argv;
+
+const parseStdin = async() => {
+  console.log('\x1b[33m%s\x1b[0m', '\nReading from Stdin\n');
+  const data = [];
+
+  for await (const chunk of process.stdin) {
+    data.push(chunk);
+  }
+
+  return data.join('');
+}
+
+const parseFile = async(filepath) => {
+  console.log('\x1b[33m%s\x1b[0m', `\nReading from "${IN_FILE}"\n`);
+  return fs.readFileSync(filepath).toString();
+}
+
+const getMaxes = lines => {
+  let maxLength = 0;
+  let maxColumns = 0;
+
+  for (const line of lines) {
+    const columns = line.replace(/(  )+/g, '#@#').split('#@#').filter(Boolean);
+    if (line.length > maxLength) {
+      maxLength = line.length;
+    }
+
+    if (columns.length > maxColumns) {
+      maxColumns = columns.length;
+    }
+  }
+
+  return { maxLength, maxColumns };
+}
+
+const contentsToColumns = (content) => {
+  const lines = content.split('\n').filter(Boolean);
+
+  const allColumns = [];
+  const {maxColumns,maxLength} = getMaxes(lines);
+
+
+  for (const [index, line] of lines.entries()) {
+    const columns = line.replace(/(  )+/g, '#@#').split('#@#').filter(Boolean);
+
+    if (columns.length < maxColumns) {
+      for (const [i, column] of columns.entries()) {
+        if (column) {
+          const numSpaces = (line.match(/ /g) || []).length;
+          const bucketSize = maxLength / maxColumns;
+          const bucket = Math.round(numSpaces / bucketSize);
+
+          if (allColumns[allColumns.length - 1] && allColumns[allColumns.length - 1][bucket]) {
+            allColumns[allColumns.length - 1][bucket] +=  ` ${column}`;
+          }
+        }
+      }
+      continue;
+    }
+
+    allColumns.push(columns);
+
+  }
+
+  return {columns: allColumns.filter(c => !!!c || (Array.isArray(c) && c.length)), maxColumns};
+}
+
+const formatColumnsToMarkdownTable = (columns, numColumns) => {
+  const output = [];
+  const row = [];
+
+  // add header
+  for (let i = 0; i < numColumns; i++) {
+    row.push('|');
+    row.push(` Heading ${i} `);
+  }
+  output.push(row.join(''));
+  row.length = 0;
+
+  for (let i = 0; i < numColumns; i++) {
+    row.push('|');
+    row.push(` --- `);
+  }
+  output.push(row.join(''));
+  row.length = 0;
+  // end add header (can probably move to a function)
+
+  for (const column of columns) {
+    for (let i = 0; i < numColumns; i++) {
+      row.push('|');
+      if (column[i]) {
+        row.push(` ${column[i]} `);
+      }
+    }
+
+    output.push(row.join(''));
+    row.length = 0;
+  }
+
+  return output.join('\n');
+}
+
+const main = async () => {
+  const content = IN_FILE ? await parseFile(IN_FILE) : await parseStdin();
+
+  const {columns, maxColumns} = contentsToColumns(content);
+
+  console.log(formatColumnsToMarkdownTable(columns, maxColumns));
+}
+
+main().then().catch(e => {
+  console.error('An error has occurred');
+  console.log(e);
+  process.exit(1);
+});
