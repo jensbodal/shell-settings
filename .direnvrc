@@ -36,14 +36,14 @@ __export_alias() {
   chmod +x "$target"
 }
 
-__rtx_path_add() {
+__mise_path_add() {
   local env_path="env_path = [ \"$1\" ]"
 
-  if [ ! -f .rtx.toml ]; then
-    printf '%s\n' "$env_path" > .rtx.toml
+  if [ ! -f .mise.toml ]; then
+    printf '%s\n' "$env_path" > .mise.toml
   else
-    if ! grep "env_path" .rtx.toml; then
-      printf '%s\n\n%s\n' "$env_path" "$(cat .rtx.toml)" > .rtx.toml
+    if ! grep "env_path" .mise.toml; then
+      printf '%s\n\n%s\n' "$env_path" "$(cat .mise.toml)" > .mise.toml
     fi
   fi
 }
@@ -57,11 +57,11 @@ use_bun() {
   __export_alias npm 'bun "$@"'
   __export_alias yarn 'bun "$@"'
 
-  if command -v rtx > /dev/null; then
-    rtx use --path .rtx.toml bun@latest
+  if command -v mise > /dev/null; then
+    mise use --path .mise.toml bun@latest
   fi
 
-  __rtx_path_add "$(__get_alias_path)"
+  __mise_path_add "$(__get_alias_path)"
   PATH_add "$(__get_alias_path)"
 }
 
@@ -76,11 +76,11 @@ use_pnpm() {
   __export_alias npm 'pnpm "$@"'
   __export_alias yarn 'pnpm "$@"'
 
-  if command -v rtx > /dev/null; then
-    rtx use --path .rtx.toml pnpm@latest
+  if command -v mise > /dev/null; then
+    mise use --path .mise.toml pnpm@latest
   fi
 
-  __rtx_path_add "$(__get_alias_path)"
+  __mise_path_add "$(__get_alias_path)"
   PATH_add "$(__get_alias_path)"
 }
 
@@ -106,8 +106,8 @@ use_node() {
     fi
   fi
 
-  if command -v rtx > /dev/null; then
-    rtx use --path .rtx.toml "node@$version"
+  if command -v mise > /dev/null; then
+    mise use --path .mise.toml "node@$version"
     export PATH=$PATH:$NPM_BIN_PATH
     return 0
   fi
@@ -120,8 +120,8 @@ use_node() {
 use_python() {
   local version="$1"
 
-  if command -v rtx > /dev/null; then
-    rtx use --path .rtx.toml "python@$version"
+  if command -v mise > /dev/null; then
+    mise use --path .mise.toml "python@$version"
     return 0
   fi
 

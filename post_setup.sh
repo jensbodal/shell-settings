@@ -62,10 +62,10 @@ ismac() {
   return 1
 }
 
-rtx-install() {
-  rtx plugin add "$1"
-  rtx install "$1@latest"
-  rtx global "$1@latest"
+mise-install() {
+  mise plugin add "$1"
+  mise install "$1@latest"
+  mise global "$1@latest"
 }
 
 install_brew_if_needed() {
@@ -127,28 +127,28 @@ if ! command -v wget &> /dev/null; then
   fi
 fi
 
-if ! command -v rtx &> /dev/null; then
-  brew install rtx
+if ! command -v mise &> /dev/null; then
+  brew install mise
   export PATH=$PATH:$HOMEBREW_PREFIX/bin
 
   # the following do not work on mac so just using native package managers
-  # rtx-install bat
-  # rtx-install hyperfine
+  # mise-install bat
+  # mise-install hyperfine
 
-  rtx-install delta
-  rtx-install direnv
+  mise-install delta
+  mise-install direnv
   # does not like to work with zsh
-  rtx-install fzf
-  rtx-install glow
-  rtx-install golang
-  rtx-install jq
-  rtx-install nodejs
-  rtx-install pnpm
-  rtx-install python
-  rtx-install rust
-  rtx-install yarn
+  mise-install fzf
+  mise-install glow
+  mise-install golang
+  mise-install jq
+  mise-install nodejs
+  mise-install pnpm
+  mise-install python
+  mise-install rust
+  mise-install yarn
 
-  #rtx direnv setup --shell zsh --version latest
+  #mise direnv setup --shell zsh --version latest
 fi
 
 if exists npm; then

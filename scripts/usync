@@ -31,7 +31,7 @@ root = ssh://${user}@${host}/${remote_root_dir}
 # ignore common build directories and paths
 ignore = Name .DS_Store
 ignore = Name ._.DS_Store
-ignore = Name .rtx.toml
+ignore = Name .mise.toml
 ignore = Name build
 ignore = Name dist
 ignore = Name env
@@ -155,4 +155,3 @@ fi
 terminal-notifier -sender com.apple.Terminal -title "usync" -message "sync starting for $(basename $abs_dir)"
 
 unison "$(basename $config)"
-

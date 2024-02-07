@@ -12,8 +12,8 @@ alias yarn=__yarn
 
 # functions
 alias bunx=__bunx
-alias rtx-install=__rtx-install
-alias rtx-update=__rtx-update
+alias mise-install=__mise-install
+alias mise-update=__mise-update
 alias cdf=__cdf
 alias cdt=__cdt
 alias dns=__dns
@@ -116,26 +116,26 @@ __bunx() {
   if exists bun; then
     bun x "$@"
   else
-    rtx-install bun && bun x "$@"
+    mise-install bun && bun x "$@"
   fi
 }
 
-__rtx-install() {
+__mise-install() {
   if [ -z $1 ]; then
     echo "missing plugin name"
     return
   fi
 
-  rtx plugin add "$1"
-  rtx install "$1@latest"
-  rtx global "$1@latest"
+  mise plugin add "$1"
+  mise install "$1@latest"
+  mise global "$1@latest"
 }
 
-__rtx-update() {
-  rtx update
-  for tool in $(rtx plugin list); do
-    rtx install "${tool}" latest  \
-      &&  rtx global "${tool}" latest  \
+__mise-update() {
+  mise update
+  for tool in $(mise plugin list); do
+    mise install "${tool}" latest  \
+      &&  mise global "${tool}" latest  \
       &&  echo "${tool} set globally"
     done
 }
@@ -273,4 +273,3 @@ __yarn() {
   echo "!!! use bun !!!"
   return 1
 }
-

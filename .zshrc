@@ -136,18 +136,21 @@ source ~/.zsh-homerc
 ################################################################################################
 if command -v direnv > /dev/null; then
   eval "$(direnv hook zsh)"
-elif [ -f $HOME/.local/share/rtx/installs/direnv/latest/bin/direnv ]; then
-  eval "$($HOME/.local/share/rtx/installs/direnv/latest/bin/direnv hook zsh)"
 fi
+#elif [ -f $HOME/.local/share/mise/installs/direnv/latest/bin/direnv ]; then
+#  eval "$($HOME/.local/share/mise/installs/direnv/latest/bin/direnv hook zsh)"
+#fi
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################
-# rtx
+# mise (formerly mise)
 ################################################################################################
-if command -v rtx > /dev/null; then
-  export RTX_USE_TOML=1
-  eval "$(rtx activate zsh)"
+if command -v mise > /dev/null; then
+#  export mise_USE_TOML=1
+  eval "$(mise activate zsh)"
+#  echo "eval \"\$(/Users/bodal/.local/bin/mise activate zsh)\"" >> "/Users/bodal/.zshrc"
+#  eval "$(mise activate zsh)"
 fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -168,4 +171,3 @@ if [ -f $HOME/github/shell-settings/scripts/shell-settings-update ]; then
 else
   echo "Could not find shell-settings-update script"
 fi
-
