@@ -1,4 +1,6 @@
 #!/bin/bash
 
+HOST=`hostname`
+
 whatsmyip
 echo "$USER@$HOST [$PWD]"

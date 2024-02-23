@@ -136,10 +136,9 @@ source ~/.zsh-homerc
 ################################################################################################
 if command -v direnv > /dev/null; then
   eval "$(direnv hook zsh)"
+elif [ -f $HOME/.local/share/mise/installs/direnv/latest/bin/direnv ]; then
+  eval "$($HOME/.local/share/mise/installs/direnv/latest/bin/direnv hook zsh)"
 fi
-#elif [ -f $HOME/.local/share/mise/installs/direnv/latest/bin/direnv ]; then
-#  eval "$($HOME/.local/share/mise/installs/direnv/latest/bin/direnv hook zsh)"
-#fi
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

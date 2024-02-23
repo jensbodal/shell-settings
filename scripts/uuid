@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! command -v uuidgen &> /dev/null; then
+  i util-linux
+fi
+
+uuidgen "$@" | tr '[:upper:]' '[:lower:]'
