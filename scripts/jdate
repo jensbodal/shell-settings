@@ -1,0 +1,31 @@
+#!/bin/bash
+
+is_number() {
+  var="$1"
+  return 0
+}
+
+fdate() {
+  if [ $# -eq 0 ]; then
+    d=$(date)
+  else
+    d="$@"
+  fi
+
+  if [[ "$d" =~ ^[0-9]+$ ]]; then
+   echo "[fdate] converting \"$d\" to date"
+   if [ "${#d}" -gt 10 ]; then
+     dd="$d"
+     d=$(($d / 1000))
+     echo "\"$dd\" is likely in ms, converting to seconds \"$d\""
+   fi
+   date -d @$d
+   return 0
+  fi
+
+  echo "[fdate] converting \"$d\" to timestamp"
+  date --date="$d" +%s
+  return $?
+}
+
+fdate "$@"

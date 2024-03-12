@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! command -v macchanger &> /dev/null; then
+  echo "installing macchanger..."
+  i acrogenesis/macchanger/macchanger
+fi
+
+# restore original
+#macchanger -m en0
+#macchanger -m bc:df:58:90:85:42 en0
+# macchanger -m 52:f7:07:88:fe:4e en0
