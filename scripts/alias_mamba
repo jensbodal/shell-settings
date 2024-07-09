@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ ! -f $HOME/local/lib/mambaforge/bin/mamba ]; then
+  if [ ! -d $HOME/local/lib/mambaforge ]; then
+    echo "\"$HOME/local/lib/mambaforge\" script does not exist, creating and installing latest version"
+    mkdir -p $HOME/local/lib && \
+      curl -L -o /tmp/mambaforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh" && \
+      echo "Running command \"bash /tmp/mambaforge.sh -b -p $HOME/local/lib/mambaforge\"" && \
+      bash /tmp/mambaforge.sh -b -p $HOME/local/lib/mambaforge
+  fi
+
+  bash $HOME/local/lib/mambaforge
+  echo "Running your original command..."
+fi
+
+if [ ! -f $HOME/local/lib/mambaforge/bin/mamba ]; then
+  echo "failed to install mamba"
+else
+  $HOME/local/lib/mambaforge/bin/mamba "$@"
+fi

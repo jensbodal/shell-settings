@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for f in ./*.step; do
+  replacewith=`grep -Z -E "/\* author \*/" "$f" | sed -E "s#/\* author \*/ \(.*\)#/\* author \*/ ('Jens Bodal (jensbodal@gmail.com)')#"`
+  linenumber=`grep -n -Z -E "/\* author \*/" "$f" | cut -f1 -d:`
+
+  awk -v replacewith="$replacewith" -v linenumber="$linenumber" '{ if (NR == linenumber) print ""replacewith""; else print $0}' "$f" > "$f.tmpz"
+
+  mv "$f.tmpz" "$f"
+done
