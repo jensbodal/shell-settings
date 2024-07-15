@@ -1,0 +1,26 @@
+#!/bin/bash
+
+usingport() {
+  ports=`echo "$@" | egrep -o "\d+" | xargs`
+  dokill=`echo "$@" | egrep -o "\-k"`
+
+  results=`lsof $(echo "$ports" | sed -E 's#([0-9]+)#-i :\1#g') -n -P`
+
+  if [ ! -z "$results" ]; then
+    printf "\n$results\n\n"
+  else
+    printf "\n[usingport] No processes found using ports [$ports]\n\n"
+    return 1
+  fi
+
+  pids=`echo "$results" | sed '1D' | awk '{print $2}' ORS=' '`
+
+  if [ ! -z "$dokill" ]; then
+    printf "killing pids [$(echo "$pids" | xargs)]\n\n"
+    echo "$pids" | xargs kill -9
+  else
+    printf "[usingport] pass -k to kill all matching processes\n\n"
+  fi
+}
+
+usingport "$@"

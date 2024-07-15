@@ -1,5 +1,11 @@
 #!/bin/bash
 
+trap exit EXIT
+
+exit() {
+  pkill -i caffeinate
+}
+
 TIME_TO_KILL=${1:-720}
 
 if command -v caffeinate &> /dev/null

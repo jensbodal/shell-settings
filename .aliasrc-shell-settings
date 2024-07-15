@@ -24,7 +24,6 @@ alias git-vim-status=__git-vim-status
 alias screen=__screen
 alias ssh-keygen-secure=__ssh-keygen-secure
 alias u=__u
-alias usingport=__usingport
 
 # bash scripts
 export BASH_SCRIPTS_PATH="$DIR/scripts"
@@ -245,31 +244,6 @@ __u() {
   fi
 }
 
-__usingport() {
-  ports=`echo "$@" | egrep -o "\d+" | xargs`
-  dokill=`echo "$@" | egrep -o "\-k"`
-  len=0
-
-  results=`lsof $(echo $ports | sed -E 's#([0-9]+)#-i :\1#g') -n -P`
-
-  if [ ! -z $results ]; then
-    echo "\n$results\n"
-  else
-    echo "[usingport] No processes found using ports [$ports]"
-    return 1
-  fi
-
-  pids=`echo $results | sed '1D' | awk '{print $2}' ORS=' '`
-
-  if [ ! -z $dokill ]; then
-    echo "killing pids [$(echo $pids | xargs)]"
-    echo $pids | xargs kill -9
-  else
-    if [ $len -gt 0 ]; then
-      echo "\n[usingport] pass -k to kill all matching processes"
-    fi
-  fi
-}
 
 __yarn() {
   echo "!!! use bun !!!"
