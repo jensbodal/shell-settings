@@ -102,7 +102,7 @@ __rmrf() {
   { __rmrfhelper & } 2>/dev/null
 }
 
-rm() {
+__rm() {
   if [ "$1" = "-rf" ]; then
     shift
     __rmrf "$@"

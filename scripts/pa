@@ -63,10 +63,8 @@ _pa() {
   local pids=
 
   for arg in "$@"; do
-    results="$results$(ps aux | grep -i $arg | grep -v grep | grep -v pa)"
+    results="$results$(ps aux | grep -i $arg | grep -v grep | grep -v "/shell-settings/scripts/pa "$arg"" | grep -v ' vim ' | grep -v ' tail ')"
   done
-
-  # results=$(ps aux | grep -i "$match" | grep -v "grep " | grep -v "pa ")
 
   if [ "$results" == "" ]; then
     log "No matches found"
@@ -83,7 +81,7 @@ _pa() {
   done <<< "$results"
 
   if [ $DO_KILL -eq 1 ]; then
-    echo "$pids" | xargs kill
+    echo "$pids" | xargs kill -9
   fi
 }
 
