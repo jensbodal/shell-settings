@@ -63,7 +63,7 @@ _pa() {
   local pids=
 
   for arg in "$@"; do
-    results="$results$(ps aux | grep -i $arg | grep -v grep | grep -v "/shell-settings/scripts/pa "$arg"" | grep -v ' vim ' | grep -v ' tail ')"
+    results="$results$(ps aux | grep -i $arg | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
   done
 
   if [ "$results" == "" ]; then
