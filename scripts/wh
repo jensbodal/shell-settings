@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for f in `which -a $@`; do
+  readlink -f $(which $f)
+done
