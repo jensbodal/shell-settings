@@ -1,0 +1,13 @@
+#!/bin/bash
+
+main() {
+  if [ -f /usr/bin/pbcopy ]; then
+    pbcopy "$@"
+    return 0
+  fi
+
+  ssh plh xclip "$@"
+  return 0
+}
+
+main "$@"

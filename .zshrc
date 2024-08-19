@@ -170,3 +170,8 @@ if [ -f $HOME/github/shell-settings/scripts/shell-settings-update ]; then
 else
   echo "Could not find shell-settings-update script"
 fi
+
+
+# bun
+export BUN_INSTALL="$HOME/local/bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

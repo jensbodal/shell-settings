@@ -63,6 +63,10 @@ ismac() {
 }
 
 mise-install() {
+  if exists "$1" ; then
+    echo "$1 exists, not doing anything..."
+    return 0
+  fi
   mise plugin add "$1"
   mise install "$1@latest"
   mise global "$1@latest"
@@ -103,7 +107,10 @@ install_brew_if_needed
 
 if command -v brew &> /dev/null; then
   brew tap mike-engel/jwt-cli
-  brew install fx fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar hyperfine jwt-cli make switchaudio-osx
+  brew install fx fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar jwt-cli
+  if ismac; then
+    brew install hyperfine switchaudio-osx make
+  fi
 elif command -v apt &> /dev/null; then
   sudo apt update && \
     sudo apt install -y bat hyperfine make
@@ -146,7 +153,6 @@ if ! command -v mise &> /dev/null; then
   mise-install pnpm
   mise-install python
   mise-install rust
-  mise-install yarn
 
   #mise direnv setup --shell zsh --version latest
 fi
@@ -156,13 +162,4 @@ if exists npm; then
 else
   echo "Missing npm; set it up then run:"
   echo "npm config set prefix=\$HOME/local/npm"
-fi
-
-if exists yarn; then
-  yarn config set prefix $HOME/local/yarn
-  yarn global add n
-else
-  echo "Missing yarn; set it up then run:"
-  echo "yarn config set prefix \$HOME/local/yarn"
-  echo "yarn global add n"
 fi

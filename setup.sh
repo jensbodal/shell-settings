@@ -29,7 +29,6 @@ echo "export USER=\$(id -un)" >> ~/.zsh-homerc
 echo "export ZSH=\$HOME/.oh-my-zsh" >> ~/.zsh-homerc
 echo "export N_PREFIX=\$HOME/local/n" >> ~/.zsh-homerc
 echo "" >> ~/.zsh-homerc
-echo "PATH=\$HOME/local/yarn/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/npm/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/n/bin:\$PATH" >> ~/.zsh-homerc
 echo "PATH=\$HOME/local/bin:\$PATH" >> ~/.zsh-homerc
