@@ -43,9 +43,39 @@ since() {
   echo ""
 }
 
+UPDATE_SHELL=1
+UPDATE_VIM=2
+UPDATE_MISE=4
+
+UPDATE_QUICK=3
+UPDATE_LONG=4
+UPDATE_ALL=7
+run-updaters() {
+  local updateflags=${1:-0}
+  local checkflag=
+
+  # Update shell
+  checkflag=$UPDATE_SHELL
+  if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    update_shell_settings
+  fi
+
+  # Update shell
+  checkflag=$UPDATE_VIM
+  if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    vim +'PlugInstall --sync' +qa
+  fi
+
+  # Update shell
+  checkflag=$UPDATE_MISE
+  if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    mise up
+  fi
+}
+
 run() {
   if [ "$1" = "--force" ]; then
-    update_shell_settings
+    run-updaters $UPDATE_ALL
     return 0
   fi
 
@@ -61,6 +91,15 @@ run() {
       return 0
     fi
 
+    if [ $diff_days -gt 2 ]; then
+      if [ ! -d $git_dir ]; then
+        log "cannot find \"$git_dir\""
+        return 1
+      fi
+
+      run-updaters $UPDATE_LONG
+    fi
+
     if [ $diff_days -gt 1 ]; then
       if [ ! -d $git_dir ]; then
         log "cannot find \"$git_dir\""
@@ -68,7 +107,7 @@ run() {
       fi
 
       since
-      update_shell_settings
+      run-updaters $UPDATE_QUICK
     fi
   else
     mkdir -p $(dirname "$update_file")

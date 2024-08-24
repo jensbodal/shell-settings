@@ -38,7 +38,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   aliases # use with acs
-  fzf
+  #fzf
   history
   history-substring-search
   iterm2

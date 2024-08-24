@@ -145,8 +145,8 @@ if ! command -v mise &> /dev/null; then
   mise-install delta
   mise-install direnv
   # does not like to work with zsh
-  mise-install fzf
-  mise-install glow
+  #mise-install fzf
+  #mise-install glow
   mise-install golang
   mise-install jq
   mise-install nodejs
