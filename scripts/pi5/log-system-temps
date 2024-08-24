@@ -1,0 +1,123 @@
+#!/bin/bash
+
+HOME=/home/jensbodal
+SCRIPT_NAME=$(basename "$0")
+LOG_DIR=$HOME/local/logs/${SCRIPT_NAME}
+
+PATH=/usr/bin/vcgencmd:$PATH
+export PATH=$PATH
+
+mkdir -p "${LOG_DIR}/${SCRIPT_NAME}"
+
+for cmd in `vcgencmd commands | sed -E 's#commands="commands, (.*)"$#\1#' | tr -d ' ' | tr ',' '\n'`; do
+  toeval="echo \"[$cmd]\"; vcgencmd $cmd"
+
+  # not interesting
+  if [ "$cmd" = "all" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "bootloader_config" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "bootloader_version" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "cache_flush" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "get_config" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "get_hvs_asserts" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "get_rsts" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "pmicrd" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "power_monitor" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "readmr" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "version" ]; then
+    continue
+  fi
+
+  if [ "$cmd" = "measure_clock" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+    frequency_h="$(vcgencmd measure_clock arm | cut -d '=' -f2)"
+    frequency_GHz="`echo $(( ${frequency_h} / 1000 / 1000 / 10 )) | sed -E 's#([0-9])([0-9]*)#\1.\2#'`"
+    toeval="echo ${frequency_GHz}GHz >> ${LOG_FILE}"
+  fi
+
+  if [ "$cmd" = "measure_temp" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+  fi
+
+  if [ "$cmd" = "measure_volts" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+  fi
+
+  if [ "$cmd" = "pmic_read_adc" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+  fi
+
+  if [ "$cmd" = "read_ring_osc" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+  fi
+
+  if [ "$cmd" = "get_throttled" ]; then
+    LOG_FILE=${LOG_DIR}/$cmd.log
+    toeval="vcgencmd $cmd >> ${LOG_FILE};"
+  fi
+
+  if [ "$cmd" = "set_logging" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  if [ "$cmd" = "get_mem" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  if [ "$cmd" = "codec_enabled" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  if [ "$cmd" = "pmicwr" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+
+  if [ "$cmd" = "power_monitor" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  if [ "$cmd" = "ipmic_read_adc" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  if [ "$cmd" = "otp_dump" ]; then
+    toeval="echo \"[$cmd]\"; echo \"Needs configuration to be useful\""
+  fi
+
+  eval "$toeval"
+done;
