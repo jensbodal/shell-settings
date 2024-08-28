@@ -2,7 +2,7 @@
 
 main() {
   if [ -f /usr/bin/pbcopy ]; then
-    pbcopy "$@"
+    command /usr/bin/pbcopy "$@"
     return 0
   fi
 

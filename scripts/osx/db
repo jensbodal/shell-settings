@@ -1,0 +1,30 @@
+#!/bin/bash
+
+trap exit EXIT
+
+exit() {
+  return $?
+}
+
+DIR="$(dirname "$(readlink -f "$0")")"
+
+main() {
+  if ! command -v brew 2>&1 > /dev/null; then
+    echo "brew not intalled, cannot run"
+    return 1
+  fi
+
+  if ! command defaultbrowser 2>&1 > /dev/null; then
+    brew install defaultbrowser
+  fi
+
+  if [ $# -eq 0 ]; then
+    defaultbrowser
+    return 0
+  fi
+
+  echo "[db] setting default browser to \"$1\""
+  osascript "$DIR/setDefaultBrowser.scpt" "$1"
+}
+
+main "$@"

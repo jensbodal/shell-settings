@@ -29,6 +29,7 @@ root = ssh://${user}@${host}/${remote_root_dir}
 # #noupdate = /src/dir
 
 # ignore common build directories and paths
+ignore = Name .nx
 ignore = Name .DS_Store
 ignore = Name ._.DS_Store
 ignore = Name .mise.toml
@@ -37,6 +38,7 @@ ignore = Name dist
 ignore = Name env
 ignore = Name logs
 ignore = Name node_modules
+ignore = Name package-lock.json
 ignore = Name runtime
 ignore = Name tmp
 

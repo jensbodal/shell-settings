@@ -38,6 +38,11 @@ alias ncdu="$BASH_SCRIPTS_PATH/alias_ncdu"
 alias nnn="$BASH_SCRIPTS_PATH/alias_nnn"
 alias disknnn="nnn"
 
+if [ "$OS" = "darwin" ]; then
+  echo "macOS detected: loading $BASH_SCRIPTS_PATH/osx"
+  export PATH="$PATH:$BASH_SCRIPTS_PATH/osx"
+fi
+
 # node scripts
 __add_node_scripts_to_path() {
   local nodedir="$DIR/scripts/node"
