@@ -7,6 +7,7 @@ alias gdh="gd HEAD"
 alias gds="gd --staged"
 alias gs="git status"
 alias hist="history"
+alias l='ls -la | grep "^d" && ls -la | grep -v "^d"'
 alias ll="ls -la"
 alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
 alias yarn=__yarn
@@ -41,6 +42,11 @@ alias disknnn="nnn"
 if [ "$OS" = "darwin" ]; then
   echo "macOS detected: loading $BASH_SCRIPTS_PATH/osx"
   export PATH="$PATH:$BASH_SCRIPTS_PATH/osx"
+fi
+
+if [ "$OS" = "proxmox" ]; then
+  echo "proxmox detected: loading $BASH_SCRIPTS_PATH/proxmox"
+  export PATH="$PATH:$BASH_SCRIPTS_PATH/proxmox"
 fi
 
 # node scripts

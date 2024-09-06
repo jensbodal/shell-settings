@@ -18,6 +18,11 @@ export PATH=$PATH:$PNPM_HOME
 
 if type uname > /dev/null; then
   OS=$(uname | tr '[:upper:]' '[:lower:]')
+  if [ "$OS" = "linux" ]; then
+    if [[ "`uname -a`" =~ "Linux.*pve.*" ]]; then
+      OS="proxmox"
+    fi
+  fi
 fi
 
 setopt HIST_IGNORE_ALL_DUPS
