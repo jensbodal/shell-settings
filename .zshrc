@@ -14,7 +14,10 @@ export BUN_INSTALL=$HOME/local/bun
 export N_PREFIX=$HOME/local/n
 export PNPM_HOME=$HOME/local/pnpm
 export ZSH=$HOME/.oh-my-zsh
-export PATH=$PATH:$PNPM_HOME
+
+PATH="$PATH:$PNPM_HOME"
+PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PATH"
 
 if type uname > /dev/null; then
   OS=$(uname | tr '[:upper:]' '[:lower:]')
@@ -178,5 +181,6 @@ fi
 
 
 # bun
-export BUN_INSTALL="$HOME/local/bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "/local/home/bodal/local/bun/_bun" ] && source "/local/home/bodal/local/bun/_bun"

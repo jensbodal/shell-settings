@@ -32,11 +32,13 @@ export BASH_SCRIPTS_PATH="$DIR/scripts"
 export PATH="$BASH_SCRIPTS_PATH:$PATH"
 
 # bash script aliases
-alias htop="$BASH_SCRIPTS_PATH/alias_htop"
-alias json="$BASH_SCRIPTS_PATH/alias_json"
-alias mamba="$BASH_SCRIPTS_PATH/alias_mamba"
-alias ncdu="$BASH_SCRIPTS_PATH/alias_ncdu"
-alias nnn="$BASH_SCRIPTS_PATH/alias_nnn"
+for f in `find "$BASH_SCRIPTS_PATH" -type f -name "alias_*"`; do
+  cmd=`echo $f | sed -E 's#.*alias_(.*)#\1#'`
+  toeval="alias $cmd=\"$BASH_SCRIPTS_PATH/alias_$cmd\""
+  eval "$toeval"
+done
+
+# just helpful if I'm looking for the command and look under disk :)
 alias disknnn="nnn"
 
 if [ "$OS" = "darwin" ]; then
