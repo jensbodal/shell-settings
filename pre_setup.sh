@@ -1,3 +1,14 @@
-sudo apt install exuberant-ctags
+#!/bin/bash
+
+sudo apt install exuberant-ctags zsh zsh-autosuggestions zsh-syntax-highlighting
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-curl -fsSL https://tailscale.com/install.sh | sh
+
+while true; do
+    read -p "Install tailscale? (y/N) " yn
+    case $yn in
+        [Yy]* ) curl -fsSL https://tailscale.com/install.sh | sh; break;;
+        [Nn]* ) exit;;
+        * ) exit;;
+    esac
+done
+
