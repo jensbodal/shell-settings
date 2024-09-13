@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! command -v pm2 &> /dev/null; then
+  pnpm i -g pm2
+fi
+
+pm2 "$@"
