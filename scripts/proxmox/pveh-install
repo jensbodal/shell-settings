@@ -1,0 +1,83 @@
+#!/bin/bash
+
+trap 'catch $? $LINENO' EXIT
+
+GIT_DIR="$HOME/github/Proxmox"
+
+log() {
+  echo "[pveh-install] $@"
+}
+
+catch() {
+  local code="$1"
+  local line="$2"
+
+  if [ "$code" != "0" ]; then
+    log "ERR code [$code] line [$line]"
+  fi
+
+  exit $code
+}
+
+update() {
+  pushd "$GIT_DIR"
+  git pull origin main --rebase > /dev/null 2>&1
+  local err=$?
+  popd
+  return $err
+}
+
+main() {
+  update
+  if [ ! -d "$GIT_DIR" ]; then
+    log "You are either not using Proxmox or the directory \"$GIT_DIR\" does not exist"
+    return 1
+  fi
+
+  local scripts=`find "$GIT_DIR" -type f -name "*.sh" | sort`
+  local filenames=()
+  local scriptnames=()
+
+  for s in $scripts; do
+    local subpath=`echo $s | sed -E 's#'${GIT_DIR}'/(.*)#\1#'`
+    local name=`basename $subpath`
+    local category=`dirname $subpath`
+
+    if [ "$category" != "install" ]; then
+      scriptnames+=("$name")
+      filenames+=("$s")
+    fi
+  done
+
+  scriptnames=`echo $scriptnames | sort`
+  IFS=$'\n' scriptnames=($(sort <<<"${scriptnames[*]}"))
+  unset IFS
+
+  if [ $# -eq 0 ]; then
+    for s in "${scriptnames[@]}"; do
+      log $s
+    done
+    return 0
+  fi
+
+  log "If there is a match for \"$1\" the installation instructions will print below"
+  echo ""
+
+  log "#############################################################################"
+  log "# START                                                                      "
+  log "#############################################################################"
+  echo ""
+
+  for s in "${filenames[@]}"; do
+    if `echo $s | grep --quiet "$1"`; then
+      echo "su - -c 'bash $s'"
+    fi
+  done
+
+  echo ""
+  log "#############################################################################"
+  log "# END                                                                        "
+  log "#############################################################################"
+}
+
+main "$@"
