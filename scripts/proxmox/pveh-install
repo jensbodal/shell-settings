@@ -69,8 +69,8 @@ main() {
   echo ""
 
   for s in "${filenames[@]}"; do
-    if `echo $s | grep --quiet "$1"`; then
-      echo "su - -c 'bash $s'"
+    if `echo $s | grep --quiet -i "$1"`; then
+      echo "sudu su -c 'bash $s'"
     fi
   done
 
