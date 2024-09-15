@@ -6,7 +6,7 @@ main() {
     return 0
   fi
 
-  ssh plh xclip "$@"
+  ssh plh "pbcopy $@"
   return 0
 }
 
