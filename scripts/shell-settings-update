@@ -54,7 +54,7 @@ run-updaters() {
   local updateflags=${1:-0}
   local checkflag=
 
-  omz update
+  zsh -ic "omz update"
 
   # Update shell
   checkflag=$UPDATE_SHELL
