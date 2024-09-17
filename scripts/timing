@@ -1,0 +1,15 @@
+#!/bin/bash
+# source: https://unix.stackexchange.com/a/334152
+
+
+START=$(date +%s.%N)
+# do something #######################
+
+tmp=`mktemp`
+eval "${@}" > $tmp 2>&1
+
+#######################################
+END=$(date +%s.%N)
+DIFF=$( echo "scale=3; (${END} - ${START})*1000/1" | bc )
+
+echo "[${DIFF}ms | \`${@}\`] `cat ${tmp}`"

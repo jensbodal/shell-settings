@@ -1,0 +1,31 @@
+#!/bin/bash
+# Include in your script with:
+# [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+# Adds default cleanup function and helper scripts common global variables
+# Also ensures that all scripts in scripts folder are available to other scripts here
+# @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable
+
+set -euo pipefail
+
+.SCRIPT_DIR() {
+  cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
+}
+
+.SCRIPT_NAME() {
+  basename "$0"
+}
+
+export PATH="$(.SCRIPT_DIR):$PATH"
+
+trap cleanup EXIT
+
+cleanup() {
+  code="$?"
+
+  if [ $code -ne 0 ]; then
+    echo "[$code] There was a failure"
+    exit $code
+  fi
+
+  exit 0
+}

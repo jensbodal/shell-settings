@@ -288,3 +288,6 @@ let g:ctrlp_root_markers = ['.ctrlp']
 " :set list
 set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
 
+" .INIT template insertion with space+t
+nnoremap <space>i :-1read $HOME/.vim/templates/script-init.sh<CR>/[<CR><o><esc>
+

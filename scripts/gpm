@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euo pipefail
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
 
 LOG_DIR_BASE="$HOME/local/logs/git-history"
 GIT_SHA=`git rev-parse HEAD`
@@ -18,7 +18,7 @@ w() {
 __gpm() {
   local curr_remote=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
   # in case origin has changed this will auto-update it
-  git remote set-head origin -a
+  timing git remote set-head origin -a
 
   local origin_branch=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
 
@@ -29,13 +29,13 @@ __gpm() {
     return 1
   fi
 
-  git pull origin "$origin_branch" --rebase --autostash
+  timing git pull origin "$origin_branch" --rebase --autostash
 
   NEW_SHA=`git rev-parse HEAD`
   LOG_MSG="[$(date)] $GIT_SHA => $NEW_SHA"
 
   if [ "$GIT_SHA" != "$NEW_SHA" ]; then
-    GIT_MSG="$ git log --format=%B -n 1 $GIT_SHA"
+    GIT_MSG="$(git log --format=%B -n 1 $GIT_SHA)"
 
     w ""
     w "$LOG_MSG"
@@ -46,5 +46,14 @@ __gpm() {
 
   w "$LOG_MSG"
 }
+
+exit() {
+  code=$?
+
+  if [ $code -ne 0 ]; then
+    echo "[$code] Error"
+  fi
+}
+
 
 __gpm "$@"

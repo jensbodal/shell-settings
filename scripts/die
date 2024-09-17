@@ -1,0 +1,17 @@
+#!/bin/bash
+# source: https://www.reddit.com/r/bash/comments/5kfbi7/best_practices_error_handling/
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+__die() {
+    set +u
+    local format="$1"
+    set -u
+    shift
+    tput setaf 1
+    printf >&2 "$format\n" "$@"
+    tput sgr0
+    exit 1
+}
+
+__die "$@"
