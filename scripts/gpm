@@ -1,0 +1,50 @@
+#!/bin/bash
+
+set -euo pipefail
+
+LOG_DIR_BASE="$HOME/local/logs/git-history"
+GIT_SHA=`git rev-parse HEAD`
+GIT_REPO=`findup .git`
+GIT_PKG=`basename $GIT_REPO`
+LOG_DIR="$LOG_DIR_BASE/$GIT_PKG"
+LOG_FILE="$LOG_DIR/gpm-sha-history.log"
+
+mkdir -p "$LOG_DIR"
+
+w() {
+  echo [gpm] "$@" | tee -a "$LOG_FILE"
+}
+
+__gpm() {
+  local curr_remote=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
+  # in case origin has changed this will auto-update it
+  git remote set-head origin -a
+
+  local origin_branch=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
+
+  if [ "$curr_remote" != "$origin_branch" ]; then
+    echo "Origin branch has changed!"
+    echo "Previous: \"$curr_remote\""
+    echo "Current: \"$origin_branch\""
+    return 1
+  fi
+
+  git pull origin "$origin_branch" --rebase --autostash
+
+  NEW_SHA=`git rev-parse HEAD`
+  LOG_MSG="[$(date)] $GIT_SHA => $NEW_SHA"
+
+  if [ "$GIT_SHA" != "$NEW_SHA" ]; then
+    GIT_MSG="$ git log --format=%B -n 1 $GIT_SHA"
+
+    w ""
+    w "$LOG_MSG"
+    w "$GIT_MSG"
+    w ""
+    return 0
+  fi
+
+  w "$LOG_MSG"
+}
+
+__gpm "$@"
