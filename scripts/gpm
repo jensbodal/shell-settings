@@ -8,6 +8,7 @@ GIT_REPO=`findup .git`
 GIT_PKG=`basename $GIT_REPO`
 LOG_DIR="$LOG_DIR_BASE/$GIT_PKG"
 LOG_FILE="$LOG_DIR/gpm-sha-history.log"
+TIMING=0
 
 mkdir -p "$LOG_DIR"
 
@@ -35,11 +36,13 @@ __gpm() {
   LOG_MSG="[$(date)] $GIT_SHA => $NEW_SHA"
 
   if [ "$GIT_SHA" != "$NEW_SHA" ]; then
-    GIT_MSG="$(git log --format=%B -n 1 $GIT_SHA)"
+    PREVIOUS_COMMIT="$(git log --date=local --format="[%cd] %B" -n 1 $GIT_SHA)"
 
     w ""
     w "$LOG_MSG"
-    w "$GIT_MSG"
+    w "= Previous Commit ="
+    w "$GIT_SHA"
+    w "$PREVIOUS_COMMIT"
     w ""
     return 0
   fi
@@ -54,6 +57,5 @@ exit() {
     echo "[$code] Error"
   fi
 }
-
 
 __gpm "$@"
