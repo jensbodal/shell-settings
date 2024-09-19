@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Include in your script with:
 # [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
 # Adds default cleanup function and helper scripts common global variables
@@ -6,6 +6,9 @@
 # @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable
 
 set -euo pipefail
+
+SCRIPTS_DIR=`cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd`
+SHELL_SETTINGS_DIR="$(readlink -f ${SCRIPTS_DIR}/..)"
 
 .SCRIPT_DIR() {
   cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
@@ -28,4 +31,34 @@ cleanup() {
   fi
 
   exit 0
+}
+
+log() {
+  args=( )
+  local log_empty=n
+  local include_date=n
+  # more complex flags seen here https://stackoverflow.com/a/2875513/679716
+  while test $# != 0; do
+    case $1 in
+      -e|--empty) log_empty=y ;;
+      -d|--date) include_date=y ;;
+      *)  args+=( "$1" ) ;;
+    esac
+    shift
+  done
+  set +u
+  set -- "${args[@]}"
+  set -u
+
+  if [ "$log_empty" = "y" ]; then
+    echo ""
+    return 0
+  fi
+
+  if [ "$include_date" = "y" ]; then
+    printf "[$(date +"%Y-%m-%d_%H%M%S") - $(.SCRIPT_NAME)] $@\n"
+    return 0
+  fi
+
+  printf "[$(.SCRIPT_NAME)] $@\n"
 }

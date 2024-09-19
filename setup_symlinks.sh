@@ -3,17 +3,27 @@
 THIS_FOLDER=$PWD
 THIS_VIM_FOLDER=$THIS_FOLDER'/.vim'
 
+# sets `-euo pipefail`
+# Adds scripts dir to PATH
+# Adds error handling
+# Globals:
+# $SCRIPTS_DIR
+# $SHELL_SETTINGS_DIR
+# $(.SCRIPT_DIR)
+# $(.SCRIPT_NAME)
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
 createsymlink() {
   local s="$1"
   local d="$2"
 
   if [ ! -L "$d" ]; then
-    echo "! linking \"$s\" to \"$d\""
+    log "! linking \"$s\" to \"$d\""
     ln -sf "$s" "$d"
   fi
 }
 
-echo "Checking for symlink update..."
+log -d "Checking for symlink update..."
 createsymlink $THIS_FOLDER/.zshrc $HOME/.zshrc
 createsymlink $THIS_FOLDER/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
 createsymlink $THIS_FOLDER/.zsh_completions $HOME/.zsh_completions
@@ -26,14 +36,25 @@ for d in `find ${THIS_VIM_FOLDER} -type d`; do
   vimfolder=`basename ${d}`
   symlink="${HOME}/.vim/${vimfolder}"
 
-  if [ ! -h "$symlink" ]; then
+  if [ ! -L "$symlink" ]; then
     createsymlink "${d}" "${symlink}"
   fi
 done
-#createsymlink $THIS_VIM_FOLDER/after $HOME/.vim/after
-#createsymlink $THIS_VIM_FOLDER/autoload $HOME/.vim/autoload
-#createsymlink $THIS_VIM_FOLDER/bundle $HOME/.vim/bundle
-#createsymlink $THIS_VIM_FOLDER/colors $HOME/.vim/colors
-#createsymlink $THIS_VIM_FOLDER/ftplugin $HOME/.vim/ftplugin
-#createsymlink $THIS_VIM_FOLDER/plugin $HOME/.vim/plugin
-#createsymlink $THIS_VIM_FOLDER/templates $HOME/.vim/templates
+
+for f in `find "${SHELL_SETTINGS_DIR}/configurations" -type f`; do
+  MAP_HOME="${SHELL_SETTINGS_DIR}/configurations/*/HOME/*"
+
+  if [[ $f == $MAP_HOME ]]; then
+    prefix=${f#"${SHELL_SETTINGS_DIR}/configurations/"}
+    _filepath=`echo ${prefix} | sed -E 's#.*/HOME/(.*)#\1#'`
+    _filename=`basename $_filepath`
+    _filedirectory="$HOME/`dirname $_filepath`"
+    _symlink="${_filedirectory}/${_filename}"
+
+    if [ ! -L "${_symlink}" ]; then
+      log -e
+      mkdir -p "${_filedirectory}"
+      createsymlink "${f}" "${_symlink}"
+    fi
+  fi
+done

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+__findup() {
+  local needle="${1}"
+  local _DIR="${PWD}"
+
+  while [[ $PWD != '/' && ${PWD##*/} != 'httpdocs' ]]; do
+    if [[ -d "$needle" || -f "$needle" || -h "$needle" ]]; then
+      echo "${PWD}/${needle}"
+      builtin cd "${_DIR}"
+      return 0
+    fi
+
+    builtin cd ..
+  done
+
+  builtin cd "${_DIR}"
+}
+
+__findup "$@"

@@ -1,1 +1,6 @@
 * add log to init thing and you can then init the init with the init of the script dir init away acutally log can do it u know
+* add vim template from work computer to the git repo
+* add a script to run incemental updates for example running the symlink command or checking if it exists before creating
+ - alternatively could ensure that all commands can only run once so it's safe, and then move a lof of the setup shit to that kind of flow
+* I was in the middle of adding a new color script so I could color the timing of the timings script 
+* 
