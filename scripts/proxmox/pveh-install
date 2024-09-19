@@ -70,7 +70,7 @@ main() {
 
   for s in "${filenames[@]}"; do
     if `echo $s | grep --quiet -i "$1"`; then
-      echo "sudu su -c 'bash $s'"
+      echo "sudo su -c 'bash $s'"
     fi
   done
 
