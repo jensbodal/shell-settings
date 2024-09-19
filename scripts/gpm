@@ -19,7 +19,8 @@ w() {
 __gpm() {
   local curr_remote=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
   # in case origin has changed this will auto-update it
-  timing git remote set-head origin -a
+  # this worked in one case but I don't know I've ever needed to do this so...
+  # timing git remote set-head origin -a
 
   local origin_branch=`git rev-parse --abbrev-ref origin/HEAD | cut -c8-`
 
