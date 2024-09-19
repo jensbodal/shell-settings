@@ -1,8 +1,5 @@
 #!/bin/bash
 
-THIS_FOLDER=$PWD
-THIS_VIM_FOLDER=$THIS_FOLDER'/.vim'
-
 # sets `-euo pipefail`
 # Adds scripts dir to PATH
 # Adds error handling
@@ -12,6 +9,8 @@ THIS_VIM_FOLDER=$THIS_FOLDER'/.vim'
 # $(.SCRIPT_DIR)
 # $(.SCRIPT_NAME)
 [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+THIS_VIM_FOLDER="$SHELL_SETTINGS_DIR/.vim"
 
 createsymlink() {
   local s="$1"
@@ -24,13 +23,13 @@ createsymlink() {
 }
 
 log -d "Checking for symlink update..."
-createsymlink $THIS_FOLDER/.zshrc $HOME/.zshrc
-createsymlink $THIS_FOLDER/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
-createsymlink $THIS_FOLDER/.zsh_completions $HOME/.zsh_completions
-createsymlink $THIS_FOLDER/.vimrc $HOME/.vimrc
-createsymlink $THIS_FOLDER/.direnvrc $HOME/.direnvrc
+createsymlink ${SHELL_SETTINGS_DIR}/.zshrc $HOME/.zshrc
+createsymlink ${SHELL_SETTINGS_DIR}/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
+createsymlink ${SHELL_SETTINGS_DIR}/.zsh_completions $HOME/.zsh_completions
+createsymlink ${SHELL_SETTINGS_DIR}/.vimrc $HOME/.vimrc
+createsymlink ${SHELL_SETTINGS_DIR}/.direnvrc $HOME/.direnvrc
 
-createsymlink $THIS_FOLDER/jens-disagrees.zsh-theme $HOME/.oh-my-zsh/themes/jens-disagrees.zsh-theme
+createsymlink ${SHELL_SETTINGS_DIR}/jens-disagrees.zsh-theme $HOME/.oh-my-zsh/themes/jens-disagrees.zsh-theme
 
 for d in `find ${THIS_VIM_FOLDER} -type d`; do
   vimfolder=`basename ${d}`
