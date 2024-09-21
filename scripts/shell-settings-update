@@ -5,7 +5,7 @@
 git_dir=$HOME/github/shell-settings
 update_file=~/.config/shell-settings/last_updated
 
-update_shell_settings() {
+_update_shell_settings() {
   log "updating shell-settings"
 
   cd $git_dir && \
@@ -18,7 +18,7 @@ update_shell_settings() {
   # fi
 }
 
-since() {
+_since() {
   log "last updated:"
   log "  $diff_seconds seconds ago"
   log "  $diff_minutes minutes ago"
@@ -34,22 +34,23 @@ UPDATE_MISE=4
 UPDATE_QUICK=3
 UPDATE_LONG=4
 UPDATE_ALL=7
+
 run-updaters() {
   local updateflags=${1:-0}
   local checkflag=
 
-  zsh -ic "omz update"
+  # zsh -ic "omz update"
 
   # Update shell
   checkflag=$UPDATE_SHELL
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
-    update_shell_settings
+    _update_shell_settings
   fi
 
   # Update shell
   checkflag=$UPDATE_VIM
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
-    vim +'PlugInstall --sync' +qa
+    vim -es -u $HOME/.vimrc -i NONE -c "PlugInstall" -c "qa"
   fi
 
   # Update shell
@@ -78,7 +79,7 @@ run() {
     set +u
     if [ "$1" = "--since" ]; then
       set -u
-      since
+      _since
       return 0
     fi
     set -u
@@ -98,7 +99,7 @@ run() {
         return 1
       fi
 
-      since
+      _since
       run-updaters $UPDATE_QUICK
     fi
   else
