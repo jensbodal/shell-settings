@@ -40,3 +40,9 @@ jq
 zsh
 ...
 ```
+# Notes
+
+```
+:w !sudo tee %
+```
+
