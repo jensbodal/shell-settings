@@ -17,7 +17,7 @@ createsymlink() {
   local d="$2"
 
   if [ ! -L "$d" ]; then
-    log "! linking \"$s\" to \"$d\""
+    log "linking \"$s\" to \"$d\""
     ln -sf "$s" "$d"
   fi
 }

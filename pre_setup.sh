@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -euo pipefail
+
+export ZSH=$HOME/.oh-my-zsh
+
 sudo apt install exuberant-ctags zsh zsh-autosuggestions zsh-syntax-highlighting
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
