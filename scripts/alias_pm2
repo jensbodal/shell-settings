@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
 if ! command -v pm2 &> /dev/null; then
   pnpm i -g pm2
 fi

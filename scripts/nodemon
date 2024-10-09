@@ -2,8 +2,4 @@
 
 [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
 
-if ! command -v nnn &> /dev/null; then
-  i nnn
-fi
-
-nnn "$@"
+npx nodemon -- "$@"

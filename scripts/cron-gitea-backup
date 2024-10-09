@@ -1,0 +1,18 @@
+#!/bin/bash
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+main() {
+  set +u
+  local git_dir="${1}"
+  set -u
+
+  if [ ! -d "${git_dir}/.git" ]; then
+    log "\"${git_dir}\" is not a git directory"
+    return 1
+  fi
+
+  log "$@"
+}
+
+main "$@"

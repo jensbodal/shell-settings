@@ -1,7 +1,9 @@
 #!/bin/bash
 
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
 if ! command -v gron &> /dev/null; then
-  echo "command 'json' not found, installing gron now..."
+  log "command 'json' not found, installing gron now..."
   i gron
 fi
 

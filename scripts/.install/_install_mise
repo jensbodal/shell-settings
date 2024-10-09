@@ -1,0 +1,18 @@
+#!/bin/bash
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+main() {
+  if ! command -v mise > /dev/null 2>&1; then
+    log "Installing mise"
+
+    if ! command -v brew > /dev/null 2>&1; then
+      curl https://mise.run | sh
+    else
+      brew install mise
+    export PATH=$PATH:$HOMEBREW_PREFIX/bin
+    fi
+  fi
+}
+
+main "${@}"

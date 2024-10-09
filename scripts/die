@@ -1,5 +1,4 @@
 #!/bin/bash
-# source: https://www.reddit.com/r/bash/comments/5kfbi7/best_practices_error_handling/
 
 [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
 
