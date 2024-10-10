@@ -1,0 +1,37 @@
+#!/bin/bash
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+USE_MOSH=${USE_MOSH:-0}
+START=`date +%s`
+
+main() {
+  set +u
+  host="$1"
+  set -u
+
+  if [ -z $host ]; then
+    log "pssh your.host.name"
+    return 1
+  fi
+
+  until ping -c1 "${host}" 2>&1; do
+    local now=`date +%s`
+    local elapsed=$(( ($now - $START) / 100.0))
+    echo "checking... ${elapsed}s"
+    sleep 5
+  done
+
+  if [ -f /opt/homebrew/bin/mosh ]; then
+    log "mosh is available locally, use USE_MOSH=1 to use"
+
+    if [ $USE_MOSH -eq 1 ]; then
+      mosh "${host}"
+      return 0
+    fi
+  fi
+
+  ssh "${host}"
+}
+
+main "$@"

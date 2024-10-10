@@ -1,0 +1,44 @@
+#!/bin/bash
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+check_install_mambaforge() {
+  local bin_name="mambaforge"
+  local install_path="${HOME}/local/opt/${bin_name}"
+
+  if [ ! -d "${install_path}" ]; then
+
+    echo "Installing ${bin_name} to \"${install_path}\""
+
+    curl -L -o /tmp/mambaforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+    bash /tmp/mambaforge.sh -u -b -p "${install_path}"
+
+  fi
+
+  # Activate
+  source "$HOME/local/opt/mambaforge/bin/activate"
+}
+
+check_install_cadquery() {
+  local env_name="$1"
+  local mamba_pkg="$2"
+
+  if ! mamba info --envs | grep -E --quiet "^${env_name}"; then
+    mamba create -n "${env_name}"
+  fi
+
+  if [ ! -f $HOME/cq-editor/run.sh ]; then
+    curl -L -o /tmp/cq-editor.sh https://github.com/CadQuery/CQ-editor/releases/download/nightly/CQ-editor-master-Linux-x86_64.sh
+    sh /tmp/cq-editor.sh
+  fi
+  source $HOME/cq-editor/bin/activate
+
+  echo 'source "'${HOME}'/local/opt/mambaforge/bin/activate" && conda activate "'${env_name}'"'
+}
+
+main() {
+  check_install_mambaforge
+  check_install_cadquery "cadquery" "cadquery"
+}
+
+main "$@"

@@ -6,7 +6,7 @@ exit() {
   pkill -i caffeinate
 }
 
-TIME_TO_KILL=${1:-720}
+TIME_TO_KILL=${1:-1720}
 
 if command -v caffeinate &> /dev/null
 then
