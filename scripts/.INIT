@@ -69,6 +69,7 @@ non_local_bin_path() {
   local PATH=`echo $PATH | tr ":" "\n" | sort | uniq | grep -v "shell-settings/script" | tr "\n" ":" | sed 's/.$//'`
 
   if command -v "$1" > /dev/null 2>&1; then
+    export NON_LOCAL_BIN_PATH=$PATH
     return 0
   else
     return 1
