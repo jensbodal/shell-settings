@@ -1,0 +1,21 @@
+#!/bin/bash
+
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+
+
+__git_show_merged() {
+    set +u
+    local dodelete="$1"
+    set -u
+
+    local branches=`git branch -a --merged | grep -Ev "(^\*|^\+|master|main|dev|mainline)"`
+
+    log "Local branches that have been merged:\n${branches}"
+
+    if [ "${dodelete}" = "--delete" ]; then
+      log "Deleting branches..."
+      echo "${branches}" | tr '\n' ' ' | xargs --no-run-if-empty git branch -d
+    fi
+}
+
+__git_show_merged "$@"
