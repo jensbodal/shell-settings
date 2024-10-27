@@ -8,6 +8,7 @@ START=`date +%s`
 main() {
   set +u
   host="$1"
+  sshtarget="${2:-$host}"
   set -u
 
   if [ -z $host ]; then
@@ -17,21 +18,23 @@ main() {
 
   until ping -c1 "${host}" 2>&1; do
     local now=`date +%s`
-    local elapsed=$(( ($now - $START) / 100.0))
+    local elapsed=$(( ($now - $START) / 100))
     echo "checking... ${elapsed}s"
-    sleep 5
   done
+
+  echo "Host \"${sshtarget}\"active, attempting to connect..."
+  sleep 5
 
   if [ -f /opt/homebrew/bin/mosh ]; then
     log "mosh is available locally, use USE_MOSH=1 to use"
 
     if [ $USE_MOSH -eq 1 ]; then
-      mosh "${host}"
+      mosh "${sshtarget}"
       return 0
     fi
   fi
 
-  ssh "${host}"
+  ssh "${sshtarget}"
 }
 
 main "$@"
