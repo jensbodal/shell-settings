@@ -30,10 +30,11 @@ _since() {
 UPDATE_SHELL=1
 UPDATE_VIM=2
 UPDATE_MISE=4
+UPDATE_TLDR=8
 
 UPDATE_QUICK=3
-UPDATE_LONG=4
-UPDATE_ALL=7
+UPDATE_LONG=12
+UPDATE_ALL=15
 
 run-updaters() {
   local updateflags=${1:-0}
@@ -55,12 +56,25 @@ run-updaters() {
 
   # Update shell
   checkflag=$UPDATE_MISE
+  log "Updating mise..."
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
     if non_local_bin_path mise; then
       PATH=$NON_LOCAL_BIN_PATH
       mise up
     else
-      echo "mise is not installed"
+      log "! mise is not installed !"
+    fi
+  fi
+
+  # Update shell
+  checkflag=$UPDATE_TLDR
+  if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    log "Updating tldr..."
+    if non_local_bin_path tldr; then
+      PATH=$NON_LOCAL_BIN_PATH
+      tldr -u
+    else
+      log "! tldr is not installed !"
     fi
   fi
 }
