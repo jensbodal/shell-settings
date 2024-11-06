@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
 if [ ! -f $HOME/local/lib/mambaforge/bin/mamba ]; then
   if [ ! -d $HOME/local/lib/mambaforge ]; then

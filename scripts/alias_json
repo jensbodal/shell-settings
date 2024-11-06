@@ -1,10 +1,12 @@
 #!/bin/bash
 
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-if ! command -v gron &> /dev/null; then
-  log "command 'json' not found, installing gron now..."
-  i gron
+cmd="gron"
+
+if ! command -v "${cmd}" &> /dev/null; then
+  log "command '${cmd}' not found, installing ${cmd} now..."
+  i "${cmd}"
 fi
 
-gron "$@"
+"${cmd}" "$@"

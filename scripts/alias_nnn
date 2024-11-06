@@ -1,9 +1,12 @@
 #!/bin/bash
 
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-if ! command -v nnn &> /dev/null; then
-  i nnn
+cmd="nnn"
+
+if ! command -v "${cmd}" &> /dev/null; then
+  log "command '${cmd}' not found, installing ${cmd} now..."
+  i "${cmd}"
 fi
 
-nnn "$@"
+"${cmd}" "$@"

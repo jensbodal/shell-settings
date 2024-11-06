@@ -1,0 +1,15 @@
+#!/bin/bash
+
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__generate-ssh-key() {
+  local comment="$USER@$(hostname) <jensbodal_protonmail.com>"
+  local keypath="$HOME/.ssh/id_ed25519"
+
+  log "Creating \"${keypath}\" with comment: \"${comment}\""
+
+  ssh-keygen -t ed25519 -C "${comment}" -f "${keypath}"
+}
+
+__generate-ssh-key "$@"

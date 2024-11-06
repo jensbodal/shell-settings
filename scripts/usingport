@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usingport() {
+__usingport() {
   ports=`echo "$@" | egrep -o "\d+" | xargs`
   dokill=`echo "$@" | egrep -o "\-k"`
 
@@ -23,4 +23,4 @@ usingport() {
   fi
 }
 
-usingport "$@"
+__usingport "$@"

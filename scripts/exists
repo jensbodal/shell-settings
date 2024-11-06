@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
 __exists() {
   if [ $# -ne 1 ]; then
     echo "You can only check a single command at a time"

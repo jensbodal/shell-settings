@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if ! command -v htop &> /dev/null; then
-  i htop
-fi
-
-htop "$@"
