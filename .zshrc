@@ -41,6 +41,30 @@ export ZSH="$HOME/.oh-my-zsh"
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+# ensure default ssh keys are in keychain
+ssh-add-special() {
+  local key="$1"
+  local flags=""
+
+  if [ "${OS}" = "darwin" ]; then
+    flags="--apple-use-keychain"
+  fi
+
+
+  if [ -f "${key}" ]; then
+    if ! ssh-add "${flags}" -l | grep -q `ssh-keygen -lf "${key}" | awk '{print $2}'`; then
+      echo "${key} not in keychain, adding..."
+      ssh-add "${flags}" "${key}"
+    fi
+  fi
+}
+
+ssh-add-special ~/.ssh/id_rsa
+ssh-add-special ~/.ssh/id_ecdsa
+ssh-add-special ~/.ssh/id_ecdsa_sk
+ssh-add-special ~/.ssh/id_ed25519
+ssh-add-special ~/.ssh/id_ed25519_sk
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
