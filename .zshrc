@@ -4,6 +4,8 @@
 # create ~/.aliasrc file
 ###########################################################################################
 
+[[ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.pre.zsh"
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -214,3 +216,5 @@ fi
 if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
+
+[[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
