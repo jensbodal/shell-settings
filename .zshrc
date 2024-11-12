@@ -6,6 +6,10 @@
 
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.pre.zsh"
 
+[ -f "$HOME/.local/bin/mise" ] && export MISE_PATH="$HOME/.local/bin/mise"
+[ -f "/opt/homebrew/bin/mise" ] && export MISE_PATH="/opt/homebrew/bin/mise"
+[ -f "/home/linuxbrew/.linuxbrew/bin/mise" ] && export MISE_PATH="/home/linuxbrew/.linuxbrew/bin/mise"
+
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -54,7 +58,7 @@ ssh-add-special() {
 
 
   if [ -f "${key}" ]; then
-    if ! ssh-add "${flags}" -l | grep -q `ssh-keygen -lf "${key}" | awk '{print $2}'`; then
+    if ! ssh-add -l "${flags}" | grep -q `ssh-keygen -lf "${key}" | awk '{print $2}'`; then
       echo "${key} not in keychain, adding..."
       ssh-add "${flags}" "${key}"
     fi

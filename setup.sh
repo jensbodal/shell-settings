@@ -1,5 +1,11 @@
 #!/bin/zsh
 
+if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+  echo "Install zsh and oh-my-zsh first"
+  echo "sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+  exit 1
+fi
+
 DATE_SUFFIX=$(date +%Y-%m-%d-%s)
 BACKUP_FOLDER=$HOME'/.shell_settings_backup/'$DATE_SUFFIX
 BACKUP_VIM_FOLDER=$BACKUP_FOLDER/.vim

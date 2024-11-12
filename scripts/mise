@@ -4,54 +4,15 @@
 
 if non_local_bin_path mise; then
   PATH=$NON_LOCAL_BIN_PATH
-  mise "${@}"
 else
-  echo "mise is not installed"
+  if [ -z "${MISE_PATH}" ]; then
+    echo "Mise is not installed, see .zshrc file install locations"
+    echo "Could add steps here to manually install mise..."
+    printf "or run\n> curl https://mise.run | sh\n"
+    exit 1
+  fi
+
+  export PATH="$(realpath `dirname ${MISE_PATH}`):${PATH}"
 fi
 
-#HOMEBREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
-#
-#_BIN_LOCAL="${HOME}/.local/bin"
-#_BIN_DOT_LOCAL="${HOME}/.local/bin"
-#_BIN_BREW="${HOMEBREW_PREFIX}/bin"
-#
-#PATH=$PATH:$_BIN_LOCAL
-#PATH=$PATH:$_BIN_DOT_LOCAL
-#
-#addtopath() {
-#  set +u
-#  path="${1}"
-#  set -u
-#
-#  if [ -d "${path}" ]; then
-#    PATH=$PATH:$path
-#  fi
-#}
-#
-#addtopath "_BIN_LOCAL"
-#addtopath "_BIN_DOT_LOCAL"
-#addtopath "_BIN_BREW"
-#
-#printenv | grep BIN && exit 1
-#
-#if [ -d "${_BIN_BREW}" ]; then
-#  PATH=$PATH:$_BIN_BREW
-#fi
-#
-#export PATH=$PATH
-#
-#main() {
-#  if ! command -v mise > /dev/null 2>&1; then
-#    log "Installing mise"
-#
-#    if ! command -v brew > /dev/null 2>&1; then
-#      curl https://mise.run | sh
-#    else
-#      brew install mise
-#    fi
-#  fi
-#
-#  mise "${@}"
-#}
-#
-#main "${@}"
+mise "${@}"
