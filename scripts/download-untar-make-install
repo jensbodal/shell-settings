@@ -1,0 +1,35 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__download_untar_make_install() {
+  local url="$1"
+  local filename=`echo "${url##*/}"`
+  local foldername=$(basename `echo "${url/%.tar.gz/}"`)
+  local downloadto="${HOME}/local/etc"
+
+  mkdir -p "${downloadto}"
+
+  log "Downloading \"${url}\" to \"${downloadto}/${filename}\""
+
+  curl "${url}" -o "${downloadto}/${filename}"
+  cd "${downloadto}"
+  tar zxvf "${filename}"
+  cd "${foldername}"
+
+  local buildfolder="build-$(date +%s)"
+  local libfolder="${HOME}/local/lib/${filename}"
+
+  mkdir -p "${buildfolder}"
+  mkdir -p "${libfolder}"
+
+  buildfolder=`realpath ${buildfolder}`
+  cd "${buildfolder}"
+  # autoconf || true
+  ../configure --prefix="${libfolder}"
+  make
+  sudo make install
+}
+
+__download_untar_make_install "$@"
+

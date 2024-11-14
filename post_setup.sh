@@ -91,7 +91,6 @@ havebrew() {
 }
 
 install_brew_from_source() {
-
   if command -v apt-get &> /dev/null; then
     sudo apt-get install -y build-essential procps curl file git
   elif command -v yum &> /dev/null; then
@@ -204,6 +203,14 @@ if ! command -v wget &> /dev/null; then
     exit 187
   fi
 fi
+
+install_mise() {
+  if [ ! -f "${MISE_PATH}" ]; then
+    curl https://mise.run | sh
+    return $?
+  fi
+  return 1
+}
 
 if install_mise; then
   # the following do not work on mac so just using native package managers

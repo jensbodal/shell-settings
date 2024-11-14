@@ -189,6 +189,8 @@ if command -v mise > /dev/null; then
   eval "$(mise activate zsh)"
 #  echo "eval \"\$(/Users/bodal/.local/bin/mise activate zsh)\"" >> "/Users/bodal/.zshrc"
 #  eval "$(mise activate zsh)"
+elif [ -f $HOME/.local/bin/mise ]; then
+  eval "$(${HOME}/.local/bin/mise activate zsh)"
 fi
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
