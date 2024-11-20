@@ -24,6 +24,7 @@ export TLDR_AUTOUPDATE_DISABLED=1
 
 PATH="$PATH:$PNPM_HOME"
 PATH="$BUN_INSTALL/bin:$PATH"
+PATH="$PATH:$PNPM_HOME"
 export PATH="$PATH"
 
 if type uname > /dev/null; then

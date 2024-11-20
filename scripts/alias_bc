@@ -1,0 +1,12 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+cmd="bc"
+
+if ! command -v "${cmd}" &> /dev/null; then
+  log "command '${cmd}' not found, installing ${cmd} now..."
+  i "${cmd}"
+fi
+
+"${cmd}" "$@"

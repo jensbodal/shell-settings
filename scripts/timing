@@ -1,6 +1,9 @@
 #!/bin/bash
 # source: https://unix.stackexchange.com/a/334152
 
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+set -x
 
 START=$(date +%s.%N)
 # do something #######################
