@@ -1,0 +1,26 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__main() {
+  if non_local_bin_path mkcert; then
+    PATH=$NON_LOCAL_BIN_PATH
+    which mkcert
+  else
+    if [ "$(uname -m)" = "aarch64" ]; then
+      if [ ! -f $HOME/local/bin/mkcert ]; then
+        wget "https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-arm64" -O "$HOME/local/bin/mkcert"
+        chmod +x "$HOME/local/bin/mkcert"
+      fi
+      "$HOME/local/bin/mkcert" "$@"
+      return $?
+    else
+      brew install mkcert
+      return $?
+    fi
+  fi
+
+  eval "$(which mkcert) ${@}"
+}
+
+__main "$@"
