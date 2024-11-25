@@ -3,8 +3,6 @@
 
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-set -x
-
 START=$(date +%s.%N)
 # do something #######################
 
