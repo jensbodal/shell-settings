@@ -2,17 +2,21 @@
 
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-if non_local_bin_path mise; then
-  PATH=$NON_LOCAL_BIN_PATH
-else
-  if [ -z "${MISE_PATH}" ]; then
-    echo "Mise is not installed, see .zshrc file install locations"
-    echo "Could add steps here to manually install mise..."
-    printf "or run\n> curl https://mise.run | sh\n"
-    exit 1
+__mise() {
+  if non_local_bin_path mise; then
+    PATH=$NON_LOCAL_BIN_PATH
+  else
+    if [ -z "${MISE_PATH}" ]; then
+      echo "Mise is not installed, see .zshrc file install locations"
+      echo "Could add steps here to manually install mise..."
+      printf "or run\n> curl https://mise.run | sh\n"
+      exit 1
+    fi
+
+    export PATH="$(realpath `dirname ${MISE_PATH}`):${PATH}"
   fi
 
-  export PATH="$(realpath `dirname ${MISE_PATH}`):${PATH}"
-fi
+  mise "${@}"
+}
 
-mise "${@}"
+__mise "${@}"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__ssh() {
+  /usr/bin/ssh "${@}"
+}
+
+
+__ssh "${@}"

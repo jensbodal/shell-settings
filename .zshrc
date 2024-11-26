@@ -66,11 +66,15 @@ ssh-add-special() {
   fi
 }
 
-ssh-add-special ~/.ssh/id_rsa
-ssh-add-special ~/.ssh/id_ecdsa
-ssh-add-special ~/.ssh/id_ecdsa_sk
-ssh-add-special ~/.ssh/id_ed25519
-ssh-add-special ~/.ssh/id_ed25519_sk
+__ssh-add-special() {
+  echo "ssh-add-special disabled"
+}
+
+__ssh-add-special ~/.ssh/id_rsa
+__ssh-add-special ~/.ssh/id_ecdsa
+__ssh-add-special ~/.ssh/id_ecdsa_sk
+__ssh-add-special ~/.ssh/id_ed25519
+__ssh-add-special ~/.ssh/id_ed25519_sk
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
