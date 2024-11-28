@@ -59,8 +59,8 @@ run-updaters() {
   log "Updating mise..."
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
     if non_local_bin_path mise; then
-      PATH=$NON_LOCAL_BIN_PATH
-      mise up
+      PATH="$NON_LOCAL_BIN_PATH:$PATH"
+      #mise up
     else
       log "! mise is not installed !"
     fi
