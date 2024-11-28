@@ -1,13 +1,21 @@
 #!/bin/bash
 
-DIR="$(dirname "$(readlink -f "$0")")"
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-os=`uname -s`
+__tmp_file=""
 
 __get_for_mac() {
+  ifconfig | grep "inet "
   ipaddress=`ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
-  gateway=`route -n get default | grep gateway | egrep -o "[0-9\.]+"`
-  nameservers=`cat /etc/resolv.conf | egrep -o "[0-9\.]{4,}" | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}'`
+  route -n get default | grep gateway || true
+  gateway=`netstat -rn | grep 'default' | awk '{print $2}' | grep -E "^[0-9l]+.*" | tr '\n' ' ' | xargs echo -n`
+  nameservers=`scutil --dns | grep 'nameserver\[[0-9]*\]' | sed -E 's#.*nameserver.*: ([0-9\.]+)$#\1#g' | sort -n | uniq`
+
+  # system_profiler SPPowerDataType SPSoftwareDataType SPHardwareDataType
+  __tmp_file="$(mktemp)"
+  system_profiler SPSoftwareDataType SPHardwareDataType SPPowerDataType | \
+    grep "State of Charge\| Cycle Count\|Condition:\|Maximum Capacity:\|Wattage\|Charging\|Model Name:\|Model Identifier:\|Model Number:\|Chip:\|Total Number of Cores:\|Memory:\|Serial Number (system):\|System Version:\|Kernel Version:\|Boot Mode:\|Computer Name:\|User Name:\|Time since boot:" \
+    | awk '{$1=$1};1' | sort | uniq > "${__tmp_file}"
 }
 
 __get_for_linux() {
@@ -17,20 +25,33 @@ __get_for_linux() {
 }
 
 __main() {
-
-  if [ $os = "Darwin" ]; then
+  if isosx; then
     __get_for_mac
-  else
+  elif islinux; then
     __get_for_linux
+  else
+    die "Wtf"
   fi
 
-  echo "OS: $os"
-  echo "IP Address: $ipaddress"
-  echo "Gateway: $gateway"
-  echo "Nameservers: $nameservers"
+  if [ -f "${__tmp_file}" ]; then
+    log "System Profiler (system_profiler -listDataTypes)"
 
-  if [ "$1" = "-a" ]; then
+    cat "${__tmp_file}" | while IFS= read -r line; do
+      local _line="$(echo -n ${line})"
+      echo "[ipc] ${_line}"
+    done
     echo ""
+  fi
+
+  log "OS: $OS"
+  log "IP Address: $ipaddress"
+  log "Gateway: $gateway"
+  log "Nameservers: $nameservers"
+
+  set +u
+  if [ "$1" = "-a" ]; then
+  set -u
+    log ""
     whereami
 
     if ! command -v neofetch &> /dev/null; then
@@ -38,7 +59,7 @@ __main() {
     fi
 
     if command -v neofetch &> /dev/null; then
-      echo ""
+      log ""
       neofetch
     fi
   fi

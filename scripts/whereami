@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$1" == "-a" ]; then
+  source "$HOME/github/shell-settings/scripts/ipc"
+  exit $?
+fi
+
 HOST=`hostname`
 
 whatsmyip
