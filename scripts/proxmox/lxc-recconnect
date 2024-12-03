@@ -1,0 +1,5 @@
+#!/bin/bash 
+
+sudo lxc-stop "$@" && \
+  sudo lxc-start "$@" && \
+  sudo lxc-console "$@"
