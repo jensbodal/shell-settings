@@ -44,11 +44,6 @@ log() {
   echo -e "$(GREEN)[$(WHITE)pa$(GREEN)] $(WHITE)$@${NC}"
 }
 
-exit() {
-  return 1
-  #echo -e "$(GREEN)[$(WHITE)pa$(GREEN)] $(RED)exit${NC}"
-}
-
 intro() {
   echo -e "$(GREEN)###################"
   echo -e "$(GREEN)### $(WHITE)ps aux (pa) $(GREEN)###"
@@ -56,31 +51,51 @@ intro() {
   echo -e "$NC"
 }
 
+hasspaces() {
+  echo "${@}" | grep -q -E "[ ]+"
+  return $?
+}
+
 _pa() {
   intro
   local results=
   local match=""
   local pids=
+  local haveresults=0
 
-  for arg in "$@"; do
-    results="$results$(ps aux | grep -i $arg | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
-  done
+  if hasspaces "${@}" && [ $# -eq 1 ]; then
+    results="$(ps aux | grep -i "${@}" | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
+    pid="$(echo $results | awk '{print $2}')"
+    process="$(echo $results | awk '{$1=$2=$3=$4=$5=$6=$7=$8=$9=$10=""; print $0}' | sed -E 's#  +##g')"
 
-  if [ "$results" == "" ]; then
+    log "$(GREEN)[$(YELLOW)$pid$(GREEN)]$(WHITE) $process"
+
+    pids="$pids $pid"
+    haveresults=1
+  else
+    for arg in "${@}"; do
+      results="$(ps aux | grep -i "${arg}" | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
+
+      if [ "${results}" != "" ]; then
+        pid="$(echo $results | awk '{print $2}')"
+        process="$(echo $results | awk '{$1=$2=$3=$4=$5=$6=$7=$8=$9=$10=""; print $0}' | sed -E 's#  +##g')"
+
+        log "$(GREEN)[$(YELLOW)$pid$(GREEN)]$(WHITE) $process"
+
+        pids="$pids $pid"
+        haveresults=$(($haveresults + 1))
+      fi
+    done
+  fi
+
+  if [ $haveresults -eq 0 ]; then
     log "No matches found"
     return 0
   fi
 
-  while IFS= read -r f; do
-    pid="$(echo $f | awk '{print $2}')"
-    process="$(echo $f | awk '{$1=$2=$3=$4=$5=$6=$7=$8=$9=$10=""; print $0}' | sed -E 's#  +##g')"
-
-    pids="$pids $pid"
-
-    log "$(GREEN)[$(YELLOW)$pid$(GREEN)]$(WHITE) $process"
-  done <<< "$results"
-
   if [ $DO_KILL -eq 1 ]; then
+    local pidstokill="$(echo $pids | sed -E 's#^ +(.*[0-9]+) +$#\1#g#')"
+    echo "Killing pids: [$pidstokill]"
     echo "$pids" | xargs kill -9
   fi
 }
@@ -89,10 +104,10 @@ main() {
   if [ "$1" == "-k" ]; then
     DO_KILL=1
     shift
-    _pa "$@"
+    _pa "${@}"
   else
-    _pa "$@"
+    _pa "${@}"
   fi
 }
 
-main "$@"
+main "${@}"

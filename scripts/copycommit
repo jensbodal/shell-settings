@@ -1,0 +1,17 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__main() {
+  set +u
+  local commit="$1"
+  set -u
+
+  if [ "$commit" = "" ]; then
+    die "commit sha required"
+  fi
+
+  log "Copying commit and message or something for \"${commit}\""
+}
+
+__main "$@"
