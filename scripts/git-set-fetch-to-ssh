@@ -1,0 +1,39 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+__main() {
+  # Get the current remote URL
+  local remote=$(git config --get remote.origin.url)
+
+  # Check if it's already an SSH URL
+  if [[ "$remote" == git@* ]]; then
+      log "Remote is already using SSH format: $remote"
+      return 0
+  fi
+
+  # Check if it's a GitHub HTTPS URL
+  if [[ "$remote" == https://github.com/* ]]; then
+      # Extract username and repo from HTTPS URL
+      # Remove https://github.com/ and .git from the end if it exists
+      local repoPath=$(echo "$remote" | sed 's|https://github.com/||' | sed 's|\.git$||')
+
+      # Create new SSH URL
+      local newRemote="git@github.com:${repoPath}.git"
+
+      # Set the new remote
+      git remote set-url origin "$newRemote"
+
+      log "Remote updated from:"
+      log "  $remote"
+      log "to:"
+      log "  $newRemote"
+  else
+      log "Current remote is not a GitHub HTTPS URL: $remote"
+      log "No changes made."
+      return 1
+  fi
+}
+
+
+__main "${@}"

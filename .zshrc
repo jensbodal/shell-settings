@@ -5,6 +5,7 @@
 ###########################################################################################
 
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.pre.zsh"
+[[ -f "${HOME}/.zshrc.pre.zsh" ]] && builtin source "${HOME}/.zshrc.pre.zsh"
 
 [ -f "$HOME/.local/bin/mise" ] && export MISE_PATH="$HOME/.local/bin/mise"
 [ -f "/opt/homebrew/bin/mise" ] && export MISE_PATH="/opt/homebrew/bin/mise"
@@ -16,6 +17,7 @@ SAVEHIST=10000
 
 export OS="unknown"
 
+export FAKE_HOME=$HOME/github/shell-settings/fakehome
 export BUN_INSTALL=$HOME/local/bun
 export N_PREFIX=$HOME/local/n
 export PNPM_HOME=$HOME/local/pnpm
@@ -48,33 +50,48 @@ export ZSH="$HOME/.oh-my-zsh"
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# ensure default ssh keys are in keychain
-ssh-add-special() {
-  local key="$1"
-  local flags=""
+setupssh() {
+  local SSH_CONFIG="${HOME}/.ssh/config"
+  local SSH_CONFIG_DIR="${HOME}/.ssh/config.d"
+  local SSH_CONFIG_SHELL_SETTINGS="${SSH_CONFIG_DIR}/shell-settings"
 
-  if [ "${OS}" = "darwin" ]; then
-    flags="--apple-use-keychain"
-  fi
+  addtokeychain() {
+    local identityFile="${1}"
 
+    if [ -f "${identityFile}" ]; then
+      if [ $OS = "darwin" ]; then
+        eval `${FAKE_HOME}/../bin/keychain -q --inherit any --eval --agents ssh ${identityFile}`
+      else
+        eval `${FAKE_HOME}/../bin/keychain -q --eval --agents ssh ${identityFile}`
+      fi
+    fi
+  }
 
-  if [ -f "${key}" ]; then
-    if ! ssh-add -l "${flags}" | grep -q `ssh-keygen -lf "${key}" | awk '{print $2}'`; then
-      echo "${key} not in keychain, adding..."
-      ssh-add "${flags}" "${key}"
+  if [ -f "${SSH_CONFIG}" ]; then
+    local includeline="Include ${SSH_CONFIG_DIR}/*"
+    if ! grep -q "${includeline}" "${SSH_CONFIG}"; then
+      cp "${SSH_CONFIG}" "${SSH_CONFIG}.bak.`date +%s`"
+
+      echo -e "${includeline}\n\n$(cat ${SSH_CONFIG})" > "${SSH_CONFIG}"
     fi
   fi
+
+  if [ ! -d "${SSH_CONFIG_DIR}" ]; then
+    mkdir -p "${SSH_CONFIG_DIR}"
+    chmod 755 "${SSH_CONFIG_DIR}"
+  fi
+
+  cp "${FAKE_HOME}/.ssh/config.d/shell-settings" "${HOME}/.ssh/config.d/shell-settings"
+  chmod 600 "${HOME}/.ssh/config.d/shell-settings"
+
+  addtokeychain ~/.ssh/id_rsa
+  addtokeychain ~/.ssh/id_ecdsa
+  addtokeychain ~/.ssh/id_ecdsa_sk
+  addtokeychain ~/.ssh/id_ed25519
+  addtokeychain ~/.ssh/id_ed25519_sk
 }
 
-__ssh-add-special() {
-  echo "ssh-add-special disabled"
-}
-
-__ssh-add-special ~/.ssh/id_rsa
-__ssh-add-special ~/.ssh/id_ecdsa
-__ssh-add-special ~/.ssh/id_ecdsa_sk
-__ssh-add-special ~/.ssh/id_ed25519
-__ssh-add-special ~/.ssh/id_ed25519_sk
+setupssh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -227,5 +244,5 @@ fi
 if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
-
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
+[[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh"
