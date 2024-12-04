@@ -56,6 +56,15 @@ hasspaces() {
   return $?
 }
 
+.processline() {
+  local results="${@}"
+  local pid="$(echo $results | awk '{print $2}')"
+  local process="$(echo $results | awk '{$1=$2=$3=$4=$5=$6=$7=$8=$9=$10=""; print $0}' | sed -E 's#  +##g')"
+
+  log "$(GREEN)[$(YELLOW)$pid$(GREEN)]$(WHITE) $process"
+  _pid="${pid}"
+}
+
 _pa() {
   intro
   local results=
@@ -63,6 +72,7 @@ _pa() {
   local pids=
   local haveresults=0
 
+  # if there are spaces and we have a single argument then there is only one item we are grepping for
   if hasspaces "${@}" && [ $# -eq 1 ]; then
     results="$(ps aux | grep -i "${@}" | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
     pid="$(echo $results | awk '{print $2}')"
@@ -76,7 +86,13 @@ _pa() {
     for arg in "${@}"; do
       results="$(ps aux | grep -i "${arg}" | grep -v grep | grep -v "/shell-settings/scripts/pa" | grep -v ' vim ' | grep -v ' tail ')"
 
-      if [ "${results}" != "" ]; then
+      if (( $(grep -c . <<<"$results") > 1 )); then
+        while IFS= read -r line ; do
+          .processline "${line}"
+          pids="${pids} ${_pid}"
+          haveresults=$(($haveresults + 1))
+        done <<< "$results"
+      elif [ "${results}" != "" ]; then
         pid="$(echo $results | awk '{print $2}')"
         process="$(echo $results | awk '{$1=$2=$3=$4=$5=$6=$7=$8=$9=$10=""; print $0}' | sed -E 's#  +##g')"
 
