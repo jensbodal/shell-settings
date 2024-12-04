@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Include in your script with:
 # [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
-# Adds default cleanup function and helper scripts common global variables
+# Adds default trap functions and helper scripts common global variables
 # Also ensures that all scripts in scripts folder are available to other scripts here
 # @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable
 
@@ -20,17 +20,19 @@ SHELL_SETTINGS_DIR="$(readlink -f ${SCRIPTS_DIR}/..)"
 
 export PATH="$(.SCRIPT_DIR):$PATH"
 
-trap cleanup EXIT
+trap __exit EXIT HUP INT TERM
 
-cleanup() {
-  code="$?"
+__exit() {
+  local code=$?
+
+  # ensure we are not in a recursive trap
+  trap - EXIT HUP INT TERM
 
   if [ $code -ne 0 ]; then
-    echo "[$code] There was a failure"
-    exit $code
+    echo "[$code] There was a failure" >&2
   fi
 
-  exit 0
+  exit $code
 }
 
 log() {

@@ -32,6 +32,8 @@ alias u=__u
 export BASH_SCRIPTS_PATH="$DIR/scripts"
 export PATH="$BASH_SCRIPTS_PATH:$PATH"
 
+alias moxi="${BASH_SCRIPTS_PATH}/moxi/main.sh"
+
 # bash script aliases
 for f in `find "$BASH_SCRIPTS_PATH" -type f -name "alias_*"`; do
   cmd=`echo $f | sed -E 's#.*alias_(.*)#\1#'`

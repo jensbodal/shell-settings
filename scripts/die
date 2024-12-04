@@ -1,16 +1,87 @@
 #!/bin/bash
 
+# Example usage:
+# die "Simple error message"
+# die 1 "Error with code 1"
+# die 2 "Error with code 2"
+# die 4
+# die 8 "Custom message for code 8"
+# die 15 "Custom error code"
+# die 0 "This will show invalid error code message"
+
+# We don't want this in this script because we don't want to add the trap functionality
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
-__die() {
-    set +u
-    local format="$1"
-    set -u
-    shift
-    tput setaf 1
-    printf >&2 "$format\n" "$@"
-    tput sgr0
-    exit 1
+trap __exit EXIT
+__exit() {
+  # Override trap function from .INIT so we don't error twice
+  return 0
 }
 
-__die "$@"
+# POSIX-compatible color codes
+# Using printf to ensure portability
+RED=$(printf '\033[0;31m')
+NC=$(printf '\033[0m')
+
+# Error messages for standard error codes
+get_error_message() {
+  case "$1" in
+    1) echo "ERROR" ;;
+    # 2 is reserved in nodemon so not using
+    # 2) echo "Invalid argument" ;;
+    4) echo "RESOURCE_NOT_FOUND" ;;
+    8) echo "PERMISSION_DENIED" ;;
+    16) echo "CONFIGURATION" ;;
+    32) echo "SYSTEM" ;;
+    *) echo "UNKNOWN" ;;
+  esac
+}
+
+# Check if input is a number
+is_number() {
+  case "$1" in
+    ''|*[!0-9]*) return 1 ;; # Not a number
+    *) return 0 ;; # Is a number
+  esac
+}
+
+__die() {
+  local error_cause=""
+  local error_code=1
+  local error_message=""
+  local prefix=""
+  local script_name=`basename "$0"`
+
+    # Check if first argument is a number
+    if is_number "$1"; then
+      error_code=$1
+      shift
+
+        # Check for invalid error code
+        if [ "$error_code" -le 0 ]; then
+          printf "%s!!! [ERROR] die() function called with invalid error code: %s%s\n" "$RED" "$error_code" "$NC" >&2
+          return exit 1
+        fi
+
+        # If no additional message provided, use predefined message
+        if [ $# -ne 0 ]; then
+          error_message="$*"
+        fi
+      else
+        error_message="$*"
+    fi
+
+    error_cause="$(get_error_message ${error_code})"
+
+
+    # Add emphasis for error codes greater than 1
+    if [ "$error_code" -gt 1 ]; then
+      prefix="!!! "
+    fi
+
+    # Print error message to stderr
+    printf "%s%s[%s] %s%s\n" "$RED" "$prefix" "$error_cause" "$error_message" "$NC" >&2
+    return "$error_code"
+  }
+
+  __die "$@"
