@@ -1,3 +1,5 @@
 .private/.*.*
 .private/*.*
 !.private/.gitkeep
+
+macos/automator/testing.workflow/

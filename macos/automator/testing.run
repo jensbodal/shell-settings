@@ -1,0 +1,86 @@
+#!/bin/bash
+# vi: ft=sh
+
+AUTOMATOR_SCRIPT="$HOME/github/shell-settings/macos/automator/testing.workflow"
+WORK_DIR="${HOME}/local/lib/automator/testing"
+CACHE_DIR="${WORK_DIR}/cache"
+LOG_DIR="${WORK_DIR}/logs"
+LOG_FILE="${LOG_DIR}/testing.live.log"
+
+if [ ! -d "${AUTOMATOR_SCRIPT}" ]; then
+  echo "You need to create an automator script at \"${AUTOMATOR_SCRIPT}\""
+  exit 1
+fi
+
+mkdir -p "${CACHE_DIR}"
+mkdir -p "${LOG_DIR}"
+
+NOW=`date +%s`
+CACHE_LAST_START="${CACHE_DIR}/.last_start"
+CACHE_LAST_EXIT="${CACHE_DIR}/.last_exit"
+
+.update_cache() {
+  if [ $# -ne 2 ]; then
+    echo "Invalid cache update \"$@\""
+    exit 1
+  fi
+
+  local _new="$1"
+  local _cached="$2"
+
+  if [ ! -f "${_cached}" ]; then
+    echo "${_new}" > "${_cached}"
+    return 0
+  fi
+
+  local _cached_value=`cat ${_cached}`
+
+  if [ ${_new} -gt ${_cached_value} ]; then
+    echo "${_new}" > "${_cached}"
+    return 0
+  fi
+
+  return 1
+}
+
+.rotate_logs() {
+  if [ -f "${LOG_FILE}" ]; then
+    cp "${LOG_FILE}" "${LOG_FILE}-${NOW}.log"
+  fi
+  echo "" > "${LOG_FILE}"
+}
+
+.update_cache "$NOW" "$CACHE_LAST_START"
+.rotate_logs
+
+echo "[testing] [`date`] Testing feasibility of cron local settings updater" | tee $logfile
+echo ""
+
+echo "Clearing screen in 2s..."
+sleep 2
+clear
+echo "#############################################"
+echo "######## TESTING FOR SCRIPT AUTOMATION ######"
+echo "#############################################"
+echo ""
+
+trap exit EXIT
+
+exit() {
+  echo "Exiting..."
+  .update_cache "$NOW" "$CACHE_LAST_EXIT"
+  echo "Killing child PIDs: [$(pgrep -P $$ | tr '\n' ' ' | awk '{$1=$1};1')]"
+  kill $(pgrep -P $$)
+  # pkill -P "$$" 2>&1 > /dev/null
+}
+
+tail $logfile -f &
+logspid=$!
+
+$HOME/github/shell-settings/scripts/caff &
+logspid="$logspid $!"
+
+echo "[testing] [`date`] Child pids: | \$logspid [$logspid] | \$\$ [$$] |" | tee -a $logfile
+
+/usr/bin/automator "${AUTOMATOR_SCRIPT}"
+wait
