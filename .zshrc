@@ -247,4 +247,4 @@ fi
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh"
 
-if mail -e; then mail; fi
+if command -v mail && mail -e; then mail; fi
