@@ -50,12 +50,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # colored completion - use my LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-setupssh() {
-  local SSH_CONFIG="${HOME}/.ssh/config"
-  local SSH_CONFIG_DIR="${HOME}/.ssh/config.d"
+.setupssh() {
+  local SSH_DIR="${HOME}/.ssh"
+  local SSH_CONFIG="${SSH_DIR}/config"
+  local SSH_CONFIG_DIR="${SSH_DIR}/config.d"
   local SSH_CONFIG_SHELL_SETTINGS="${SSH_CONFIG_DIR}/shell-settings"
 
-  addtokeychain() {
+  .addtokeychain() {
     local identityFile="${1}"
 
     if [ -f "${identityFile}" ]; then
@@ -78,20 +79,72 @@ setupssh() {
 
   if [ ! -d "${SSH_CONFIG_DIR}" ]; then
     mkdir -p "${SSH_CONFIG_DIR}"
-    chmod 755 "${SSH_CONFIG_DIR}"
   fi
 
   cp "${FAKE_HOME}/.ssh/config.d/shell-settings" "${HOME}/.ssh/config.d/shell-settings"
-  chmod 600 "${HOME}/.ssh/config.d/shell-settings"
 
-  addtokeychain ~/.ssh/id_rsa
-  addtokeychain ~/.ssh/id_ecdsa
-  addtokeychain ~/.ssh/id_ecdsa_sk
-  addtokeychain ~/.ssh/id_ed25519
-  addtokeychain ~/.ssh/id_ed25519_sk
+  .hasextension() {
+    local filename="$1"
+    local filename_no_ext=`echo "$filename" | sed -E 's#(^.*)(\..*)$#\1#'`
+
+    # Empty strings do not have extensions
+    if [[ -z "$filename" ]]; then
+      return 1
+    fi
+
+    # We do not have an extension if the filename without an extension is the same as one with one
+    if [ "$filename_no_ext" = "$filename" ]; then
+      return 1
+    fi
+
+    return 0
+  }
+
+  for d in `find "${HOME}/.ssh" -type d`; do
+    chmod 700 "${d}"
+  done
+
+
+  for filepath in `find "${HOME}/.ssh" -maxdepth 1 -type f`; do
+    filename=`basename $filepath`
+
+    if [ "$filename" = "authorized_keys" ]; then
+      chmod 644 "${filepath}"
+      continue
+    fi
+
+    if [ "$filename" = "known_hosts" ]; then
+      chmod 600 "${filepath}"
+      continue
+    fi
+
+    if [[ $filename == *.pub ]]; then
+      chmod 644 "${filepath}"
+      continue
+    fi
+
+    # check filepath here because will cover *config* files and config.d/* files
+    if [[ $filepath == *config* ]]; then
+      chmod 600 "${filepath}"
+      continue
+    fi
+
+    if [[ $filepath == *.ssh/environment* ]]; then
+      # we don't need to do anything with these
+      continue
+    fi
+
+    if .hasextension "$filename"; then
+      # we don't need to do anything with these
+      continue
+    fi
+
+    chmod 600 "${filepath}"
+    .addtokeychain "${filepath}"
+  done
 }
 
-setupssh
+.setupssh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -158,6 +211,7 @@ down-local-history-or-substring-search() {
     history-substring-search-down
   fi
 }
+
 # register functions
 zle -N up-local-history-or-substring-search
 zle -N down-local-history-or-substring-search
@@ -207,10 +261,10 @@ fi
 # mise (formerly mise)
 ################################################################################################
 if command -v mise > /dev/null; then
-#  export mise_USE_TOML=1
+  #  export mise_USE_TOML=1
   eval "$(mise activate zsh)"
-#  echo "eval \"\$(/Users/bodal/.local/bin/mise activate zsh)\"" >> "/Users/bodal/.zshrc"
-#  eval "$(mise activate zsh)"
+  #  echo "eval \"\$(/Users/bodal/.local/bin/mise activate zsh)\"" >> "/Users/bodal/.zshrc"
+  #  eval "$(mise activate zsh)"
 elif [ -f $HOME/.local/bin/mise ]; then
   eval "$(${HOME}/.local/bin/mise activate zsh)"
 fi
@@ -235,15 +289,18 @@ else
 fi
 
 
+################################################################################################
 # bun
-
+################################################################################################
 # bun completions
 [ -s "/local/home/bodal/local/bun/_bun" ] && source "/local/home/bodal/local/bun/_bun"
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # no idea why this is here
 if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
+
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh"
 

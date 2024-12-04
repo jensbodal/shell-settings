@@ -3,13 +3,36 @@
 
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
+# TODO move to own script
+.get_hostname() {
+  if command -v hostname >/dev/null 2>&1; then
+    hostname
+  elif [ -f /etc/hostname ]; then
+    cat /etc/hostname
+  elif command -v uname >/dev/null 2>&1; then
+    uname -n
+  else
+    echo "Unable to determine hostname" >&2
+    return 1
+  fi
+}
+
 __generate-ssh-key() {
-  local comment="$USER@$(hostname) <jensbodal_protonmail.com>"
-  local keypath="$HOME/.ssh/id_ed25519"
+  local ssh_dir=$(realpath $HOME/.ssh)
+  local comment="$USER@$(.get_hostname) <jensbodal@protonmail.com>"
+  local keypath="${ssh_dir}/id_ed25519"
+
+  if [ $# -gt 1 ]; then
+    die "More than one argument is not supported"
+  fi
+
+  if [ $# -eq 1 ]; then
+    keypath="${ssh_dir}/${1}"
+  fi
 
   log "Creating \"${keypath}\" with comment: \"${comment}\""
-
-  ssh-keygen -t ed25519 -C "${comment}" -f "${keypath}"
+  ssh-keygen -t ed25519 -a 100 -C "${comment}" -f "${keypath}"
+  return $?
 }
 
 __generate-ssh-key "$@"

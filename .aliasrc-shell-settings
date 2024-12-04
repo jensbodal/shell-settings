@@ -257,7 +257,7 @@ __screen() {
 }
 
 __ssh-keygen-secure() {
-  ssh-keygen -t ed25519 -a 100
+  ${BASH_SCRIPTS_PATH}/generate-ssh-key "${@}"
 }
 
 __u() {
