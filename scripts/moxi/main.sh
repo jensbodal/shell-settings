@@ -7,25 +7,33 @@
   echo "moxi"
 }
 
-.help() {
-  log "moxi --setup-ssh-agent"
-  exit 0
-}
-
 .main() {
   if [ $# -eq 0 ]; then
     .help
   fi
 
-  set +u
-  local cmd="$1"
+  local cmd="${1}"
+
+  if [ "${cmd}" = "--help" ]; then
+    .help
+  fi
 
   if [ "${cmd}" = "--setup-ssh-agent" ]; then
-    log "Comming soon!"
-    return 0
+    .setup_ssh_agent "$@"
   fi
 
   die "Command not supported: \"${@}\""
 }
 
-.main "${@}"
+.help() {
+  log "moxi --setup-ssh-agent"
+  exit 0
+}
+
+.setup_ssh_agent() {
+  log "Do stuff to make sure ssh-agent is working..."
+
+  exit $?
+}
+
+.main "$@"
