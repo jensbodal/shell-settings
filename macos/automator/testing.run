@@ -6,6 +6,13 @@ WORK_DIR="${HOME}/local/lib/automator/testing"
 CACHE_DIR="${WORK_DIR}/cache"
 LOG_DIR="${WORK_DIR}/logs"
 LOG_FILE="${LOG_DIR}/testing.live.log"
+DEFAULT_TIMEOUT="7.5"
+TIMEOUT=${1:-$DEFAULT_TIMEOUT}
+
+[ -f $LOG_FILE ] && rm $LOG_FILE
+
+echo "[moxi] Setting timeout to ${TIMEOUT}m ($(($TIMEOUT * 60))s)"
+echo ""
 
 if [ ! -d "${AUTOMATOR_SCRIPT}" ]; then
   echo "You need to create an automator script at \"${AUTOMATOR_SCRIPT}\""
@@ -82,5 +89,5 @@ logspid="$logspid $!"
 
 echo "[testing] [`date`] Child pids: | \$logspid [$logspid] | \$\$ [$$] |" | tee -a $logfile
 
-/usr/bin/automator "${AUTOMATOR_SCRIPT}"
+/usr/bin/automator -i "$(($TIMEOUT * 60))" "${AUTOMATOR_SCRIPT}"
 wait

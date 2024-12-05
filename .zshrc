@@ -23,6 +23,7 @@ export N_PREFIX=$HOME/local/n
 export PNPM_HOME=$HOME/local/pnpm
 export ZSH=$HOME/.oh-my-zsh
 export TLDR_AUTOUPDATE_DISABLED=1
+export MOXI_SSH_INIT=${MOXI_SSH_INIT:=0}
 
 PATH="$PATH:$PNPM_HOME"
 PATH="$BUN_INSTALL/bin:$PATH"
@@ -142,9 +143,13 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
     chmod 600 "${filepath}"
     .addtokeychain "${filepath}"
   done
+
 }
 
-.setupssh
+if [ $MOXI_SSH_INIT -eq 0 ]; then
+  .setupssh
+  export MOXI_SSH_INIT=1
+fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
