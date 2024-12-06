@@ -2,6 +2,9 @@
 
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
+MOXI_BIN_DIR="${SCRIPTS_DIR}/moxi/bin"
+PATH="${MOXI_BIN_DIR}:$PATH"
+
 # override .SCRIPT_NAME from init so we log the correct name
 .SCRIPT_NAME() {
   echo "moxi"
@@ -14,15 +17,22 @@
 
   local cmd="${1}"
 
-  if [ "${cmd}" = "--help" ]; then
+  if [ "${cmd}" = "n" ]; then
+    shift
+    .notify "${@}"
+  elif [ "${cmd}" = "h" ]; then
     .help
-  fi
-
-  if [ "${cmd}" = "--setup-ssh-agent" ]; then
+  elif [ "${cmd}" = "help" ]; then
+    .help
+  elif [ "${cmd}" = "--help" ]; then
+    .help
+  elif [ "${cmd}" = "--setup-ssh-agent" ]; then
     .setup_ssh_agent "$@"
+  else
+    die "Command not supported: \"${@}\""
   fi
 
-  die "Command not supported: \"${@}\""
+  return 0
 }
 
 .help() {
@@ -34,6 +44,20 @@
   log "Do stuff to make sure ssh-agent is working..."
 
   exit $?
+}
+
+.notify() {
+  if isosx; then
+    alerter \
+      -title "\[moxi] notify" \
+      -ignoreDnD \
+      -sound 'default' \
+      -message "${@}" &
+
+    /usr/bin/say "${@}"
+  else
+    die "${OS} not supported"
+  fi
 }
 
 .main "$@"

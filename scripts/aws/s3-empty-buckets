@@ -1,0 +1,92 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Move to proper arg parsing...
+CONFIRM_ALL="--confirm=all"
+CONFIRM_DELETION="--confirm=delete"
+CONFIRM_NONE="--confirm=none"
+
+.confirm() {
+  local confirmationType="$1"
+
+  if [ "$CONFIRM" = "$CONFIRM_NONE" ]; then
+    return 0
+  fi
+
+  if [ "$CONFIRM" = "$CONFIRM_DELETION" ]; then
+    if [ "$confirmationType" != "$CONFIRM_DELETION" ]; then
+      return 0
+    fi
+  fi
+
+  read -p "Are you sure you want to proceed? (y/N) " -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Your code here
+    echo "Proceeding..."
+    return 0
+  else
+    echo "Operation cancelled"
+    exit 1
+  fi
+}
+
+.delete-bucket() {
+  local bucket_name="$1"
+
+  if [ -z $bucket_name ]; then
+    echo "You must pass a single bucket name to this function"
+    exit 1
+  fi
+
+  echo "Removing termination protection for \"$bucket_name\""
+  .confirm $CONFIRM_ALL
+  aws s3api put-bucket-versioning \
+    --bucket "$bucket_name" \
+    --versioning-configuration Status=Suspended
+
+  echo "Emptying bucket (including versions and delete markers) \"$bucket_name\""
+  .confirm $CONFIRM_DELETION
+  aws s3api list-object-versions \
+    --bucket "$bucket_name" \
+    --output json \
+    --query '[Versions[].{Key:Key,VersionId:VersionId},DeleteMarkers[].{Key:Key,VersionId:VersionId}][]' \
+    | jq -r '.[] | select(. != null) | "--delete Objects=[{Key=\(.Key),VersionId=\(.VersionId)}]"' \
+    | while read -r line; do
+      aws s3api delete-objects --bucket "$bucket_name" $line
+    done
+
+  # Delete the bucket
+  echo "Deleting bucket: \"$bucket_name\""
+  .confirm $CONFIRM_DELETION
+  aws s3api delete-bucket --bucket "$bucket_name"
+
+  if [ $? -eq 0 ]; then
+    echo "Bucket $bucket_name successfully deleted"
+  else
+    echo "Failed to delete bucket $bucket_name"
+    exit 1
+  fi
+}
+
+.main() {
+  local bucketlist="$1"
+  shift
+  CONFIRM="${1:-'--confirm=all'}"
+
+  if [ "$bucketlist" = "" ]; then
+    echo "s3-empty-bucket <path-to-list-of-buckets-to-delete>"
+    exit 1
+  fi
+
+  for bucket_name in `cat $bucketlist`; do
+    if [ "$CONFIRM" = "$CONFIRM_NONE" ]; then
+      .delete-bucket "$bucket_name" &
+    else
+      .delete-bucket "$bucket_name"
+    fi
+  done
+}
+
+.main "$@"
