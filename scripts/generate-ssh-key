@@ -32,6 +32,7 @@ __generate-ssh-key() {
 
   log "Creating \"${keypath}\" with comment: \"${comment}\""
   ssh-keygen -t ed25519 -a 100 -C "${comment}" -f "${keypath}"
+
   return $?
 }
 

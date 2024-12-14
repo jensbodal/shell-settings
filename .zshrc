@@ -69,6 +69,14 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
     fi
   }
 
+  if [ ! -d "${SSH_CONFIG_DIR}" ]; then
+    mkdir -p "${SSH_CONFIG_DIR}"
+  fi
+
+  if [ ! -f "${SSH_CONFIG}" ]; then
+    touch "${SSH_CONFIG}"
+  fi
+
   if [ -f "${SSH_CONFIG}" ]; then
     local includeline="Include ${SSH_CONFIG_DIR}/*"
     if ! grep -q "${includeline}" "${SSH_CONFIG}"; then
@@ -76,10 +84,6 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
       echo -e "${includeline}\n\n$(cat ${SSH_CONFIG})" > "${SSH_CONFIG}"
     fi
-  fi
-
-  if [ ! -d "${SSH_CONFIG_DIR}" ]; then
-    mkdir -p "${SSH_CONFIG_DIR}"
   fi
 
   cp "${FAKE_HOME}/.ssh/config.d/shell-settings" "${HOME}/.ssh/config.d/shell-settings"

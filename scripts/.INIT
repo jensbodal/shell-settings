@@ -77,3 +77,11 @@ non_local_bin_path() {
     return 1
   fi
 }
+
+.ismac() {
+  if [ $os = "Darwin" ]; then
+    return 0
+  fi
+  return 1
+}
+
