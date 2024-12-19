@@ -47,13 +47,16 @@ PATH="${MOXI_BIN_DIR}:$PATH"
 }
 
 .notify() {
+  local default_timeout=5
+
   if isosx; then
     alerter \
       -title "\[moxi] notify" \
       -ignoreDnD \
-      -sound 'default' \
-      -message "${@}" &
+      -timeout ${default_timeout} \
+      -message "${@}" >/dev/null 2>&1 &
 
+    # could have an option to use -sound if we don't want to speak the message
     /usr/bin/say "${@}"
   else
     die "${OS} not supported"

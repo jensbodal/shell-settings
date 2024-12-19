@@ -71,13 +71,21 @@ CONFIRM_NONE="--confirm=none"
 }
 
 .main() {
+  if [ $# -eq 0 ]; then
+    echo "s3-empty-bucket <path-to-list-of-buckets-to-delete>"
+    echo $CONFIRM_ALL
+    echo $CONFIRM_DELETION
+    echo $CONFIRM_NONE
+    return 1
+  fi
+
   local bucketlist="$1"
   shift
   CONFIRM="${1:-'--confirm=all'}"
 
   if [ "$bucketlist" = "" ]; then
     echo "s3-empty-bucket <path-to-list-of-buckets-to-delete>"
-    exit 1
+    return 1
   fi
 
   for bucket_name in `cat $bucketlist`; do

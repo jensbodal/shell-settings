@@ -1,22 +1,20 @@
-# Installation
-# COPY symlink jens-disagrees theme to ohmyzsh themes folder
-# create ~/.zsh-homerc file containing something like: export ZSH=/home/username/.oh-my-zsh
-# create ~/.aliasrc file
-###########################################################################################
-
+###########################################################################################################################################
+# .zshrc.post.zsh
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.pre.zsh"
 [[ -f "${HOME}/.zshrc.pre.zsh" ]] && builtin source "${HOME}/.zshrc.pre.zsh"
+###########################################################################################################################################
 
 [ -f "$HOME/.local/bin/mise" ] && export MISE_PATH="$HOME/.local/bin/mise"
-[ -f "/opt/homebrew/bin/mise" ] && export MISE_PATH="/opt/homebrew/bin/mise"
-[ -f "/home/linuxbrew/.linuxbrew/bin/mise" ] && export MISE_PATH="/home/linuxbrew/.linuxbrew/bin/mise"
+[ -f "/opt/homebrew/bin/mise" ] && export MISE_PATH="/opt/homebrew/bin/mise" && export MISE_PATH_WARNING=1
+[ -f "/home/linuxbrew/.linuxbrew/bin/mise" ] && export MISE_PATH="/home/linuxbrew/.linuxbrew/bin/mise" && export MISE_PATH_WARNING=1
+[ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
+if command -v mail >/dev/null 2>&1 && mail -e; then mail; fi
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
 export OS="unknown"
-
 export FAKE_HOME=$HOME/github/shell-settings/fakehome
 export BUN_INSTALL=$HOME/local/bun
 export N_PREFIX=$HOME/local/n
@@ -310,10 +308,7 @@ if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
 
+
+# .zshrc.post.zsh
 [[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh"
-
-if command -v mail && mail -e; then mail; fi
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-

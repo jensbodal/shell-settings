@@ -6,7 +6,7 @@ WORK_DIR="${HOME}/local/lib/automator/testing"
 CACHE_DIR="${WORK_DIR}/cache"
 LOG_DIR="${WORK_DIR}/logs"
 LOG_FILE="${LOG_DIR}/testing.live.log"
-DEFAULT_TIMEOUT="7.5"
+DEFAULT_TIMEOUT="1"
 TIMEOUT=${1:-$DEFAULT_TIMEOUT}
 
 [ -f $LOG_FILE ] && rm $LOG_FILE

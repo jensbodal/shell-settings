@@ -1,5 +1,16 @@
 #!/bin/bash
 
+_ASK=${MISE_SKIP_AUTO_INSTALL_PROMPT=-0}
+
+if [ $_ASK -eq 0 ]; then
+  if [ ! -f $HOME/.local/bin/mise ]; then
+    echo "Auto installing mise then exiting..."
+    echo "...unless cancelled within the next 10 seconds..."
+    sleep 10
+    curl https://mise.run | sh
+  fi
+fi
+
 [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 
 __mise() {

@@ -291,3 +291,7 @@ set listchars=eol:$,tab:>.,trail:~,extends:>,precedes:<,nbsp:␣
 " .INIT template insertion with space+t
 nnoremap <space>i :-1read $HOME/.vim/templates/script-init.sh<CR>/[<CR><o><esc>
 
+nnoremap n nzt
+nnoremap N Nzt
+xnoremap n nzt
+xnoremap N Nzt
