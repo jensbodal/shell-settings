@@ -59,6 +59,11 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
     local identityFile="${1}"
 
     if [ -f "${identityFile}" ]; then
+      if [ ! -f "${identityFile}.pub" ]; then
+        echo "Creating public key for \"${identityFile}.pub\""
+        ssh-keygen -y -f "${identityFile}" | tee "${identityFile}.pub"
+      fi
+
       if [ $OS = "darwin" ]; then
         eval `${FAKE_HOME}/../bin/keychain -q --inherit any --eval --agents ssh ${identityFile}`
       else
