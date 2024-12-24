@@ -8,7 +8,6 @@
 [ -f "/opt/homebrew/bin/mise" ] && export MISE_PATH="/opt/homebrew/bin/mise" && export MISE_PATH_WARNING=1
 [ -f "/home/linuxbrew/.linuxbrew/bin/mise" ] && export MISE_PATH="/home/linuxbrew/.linuxbrew/bin/mise" && export MISE_PATH_WARNING=1
 [ -f "${HOME}/.iterm2_shell_integration.zsh" ] && source "${HOME}/.iterm2_shell_integration.zsh"
-if command -v mail >/dev/null 2>&1 && mail -e; then mail; fi
 
 HISTFILE=~/.histfile
 HISTSIZE=10000
