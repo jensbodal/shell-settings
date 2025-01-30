@@ -69,8 +69,7 @@ log() {
     return 0
   fi
 
-  .SCRIPT_NAME
-  printf "[${SCRIPT_NAME}] ${input}\n"
+  printf "[$(.SCRIPT_NAME)] ${input}\n"
 }
 
 .log() {
@@ -137,14 +136,117 @@ non_local_bin_path() {
   .findup -d ".git"
 }
 
+.is-number() {
+  expr "$1" + 1 > /dev/null 2>&1
+  return $?
+}
+
+# Example usage:
+# .monitor 1 /usr/bin/say -vAlex -r110 "Alexa announce ${@}"
+.monitor() {
+  local default_throttle=2
+  local throttleBetweenCalls=$1
+  local start_time=$(date +%s)
+  local is_number=$(.is-number "$throttleBetweenCalls")
+  local timeout=${3:-30}
+
+  if [ $# -eq 0 ]; then
+    .die "Cannot monitor nothing..."
+  fi
+
+  if ! .is-number "$throttleBetweenCalls"; then
+    log "Setting default throttling to $default_throttle"
+    throttleBetweenCalls=$default_throttle
+  else
+    shift
+  fi
+
+
+  log "Monitoring \"$@\" every ${throttleBetweenCalls}s or until ${timeout}s timeout"
+  eval "$@" &
+  local pid=$!
+  local message=${4:-"[%pid%] [%elapsed%s] \"$@\""}
+
+  while kill -0 $pid 2>/dev/null; do
+      # Calculate elapsed time
+      current_time=$(date +%s)
+      elapsed=$((current_time - start_time))
+
+      # Check if we've exceeded timeout
+      if [ $elapsed -eq $timeout ]; then
+          log "Process timed out after ${timeout} seconds. Killing PID ${pid}"
+          kill -9 "$pid"
+          return 1
+      fi
+
+      # Wait for specified interval
+      sleep "$throttleBetweenCalls"
+
+      # Display status message with elapsed time
+      status_msg=$(echo "$message" | sed "s/%elapsed%/$((`date +%s` - start_time))/" | sed "s/%pid%/$pid/")
+      log "$status_msg"
+  done
+  .wait-for-pid $! 5 30 "[%elapsed%] Timed out after ${timeout}s:  \"$@\""
+}
+
+# Example usage:
+# .throttle 1 /usr/bin/say -vAlex -r110 "Alexa announce ${@}"
+.throttle() {
+  local default_throttle=2
+  local throttleBetweenCalls=$1
+  local start_time=$(date +%s)
+  local is_number=.is-number "$throttleBetweenCalls"
+  local timeout=${3:-30}
+
+  if [ $# -eq 0 ]; then
+    .die "Cannot throttle nothing..."
+  fi
+
+  if ! .is-number "$throttleBetweenCalls"; then
+    log "Setting default throttling to $default_throttle"
+    throttleBetweenCalls=$default_throttle
+  fi
+
+  eval "$@" &
+  local pid=$!
+  local message=${4:-"[%pid%] [%elapsed%s] \"$@\""}
+
+  while kill -0 $pid 2>/dev/null; do
+      # Calculate elapsed time
+      current_time=$(date +%s)
+      elapsed=$((current_time - start_time))
+
+      # Check if we've exceeded timeout
+      if [ $elapsed -eq $timeout ]; then
+          log "Process timed out after ${timeout} seconds. Killing PID ${pid}"
+          kill -9 "$pid"
+          return 1
+      fi
+
+      # Wait for specified interval
+      sleep "$throttleBetweenCalls"
+
+      # Display status message with elapsed time
+      status_msg=$(echo "$message" | sed "s/%elapsed%/$((`date +%s` - start_time))/" | sed "s/%pid%/$pid/")
+      log "$status_msg"
+  done
+  .wait-for-pid $! 5 30 "[%elapsed%] Timed out after ${timeout}s:  \"$@\""
+}
+
+
 # Example usage:
 # some_long_running_command &
 # .wait-for-pid $! 30 1200 "[%elapsed%] Waiting for ${repo_files} to finish generating"
 .wait-for-pid() {
-    local pid=$1          # Process ID to monitor
-    local interval=$2     # Interval in seconds between checks (30)
-    local timeout=$3      # Maximum time to wait in seconds (1200 = 20 minutes)
-    local message=$4      # Message template to display
+    # Process ID to monitor
+    local pid=$1
+    # Interval in seconds between checks (30)
+    local interval=$2
+    # Maximum time to wait in seconds (1200 = 20 minutes)
+    local timeout=${3:-30}
+    # Message template to display
+    local message=${4:-"[%elapsed%] Waiting for $pid"}
+
     local start_time=$(date +%s)
     local elapsed=0
 
@@ -171,4 +273,4 @@ non_local_bin_path() {
     return 0
 }
 
-.log init
+

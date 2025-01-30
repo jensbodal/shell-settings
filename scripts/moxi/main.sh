@@ -39,6 +39,18 @@ PATH="${MOXI_BIN_DIR}:$PATH"
     .help
   elif [ "${cmd}" = "--help" ]; then
     .help
+  elif [ "${cmd}" = "m" ]; then
+    shift
+    .monitor "${@}"
+  elif [ "${cmd}" = "monitor" ]; then
+    shift
+    .monitor "${@}"
+  elif [ "${cmd}" = "t" ]; then
+    shift
+    .throttle "${@}"
+  elif [ "${cmd}" = "throttle" ]; then
+    shift
+    .throttle "${@}"
   elif [ "${cmd}" = "--setup-ssh-agent" ]; then
     .setup_ssh_agent "$@"
   else

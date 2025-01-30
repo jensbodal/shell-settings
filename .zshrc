@@ -9,7 +9,7 @@ touch() {
   fi
 }
 
-.log "Init"
+.log "init"
 ###########################################################################################################################################
 # .zshrc.pre.zsh
 # TOOD: Remove -- here to support moving to one way of doing post/pre
