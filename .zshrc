@@ -1,7 +1,37 @@
+.log() {
+  local input="${@:-$(</dev/stdin)}"
+  echo "[.zshrc] ${input}"
+}
+
+touch() {
+  if [ ! -f "$1" ]; then
+    echo "" > "$1"
+  fi
+}
+
+.log "Init"
 ###########################################################################################################################################
-# .zshrc.post.zsh
-[[ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.pre.zsh"
-[[ -f "${HOME}/.zshrc.pre.zsh" ]] && builtin source "${HOME}/.zshrc.pre.zsh"
+# .zshrc.pre.zsh
+# TOOD: Remove -- here to support moving to one way of doing post/pre
+if [ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]; then
+  if [ -f "${HOME}/.zshrc.pre.zsh" ]; then
+    echo "###########################################################################################################################################" | tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# Merged \"${HOME}/.zshrc.pre.zsh\"" | tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# with"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# ${HOME}/github/shell-settings/.private/zshrc.pre.zsh"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "###########################################################################################################################################" | tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    cat "${HOME}/.zshrc.pre.zsh" | tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+  fi
+  mv  "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" "${HOME}/.zshrc.pre.zsh"
+fi
+
+[[ -f "${HOME}/.zshrc.pre.zsh" ]] && builtin source "${HOME}/.zshrc.pre.zsh" || touch "${HOME}/.zshrc.pre.zsh"
+###########################################################################################################################################
+
+###########################################################################################################################################
+# neovim setup
+[[ ! -f "${HOME}/.config/nvim/lua/plugins" ]] && \
+  mkdir -p "${HOME}/.config/nvim/lua/plugins" && touch "${HOME}/.config/nvim/lua/plugins/init.lua"
 ###########################################################################################################################################
 
 [ -f "$HOME/.local/bin/mise" ] && export MISE_PATH="$HOME/.local/bin/mise"
@@ -13,6 +43,7 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 
+export AWS_PAGER=""
 export OS="unknown"
 export FAKE_HOME=$HOME/github/shell-settings/fakehome
 export BUN_INSTALL=$HOME/local/bun
@@ -59,7 +90,7 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
     if [ -f "${identityFile}" ]; then
       if [ ! -f "${identityFile}.pub" ]; then
-        echo "Creating public key for \"${identityFile}.pub\""
+        .log "Creating public key for \"${identityFile}.pub\""
         ssh-keygen -y -f "${identityFile}" | tee "${identityFile}.pub"
       fi
 
@@ -296,7 +327,7 @@ export AWS_EC2_METADATA_DISABLED=true
 if [ -f $HOME/github/shell-settings/scripts/shell-settings-update ]; then
   shell-settings-update
 else
-  echo "Could not find shell-settings-update script"
+  .log "Could not find shell-settings-update script"
 fi
 
 
@@ -312,7 +343,20 @@ if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
 
-
+###########################################################################################################################################
 # .zshrc.post.zsh
-[[ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]] && builtin source "${HOME}/github/shell-settings/.private/zshrc.post.zsh"
-[[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh"
+# TOOD: Remove -- here to support moving to one way of doing post/pre
+if [ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]; then
+  if [ -f "${HOME}/.zshrc.post.zsh" ]; then
+    echo "###########################################################################################################################################"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# Merged \"${HOME}/.zshrc.post.zsh\""| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# with"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "# ${HOME}/github/shell-settings/.private/zshrc.post.zsh"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    echo "###########################################################################################################################################"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
+    cat "${HOME}/.zshrc.post.zsh" | tee -a "${HOME}/github/shell-settings/.private/zshrc.post.zsh" | .log
+  fi
+  mv  "${HOME}/github/shell-settings/.private/zshrc.post.zsh" "${HOME}/.zshrc.post.zsh"
+fi
+
+[[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh" || touch "${HOME}/.zshrc.post.zsh"
+###########################################################################################################################################

@@ -1,0 +1,61 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+NUMBER_COMMITS=100
+COMMIT_OUTPUT=11
+
+.main() {
+  local regexp="\.(js|ts|py|cpp|c|h|java|html|css|go|rs|sh|json|yaml|yml|xml)$"
+  local gitdir="$(.gitdir)/.."
+  cd "$(.gitdir)/.."
+
+  local tmpd="${HOME}/.ss/ai-git/`basename $(realpath ./)`"
+  mkdir -p "${tmpd}"
+
+  local commits_file="${tmpd}/commits.json"
+  local source_files="${tmpd}/source_files.txt"
+  local repo_files="${tmpd}/repo_files.json"
+  local output_file="${tmpd}/git_export.json"
+
+  .log "Changing directory to git root: ${PWD}"
+
+  .log "Adding git history for last ${NUMBER_COMMITS} commits" && \
+  git log -n "${NUMBER_COMMITS}" --pretty=format:'{"hash": "%H", "author": "%an", "email": "%ae", "date": "%ad", "message": "%s", "parents": "%P"}' | jq -s '.' | tee "${commits_file}"
+
+  .log "Generating a list of all files that match: /${regexp}/" && \
+  git ls-files | grep -E "${regexp}" | xargs realpath > "${source_files}"
+
+  .log "For each file in source file, base64 encode it and write it to \"${repo_files}\""
+  echo '{"files": [' > "$repo_files"
+  first=true
+  while IFS= read -r file; do
+    if [ "${first}" = true ]; then first=false; else echo "," >> "${repo_files}"; fi
+    echo -n "{\"file\": \"$file\", \"content\": \"" >> "${repo_files}"
+    .log "Processing $file" &
+    base64 "$file" | tr -d '\n' >> "${repo_files}"
+    echo "\"}" >> "${repo_files}"
+  done < "${source_files}"
+  .wait-for-pid $! 2 1200 "[%elapsed%] Waiting for ${file} to finish generating"
+  echo "]}" >> "${repo_files}"
+  .log "\"${repo_files}\" has finished generating."
+
+  .log "Merging commits and files into a single JSON file: \"${output_file}\""
+  {
+    echo "{"
+    echo "\"commits\": $(cat "${commits_file}"),"
+    echo "\"files\": $(cat "${repo_files}" | jq '.files')"
+    echo "}"
+  } > "${output_file}"
+
+  local x=`cat "${output_file}" | jq | head -n $COMMIT_OUTPUT`
+  echo "${x}"
+  echo "..."
+  local x=`cat "${output_file}" | jq | tail -n $COMMIT_OUTPUT`
+  echo "${x}"
+  .log "${output_file}"
+  .log "Finished."
+  echo ""
+}
+
+.main "$@"

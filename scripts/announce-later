@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# We don't want this in this script because we don't want to add the trap functionality
+[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+
+.main() {
+  local sleep_wait_m=$1
+  local msg="$2"
+  local o="Returning from ${sleep_wait_m} minute sleep. ${msg}."
+
+  if [ $sleep_wait_m -gt 0 ]; then
+    sleep_wait_s=$(($sleep_wait_m * 60))
+    log "Sleeping for ${sleep_wait_m}m then announcing: ${msg}"
+    sleep $sleep_wait_s
+    local moxi=$HOME/github/shell-settings/scripts/moxi/main.sh
+    $moxi a "${o}"
+  fi
+}
+
+.main "${@}"

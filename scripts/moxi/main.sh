@@ -10,6 +10,13 @@ PATH="${MOXI_BIN_DIR}:$PATH"
   echo "moxi"
 }
 
+.watch() {
+  local watchpath="$(realpath ${1})"
+
+  echo "Watching file \"${watchpath}\""
+  nodemon -w "${watchpath}" -x "${watchpath}"
+}
+
 .main() {
   if [ $# -eq 0 ]; then
     .help
@@ -20,6 +27,12 @@ PATH="${MOXI_BIN_DIR}:$PATH"
   if [ "${cmd}" = "n" ]; then
     shift
     .notify "${@}"
+  elif [ "${cmd}" = "a" ]; then
+    shift
+    .announce "${@}"
+  elif [ "${cmd}" = "w" ]; then
+    shift
+    .watch "${@}"
   elif [ "${cmd}" = "h" ]; then
     .help
   elif [ "${cmd}" = "help" ]; then
@@ -44,6 +57,23 @@ PATH="${MOXI_BIN_DIR}:$PATH"
   log "Do stuff to make sure ssh-agent is working..."
 
   exit $?
+}
+
+.announce() {
+  local default_timeout=5
+
+  if isosx; then
+    alerter \
+      -title "\[moxi] notify" \
+      -ignoreDnD \
+      -timeout ${default_timeout} \
+      -message "Alexa announce that, ${@}" >/dev/null 2>&1 &
+
+    # could have an option to use -sound if we don't want to speak the message
+    /usr/bin/say -vAlex -r110 "Alexa announce ${@}"
+  else
+    die "${OS} not supported"
+  fi
 }
 
 .notify() {

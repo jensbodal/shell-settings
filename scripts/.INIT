@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Include in your script with:
-# [ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+# [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
 # Adds default trap functions and helper scripts common global variables
 # Also ensures that all scripts in scripts folder are available to other scripts here
 # @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable
@@ -36,9 +36,11 @@ __exit() {
 }
 
 log() {
+  local input="${@:-$(</dev/stdin)}"
   args=( )
   local log_empty=n
   local include_date=n
+
   # more complex flags seen here https://stackoverflow.com/a/2875513/679716
   while test $# != 0; do
     case $1 in
@@ -58,11 +60,17 @@ log() {
   fi
 
   if [ "$include_date" = "y" ]; then
-    printf "[$(date +"%Y-%m-%d_%H%M%S") - $(.SCRIPT_NAME)] $@\n"
+    printf "[$(date +"%Y-%m-%d_%H%M%S") - $(.SCRIPT_NAME)] $input\n"
     return 0
   fi
 
-  printf "[$(.SCRIPT_NAME)] $@\n"
+  printf "[$(.SCRIPT_NAME)] $input\n"
+}
+
+.log() {
+  set +u
+  log ${@}
+  set -u
 }
 
 # if non_local_bin_path mise; echo "mise is installed"; fi
@@ -78,6 +86,10 @@ non_local_bin_path() {
   fi
 }
 
+.non_local_bin_path() {
+  non_local_bin_path "${@}"
+}
+
 .ismac() {
   if [ $os = "Darwin" ]; then
     return 0
@@ -85,3 +97,72 @@ non_local_bin_path() {
   return 1
 }
 
+.findup() {
+  local type="${1}"
+  local needle="${2}"
+  local _DIR="${PWD}"
+
+  if [ "${type}" = "-d" ]; then
+    while [[ $PWD != '/' && ${PWD##*/} != 'httpdocs' ]]; do
+      if [ -d "$needle" ]; then
+        echo "${PWD}/${needle}"
+        builtin cd "${_DIR}"
+        return 0
+      fi
+
+      builtin cd ..
+    done
+  else
+    while [[ $PWD != '/' && ${PWD##*/} != 'httpdocs' ]]; do
+      if [[ -d "$needle" || -f "$needle" || -h "$needle" ]]; then
+        echo "${PWD}/${needle}"
+        builtin cd "${_DIR}"
+        return 0
+      fi
+
+      builtin cd ..
+    done
+  fi
+
+  builtin cd "${_DIR}"
+}
+
+.gitdir() {
+  .findup -d ".git"
+}
+
+# Example usage:
+# some_long_running_command &
+# .wait-for-pid $! 30 1200 "[%elapsed%] Waiting for ${repo_files} to finish generating"
+.wait-for-pid() {
+    local pid=$1          # Process ID to monitor
+    local interval=$2     # Interval in seconds between checks (30)
+    local timeout=$3      # Maximum time to wait in seconds (1200 = 20 minutes)
+    local message=$4      # Message template to display
+    local start_time=$(date +%s)
+    local elapsed=0
+
+    while kill -0 "$pid" 2>/dev/null; do
+        # Calculate elapsed time
+        current_time=$(date +%s)
+        elapsed=$((current_time - start_time))
+
+        # Check if we've exceeded timeout
+        if [ $elapsed -ge $timeout ]; then
+            echo "Process timed out after ${timeout} seconds. Killing PID ${pid}"
+            kill -9 "$pid"
+            return 1
+        fi
+
+        # Display status message with elapsed time
+        status_msg=$(echo "[$pid] $message" | sed "s/\[%elapsed%\]/$elapsed/")
+        echo "$status_msg"
+
+        # Wait for specified interval
+        sleep "$interval"
+    done
+
+    return 0
+}
+
+.log init
