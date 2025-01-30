@@ -302,11 +302,9 @@ fi
 ################################################################################################
 # mise (formerly mise)
 ################################################################################################
-if command -v mise > /dev/null; then
-  #  export mise_USE_TOML=1
+mise_install_path="$(command -v mise 2>&1)"
+if [[ (! -z $mise_install_path) &&  "$mise_install_path" != "$(realpath $HOME/github/shell-settings/scripts/mise)" ]]; then
   eval "$(mise activate zsh)"
-  #  echo "eval \"\$(/Users/bodal/.local/bin/mise activate zsh)\"" >> "/Users/bodal/.zshrc"
-  #  eval "$(mise activate zsh)"
 elif [ -f $HOME/.local/bin/mise ]; then
   eval "$(${HOME}/.local/bin/mise activate zsh)"
 fi

@@ -9,13 +9,18 @@ set -euo pipefail
 
 SCRIPTS_DIR=`cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd`
 SHELL_SETTINGS_DIR="$(readlink -f ${SCRIPTS_DIR}/..)"
+SCRIPT_NAME=
 
 .SCRIPT_DIR() {
   cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
 }
 
 .SCRIPT_NAME() {
-  basename "$0"
+  if [ -z $SCRIPT_NAME ]; then
+    SCRIPT_NAME="`basename "$0"`"
+  fi
+
+  echo "${SCRIPT_NAME}"
 }
 
 export PATH="$(.SCRIPT_DIR):$PATH"
@@ -64,7 +69,8 @@ log() {
     return 0
   fi
 
-  printf "[$(.SCRIPT_NAME)] $input\n"
+  .SCRIPT_NAME
+  printf "[${SCRIPT_NAME}] ${input}\n"
 }
 
 .log() {
