@@ -1,8 +1,11 @@
 # vi: ft=zsh
 
 DIR="$(dirname "$(readlink -f "$0")")"
+_LOG_PREFIX="${LOG_PREFIX:=}"
+LOG_PREFIX="[~/.aliasrc-shell-settings] "
 
 alias cds="cd $SHELL_SETTINGS_DIR"
+alias cdg="cd $HOME/github"
 alias pbc="pbcopy"
 alias gd="git diff"
 alias gdh="gd HEAD"
@@ -49,12 +52,12 @@ done
 alias disknnn="nnn"
 
 if [ "$OS" = "darwin" ]; then
-  echo "macOS detected: loading $BASH_SCRIPTS_PATH/osx"
+  .log "macOS detected: loading $BASH_SCRIPTS_PATH/osx"
   export PATH="$PATH:$BASH_SCRIPTS_PATH/osx"
 fi
 
 if [ "$OS" = "proxmox" ]; then
-  echo "proxmox detected: loading $BASH_SCRIPTS_PATH/proxmox"
+  .log "proxmox detected: loading $BASH_SCRIPTS_PATH/proxmox"
   export PATH="$PATH:$BASH_SCRIPTS_PATH/proxmox"
 fi
 
@@ -72,22 +75,22 @@ __add_node_scripts_to_path
 # aliasing these to functions breaks functionality
 cd() {
   if [ $# -eq 1 -a -f "$@" ]; then
-    echo "file found, changing to parent directory"
+    .log "file found, changing to parent directory"
     cdf "$1"
     return $?
   fi
 
   if [ "$1" != "-" -a ! -d "$@" ]; then
-    echo "no such directory: $@"
+    .log "no such directory: $@"
     return 1
   fi
 
-  builtin cd "$@" && echo "$OLDPWD --> $PWD"
+  builtin cd "$@" && .log "$OLDPWD --> $PWD"
 }
 
 __rmrf() {
   SECONDS=0
-  echo "rm -rf $@"
+  .log "rm -rf $@"
   local volume="$(df -P . | sed -n '$s/[^%]*%[[:blank:]]*//p')"
   local tmp=$(mktemp)
   local tmpFolder=$(basename $tmp)
@@ -102,7 +105,7 @@ __rmrf() {
   mkdir -p $trash
 
   if [ "$#" -eq 0 ]; then
-    echo "trash: $trash"
+    .log "trash: $trash"
     ls -la $trash
     return 0;
   fi
@@ -110,14 +113,14 @@ __rmrf() {
   local trashfolder="$trash/$tmpFolder"
   mkdir -p $trashfolder
 
-  echo "moving "$folders" to $trashfolder"
+  .log "moving "$folders" to $trashfolder"
   mv $folders $trashfolder
-  echo "emptying $trash in the background..."
+  .log "emptying $trash in the background..."
 
   __rmrfhelper() {
     duration=$SECONDS
     command rm -rf $trash
-    echo "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
+    .log "$(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed."
   }
 
   { __rmrfhelper & } 2>/dev/null
@@ -139,7 +142,7 @@ function findup() {
 
   while [[ $PWD != '/' && ${PWD##*/} != 'httpdocs' ]]; do
     if [[ -d "$needle" || -f "$needle" ]]; then
-      echo "${PWD}/${needle}"
+      .log "${PWD}/${needle}"
       builtin cd "${_DIR}"
       return 0
     fi
@@ -161,7 +164,7 @@ __bunx() {
 
 __mise-install() {
   if [ -z $1 ]; then
-    echo "missing plugin name"
+    .log "missing plugin name"
     return
   fi
 
@@ -175,7 +178,7 @@ __mise-update() {
   for tool in $(mise plugin list); do
     mise install "${tool}" latest  \
       &&  mise global "${tool}" latest  \
-      &&  echo "${tool} set globally"
+      &&  .log "${tool} set globally"
     done
 }
 
@@ -184,7 +187,7 @@ __caff() {
   then
     caffeinate -disu
   else
-    echo "caffeinate not supported"
+    .log "caffeinate not supported"
   fi
 }
 
@@ -200,19 +203,19 @@ __cdt() {
 
 __dns() {
   domain="$1"
-  echo "[nameservers]"
+  .log "[nameservers]"
   dig +short "$domain" ns
-  echo "[a records]"
+  .log "[a records]"
   dig +short "$domain" a
-  echo "[cname records]"
+  .log "[cname records]"
   dig +short "$domain" cname
-  echo "[txt records]"
+  .log "[txt records]"
   dig +short "$domain" txt
-  echo "[mx records]"
+  .log "[mx records]"
   dig +short "$domain" mx
-  echo "[aaaa records]"
+  .log "[aaaa records]"
   dig +short "$domain" aaaa
-  echo "[srv records]"
+  .log "[srv records]"
   dig +short "$domain" srv
 }
 
@@ -234,7 +237,7 @@ __git-set-origin() {
   local currentbranch=$(git rev-parse --abbrev-ref HEAD)
 
   local gitpath="$remote/$currentbranch"
-  echo "Setting upstream to \"$gitpath\""
+  .log "Setting upstream to \"$gitpath\""
   git branch --set-upstream-to="$gitpath"
 }
 
@@ -263,27 +266,30 @@ __ssh-keygen-secure() {
 
 __u() {
   if exists brew; then
-    echo "updating brew"
+    .log "updating brew"
     brew update && brew upgrade
   fi
   if exists pacman; then
-    echo "updating pacman"
+    .log "updating pacman"
     sudo pacman -Syu
   fi
   if exists apt; then
     if apt -v &> /dev/null; then
-      echo "updating apt"
+      .log "updating apt"
       sudo apt update && sudo apt upgrade
     fi
   fi
   if exists yum; then
-    echo "updating yum"
+    .log "updating yum"
     sudo yum update
   fi
 }
 
 
 __yarn() {
-  echo "!!! use bun !!!"
+  .log "!!! use bun !!!"
   return 1
 }
+
+LOG_PREFIX=$_LOG_PREFIX
+

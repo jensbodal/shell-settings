@@ -1,20 +1,51 @@
 source $HOME/github/shell-settings/.generic.env
+export LOG_PREFIX="[~/.zshrc] "
 
 .log() {
   local input="${@:-$(</dev/stdin)}"
-  echo "[.zshrc] ${input}"
+  local prefix="${LOG_PREFIX:-}"
+  echo "${prefix}${input}"
 }
 
 touch() {
-  if [ ! -f "$1" ]; then
-    echo "" > "$1"
+  if [ $# -eq 0 ]; then
+    return 1
   fi
+
+  if [ -f "$1" ]; then
+    return 0
+  fi
+
+  local path="$(dirname ${1})"
+
+  /bin/mkdir -p "${path}"
+
+  local t=/usr/bin/touch
+
+  if [ -f /usr/bin/touch ]; then
+    /usr/bin/touch "$@"
+    return $?
+  fi
+
+  if [ -f /opt/homebrew/opt/coreutils/libexec/gnubin/touch ]; then
+    /opt/homebrew/opt/coreutils/libexec/gnubin/touch "$@"
+    return $?
+  fi
+
+  echo "" > "$1"
 }
 
-.log "init"
+.is_mac() {
+  if [ "$OS" = "darwin" ]; then
+    return 0
+  fi
+  return 1
+}
+
 ###########################################################################################################################################
-# .zshrc.pre.zsh
+# ~/.zshrc.pre.zsh
 # TOOD: Remove -- here to support moving to one way of doing post/pre
+.log "Loading ~/.zshrc.pre.zsh"
 if [ -f "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" ]; then
   if [ -f "${HOME}/.zshrc.pre.zsh" ]; then
     echo "###########################################################################################################################################" | tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log
@@ -343,9 +374,24 @@ if command -v bashcompinit > /dev/null; then
   autoload -U +X bashcompinit && bashcompinit
 fi
 
+################################################################################################
+# autosetup
+################################################################################################
+# wip: move auto setup of programs to this file
+if .is_mac; then
+  if [ ! -f "$HOME/.autosetup.macos" ]; then
+    ln -s "$HOME/github/shell-settings/.autosetup.macos" "$HOME/.autosetup.macos"
+  fi
+
+  source $HOME/.autosetup.macos
+fi
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ###########################################################################################################################################
 # .zshrc.post.zsh
 # TOOD: Remove -- here to support moving to one way of doing post/pre
+.log "Loading ~/.zshrc.post.zsh"
 if [ -f "${HOME}/github/shell-settings/.private/zshrc.post.zsh" ]; then
   if [ -f "${HOME}/.zshrc.post.zsh" ]; then
     echo "###########################################################################################################################################"| tee -a "${HOME}/github/shell-settings/.private/zshrc.pre.zsh" | .log

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+_LOG_PREFIX="${LOG_PREFIX:=}"
+LOG_PREFIX="[~/.autosetup.macos] "
+
+keybindings="${HOME}/Library/KeyBindings/DefaultKeyBinding.dict"
+
+if [ ! -f "${keybindings}" ]; then
+  .log "KeyBindings not found, adding them to ${keybindings}"
+  mkdir -p $HOME/Library/KeyBindings
+  cp "${HOME}/github/shell-settings/macos/USERHOME/Library/KeyBindings/DefaultKeyBinding.dict" "${keybindings}"
+else
+  .log "Loaded \"${keybindings}\""
+fi
+
+LOG_PREFIX=$_LOG_PREFIX
