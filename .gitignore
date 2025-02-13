@@ -3,3 +3,5 @@
 !.private/.gitkeep
 
 macos/automator/testing.workflow/
+
+/node_modules/
