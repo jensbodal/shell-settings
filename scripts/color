@@ -1,5 +1,5 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
 
 log "I don't do anything :("

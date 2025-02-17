@@ -9,7 +9,7 @@
 # die 15 "Custom error code"
 # die 0 "This will show invalid error code message"
 
-[ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
 
 trap __exit EXIT
 __exit() {

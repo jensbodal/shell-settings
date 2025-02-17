@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Include in your script with:
-# [ -z $SHELL_SETTINGS_DIR ] && source $HOME/github/shell-settings/scripts/.INIT
+# [ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
 # Adds default trap functions and helper scripts common global variables
 # Also ensures that all scripts in scripts folder are available to other scripts here
 # @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable
 
 set -euo pipefail
 
-SCRIPTS_DIR=`cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd`
-SHELL_SETTINGS_DIR="$(readlink -f ${SCRIPTS_DIR}/..)"
+# shellcheck disable=SC2034
+SHELL_SETTINGS_INIT=0
 SCRIPT_NAME=
 
 .SCRIPT_DIR() {
@@ -74,7 +74,7 @@ log() {
 
 .log() {
   set +u
-  log ${@}
+  log "${@}"
   set -u
 }
 
@@ -162,6 +162,7 @@ non_local_bin_path() {
   fi
 
 
+  # shellcheck disable=SC2145
   log "Monitoring \"$@\" every ${throttleBetweenCalls}s or until ${timeout}s timeout"
   eval "$@" &
   local pid=$!
@@ -272,5 +273,3 @@ non_local_bin_path() {
 
     return 0
 }
-
-

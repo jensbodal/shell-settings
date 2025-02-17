@@ -2,6 +2,7 @@
 
 DIR="$(dirname "$(readlink -f "$0")")"
 
+alias cds="cd $SHELL_SETTINGS_DIR"
 alias pbc="pbcopy"
 alias gd="git diff"
 alias gdh="gd HEAD"

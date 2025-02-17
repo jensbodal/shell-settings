@@ -1,3 +1,5 @@
+source $HOME/github/shell-settings/.generic.env
+
 .log() {
   local input="${@:-$(</dev/stdin)}"
   echo "[.zshrc] ${input}"
@@ -270,8 +272,8 @@ export GID
 ################################################################################################
 # Read custom aliases from file
 ################################################################################################
-source ~/.aliasrc
-source ~/.aliasrc-shell-settings
+[ -f "$HOME/.aliasrc" ] && source "$HOME/.aliasrc"
+[ -f "$HOME/.aliasrc-shell-settings" ] && source "$HOME/.aliasrc-shell-settings"
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ################################################################################################

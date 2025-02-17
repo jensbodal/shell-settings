@@ -1,0 +1,26 @@
+#!/bin/bash
+
+WORK_DIR="${HOME}/local/lib/automator/testing"
+CACHE_DIR="${WORK_DIR}/cache"
+CACHE_LAST_RUN="$CACHE_DIR/.last_run"
+CACHE_LAST_EXIT="$CACHE_DIR/.last_exit"
+NOW=`date +%s`
+
+mkdir -p "${CACHE_DIR}"
+
+if [ -f "$CACHE_LAST_RUN" ]; then
+  last=`cat $CACHE_LAST_RUN`
+  elapsed=$(($NOW - $last))
+  echo "[logelapsed] [$(date)] ${elapsed}s since last run ($(($elapsed/60))m)"
+fi
+
+echo "$NOW" > $CACHE_LAST_RUN
+
+if [ -f $CACHE_LAST_EXIT ]; then
+  lastexit=`cat $CACHE_LAST_EXIT`
+  total_elapsed=$(($NOW - $lastexit))
+  echo "[logelapsed] [$(date)] Running for ${total_elapsed}s ($((total_elapsed/60))m)"
+else
+  echo "No last exit file found: \"$CACHE_LAST_EXIT\", exiting..."
+  exit 1
+fi

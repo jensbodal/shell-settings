@@ -1,0 +1,72 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+# cached values older than this will be automatically refreshed in the background
+export BKT_STALE=${BKT_STALE:-1h}
+# cache will automatically be refreshed after this time elapses
+export BKT_TTL=${BKT_TTL:-4h}
+export BKT_RAW=${BKT_RAW:-0}
+
+.main() {
+  log "$@"
+
+  if ! .install-check-bkt "$@"; then
+    log "Unable to install or locate \`bkt\`"
+    return 1
+  fi
+
+  if [ "$BKT_RAW" = "1" ]; then
+    .bkt-raw "$@"
+    return $?
+  fi
+
+  # bkt --ttl=DURATION [--stale=DURATION] [--cwd] [--env=ENV ...] [--modtime=FILE ...] [--scope=SCOPE] [--discard-failures] [--warm|--force] -- <command>...
+  bkt --cwd --ttl=$BKT_TTL --stale=$BKT_STALE -- "$(echo $@)"
+}
+
+.bkt-raw() {
+  set +u
+  local cache_instructions_file="$1"
+  set -u
+  shift
+
+  if [ ! -f "$cache_instructions_file" ]; then
+    log "BKT_RAW mode requires a cache instructions file"
+    return 1
+  fi
+
+  local bkt_cmd="bkt --cwd --ttl=$BKT_TTL --stale=$BKT_STALE"
+
+  # If you need to parse the line into variables, you can extend it like this:
+  while read -r cmd_type cmd_str; do
+    # Skip empty lines and comments
+    [[ -z "$cmd_type" || "$cmd_type" =~ ^[[:space:]]*# ]] && continue
+
+    if [ "$cmd_type" = "findup_cmd" ]; then
+      fp="$(findup $cmd_str)"
+      bkt_cmd="${bkt_cmd} --modtime=$fp"
+    fi
+  done < "$cache_instructions_file"
+
+  eval "$bkt_cmd -- $(echo $@)"
+
+  return $?
+}
+
+# https://github.com/dimo414/bkt
+.install-check-bkt() {
+  if ! exists bkt; then
+    log "Bucket not found, attempting to install"
+    if ! exists cargo; then
+      log "Cargo not found, running command without caching"
+      while [[ "$1" == --* ]]; do shift; done
+      "$@"
+      return $?
+    fi
+
+    cargo install bkt
+  fi
+}
+
+.main "$@"
