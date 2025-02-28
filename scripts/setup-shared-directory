@@ -1,0 +1,43 @@
+#!/bin/bash
+
+TGT_GRP="tank_opt" TGT_DIR="/tank/opt"
+
+# set group ownership
+.c "sudo chgrp -R $TGT_GRP $TGT_DIR"
+
+# set permissions for directory and all files and directories currently in the
+# given root directory 2 sets setgid bit; ensures new files/folders inherit
+# group's ownershipt RWX-RWX-RX
+.c "sudo chmod -R 2775 $TGT_DIR"
+
+# ensure setgid bit is also set for all new files and folders all new files and
+# subdirectories created within the current directory and subdirectories inherit
+# the group ID of the given root directory rather than the primary group ID of
+# the user who created the file
+.c "chmod g+s $TGT_DIR"
+
+# NEED MORE INFORMATION configure user Umask Sets default file creation
+# permissions for users in the group umask 002 This setting ensures that new
+# files are created with group write permissions. ￼ umask 077 - Assigns
+# permissions so that only you have read/write access for files, and
+# read/write/search for directories you own. All others have no access
+# permissions to your files or directories.
+
+# umask 022 - Assigns permissions so that only you have read/write access for
+# files, and read/write/search for directories you own. All others have read
+# access only to your files, and read/search access to your directories.
+
+#umask 002 - Assigns permissions so that only you and members of your group have
+# read/write access to files, and read/write/search access to directories you own.
+# All others have read access only to your files, and read/search to your
+# directories.
+
+# add users to group
+# sudo usermod -aG your_group username
+
+# Example
+# TGT_USER=$USER
+# sudo usermod -aG tank_opt $TGT_USER
+# chmod 775 /tank/opt
+#
+# sudo chown tank_opt:tank_opt

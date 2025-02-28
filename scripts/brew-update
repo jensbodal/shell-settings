@@ -1,0 +1,22 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+if ismac; then
+  if [ ! -f /opt/homebrew/bin/pinentry-mac ]; then
+    log "brew auto update is not installed, attempting to install..."
+
+    brew install pinentry-mac
+  fi
+
+  if [ ! -f /opt/homebrew/bin/autoupdate ]; then
+    brew tap domt4/autoupdate
+    brew autoupdate start 43200 --upgrade --cleanup --immediate --sudo
+  fi
+else
+  log "Currently brew auto update only works on mac, or I haven't tried on linux..."
+fi
+
+log "Running update and upgrade"
+brew update && brew upgrade
+log "Ran \`brew update && brew upgrade\`"

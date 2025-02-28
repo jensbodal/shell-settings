@@ -95,8 +95,8 @@ non_local_bin_path() {
   non_local_bin_path "${@}"
 }
 
-.ismac() {
-  if [ $os = "Darwin" ]; then
+ismac() {
+  if [ $OS = "darwin" ]; then
     return 0
   fi
   return 1
