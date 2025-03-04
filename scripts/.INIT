@@ -273,3 +273,25 @@ ismac() {
 
     return 0
 }
+
+isinteger() {
+  local re='^[0-9]+$'
+  set +u
+  local input="$1"
+  set -u
+  if ! [[ $input =~ $re ]] ; then
+    return 1
+  fi
+  return 0
+}
+
+isfloat() {
+  local re='^[0-9]+([.][0-9]+)?$'
+  set +u
+  local input="$1"
+  set -u
+  if ! [[ $input =~ $re ]] ; then
+    return 1
+  fi
+  return 0
+}

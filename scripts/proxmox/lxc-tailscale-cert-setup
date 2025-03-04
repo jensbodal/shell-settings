@@ -1,0 +1,90 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+create_service_file() {
+  cat << EOF
+[Unit]
+Description=Tailscale SSL Service Renewal
+After=network.target
+After=syslog.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/etc/ssl/private/
+ExecStart=tailscale cert ${dns_name}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+}
+
+create_timer_file() {
+  cat << EOF
+[Unit]
+Description=Renew Tailscale cert weekly timer
+
+[Timer]
+OnCalendar=weekly
+Unit=%i.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+}
+
+main() {
+  set +u
+  container="$1"
+  set -u
+
+
+  if ! isinteger $container; then
+    die "\"$container\" is not a valid container id"
+  fi
+
+  source "$(.SCRIPT_DIR)/proxmox/lxc-cmd"
+
+  _cmd() {
+    lxc-cmd $container "$@"
+  }
+
+  local dns_name="$(_cmd tailscale status --json | jq '.Self.DNSName | .[:-1]' -r)"
+
+  local opt_dir=/opt/tailscale
+  local cert_file="$opt_dir/$dns_name.crt"
+  local key_file="$opt_dir/$dns_name.key"
+  local service_file=$opt_dir/tailscale-cert.service
+  local timer_file=$opt_dir/tailscale-cert.timer
+
+  local tmp_service=$(mktemp)
+  local tmp_timer=$(mktemp)
+  create_service_file $container > "${tmp_service}"
+  create_timer_file > "${tmp_timer}"
+
+  log "Creating certificate for \"$dns_name\" on [$container]"
+  log "Cert file created at \"$cert_file\""
+  log "Key file created at \"$key_file\""
+  _cmd mkdir -p "${opt_dir}"
+  _cmd tailscale cert --cert-file $cert_file --key-file $key_file $dns_name
+
+  sudo pct push $container $tmp_service $service_file
+  sudo pct push $container $tmp_timer $timer_file
+  rm $tmp_service $tmp_timer
+
+  _cmd ln -nsf $service_file /etc/systemd/system/tailscale-cert.service
+  _cmd ln -nsf $timer_file /etc/systemd/system/tailscale-cert.timer
+
+  _cmd systemctl daemon-reload
+  _cmd systemctl start tailscale-cert.service
+  _cmd systemctl enable tailscale-cert.timer
+  _cmd tailscale status
+
+  log "Installing jq if it doesn't exist"
+  _cmd sudo apt update &>/dev/null && _cmd sudo apt install -y jq &>/dev/null && _cmd tailscale status --json | jq '.CertDomains[]'
+}
+
+main "$@"

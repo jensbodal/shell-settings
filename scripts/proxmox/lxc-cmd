@@ -1,0 +1,22 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+main() {
+  container=$(echo "${1//"'"}")
+
+  if ! isinteger $container; then
+    log "\"$container\" is not a valid container identifier"
+    return 1
+  fi
+
+  shift
+  command="${@}"
+
+  # log "Running \`$(echo ${command//"'"})\` on $[container]"]
+
+  sudo lxc-attach -n "$container" -- /bin/bash -c "$(echo $command)"
+
+}
+
+main "${@@Q}"
