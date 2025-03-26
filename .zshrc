@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 source $HOME/github/shell-settings/.generic.env
 export LOG_PREFIX="[~/.zshrc] "
 
@@ -406,3 +408,4 @@ fi
 
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh" || touch "${HOME}/.zshrc.post.zsh"
 ###########################################################################################################################################
+

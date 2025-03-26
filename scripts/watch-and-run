@@ -1,0 +1,41 @@
+#!/bin/bash
+
+watch_and_run() {
+    local script_path="$1"
+    local last_md5=""
+
+    # Initial check
+    echo "Starting watch on: $script_path"
+    echo "Press Ctrl+C to stop..."
+    echo
+
+    # First run
+    if [ -f "$script_path" ]; then
+        "$script_path"
+        last_md5=$(md5sum "$script_path" | awk '{print $1}')
+    else
+        echo "Error: File $script_path not found!"
+        exit 1
+    fi
+
+    # Watch loop
+    while true; do
+        current_md5=$(md5sum "$script_path" | awk '{print $1}')
+        if [ "$current_md5" != "$last_md5" ]; then
+            echo "Change detected at $(date '+%H:%M:%S')"
+            clear
+            "$script_path"
+            last_md5="$current_md5"
+        fi
+        sleep 1
+    done
+}
+
+# Check if argument is provided
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <script-to-watch>"
+    exit 1
+fi
+
+# Run the watch function
+watch_and_run "$1"
