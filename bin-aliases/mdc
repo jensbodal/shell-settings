@@ -1,0 +1,11 @@
+#!/bin/bash
+
+main() {
+  if ! command -v mdless 2>&1 >/dev/null; then
+    brew install mdless
+  fi
+
+  mdless "$@"
+}
+
+main "$@"

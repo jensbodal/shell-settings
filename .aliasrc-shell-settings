@@ -11,9 +11,10 @@ alias gd="git diff"
 alias gdh="gd HEAD"
 alias gds="gd --staged"
 alias gs="git status"
-alias hist="history"
+alias hist="history -E"
 alias l='ls -la | grep "^d" && ls -la | grep -v "^d"'
 alias ll="ls -la"
+alias pf="moxi s 'Command finished successfully.' || moxi s 'Command failed'"
 alias rp="realpath"
 alias s="source ~/.zshrc && hash -r && if type direnv > /dev/null; then direnv reload; fi"
 alias shellsettings="pushd $HOME/github/shell-settings"
@@ -36,8 +37,9 @@ alias ssh-keygen-secure=__ssh-keygen-secure
 alias u=__u
 
 # bash scripts
+export BIN_ALIAS_PATH="$DIR/bin-aliases"
 export BASH_SCRIPTS_PATH="$DIR/scripts"
-export PATH="$BASH_SCRIPTS_PATH:$PATH"
+export PATH="$BIN_ALIAS_PATH:$BASH_SCRIPTS_PATH:$PATH"
 
 alias moxi="${BASH_SCRIPTS_PATH}/moxi/main.sh"
 

@@ -188,7 +188,8 @@ fun! <SID>StripTrailingWhitespaces()
   call cursor(l, c)
 endfun
 
-autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+"autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre * :%s/\s\+$//e
 
 "HERE FOR REFERENCE INSERTING TEXT FROM FILE
 "This function will insert a custom header text for a cpp file
