@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -euo pipefail
 
 SCRIPT_DIR() {
   cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
@@ -92,8 +91,8 @@ if [ "$filename" = "" ]; then
   exit 1
 fi
 
-tmp="$(mktemp)"
 echo "[elm] Outputting results to \"$filename\""
+tmp="$(mktemp)"
 
 "$ollama" run phi3 --verbose 2>&1 <<< "42 is? (respond in 20 words or less)" | tee "$tmp"
 

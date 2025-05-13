@@ -1,0 +1,11 @@
+⠙ ⠙ ⠹ ⠸ ⠴ ⠦ ⠧ ⠇ ⠇ "The atomic number of the chemical element tennessine."
+total duration:       1.0293904s
+
+load duration:        838.3752ms
+prompt eval count:    24 token(s)
+prompt eval duration: 102.6596ms
+prompt eval rate:     233.78 tokens/s
+eval count:           14 token(s)
+eval duration:        87.752ms
+eval rate:            159.54 tokens/s
+
