@@ -10,12 +10,35 @@ DIR="$(SCRIPT_DIR)"
 DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
 PROMPT="What is 32F in C?"
 MODEL="llama3"
+SYSTEM_GPU="Unknown"
 ollama=""
+
+set_system_gpu() {
+  OS="$(uname -s)"
+
+  case "$OS" in
+    Linux*)
+      # For Linux, list VGA devices (might not directly show the GPU name sometimes)
+      lspci | grep -i vga
+      ;;
+    Darwin*)
+      # For macOS, use system_profiler to get display info
+      SYSTEM_GPU="$(system_profiler SPDisplaysDataType | grep "Chipset Model" | sed -E 's#.*Chipset.*:[ ]+(.*)#\1#' | tr ' ' '_')"
+      ;;
+    CYGWIN*|MINGW*|MSYS*)
+      # For Windows under a Unix-like shell (Cygwin, Git Bash), use WMIC
+      wmic path win32_VideoController get name
+      ;;
+    *)
+      echo "[elm] Unsupported OS: $OS"
+      ;;
+  esac
+}
 
 set_output_filename() {
   local prompt="$(echo -n $PROMPT | sha256sum | awk '{print $1}')"
   local name="${ELM_HOSTNAME:-$(hostname)}"
-  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt.$name.log"
+  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt.$SYSTEM_GPU.$name.log"
 }
 
 set_ollama() {
@@ -49,6 +72,7 @@ set_ollama() {
 
 setup() {
   mkdir -p "$DIR_BENCHMARK_RESULTS"
+  set_system_gpu
   set_ollama
   set_output_filename
   if ! command -v ansifilter 2>&1; then

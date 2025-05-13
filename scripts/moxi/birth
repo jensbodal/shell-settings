@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p $HOME/github/project-green-bag
+cd $HOME/github/project-green-bag
+git init
+

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+OS="$(uname -s)"
+SYSTEM_GPU="Unknown"
+
+case "$OS" in
+  Linux*)
+    # For Linux, list VGA devices (might not directly show the GPU name sometimes)
+    lspci | grep -i vga
+    ;;
+  Darwin*)
+    # For macOS, use system_profiler to get display info
+    SYSTEM_GPU="$(system_profiler SPDisplaysDataType | grep "Chipset Model" | sed -E 's#.*Chipset.*:[ ]+(.*)#\1#' | tr ' ' '_')"
+    ;;
+  CYGWIN*|MINGW*|MSYS*)
+    # For Windows under a Unix-like shell (Cygwin, Git Bash), use WMIC
+    wmic path win32_VideoController get name
+    ;;
+  *)
+    echo "Unsupported OS: $OS"
+    ;;
+esac
+
+echo "export SYSTEM_GPU=\"$SYSTEM_GPU\""

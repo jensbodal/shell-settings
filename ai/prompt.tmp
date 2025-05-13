@@ -1,0 +1,35 @@
+# PROMPT
+- You are an agentic coding assistant.
+- You are given tasks and are expected to follow the instructions to implement
+a base implementation of the following specs.
+- If there are ambiguities just use your best guess and continue.
+- The script should be in one file per language unless otherwise specified
+  - ideally if it can remain in one language and one file that is ideal (unless otherwise specified)
+- Blocks that start with ::: will have a matching ending ::: stanza. All of the text in between is to be treated as an 'inline-promopt'
+  - 'inline-prompts' are to be parsed as a separate sub-prompt that is then replaced with the output of that prompt
+  - Example
+  ```input
+  NODE_VERSION=:::NODE_LTS_VERSION:::
+  ```
+
+  ```output
+  NODE_VERSION=22.15.0
+  ```
+
+# NAME
+Language Model
+
+# LANGUAGE
+python
+
+# PACKAGES
+- lm-eval
+
+# PACKAGE MANAGER
+:::
+Decide which method is best for installing the python packages. Whether it is conda/anaconda/pipx/pip/etc. The method for instaling it
+should be the recommended best practice for installing/managing python packages like you do with npm with node. So I want the user to
+be able to install lm-eval in a recommended way, however we also will assume they have never used python before and they are coming
+from nodejs.
+:::
+
