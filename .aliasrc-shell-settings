@@ -39,6 +39,7 @@ alias u=__u
 # bash scripts
 export BIN_ALIAS_PATH="$DIR/bin-aliases"
 export BASH_SCRIPTS_PATH="$DIR/scripts"
+export BIN_X86_64_PATH="$DIR/bin/x86_64"
 export PATH="$BIN_ALIAS_PATH:$BASH_SCRIPTS_PATH:$PATH"
 
 alias moxi="${BASH_SCRIPTS_PATH}/moxi/main.sh"
@@ -61,6 +62,12 @@ fi
 if [ "$OS" = "proxmox" ]; then
   .log "proxmox detected: loading $BASH_SCRIPTS_PATH/proxmox"
   export PATH="$PATH:$BASH_SCRIPTS_PATH/proxmox"
+fi
+
+
+# quick hack for wsl bin and aichat for now
+if uname -a | grep -q microsoft 2>&1; then
+  export PATH="$PATH:$BIN_X86_64_PATH/windows"
 fi
 
 # node scripts

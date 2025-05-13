@@ -1,0 +1,65 @@
+#!/bin/bash
+
+set -euo pipefail
+
+SCRIPT_DIR() {
+  cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
+}
+
+DIR="$(SCRIPT_DIR)"
+DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
+PROMPT="What is 32F in C?"
+MODEL="llama3"
+ollama=""
+
+set_output_filename() {
+  local prompt="$(echo -n $PROMPT | sha256sum | awk '{print $1}')"
+  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$(hostname).$prompt.log"
+}
+
+set_ollama() {
+  local path_a="/usr/local/bin/ollama"
+  local path_homebrew_macos="/opt/homebrew/bin/ollama"
+  local path_windows="/mnt/c/Users/jensbodal/AppData/Local/Programs/Ollama/ollama.exe"
+  local path_b="/usr/bin/ollama"
+  local path_c="/bin/ollama"
+  local path_d="/usr/local/bin/ollama"
+  local path_e="/home/linuxbrew/.linuxbrew/bin/ollama"
+
+  if [ -f "$path_a" ]; then
+    ollama="$path_a"
+  elif [ -f "$path_windows" ]; then
+    ollama="$path_windows"
+  elif [ -f "$path_homebrew_macos" ]; then
+    ollama="$path_homebrew_macos"
+  elif [ -f "$path_b" ]; then
+    ollama="$path_b"
+  elif [ -f "$path_c" ]; then
+    ollama="$path_c"
+  elif [ -f "$path_d" ]; then
+    ollama="$path_d"
+  elif [ -f "$path_e" ]; then
+    ollama="$path_e"
+  fi
+}
+
+mkdir -p "$DIR_BENCHMARK_RESULTS"
+set_ollama
+set_output_filename
+
+if [ "$ollama" = "" ]; then
+  echo "Cannot find ollama"
+  exit 1
+fi
+
+if [ "$filename" = "" ]; then
+  echo "Missing filename"
+  exit 1
+fi
+
+echo "[elm] Outputting results to \"$filename\""
+
+"$ollama" run phi3 --verbose 2>&1 <<< "42 is? (respond in 20 words or less)" | tee "$filename"
+
+#"$ollama" run "$MODEL" "$PROMPT" --verbose --nowordwrap
+echo "DONE"

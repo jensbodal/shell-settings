@@ -1,3 +1,5 @@
+/.idea/
+
 .private/.*.*
 .private/*.*
 !.private/.gitkeep

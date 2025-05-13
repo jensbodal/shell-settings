@@ -1,0 +1,11 @@
+[?2026h[?25l[1G⠋ [K[?25h[?2026l[?2026h[?25l[1G⠙ [K[?25h[?2026l[?2026h[?25l[1G⠸ [K[?25h[?2026l[?2026h[?25l[1G⠸ [K[?25h[?2026l[?25l[?2026h[?25l[1G[K[?25h[?2026l[2K[1G[?25hF[?25l[?25hort[?25l[?25hy[?25l[?25h-[?25l[?25htwo[?25l[?25h,[?25l[?25h a[?25l[?25h number[?25l[?25h between[?25l[?25h thirty[?25l[?25h and[?25l[?25h forty[?25l[?25h.[?25l[?25h It[?25l[?25h'[?25l[?25hs[?25l[?25h an[?25l[?25h even[?25l[?25h composite[?25l[?25h natural[?25l[?25h number[?25l[?25h with[?25l[?25h factors[?25l[?25h including[?25l[?25h one[?25l[?25h,[?25l[?25h two[?25l[?25h,[?25l[?25h and[?25l[?25h eleven[?25l[?25h besides[?25l[?25h itself[?25l[?25h;[?25l[?25h it[?25l[?25h equals[?25l[?25h three[?25l[?25h times[?25l[?25h the[?25l[?25h sum[?25l[?25h of[?25l[?25h squares[?25l[?25h plus[?25l[?25h one[?25l[?25h:[?25l[?25h \([?25l[?25h4[?25l[?25h2[?25l[?25h =[?25l[?25h [?25l[?25h3[?25l[?25h([?25l[?25h1[?25l[?25h^[?25l[?25h2[?25l[?25h +[?25l[?25h [?25l[?25h2[?25l[?25h^[?25l[?25h2[?25l[?25h)[?25l[?25h +[?25l[?25h [?25l[?25h1[?25l[?25h\).[?25l[?25h
+
+total duration:       2.567640958s
+load duration:        7.839708ms
+prompt eval count:    23 token(s)
+prompt eval duration: 454.986542ms
+prompt eval rate:     50.55 tokens/s
+eval count:           65 token(s)
+eval duration:        2.104249666s
+eval rate:            30.89 tokens/s
+[?25l[?25h
