@@ -1,0 +1,44 @@
+⠙ ⠙ ⠹ ⠸  For your use case, creating a containerized remote desktop environment on Proxmox that can run macOS, Linux, or Windows for managing persistent workflows like 3D printing slicer configuration would require a multi-step approach. Here's a suggestion using Portainer and Rancher, which are popular tools for managing containers in a Kubernetes environment like Proxmox.
+
+1. First, install Docker and Kubernetes (kubeadm, kubelet, kubectl) on your Proxmox server:
+   ```
+   apt-get update && apt-get install -y docker.io kubeadm kubelet kubectl
+   ```
+   Follow the official documentation to set up Kubernetes: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+2. Install Portainer, a useful UI for managing your Kubernetes cluster:
+   ```
+   kubectl create -f https://raw.githubusercontent.com/portainer/compose-file/master/docker-compose.yml
+   ```
+   Set up the Tiller (Helm 2) to deploy Portainer on your Kubernetes cluster:
+   ```
+   kubectl create serviceaccount tiller --namespace kube-system
+   kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller:tiller
+   helm init
+   ```
+   Expose the Portainer web interface with a LoadBalancer service:
+   ```
+   kubectl apply -f https://raw.githubusercontent.com/portainer/compose-file/master/helm-charts/stable/portainer/values-rbac.yaml
+   kubectl apply -f https://raw.githubusercontent.com/portainer/compose-file/master/helm-charts/stable/portainer/templates/service.yaml
+   ```
+
+3. Next, install Rancher on your Kubernetes cluster:
+   ```
+   kubectl create -f https://releases.rancher.com/server-compose/latest-compose-file.yml
+   ```
+
+4. Install remote desktop solutions in containers for macOS, Linux, and Windows. For macOS, you can use Docker Desktop for Mac. For Windows, you can use WSL2 (Windows Subsystem for Linux) with a compatible Linux distribution like Ubuntu or CentOS. Note that there are some limitations to running a full-fledged macOS inside a container.
+
+5. Configure the remote desktop containers with your preferred 3D printing slicer software, and persist their configurations using volumes or other persistent storage methods in Kubernetes.
+
+6. Access the remote desktop containers securely via Portainer's web UI or directly from your local machine by forwarding ports through SSH tunnels to access them remotely.
+
+total duration:       30.768184083s
+load duration:        7.006917ms
+prompt eval count:    69 token(s)
+prompt eval duration: 431.020708ms
+prompt eval rate:     160.09 tokens/s
+eval count:           667 token(s)
+eval duration:        30.329557542s
+eval rate:            21.99 tokens/s
+
