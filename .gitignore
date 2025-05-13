@@ -1,3 +1,4 @@
+/.direnv/
 /.idea/
 
 .private/.*.*
@@ -10,3 +11,5 @@ macos/automator/testing.workflow/
 
 /node_modules/
 /scripts/ideas/work/
+
+/scripts/moxi/.ai/logs

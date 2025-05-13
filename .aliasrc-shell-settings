@@ -39,8 +39,9 @@ alias u=__u
 # bash scripts
 export BIN_ALIAS_PATH="$DIR/bin-aliases"
 export BASH_SCRIPTS_PATH="$DIR/scripts"
+export BIN_AI_PATH="$DIR/ai/bin"
 export BIN_X86_64_PATH="$DIR/bin/x86_64"
-export PATH="$BIN_ALIAS_PATH:$BASH_SCRIPTS_PATH:$PATH"
+export PATH="$BIN_ALIAS_PATH:$BASH_SCRIPTS_PATH:$BIN_AI_PATH:$PATH"
 
 alias moxi="${BASH_SCRIPTS_PATH}/moxi/main.sh"
 
