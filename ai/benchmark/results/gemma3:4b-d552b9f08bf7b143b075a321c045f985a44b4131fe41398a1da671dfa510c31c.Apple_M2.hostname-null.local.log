@@ -1,0 +1,12 @@
+⠙ ⠹ To convert from Fahrenheit to Celsiinus, use the formula: C = (F - 32) * 5/9
+So for 33.5°F it would be approximately: (33.5 - 32) * 5/9 ≈ 0.97°C in Norwegian you would say "treogtesseskadelior"
+
+total duration:       2.897977417s
+load duration:        9.062084ms
+prompt eval count:    29 token(s)
+prompt eval duration: 234.702458ms
+prompt eval rate:     123.56 tokens/s
+eval count:           84 token(s)
+eval duration:        2.653880708s
+eval rate:            31.65 tokens/s
+

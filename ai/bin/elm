@@ -7,8 +7,8 @@ SCRIPT_DIR() {
 
 DIR="$(SCRIPT_DIR)"
 DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
-PROMPT="What is 32F in C?"
-MODEL="llama3"
+PROMPT="Show a photo of a red apple on a wooden table with a caption that says, \"Fresh and Juicy.\" Also, display the equation e=mc^2 as part of the narrative"
+MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b")
 SYSTEM_GPU="Unknown"
 ollama=""
 
@@ -79,23 +79,30 @@ setup() {
   fi
 }
 
-setup
+run() {
+  MODEL="$1"
+  setup
 
-if [ "$ollama" = "" ]; then
-  echo "Cannot find ollama"
-  exit 1
-fi
+  if [ "$ollama" = "" ]; then
+    echo "Cannot find ollama"
+    exit 1
+  fi
 
-if [ "$filename" = "" ]; then
-  echo "Missing filename"
-  exit 1
-fi
+  if [ "$filename" = "" ]; then
+    echo "Missing filename"
+    exit 1
+  fi
 
-echo "[elm] Outputting results to \"$filename\""
-tmp="$(mktemp)"
+  tmp="$(mktemp)"
+  echo "[elm] Outputting results to \"$filename\""
 
-"$ollama" run phi3 --verbose 2>&1 <<< "42 is? (respond in 20 words or less)" | tee "$tmp"
+  "$ollama" run "$MODEL" --verbose 2>&1 <<< "$PROMPT" | tee "$tmp"
 
-ansifilter "$tmp" > "$filename"
+  ansifilter "$tmp" > "$filename"
 
-echo "[elm] DONE"
+  echo "[elm] DONE"
+}
+
+for M in "${MODELS[@]}"; do
+  run "$M"
+done

@@ -1,0 +1,11 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠧ ⠧ ⠇ ⠏ ⠙ ⠹ ⠸ ⠸ ⠼ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠧ ⠇ ⠇ ⠋ A prime number, not divisible by any other integer except for 1 and itself. It's significant in mathematics as the result of a famous unsolved problem related to perfect numbers: if there are such primes with even exponents that yield "perfect" sums of their iterated halves.
+
+total duration:       5.244629333s
+load duration:        2.1256805s
+prompt eval count:    24 token(s)
+prompt eval duration: 933.354833ms
+prompt eval rate:     25.71 tokens/s
+eval count:           64 token(s)
+eval duration:        2.183675208s
+eval rate:            29.31 tokens/s
+
