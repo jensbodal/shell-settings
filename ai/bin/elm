@@ -25,6 +25,7 @@ set_ollama() {
   local path_c="/bin/ollama"
   local path_d="/usr/local/bin/ollama"
   local path_e="/home/linuxbrew/.linuxbrew/bin/ollama"
+  local path_macos_idk="/usr/local/bin/ollama"
 
   if [ -f "$path_a" ]; then
     ollama="$path_a"
@@ -40,12 +41,21 @@ set_ollama() {
     ollama="$path_d"
   elif [ -f "$path_e" ]; then
     ollama="$path_e"
+  elif [ -f "$path_macos_idk" ]; then
+    ollama="$path_macos_idk"
   fi
 }
 
-mkdir -p "$DIR_BENCHMARK_RESULTS"
-set_ollama
-set_output_filename
+setup() {
+  mkdir -p "$DIR_BENCHMARK_RESULTS"
+  set_ollama
+  set_output_filename
+  if ! command -v ansifilter 2>&1; then
+    brew install ansifilter
+  fi
+}
+
+setup
 
 if [ "$ollama" = "" ]; then
   echo "Cannot find ollama"
@@ -57,9 +67,11 @@ if [ "$filename" = "" ]; then
   exit 1
 fi
 
+tmp="$(mktemp)"
 echo "[elm] Outputting results to \"$filename\""
 
-"$ollama" run phi3 --verbose 2>&1 <<< "42 is? (respond in 20 words or less)" | tee "$filename"
+"$ollama" run phi3 --verbose 2>&1 <<< "42 is? (respond in 20 words or less)" | tee "$tmp"
 
-#"$ollama" run "$MODEL" "$PROMPT" --verbose --nowordwrap
-echo "DONE"
+ansifilter "$tmp" > "$filename"
+
+echo "[elm] DONE"

@@ -1,11 +1,11 @@
-[?2026h[?25l[1G⠙ [K[?25h[?2026l[?2026h[?25l[1G⠹ [K[?25h[?2026l[?25l[?2026h[?25l[1G[K[?25h[?2026l[2K[1G[?25hF[?25l[?25hort[?25l[?25hy[?25l[?25h-[?25l[?25htwo[?25l[?25h,[?25l[?25h a[?25l[?25h number[?25l[?25h between[?25l[?25h thirty[?25l[?25h and[?25l[?25h fifty[?25l[?25h.[?25l[?25h It[?25l[?25h'[?25l[?25hs[?25l[?25h the[?25l[?25h sum[?25l[?25h of[?25l[?25h eleven[?25l[?25h plus[?25l[?25h th[?25l[?25hir[?25l[?25hteen[?25l[?25h.[?25l[?25h Also[?25l[?25h known[?25l[?25h as[?25l[?25h an[?25l[?25h even[?25l[?25h composite[?25l[?25h prime[?25l[?25h that[?25l[?25h’[?25l[?25hsu[?25l[?25hps[?25l[?25hupp[?25l[?25hosed[?25l[?25hly[?25l[?25h not[?25l[?25h true[?25l[?25h for[?25l[?25h any[?25l[?25h integer[?25l[?25h greater[?25l[?25h than[?25l[?25h two[?25l[?25h.[?25l[?25h Not[?25l[?25hably[?25l[?25h significant[?25l[?25h in[?25l[?25h mathematics[?25l[?25h due[?25l[?25h to[?25l[?25h its[?25l[?25h unique[?25l[?25h properties[?25l[?25h.[?25l[?25h
+⠙ ⠹ "A composite number that can be factored into prime numbers as follows: 2 x 21 = 4, and further factoring yields 2 x 3 x 7."
 
-total duration:       2.175192208s
-load duration:        7.282792ms
+total duration:       1.4513935s
+load duration:        7.3995ms
 prompt eval count:    24 token(s)
-prompt eval duration: 256.346166ms
-prompt eval rate:     93.62 tokens/s
-eval count:           60 token(s)
-eval duration:        1.911025917s
-eval rate:            31.40 tokens/s
-[?25l[?25h
+prompt eval duration: 193.290916ms
+prompt eval rate:     124.17 tokens/s
+eval count:           40 token(s)
+eval duration:        1.248823792s
+eval rate:            32.03 tokens/s
+
