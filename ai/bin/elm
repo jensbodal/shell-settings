@@ -14,7 +14,8 @@ ollama=""
 
 set_output_filename() {
   local prompt="$(echo -n $PROMPT | sha256sum | awk '{print $1}')"
-  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt.$(hostname).log"
+  local name="${ELM_HOSTNAME:-$(hostname)}"
+  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt.$name.log"
 }
 
 set_ollama() {
