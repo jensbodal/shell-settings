@@ -110,6 +110,7 @@ run() {
   "$ollama" run "$MODEL" --verbose 2>&1 <<< "$PROMPT" | tee "$tmp"
 
   ansifilter "$tmp" > "$filename"
+  git add "$filename"
 
   echo "[elm] DONE"
 }
@@ -119,3 +120,5 @@ for M in "${MODELS[@]}"; do
     run "$M" "$P"
   done
 done
+
+git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
