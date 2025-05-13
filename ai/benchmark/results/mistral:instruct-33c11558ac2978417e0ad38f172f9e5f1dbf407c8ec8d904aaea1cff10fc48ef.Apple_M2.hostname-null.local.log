@@ -1,0 +1,23 @@
+⠙ ⠹ ⠹ ⠼ ⠴ ⠦  For your requirement, you can create a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows. Here's a suggested approach using LXC (Linux Containers) for Proxmox and CoRD (macOS Remote Desktop Client for iPad/iPhone) as the remote access solution.
+
+1. Install LXC on Proxmox: Follow this guide to install LXC on your Proxmox server: https://www.digitalocean.com/community/tutorials/how-to-install-lxc-on-ubuntu-18-04
+
+2. Create a new LXC container for macOS, Linux, or Windows: You can either create a new container from scratch or use an existing macOS or Windows template available online. For macOS, you may want to check out MacStadium's Mac miniature LXD templates (https://github.com/MacStadium/mac-miniature).
+
+3. Configure the container: Set up the container according to your needs, such as installing a 3D printing slicer software like PrusaSlicer, Ultimaker Cura, or Simplify3D.
+
+4. Port forwarding and firewall rules: Open the necessary ports on your Proxmox host for remote access and set up firewall rules to allow incoming connections. The specific ports depend on the 3D printing slicer software and remote desktop protocol you choose (e.g., RDP for Windows, VNC for macOS/Linux).
+
+5. Install CoRD: If you're working on an iOS device like iPhone or iPad, install CoRD from the App Store to access your containerized remote desktop environment remotely.
+
+6. Connect to your container: Once everything is set up, you can connect to your container using CoRD and start managing your 3D printing configurations without syncing between machines.
+
+total duration:       31.691169959s
+load duration:        7.378459ms
+prompt eval count:    69 token(s)
+prompt eval duration: 664.504458ms
+prompt eval rate:     103.84 tokens/s
+eval count:           427 token(s)
+eval duration:        31.018189875s
+eval rate:            13.77 tokens/s
+

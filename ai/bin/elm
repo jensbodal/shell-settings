@@ -7,8 +7,10 @@ SCRIPT_DIR() {
 
 DIR="$(SCRIPT_DIR)"
 DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
-PROMPT="Show a photo of a red apple on a wooden table with a caption that says, \"Fresh and Juicy.\" Also, display the equation e=mc^2 as part of the narrative"
-MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b")
+PROMPT_A="Show a photo of a red apple on a wooden table with a caption that says, \"Fresh and Juicy.\" Also, display the equation e=mc^2 as part of the narrative"
+PROMPT_B="What is the best containerized remote desktop environment to run on Proxmox for managing persistent workflows like 3D printing slicer configuration, with macOS preferred but Linux or Windows acceptable? The goal is to avoid syncing configurations between machines by centralizing the workflow in a local remote desktop."
+PROMPTS=("$PROMPT_A" "$PROMPT_B")
+MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3")
 SYSTEM_GPU="Unknown"
 ollama=""
 
@@ -36,9 +38,10 @@ set_system_gpu() {
 }
 
 set_output_filename() {
-  local prompt="$(echo -n $PROMPT | sha256sum | awk '{print $1}')"
+  local prompt="$1"
+  local prompt_sha="$(echo -n \"$prompt\" | sha256sum | awk '{print $1}')"
   local name="${ELM_HOSTNAME:-$(hostname)}"
-  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt.$SYSTEM_GPU.$name.log"
+  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt_sha.$SYSTEM_GPU.$name.log"
 }
 
 set_ollama() {
@@ -74,7 +77,7 @@ setup() {
   mkdir -p "$DIR_BENCHMARK_RESULTS"
   set_system_gpu
   set_ollama
-  set_output_filename
+  set_output_filename "$1"
   if ! command -v ansifilter 2>&1; then
 	  if command -v apt 2>&1; then
 		  sudo apt update -y && install ansifilter -y
@@ -86,7 +89,9 @@ setup() {
 
 run() {
   MODEL="$1"
-  setup
+  PROMPT="$2"
+
+  setup "$PROMPT"
 
   if [ "$ollama" = "" ]; then
     echo "Cannot find ollama"
@@ -110,5 +115,7 @@ run() {
 }
 
 for M in "${MODELS[@]}"; do
-  run "$M"
+  for P in "${PROMPTS[@]}"; do
+    run "$M" "$P"
+  done
 done
