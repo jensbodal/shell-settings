@@ -96,6 +96,7 @@ run() {
   tmp="$(mktemp)"
   echo "[elm] Outputting results to \"$filename\""
 
+  "$ollama" pull "$MODEL"
   "$ollama" run "$MODEL" --verbose 2>&1 <<< "$PROMPT" | tee "$tmp"
 
   ansifilter "$tmp" > "$filename"
