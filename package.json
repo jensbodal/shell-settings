@@ -1,5 +1,11 @@
 {
   "devDependencies": {
-    "@types/node": "^22.12.0"
+    "@types/node": "^22.12.0",
+    "openapi": "^1.0.1",
+    "tiktoken": "^1.0.21",
+    "tiktoken-node": "^0.0.7"
+  },
+  "dependencies": {
+    "@dqbd/tiktoken": "^1.0.21"
   }
 }

@@ -45,21 +45,24 @@ run-updaters() {
   # Update shell
   checkflag=$UPDATE_SHELL
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    log "Running update shell settings"
     _update_shell_settings
   fi
 
   # Update shell
   checkflag=$UPDATE_VIM
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    log "Running update vim"
     vim -es -u $HOME/.vimrc -i NONE -c "PlugInstall" -c "qa"
   fi
 
   # Update shell
   checkflag=$UPDATE_MISE
-  log "Updating mise..."
   if [ "$(( $checkflag & $updateflags))" = "$checkflag" ]; then
+    log "Updating mise..."
     if non_local_bin_path mise; then
       PATH="$NON_LOCAL_BIN_PATH:$PATH"
+      log "Running mise self-update"
       mise self-update
     else
       log "! mise is not installed !"
@@ -82,6 +85,7 @@ run-updaters() {
 run() {
   set +u
   if [ "$1" = "--force" ]; then
+    log "run-updaters $UPDATE_ALL (\"--force\")"
     run-updaters $UPDATE_ALL
     set -u
     return 0
