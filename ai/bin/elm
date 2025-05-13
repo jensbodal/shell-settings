@@ -18,6 +18,7 @@ set_system_gpu() {
   case "$OS" in
     Linux*)
       # For Linux, list VGA devices (might not directly show the GPU name sometimes)
+      sudo apt install pciutils -y
       lspci | grep -i vga
       ;;
     Darwin*)
@@ -75,7 +76,11 @@ setup() {
   set_ollama
   set_output_filename
   if ! command -v ansifilter 2>&1; then
+	  if command -v apt 2>&1; then
+		  sudo apt update -y && install ansifilter -y
+	  else
     brew install ansifilter
+	  fi
   fi
 }
 
