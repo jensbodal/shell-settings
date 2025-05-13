@@ -1,0 +1,71 @@
+⠙ One of the best containerized solutions that fit your requirements and support for both Mac OS X (macOS) as well as Linux environments would be using Docker Compose alongside Kubernetes, with additional integration to manage persistent data such as those used by slicers in a consistent manner across different machines. Here's how you could achieve this:
+
+Firstly, consider setting up your containerized workflow on Proxmox for macOS or Linux environments based on the desired system and compatibility needs using Docker with Kubernetes support to manage stateful components like database backends that might be required by 3D printer slicers. This setup enables you to have isolated containers where each service can run independently, ensuring consistent configuration across different machines without direct syncing of configurations as they'dequalent on the container level rather than local environments which minimizes human error during updates or changes in workflows:
+
+1. Set up your Proxmox machine with Kubernetes installed and running within it (if not already done). You can use a minimal version called k3s, designed for lightweight deployments that works well on containers orchestrated by Docker Swarm, which could be suitable given the simplicity of setup needed:
+
+```bash
+curl -L https://get.k8s.io/ | bash
+sudo yum install kubeadm --yum-enabled # For RHEL or CentOS systems (or use apt for Ubuntu)
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16 && sudo kubectl apply -f https://raw.githubusercontent.com/coreos/kubernetes-dashboard/master/deploy/daemonset.yaml
+```
+
+Inspect the deployment with: `kubectl get deploy` and verify that Kubelet service is running on port 80, you can also install Helm to simplify your management of this setup (https://helm.sh/, http://www.jetstack.io/docs/setup/). You'll need a headless DNS server like `kubeadm-dns` for pods namespacing:
+
+```bash
+kubectl create ns dns  # Create namespace ‘dns’ to host your services within Kubernetes (optional)
+curl -L https://raw.githubusercontent.com/jetstack/kube-dashboard/master/scripts/get_helm_chart | bash
+helm repo add jetstack https://storage.googleapis.com/k8s-charts/stable/dns --set localPath=/tmp # Add Helm repository for Kubernetes Dashboard; k3s uses helmed from here to generate an inventory with namespaces and services, which we will use below:
+helm repo update && helm install dns jetstack/kube-dashboard -n=dns --wait  ## Installing the chart (with timeout) using Helm v2.x+ on k3s or similar Kubernetes distribution for macOS / Linux systems, see http://192.164.0.5:8080/ui#Dashboard
+```
+
+If you're running Docker within the container with a custom-built slicer image like https://github.com/Slice3dPrinting/kubelet, which is compatible across macOS and Linux (useful if using Proxmox), ensure to build it or pull from an existing repository:
+
+```bash
+curl -sSL https://storage.googleapis.com/proton-os/devices | sudo tee /etc/hosts >& /dev/null \
+&& curl -LJ kubernetes.dsmith1234567890.repl.co:8080/api/v1beta1/namespaces/kube-system/services/docker | grep 10.244.0.x > /etc/hosts
+```
+Now, create a `Dockerfile` to build your slicer as usual on Docker Hub: https://github.com/Slice3dPrinting/slice3dprinters-mender (use the latest nightly builds). You could include all configurations there and ensure it's available via HTTP(S) for a secure, containerized setup with Helm templates that create Kubernetes secrets where needed:
+
+```yaml
+apiVersion: extensions/v1beta1  # For helm >= v0.9+
+kind: Deployment
+metadata:
+    name: slice-slicer  
+spec:
+    containers:                            
+        - container: slic3r         ## SliceCAD's main image (easily updatable via docker hub or your own registry)
+          # ... other configurations for the slicer here, as in `slice3dprinters-mender` on Docker Hub. 
+```
+Then create a Helm chart to manage it with proper templating: https://github.com/Slice3DPrinting/kube-slice-workflow (it has the slicer's yml file in templates). This should be compatible for both macOS and Linux, but remember that you might need a small adjustment if using MacOS as it runs on Apple Silicon architecture.
+
+Finally, deploy your workflow across Proxmox containers with Helm:
+
+```bash
+helm upgrade --install slice-slicer -f ./slice3dprinting/kube-slice-workflow/values.yaml myapp \
+   . # or helm install k8s_default slicesvc?=https://raw.githubusercontent.026479a1.git | jq '.metadata.annotations = {"sidecars": "true"}' > /dev/null && sed -i '/# Sidecar support to enable/# {
+  sidecars: true }/r next-gen/, '${BASH_REMATCH[2]}"; done
+```
+And then, as a separate Helm release for the slicer (or in parallel if desired): https://github.com/Slice3DPrinting/kubelet to manage your Kubernetes pods within Proxmox containers:
+
+- Docker Desktop + kubectl commands are also available on Linux and MacOS, but they may not be directly supported by default as of my last update due to the complexity. You can try using it or refer to this article for a quick setup guide (though bear in mind that docker desktop's native support has limitations): https://www.proxmox-community.com/en/support/kb/howto/docker-desktop
+- For MacOS, you may need to set up Docker Desktop with Linux containers enabled: see this article for a guide on setting it up (but note that Proxmox might not be officially supported): https://www.proxmox.com/en/support/kb/howto/linux-containers-for-mac
+- For Windows, Docker Desktop supports containers and Kubernetes natively: see this guide for setup instructions: https://docs.microsoft.com/en-us/virtualization/troubleshooting-guides/docker-engine/setup (Windows version required here). Useful reference to get the k3s helm charts working with Docker Desktop on Windows is at GitHub's project page for Kubernetes container deployment: https://github.com/kelseyhightower/helm-chart
+- For Linux, you can continue using your current setup as it supports Helm and Kubernetes out of the box (https://www.proxmox.com/). Note that Proxmox uses its own k3s images for better integration with VMware'S hypervisor technology: https://github.com/kelseyhightower/helm-chart
+- Make sure to use Helm 2+ and follow instructions found herein (https://www.jetstack.io/docs/installation/#on-linux). You might need a more recent kubectl version for MacOS: https://stackoverflow.com/questions/48703156/kubernetes-doesnt-see-docker
+  For example, you can use Helm v2+ to deploy helmet charts on Linux with `helm upgrade --install slice-slicer -f ./slice3dprinting/deployment.yaml myapp` and for MacOS install it following the same procedure as above but without needing a containerized kubelet: https://github.com/Slice3DPrinting/kubelet .
+  Note that you'll require additional steps to enable Docker support in Proxmox, which can be done with their official documentation herein (https://www.proxmox.com/en/support/kb/howto/containers/). Remember this is for using docker-machine and not directly Kubernetes containers but it might serve as a helpful starting point: https://github.com/Slice3DPrinting/kubelet
+  To use Helm templates, you can edit your `values.yaml` file accordingly (for example in slicer configuration). This could help streamline setup and ensure consistent deployments across different environments while keeping the containers self-contained: https://helm.sh/docs/chart_template/#using-templates
+  Avoid using `--wait=false` as it can cause issues with Kubernetes' health check mechanism, instead set timeouts or use `kubectl wait`. You might also want to integrate HelmCharts for better management: https://helm.sh/. To sync the workflow and share configurations across containers without direct synchronization you could utilize Persistent Volumes (PV/PVC on Kubernetes) coupled with a shared volume or use `Helm cache` if your application codebase is static to ensure no changes cause rebuilds when not needed.
+  Lastly, consider using HelmSecrets for encrypting sensitive data like API keys and tokens: https://helm-secruity.com/. Remember that Kubernetes maintainer's guide on setting up persistent volumes with Docker herein might be helpful: https://kubernetes.io/docs/tasks/configure-pod-container/configuring-persistent-storage/
+  This setup allows you to have a flexible and portable workflow without direct syncing of configurations, as Helm templates can encapsulate them in your Kubernetes YAML files; thus providing centralized management for the slicer's configuration.
+
+total duration:       50.795303541s
+load duration:        4.96825ms
+prompt eval count:    73 token(s)
+prompt eval duration: 161.678333ms
+prompt eval rate:     451.51 tokens/s
+eval count:           2280 token(s)
+eval duration:        50.627844s
+eval rate:            45.03 tokens/s
+

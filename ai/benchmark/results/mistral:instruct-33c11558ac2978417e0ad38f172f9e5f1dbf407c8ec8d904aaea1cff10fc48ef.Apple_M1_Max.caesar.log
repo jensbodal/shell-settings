@@ -1,0 +1,24 @@
+⠋ ⠹  For your requirements, creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration can be achieved using Portainer (for container management) and Remote Desktop Services (RDS) for each operating system. Here's a high-level overview of the setup process:
+
+1. Install Proxmox and set it up with at least one storage pool.
+2. Install Docker on the Proxmox host.
+3. Set up Portainer by deploying a container using the Proxmox web interface or command line. Configure Portainer to manage your Docker environment.
+4. Create three separate containers for macOS, Linux, and Windows:
+   - For macOS, use a solution like Docker Desktop (paid) or ShinyProxy (free but less stable). These solutions provide a way to run macOS in a Docker container using M1 Macs as the host. Make sure to mount any necessary volumes inside the containers for persistent data storage.
+   - For Linux, you can use an official Docker image for your preferred desktop environment (e.g., XFCE, GNOME). Mount any necessary volumes for persistent data storage.
+   - For Windows, you can use a tool like WSL2-Docker or Docker Toolbox to run Windows containers on Linux. You'll need to set up RDP access in the container and mount any necessary volumes for persistent data storage.
+5. Set up Remote Desktop Services (RDS) for each operating system:
+   - For macOS, configure screen sharing options within your chosen solution (Docker Desktop or ShinyProxy).
+   - For Linux, install and configure the tightvncserver package to enable VNC access. You can use a VNC client such as RealVNC or TightVNC on your local machine to connect.
+   - For Windows, you can set up RDP access within your container using tools like xrdp for Linux or rdpwrap for macOS and WSL2.
+6. Finally, configure your local machine to connect to these remote desktops (RDS sessions) when needed. This will allow you to centralize your workflow without the need for syncing configurations between machines.
+
+total duration:       12.907416958s
+load duration:        18.210958ms
+prompt eval count:    69 token(s)
+prompt eval duration: 257.603042ms
+prompt eval rate:     267.85 tokens/s
+eval count:           492 token(s)
+eval duration:        12.317776417s
+eval rate:            39.94 tokens/s
+
