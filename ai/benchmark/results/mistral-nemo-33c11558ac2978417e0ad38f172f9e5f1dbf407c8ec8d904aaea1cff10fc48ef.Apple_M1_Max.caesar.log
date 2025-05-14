@@ -1,0 +1,43 @@
+⠙ ⠹ ⠸ To achieve your goal of running a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration with preference given to macOS, you can use a combination of technologies. Since macOS is not directly supported as a guest OS in Proxmox, we'll focus on Linux and Windows, using Mac-like software where possible.
+
+Here's a suggested setup:
+
+1. **Operating System**: Install Proxmox VE 7.x (based on Debian Buster) as your hypervisor.
+2. **Containerization Platform**: Use Docker or Podman for containerizing the remote desktop environment.
+3. **Remote Desktop Solution**:
+   - For Linux: Use NoMachine's NX Server with the NX Client for a fast and efficient remote desktop experience. You can install the NX Server in a container and access it from your client machine using the NX Client (available on macOS, Windows, and Linux).
+   - For Windows: Use Microsoft's Remote Desktop Services (RDS) or alternatives like x2go with Xming for displaying X windows on Windows.
+4. **3D Printing Software**:
+   - For Mac-like experience on Linux/Windows:
+     - Slicer: Use PrusaSlicer, available on Linux and Windows, which has a similar interface to Cura, the popular macOS slicer.
+     - Monitor printer: OctoPrint is a popular choice for monitoring 3D printers over the web. You can run it in a container and access it via your remote desktop session.
+5. **Persistence**:
+   - To ensure persistent data across reboots and container restarts, use Docker volumes or bind mounts to store configuration files and other important data.
+   - Alternatively, you can use Proxmox's built-in features like VM snapshots or use a separate storage node for persistent data.
+
+Here's how to set up the Linux remote desktop environment using NoMachine:
+
+1. Install NoMachine server on your Proxmox VE host:
+```bash
+curl -s https://raw.githubusercontent.com/nomachine/debian/master/nxsstall.sh | bash -
+```
+2. Create a Docker container for PrusaSlicer and map the necessary ports (e.g., 80 for OctoPrint):
+```bash
+docker run -d --name slicer --network host -v /path/to/config:/config -p 80:80 prusa3d/prusa-slicer
+```
+3. Access the remote desktop session using the NoMachine client on your macOS, Linux, or Windows machine.
+4. Once connected, run the OctoPrint container and configure PrusaSlicer as needed.
+
+For Windows remoting, follow Microsoft's official guide for setting up Remote Desktop Services: https://docs.microsoft.com/en-us/windows-server/administration/roles/remote-desktop-services-install
+
+By using this setup, you'll have a centralized remote desktop environment for managing your 3D printing workflows on Proxmox VE, with persistent data and a Mac-like software experience where possible.
+
+total duration:       26.028824792s
+load duration:        16.497667ms
+prompt eval count:    64 token(s)
+prompt eval duration: 341.515ms
+prompt eval rate:     187.40 tokens/s
+eval count:           632 token(s)
+eval duration:        25.668807084s
+eval rate:            24.62 tokens/s
+

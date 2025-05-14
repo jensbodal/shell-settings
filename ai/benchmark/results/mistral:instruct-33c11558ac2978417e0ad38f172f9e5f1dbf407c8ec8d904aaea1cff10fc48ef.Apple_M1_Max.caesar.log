@@ -1,24 +1,45 @@
-⠋ ⠹  For your requirements, creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration can be achieved using Portainer (for container management) and Remote Desktop Services (RDS) for each operating system. Here's a high-level overview of the setup process:
+⠋ ⠹  For your requirements, you can set up a containerized remote desktop environment on Proxmox that allows you to run macOS, Linux, or Windows applications while centralizing your persistent workflows. I would recommend using a solution stack that includes LXC (Linux Containers) for containerization, Nginix as a reverse proxy, and VNC server (TightVNC for Windows, XQuartz for macOS, and VNC4Server for Linux) for remote access.
 
-1. Install Proxmox and set it up with at least one storage pool.
-2. Install Docker on the Proxmox host.
-3. Set up Portainer by deploying a container using the Proxmox web interface or command line. Configure Portainer to manage your Docker environment.
-4. Create three separate containers for macOS, Linux, and Windows:
-   - For macOS, use a solution like Docker Desktop (paid) or ShinyProxy (free but less stable). These solutions provide a way to run macOS in a Docker container using M1 Macs as the host. Make sure to mount any necessary volumes inside the containers for persistent data storage.
-   - For Linux, you can use an official Docker image for your preferred desktop environment (e.g., XFCE, GNOME). Mount any necessary volumes for persistent data storage.
-   - For Windows, you can use a tool like WSL2-Docker or Docker Toolbox to run Windows containers on Linux. You'll need to set up RDP access in the container and mount any necessary volumes for persistent data storage.
-5. Set up Remote Desktop Services (RDS) for each operating system:
-   - For macOS, configure screen sharing options within your chosen solution (Docker Desktop or ShinyProxy).
-   - For Linux, install and configure the tightvncserver package to enable VNC access. You can use a VNC client such as RealVNC or TightVNC on your local machine to connect.
-   - For Windows, you can set up RDP access within your container using tools like xrdp for Linux or rdpwrap for macOS and WSL2.
-6. Finally, configure your local machine to connect to these remote desktops (RDS sessions) when needed. This will allow you to centralize your workflow without the need for syncing configurations between machines.
+Here's an outline of the steps you can follow to set up this environment:
 
-total duration:       12.907416958s
-load duration:        18.210958ms
+1. Install Proxmox on your server if you haven't already done so.
+2. Create a new LXC container with the desired OS (macOS, Linux, or Windows) using templates provided by Proxmox. You may need to install additional tools like boot-scd and QEMU/KVM to use macOS templates on Proxmox.
+3. Configure the LXC container:
+   a. Assign an accessible IP address, port, or hostname for VNC access.
+   b. Mount any necessary directories or volumes (e.g., shared folders for 3D printing configurations) inside the container.
+   c. If required, adjust container settings to allocate more CPU and memory resources.
+4. Install the VNC server on your LXC container:
+   a. For macOS, install XQuartz and set up screen sharing in System Preferences > Sharing.
+   b. For Windows, install TightVNC Server.
+   c. For Linux distributions, you can use VNC4Server or any other preferred VNC server.
+5. Configure Nginix as a reverse proxy to forward incoming VNC requests to the container:
+   a. Install Nginix on your Proxmox host.
+   b. Create a new configuration file for the LXC container, e.g., `/etc/nginx/conf.d/lxc-container.conf`, with the following contents:
+
+```
+server {
+    listen 5901; # Replace this port with your chosen VNC listening port.
+    location / {
+        proxy_pass http://<LXC container IP address>:5900; # Replace this IP address with the one assigned to your LXC container.
+    }
+}
+```
+   c. Enable and start the Nginix service:
+
+```sh
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+6. Access the remote desktop environment using a VNC client (e.g., TightVNC, RealVNC, or Chicken of the VNC) by connecting to the Proxmox host IP address and port 5901. You can also adjust your firewall settings to limit access to the remote desktop if needed.
+7. Install your preferred 3D printing software on the LXC container (e.g., Cura, Ultimaker Cura, or PrusaSlicer) and configure it to store its profiles in a shared folder for easy access across multiple machines.
+8. Enjoy a centralized workflow for managing your 3D printing configurations without the need for syncing between devices!
+
+total duration:       17.002610792s
+load duration:        4.619584ms
 prompt eval count:    69 token(s)
-prompt eval duration: 257.603042ms
-prompt eval rate:     267.85 tokens/s
-eval count:           492 token(s)
-eval duration:        12.317776417s
-eval rate:            39.94 tokens/s
+prompt eval duration: 250.608708ms
+prompt eval rate:     275.33 tokens/s
+eval count:           717 token(s)
+eval duration:        16.746709625s
+eval rate:            42.81 tokens/s
 

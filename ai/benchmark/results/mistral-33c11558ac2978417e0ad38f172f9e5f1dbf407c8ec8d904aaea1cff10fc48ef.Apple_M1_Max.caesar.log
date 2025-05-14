@@ -1,0 +1,47 @@
+⠙ ⠙ ⠸  To create a containerized remote desktop environment on Proxmox that supports both macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration, I'd suggest using Portainer with containers from Jumpcloud's catalog or Docker Hub along with an RDP/VNC gateway for access. Here's a step-by-step guide:
+
+1. Install and configure Proxmox:
+   Follow the official instructions to install Proxmox on your system (https://pve.proxmox.com/wiki/Installation).
+
+2. Install Portainer:
+   Run the following commands in the terminal of a Proxmox node:
+
+   ```
+   curl -SL https://install.portainer.io | sh
+   ```
+
+3. Configure Portainer to access the API:
+   Open the web interface for Portainer on your Proxmox host and follow the setup instructions. Take note of the port and token provided.
+
+4. Create a network:
+   In the Proxmox GUI, create a new virtual bridge network with appropriate settings (IP range, gateway, DNS). This will be used to connect containers.
+
+5. Add hosts to Portainer:
+   Use the Portainer API to add your desired container hosts (Proxmox nodes) to manage them more easily. For instructions on how to do this, consult the Portainer documentation (https://docs.portainer.io/learn/api/)
+
+6. Choose a remote desktop solution:
+
+   **Option 1: macOS**: Use Coherent Desktop by Jumpcloud (https://jumpcloud.com/products/coherent). Install it on each Proxmox host that needs to run macOS, then create and manage containers using Docker.
+
+   **Option 2: Linux & Windows**: For RDP access, you can use the Windows Server 2019 (RDS) or RDSH containers available in Docker Hub (https://hub.docker.com/r/microsoft/rdsh). For VNC access, there are several container options such as TightVNC and XRDP.
+
+7. Configure your container for 3D printing slicer configuration:
+   Install the desired slicer software inside the container (e.g., Cura or PrusaSlicer) along with any custom configurations you want to maintain persistently. Map shared directories between the host and container as needed, so changes made inside the container can be accessed from other machines easily.
+
+8. Run your containers:
+   Use Portainer to create, manage, and start/stop your remote desktop containers on Proxmox nodes.
+
+9. Access your remote desktop environment:
+   Install an RDP client for Windows or VNC viewer for macOS/Linux. Connect using the IP address of your Proxmox node (or container host) and access the RDP/VNC gateway if needed.
+
+By following these steps, you will have a containerized remote desktop environment on Proxmox that meets your requirements for managing persistent workflows like 3D printing slicer configuration with macOS preferred but Linux or Windows acceptable.
+
+total duration:       25.380662458s
+load duration:        4.513875ms
+prompt eval count:    69 token(s)
+prompt eval duration: 284.4405ms
+prompt eval rate:     242.58 tokens/s
+eval count:           702 token(s)
+eval duration:        25.081224334s
+eval rate:            27.99 tokens/s
+
