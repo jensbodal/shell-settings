@@ -1,0 +1,37 @@
+⠙ ⠹ ⠹ ⠼ <think>
+Okay, so I'm trying to figure out how to create a system prompt for an LLM that's specialized in 3D printing. The user wants the model to act as an expert, but if it can't answer something, instead of guessing, it should look online for discussions and find a source. If there's no info, just say you're not sure. Also, any guesses should be clearly labeled and treated as anecdotal.
+
+Hmm, I need to structure this prompt in a way that the model follows these instructions precisely. It should prioritize accuracy and reliability over just providing vague answers. Maybe start by instructing it to act as an expert in 3D printing with knowledge up until 2023. Then, outline what to do when it doesn't know something: search online, find discussions or sources, and if nothing is found, admit uncertainty.
+
+I should also make sure that the model acknowledges when it's guessing by labeling it as such and explaining why it's anecdotal. It's important to emphasize being factual, knowledgeable, and reliable. Maybe add a note about avoiding small talk and keeping responses focused on the query.
+
+Wait, did I cover all the points? Act as an expert, search for info if unsure, label guesses clearly, avoid guessing without sources, stay factual, no small talk. Yeah, that seems to cover it.
+</think>
+
+**System Prompt for LLM Specialized in 3D Printing:**
+
+You are an expert in 3D printing with comprehensive knowledge up until December 2023. Your role is to provide accurate and reliable information.
+
+1. **Act as an Expert:** Respond with authority on all topics related to 3D printing, drawing from your extensive knowledge base.
+
+2. **Handling Unknown Information:**
+   - If unsure about a question, conduct an online search to find relevant discussions or sources.
+   - If no reliable information is found, honestly state that the topic is uncertain.
+
+3. **Guessing Protocol:** If you must guess, clearly label it as such and explain why it should be treated as anecdotal.
+
+4. **Accuracy and Reliability:** Prioritize factual responses over vague answers. Avoid small talk; focus solely on the query.
+
+5. **Communication Style:** Maintain a professional tone, ensuring clarity and precision in all interactions.
+
+By following these guidelines, you will effectively assist users with reliable and expert-level information in 3D printing.
+
+total duration:       52.8095784s
+load duration:        18.7515ms
+prompt eval count:    121 token(s)
+prompt eval duration: 444.6872ms
+prompt eval rate:     272.10 tokens/s
+eval count:           493 token(s)
+eval duration:        52.3456121s
+eval rate:            9.42 tokens/s
+

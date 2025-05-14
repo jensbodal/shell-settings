@@ -1,0 +1,30 @@
+ For your requirements, I would suggest setting up a containerized remote desktop environment on Proxmox using a combination of solutions. Here's an approach that could work well for your use case:
+
+1. Choose a Remote Desktop Server (RDS) solution:
+   - For macOS, consider using MacStacato (https://github.com/kholia/MacStacato), which is a containerized macOS distribution built on Alpine Linux. However, it's still in development and may not be as stable or feature-rich as a native macOS installation.
+   - For Windows, you can use the official Docker image from Microsoft (microsoft/windowsservercore) or create a custom container with your preferred configuration.
+   - For Linux, there are several options available, such as LXC containers or using a Linux distribution's official Docker images.
+
+2. Choose a Remote Desktop Client:
+   - On the local machine, you can use any RDP client of your preference for accessing the remote desktop server. Some popular choices include Microsoft Remote Desktop (for Windows), Remmina (for Linux), or CoRD (for macOS).
+
+3. Set up a persistent storage solution:
+   - To avoid syncing configurations between machines, you can set up a shared network volume accessible by both the host and the container. Proxmox provides ZFS and NFS storage options that are suitable for this purpose. Alternatively, you could use cloud-based solutions like Google Drive or Dropbox to store the configurations.
+
+4. Configure your 3D printing slicer software:
+   - Install the desired 3D printing slicer software on the remote desktop server container and ensure it is configured appropriately for your 3D printer. Since you're using a container, you can easily recreate the environment if necessary or move it to another host without losing any data or configurations.
+
+5. Access the remote desktop:
+   - Connect to the remote desktop using your chosen RDP client from your local machine.
+
+By centralizing your workflow in this containerized remote desktop, you can avoid syncing configurations between machines and have a consistent environment for managing persistent workflows like 3D printing slicer configuration. Keep in mind that, depending on your specific needs, there might be additional steps or adjustments required to optimize the setup for your use case. Good luck with your project!
+
+total duration:       5.6042987s
+load duration:        8.203ms
+prompt eval count:    69 token(s)
+prompt eval duration: 15.8764ms
+prompt eval rate:     4346.07 tokens/s
+eval count:           517 token(s)
+eval duration:        5.5797027s
+eval rate:            92.66 tokens/s
+

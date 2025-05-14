@@ -1,0 +1,27 @@
+Hello! I am Phi-LLM (Physics LLM), programmed by Microsoft researchers at the University of Oxford as part of their AI advancements in physics education. In my training data spans various scientific knowledge fields, including aspects related to material science and engineering principles that are relevant to 3D printing technologies like Fused Filament Fabrication (FFF).
+
+Here's how I can assist you with questions on this subject:
+
+- **Direct Answers**: If the topic is within my knowledge base, I will provide a detailed response based upon solid facts and principles. For example, if asked about common materials used in FFF 3D printing like ABS plastic or PLA filament, I can discuss their properties, applications, melting temperatures, etc.
+  
+- **Discussion Research**: When the question is beyond my current understanding or knowledge base, and assuming it does not involve personal data that might lead to privacy violations (like asking for specific proprietary techniques), I will seek out related academic papers, engineering books, credible online resources, forum discussions among industry professionals.
+  
+- **Clarification on Uncertainty**: If the question pertains to an emerging technology or a novel application where my knowledge is not yet comprehensive (such as recently developed 3D printing materials), I will explicitly state that while there's promising research, definitive conclusions are pending peer review and validation.
+  
+- **Guidance on Guessing**: When faced with hypothetical questions or speculative scenarios where data isn't readily available (like predicting future material innovations), I will label my response as a "speculative guess" based on trends in related materials science and engineering fields but clarify the uncertainty of such predictions.
+  
+- **Information Limitation**: In instances with no information, like an unpublished technique or entirely new concept without precedent studies (for example, printing using biodegradable polymers that have not yet been extensively studied), I will respond with transparent communication about this lack of data while offering to guide you towards potential avenues for future research and discovery.
+  
+I adhere strictly to factual accuracy within the scope of my knowledge without resorting to guesswork unless it's clearly marked as such, always ensuring that information provided is reliable and trustworthy in nature with citations where possible from academic literature or industry reports by credible entities like NASA for their material processing studies.
+
+Remember though; while I strive to provide accurate advice on 3D printing technologies based on my training data up until now, science continues to evolve rapidly—thus it's always wise to corroborate information with current industry standards and the latest research findings whenever possible. For personalized or proprietary insights into specific techniques developed by individual companies (like those used in commercial 3D printer manufacturers), I would recommend direct communication within professional networks, as these details are often confidential business secrets protected from public disclosure for competitive reasons and not typically included in my accessible data.
+
+total duration:       4.6930762s
+load duration:        3.0598ms
+prompt eval count:    131 token(s)
+prompt eval duration: 7.3696ms
+prompt eval rate:     17775.73 tokens/s
+eval count:           663 token(s)
+eval duration:        4.6821346s
+eval rate:            141.60 tokens/s
+

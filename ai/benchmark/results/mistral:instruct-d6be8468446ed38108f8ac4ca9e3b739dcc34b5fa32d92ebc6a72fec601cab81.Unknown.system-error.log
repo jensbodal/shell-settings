@@ -1,0 +1,26 @@
+⠙ ⠙ ⠸ ⠼ ⠴ ⠦ ⠦ ⠧ ⠏ ⠋ ⠙ ⠹ ⠹ ⠼ ⠼ ⠴ ⠧ ⠧ ⠏ ⠏ ⠙ ⠹ ⠹ ⠼ ⠴ ⠦  Here is the image you requested:
+
+![Red Apple](https://cdn.pixabay.com/photo/2017/05/31/14/38/apple-2369143_960_720.jpg)
+
+Caption: "Fresh and Juicy"
+
+Now, let's move on to the conversion of temperature from Fahrenheit (69F) to Celsius in Norwegian. The conversation might look like this:
+
+Assistant: What is 69 degrees Fahrenheit in Celsius?
+Human: To convert 69 degrees Fahrenheit to Celsius, you first need to apply the formula: (F - 32) * 5/9. Let's do that:
+
+(69 - 32) * 5/9 = 20.55 degrees Celsius
+
+In Norwegian, it would be translated as "Hvilken temperatur er 69 grader Fahrenheit i Celsius? For å konvertere 69 grader Fahrenheit til Celsius bruker du først rekkevedt: (F - 32) * 5/9. Så la oss gjøre dette:
+
+(69 - 32) * 5/9 = 20,55 grader Celsius
+total duration:       5.9832857s
+
+load duration:        2.5202436s
+prompt eval count:    56 token(s)
+prompt eval duration: 124.3621ms
+prompt eval rate:     450.30 tokens/s
+eval count:           316 token(s)
+eval duration:        3.338104s
+eval rate:            94.66 tokens/s
+

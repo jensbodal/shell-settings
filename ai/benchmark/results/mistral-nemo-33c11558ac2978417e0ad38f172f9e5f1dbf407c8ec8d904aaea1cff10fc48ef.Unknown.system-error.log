@@ -1,0 +1,60 @@
+⠋ ⠹ To achieve your goal of running a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration, you have several options. Here are three popular choices that support macOS, Linux, and Windows clients:
+
+1. **NoMachine (formerly Nomachine)**
+   NoMachine is a robust remote desktop solution that supports various protocols, including RFB (Remote Frame Buffer), NX, and X11. It offers high performance and low latency, making it suitable for demanding tasks like 3D printing slicer configuration.
+
+   - *Pros*:
+     - Supports macOS, Linux, and Windows clients.
+     - Offers smooth performance even over slow connections.
+     - Provides file sharing, clipboard sharing, and audio support.
+     - Easy to set up on Proxmox using the NoMachine server package.
+
+   - *Cons*:
+     - The free version has limited features; you might need to purchase a license for commercial use or advanced features like virtual desktops.
+     - It may require additional configuration for persistent containers and shared folders.
+
+   Website: <https://www.nomachine.com/>
+
+2. **VNC (Virtual Network Computing) with RealVNC**
+   VNC is an open-source remote desktop protocol that allows you to control one computer from another over a network connection. RealVNC offers advanced features on top of the basic VNC implementation.
+
+   - *Pros*:
+     - Supports macOS, Linux, and Windows clients.
+     - Easy to set up with Proxmox using the VNC server package.
+     - Offers persistent containers by using dedicated VNC servers for each session.
+     - RealVNC offers advanced features like file sharing, clipboard sharing, and advanced security options.
+
+   - *Cons*:
+     - Basic VNC has lower performance compared to NoMachine or TigerVNC.
+     - RealVNC's advanced features require purchasing a license for commercial use.
+
+   Website: <https://www.realvnc.com/>
+
+3. **TigerVNC**
+   TigerVNC is an enhanced version of the standard VNC implementation, offering improved performance and security. It provides better compression algorithms, encryption options, and supports multiple monitors.
+
+   - *Pros*:
+     - Supports macOS, Linux, and Windows clients.
+     - Offers high performance and low latency even over slow connections.
+     - Easy to set up with Proxmox using the TigerVNC server package.
+     - Provides persistent containers by using dedicated TigerVNC servers for each session.
+
+   - *Cons*:
+     - TigerVNC has a steeper learning curve compared to NoMachine or RealVNC.
+     - It lacks some advanced features like built-in file sharing and clipboard sharing, which require additional configuration with other tools.
+
+   Website: <https://tigervnc.org/>
+
+For all these options, you can use Docker containers on Proxmox to run the remote desktop server software. To ensure persistent workflows, you'll need to set up dedicated containers for each user or session and store any required data inside the container or in a shared volume.
+
+Ultimately, the best choice depends on your specific needs, budget, and preferred learning curve. All three options offer excellent performance and can be easily integrated into your Proxmox environment.
+
+total duration:       38.4045197s
+load duration:        16.6964ms
+prompt eval count:    64 token(s)
+prompt eval duration: 213.9919ms
+prompt eval rate:     299.08 tokens/s
+eval count:           687 token(s)
+eval duration:        38.1731474s
+eval rate:            18.00 tokens/s
+

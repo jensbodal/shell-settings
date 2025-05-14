@@ -1,0 +1,75 @@
+⠋ <think>
+Okay, so I need to create a system prompt for an LLM that's supposed to act as an expert in 3D printing. The user provided an example prompt which is quite detailed. Let me try to understand what the key components are here.
+
+First, the purpose of the system prompt seems to be to set guidelines on how the LLM should respond when faced with questions about 3D printing. It needs to avoid guessing unless it's certain and can provide a reliable source or discussion online. If there's no information available, it just says it's not sure.
+
+Looking at the example prompt, it starts by defining the role of the model as an expert in 3D printing. Then it outlines specific instructions:
+
+1. If unable to answer, do not guess but instead find a relevant discussion online.
+2. If there's no information available on the subject, reply that it's unsure.
+3. Any guesses must be clearly labeled as such along with reasons why it should be taken anecdotally.
+
+Additionally, the prompt emphasizes being factual and reliable, avoiding being a "warm ear" just for chatting.
+
+So, if I were to create my own system prompt, I'd need to include similar elements but perhaps adjust some wording or structure. Let me think about possible variations or improvements.
+
+Maybe starting with the role definition first: "You are an expert in 3D printing."
+
+Then outline the steps:
+
+- Attempt to answer using known information.
+- If unsure, search online for discussions related to the topic.
+- Provide a credible source if found.
+- If no info is available, state that you're not sure.
+- Any guesses should be marked as such and why they aren't certain.
+
+I should also ensure that the LLM adheres to being factual and not just chatting. Maybe include something about avoiding conjecture unless necessary.
+
+Wait, perhaps I can make it more concise while keeping all the key points. Let me try drafting:
+
+"You are an expert in 3D printing. For any question related to this field, provide a detailed, accurate response based on established knowledge. If you cannot answer confidently, research online forums or academic sources for discussions on the topic and cite a credible source if possible. If no relevant information is found, admit your lack of surety. Avoid making unfounded guesses; if you must make an educated guess, label it as such with rationale."
+
+Hmm, that's a bit shorter but might lose some nuance. The original example was longer but more explicit about actions like searching online and treating guesses properly.
+
+Alternatively, maybe I can structure it step-by-step to ensure clarity:
+
+1. Answer the question based on your knowledge.
+2. If uncertain, search for discussions online.
+3. Provide a source if found.
+4. Acknowledge lack of information if none is available.
+5. Label guesses as such with reasons.
+
+I think this approach covers all bases without being too verbose. It's important to maintain clarity and ensure the LLM knows not to fabricate or guess unless necessary.
+
+Another point is to emphasize reliability over chat-ability, so the system prompt should discourage casual responses in favor of factual ones.
+
+Maybe adding a part where if online sources are insufficient, it prefers to say it doesn't know instead of making up data. Also, ensure that any guesses are clearly marked as such with reasons why they're not certain.
+
+I think I've got a good grasp on what needs to be included. Let me put it all together in a prompt.
+</think>
+
+**System Prompt for 3D Printing Expert**
+
+"You are an expert in 3D printing. Your role is to provide accurate and reliable information based on established knowledge. When faced with a question:
+
+1. **Answer Confidently**: Use your existing knowledge to answer the query fully.
+
+2. **Seek Online Resources**: If unsure, research online forums or academic sources for relevant discussions.
+
+3. **Cite Sources**: Provide credible sources if found; otherwise, acknowledge your lack of surety.
+
+4. **Avoid Unfounded Guesses**: Do not make conjectures unless necessary. If you must guess, label it as such and explain why it's uncertain.
+
+5. **Prioritize Factuality**: Ensure responses are factual rather than casual or speculative.
+
+This approach ensures reliability over chat-ability, discouraging casual responses in favor of precise information."
+
+total duration:       23.7347275s
+load duration:        11.5742ms
+prompt eval count:    121 token(s)
+prompt eval duration: 90.4625ms
+prompt eval rate:     1337.57 tokens/s
+eval count:           880 token(s)
+eval duration:        23.6319725s
+eval rate:            37.24 tokens/s
+

@@ -1,0 +1,41 @@
+For a containerized remote desktop environment on Proxmox, I'd recommend considering the following options:
+
+1. **Proxmox VE Apps**: Proxmox provides a built-in application center that allows you to easily install and manage containers. You can use the "VE Apps" section to search for pre-configured images for various applications, including remote desktop environments.
+2. **Vultr's containerized RDP**: Vultr offers a managed cloud platform with pre-configured containerized RDP solutions. Their offerings are designed specifically for remote access and management of workstations, making it an excellent choice for your use case.
+
+For the operating system, you have several options:
+
+1. **macOS in a Linux-based container**: You can run macOS in a Linux-based container using tools like:
+ * **Linuxbrew's Docker image**: This provides a headless macOS environment with a web-based login interface.
+ * **Parallels Desktop for Linux**: This allows you to run a full-fledged macOS installation within a Linux container.
+
+For 3D printing slicer configuration, consider the following options:
+
+1. **Slic3r**: A popular open-source 3D printing slicer that can be run as a web application.
+2. **Cura**: Another widely used 3D printing slicer that offers both GUI and command-line interfaces.
+
+To avoid syncing configurations between machines, you can use the following strategies:
+
+1. **Use a centralized configuration management tool**, such as:
+ * **Ansible**: An open-source automation tool that can manage and deploy configurations to multiple environments.
+ * **Puppet**: Another popular automation tool that offers robust configuration management capabilities.
+2. **Store configurations in a version control system**, like Git, and use a **container-based workflow** to manage changes.
+
+Here's an example of how you could set up your containerized remote desktop environment:
+
+* Use Proxmox VE Apps or Vultr's containerized RDP solution as the base image.
+* Install macOS (using Linuxbrew's Docker image or Parallels Desktop for Linux) or a similar operating system within a Linux-based container.
+* Set up Slic3r or Cura as a web application within your remote desktop environment.
+* Use Ansible or Puppet to manage and deploy configurations to your remote desktop environment.
+
+By centralizing your workflows in a local remote desktop, you can avoid syncing configurations between machines and ensure that each machine has its own, isolated copy of the workflow.
+
+total duration:       3.5062316s
+load duration:        18.2805ms
+prompt eval count:    82 token(s)
+prompt eval duration: 7.2589ms
+prompt eval rate:     11296.48 tokens/s
+eval count:           499 token(s)
+eval duration:        3.4806922s
+eval rate:            143.36 tokens/s
+
