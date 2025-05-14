@@ -1,0 +1,36 @@
+⠙ ⠹ For a containerized remote desktop environment on Proxmox, I'd recommend the following options for managing persistent workflows like 3D printing slicer configuration, with macOS as the preferred operating system:
+
+1. **VMware Horizon Cloud** (formerly Horizon Suite): Although primarily an infrastructure solution, VMware Horizon Cloud can be used to create a highly available and secure remote desktop environment. You can deploy macOS or Linux containers, leveraging VMware's containerization capabilities.
+2. **Pulse** (by Citrix): Pulse is an advanced thin client that allows for remote access to Windows, Linux, or macOS environments. It supports containerization through its "Pulse Cloud Gateway" feature, enabling you to centralize and manage workflows without syncing configurations between machines.
+3. **VMware Workspace One**: This solution offers a modern, cloud-centric approach to managing remote workspaces. You can deploy macOS or Linux containers, leveraging VMware's containerization capabilities. Workspace One also provides features for managing software, security, and compliance.
+4. **Red Hat OpenShift** (using RHEL/CentOS): If you prefer a Linux-based solution, Red Hat OpenShift is an excellent choice. It offers a managed platform for building, deploying, and scaling applications. You can deploy macOS or Linux containers on top of OpenShift.
+
+For macOS-specific solutions:
+
+1. **Parallels Remote Desktop**: This software allows you to access a remote desktop from any device, including macOS and Linux hosts. It supports containerization through its "Remote Desktop" feature.
+2. **VMware Fusion** (using VMware vSphere): While not exclusively a containerization solution, VMware Fusion enables you to run macOS or Linux containers on top of VMware ESXi.
+
+When choosing a solution, consider the following factors:
+
+* Compatibility with your existing infrastructure and tools
+* Ease of deployment, management, and scaling
+* Security and compliance features
+* Support for your preferred operating system (macOS, Linux, or Windows)
+* Cost and licensing requirements
+
+To avoid syncing configurations between machines, focus on using a containerization solution that allows for persistent storage of data within containers. You can also leverage Proxmox's own solutions, such as:
+
+* **Proxmox VE Container Storage**: This feature provides shared storage for containers, ensuring data persistence even in the event of container failures.
+* **Proxmox Backup Server**: This tool enables you to create backups of your containerized environment, ensuring data recovery and minimizing downtime.
+
+Ultimately, choose a solution that aligns with your organization's needs, technical expertise, and budget.
+
+total duration:       17.547544292s
+load duration:        12.4165ms
+prompt eval count:    82 token(s)
+prompt eval duration: 197.561541ms
+prompt eval rate:     415.06 tokens/s
+eval count:           516 token(s)
+eval duration:        17.333395375s
+eval rate:            29.77 tokens/s
+

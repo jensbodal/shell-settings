@@ -1,0 +1,57 @@
+⠙ ⠙ ⠹ ⠸ ⠼ To achieve your goals, you'll want to set up a containerized remote desktop environment on Proxmox that supports persistent storage and can run macOS, Linux, or Windows. Since Apple's macOS doesn't support virtualization very well, we'll focus on using Linux containers with Wine for Windows applications and use Linux for macOS-compatible software. Here's a step-by-step guide using Ubuntu Server 20.04 LTS as the host OS:
+
+1. **Install Proxmox VE:**
+   Follow the official documentation to install Proxmox VE on your hardware: https://pve.proxmox.com/wiki/Installation
+
+2. **Create a Ubuntu VM (or use an existing one) with LXC containers:**
+   - Create a new VM with Ubuntu Server 20.04 LTS.
+   - Enable LXC containers in the VM's settings.
+
+3. **Create LXC containers for remote desktops:**
+   - Log in to your Proxmox VE web interface and select the Ubuntu VM.
+   - Go to `Containers` > `Add Container`.
+   - Choose `LXC (Linux Containers)` template, then click `Next`.
+   - Provide a name, hostname, password for the container's root user, and choose other settings as desired. Click `Finish`.
+
+4. **Set up persistent storage:**
+   - To store your workflows' data persistently, create an empty directory on the host machine (e.g., `/opt/3dprint`).
+   - Mount this directory to the container using `volume=path:/opt/3dprint` in the container's configuration file.
+
+5. **Install required software:**
+   For each remote desktop container:
+   - SSH into the container and update the package list: `sudo apt update`
+   - Install necessary software (e.g., for Linux):
+     ```
+     sudo apt install -y build-essential git curl wget vim
+     ```
+   - For Wine (to run Windows applications like 3D printing slicers): https://wiki.winehq.org/Ubuntu
+   - For macOS-compatible software (e.g., OpenSCAD, PrusaSlicer), install them directly as they are Linux-based.
+
+6. **Configure remote desktop:**
+   Choose one of the following options to set up a remote desktop:
+
+   **Option A: X2Go**
+   - Install X2Go server on your container: `sudo apt install x2godesktop`
+   - Configure X2Go to start automatically.
+   - On your client machine, install the X2Go client (e.g., for macOS: https://github.com/mszepf/x2go-macosx) and connect to your container.
+
+   **Option B: NoMachine**
+   - Install NoMachine on your container: `sudo apt install nomachine`
+   - Configure NoMachine to start automatically.
+   - On your client machine, download the NoMachine client (https://nomachine.com/download), install it, and connect to your container using its IP address.
+
+7. **Configure workflows:**
+   - Set up your 3D printing slicers' configurations and other tools in the `/opt/3dprint` directory.
+   - Configure your remote desktop environments to access this directory and use the software installed within the containers.
+
+Now you should have a persistent containerized remote desktop environment on Proxmox for managing your workflows like 3D printing slicer configuration. This setup allows you to use macOS-compatible software or Linux/Windows alternatives, depending on your preferences.
+
+total duration:       1m15.812767791s
+load duration:        15.519291ms
+prompt eval count:    64 token(s)
+prompt eval duration: 579.775334ms
+prompt eval rate:     110.39 tokens/s
+eval count:           744 token(s)
+eval duration:        1m15.214637958s
+eval rate:            9.89 tokens/s
+

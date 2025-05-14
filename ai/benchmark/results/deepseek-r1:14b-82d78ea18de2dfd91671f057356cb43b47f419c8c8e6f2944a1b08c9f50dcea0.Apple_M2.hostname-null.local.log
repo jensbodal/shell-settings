@@ -1,0 +1,43 @@
+⠙ ⠙ ⠹ ⠼ ⠼ ⠴ ⠧ ⠧ ⠇ ⠋ ⠋ ⠹ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ <think>
+Okay, so I need to create a system prompt for an LLM that's supposed to act as an expert in 3D printing. The instructions are pretty clear: the AI should provide accurate, reliable information without guessing. If it doesn't know something, it should look up relevant discussions online and cite sources. If there's no info available, just say it's not sure.
+
+Hmm, let me break this down. First, the AI must act as an expert in 3D printing. That means it needs to have a solid understanding of the subject matter—types of printers, materials, techniques, applications, etc. But I also don't want it to guess; if it can't answer, it should find a reliable source.
+
+So, how do I structure this? Maybe start by telling the AI to adopt an expert persona in 3D printing. Then specify that it shouldn’t make up answers or guess—it should either provide accurate info or refer to credible sources. Also, if no information exists on the topic, it should admit uncertainty without making things up.
+
+I think it's important to emphasize reliability and factuality. The AI needs to be knowledgeable and trustworthy, not just a casual chat partner. Maybe add something about using online discussions to find sources when unsure.
+
+Wait, should I include instructions on how to present information? Like, if the AI has to refer to a source, maybe it can provide a summary or link. Also, if it's uncertain or guessing, label it as such and explain why it’s anecdotal.
+
+I need to make sure the prompt is clear and covers all bases: expertise, no guessing, sourcing, handling unknown info, reliability, and proper disclosure of guesses.
+
+Putting it all together, I think a solid system prompt would set the AI as an expert, command it to avoid guessing, seek sources when unsure, handle cases with no information, prioritize factual accuracy, and clearly mark any conjecture.
+</think>
+
+**System Prompt for 3D Printing Expert LLM:**
+
+You are an expert in 3D printing. Your role is to provide accurate, reliable, and factual information on the subject. When responding to queries:
+
+1. **Expertise:** Assume a deep knowledge of 3D printing, including various technologies, materials, applications, and techniques.
+
+2. **No Guessing:** Avoid making up answers or speculating. If unsure about details, refrain from guessing.
+
+3. **Source Credibility:** If uncertain, locate relevant online discussions or credible sources to provide accurate information.
+
+4. **Handling Unknowns:** If no reliable information exists on a topic, clearly state that the subject is unclear and not well-documented.
+
+5. **Reliability:** Focus on being factual and trustworthy, avoiding casual or conversational responses.
+
+6. **Disclosure of Guesses:** If you must conjecture (labeled as such), explain why it should be treated as anecdotal rather than factual.
+
+Ensure your responses are informative, accurate, and adhere to these guidelines.
+
+total duration:       1m51.795196375s
+load duration:        13.558459ms
+prompt eval count:    121 token(s)
+prompt eval duration: 2.112719791s
+prompt eval rate:     57.27 tokens/s
+eval count:           609 token(s)
+eval duration:        1m49.668162542s
+eval rate:            5.55 tokens/s
+
