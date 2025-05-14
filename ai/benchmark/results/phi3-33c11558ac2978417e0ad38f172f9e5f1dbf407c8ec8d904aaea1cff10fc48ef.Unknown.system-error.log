@@ -1,69 +1,44 @@
-The best containerized Remote Desktop environment that can cater to your needs and preferences on Proxmox would likely be using Docker with a compatible VNC server inside, alongside X11 forwarding if possible for GUI-based applications like macOS or Linux systems' native software. Below are steps tailored toward achieving this setup:
+Proxmox VE (Virtual Environment) can be set up as a robust and versatile containerized solution for running different operating systems, including macOS through Parallels or VirtualBox, which are capable of virtualization with Mac's High Sierra XNU kernel compatibility on Linux. Here is how you could achieve this setup:
 
-**For MacOS Users (Docker/Desktop):** 
+1. **Install Proxmox** - Start by installing the latest stable version of Proxmox VE (if not already installed). You can download it from [here](https://www.proxmox.com/en/downloads) and follow their installation instructions for your system, which includes setting up a control panel with web accessibility via `http` or `https`.
 
-Given that you prefer macOS and Docker is one of the best options, here’s how to set up a persistent workflow for your 3D printing slicer configuration on Proxmox using Docker with X11 forwarding:
+2. **Install Virtualization Software** - Since Parallels is Mac-specific but we need to run macOS on Linux (through virtual machines), it’s more practical to use open-source software like XenServer for this purpose:
+   a. Download and install the latest version of Proxmox VE Server from [here](https://wwwspoolman.proxmox.com/download). After installation, you'll need Supermini as well if your host doesn’t have it installed by default; for that download OpenMINED (http://openmindedclouds.org/) and follow the instructions to install Miniconda3 on Proxmox Server VM with `Supermini` enabled:
+   b. If using VirtualBox, ensure you've added Oracle as a trusted source in your virtual machine settings for macOS compatibility (https://www.virtualbox.com/manual/ch09.html).
+   
+3. **Create Mac OS VM** - Create and start new VM with the following steps:
+   ```bash
+   proxmox hostlist | grep "macvm" && echo "MacVM already running, skipping." || vboxmanage createvm --name macos --ostype Ubuntu20_64 --uart serial console 1 --nic bridge=br0 --monitor none
+   ```
+    This command creates a new VM with the name 'macos' and installs an Ubuntu guest system that emulates MacOS using virtualization software. You can then proceed to download macOS (https://www.macdownloader.com/) or use your existing Mojave/Catalina installation on external media, such as USB drives:
+    ```bash
+    sudo dd if=/path_to_installation.iso of=/dev/sdXY bs=4M status=none sync warn truncate 2>&1 | more # Replace /path_to_installation.iso with actual ISO path and sdXY with the correct device identifier for your setup (e.g., `/dev/sde` or similar)
+    ```
+   After installation, make sure to mount a filesystem inside macOS VM using Proxmox CLI:
+   ```bash
+   vboxmanage internalcommands createrawhd --output /media/user-data/macos hdd01 | qemu-nbd -o none & # Replace 'hdd01' with your MacVM name and '/dev/' to the actual device path as necessary. Also, replace `/media/` folder if needed using a shared network drive instead of local mounts within Proxmox VE settings for data persistence across VM lifecycle:
+   ```bash
+    proxmox web panel > ~/macos_mounted # This command will store the macOS mounted path in `~/macos_mounted` file on your host system. Be sure to replace this with a proper shared network drive or external storage device for persistence across VM lifecycles and reboots if needed.
+    ```bash 
+4. **Set up Remote Desktop** - Install the preferred remote desktop software, either Parallels Tools (for Mac OS), Microsoft Remote Desktop Protocol (RDP) clients like Microsoft's built-in RDP client for Windows or a compatible alternative on Linux such as [Remmina](https://remmina.org/), to access your macOS VM remotely:
+   ```bash 
+    vboxmanage guestproperty add "Parallels Tools Installation" --type String --value "/Applications/Parallels Toolbar.app" # This will install Parallels tools into the MacVM, allowing it to be managed via Remmina or similar clients on your host machine for remote access (for Linux this is not possible without additional setup like SSH tunneling).
+   ```bash 
+5. **Centralize Workflow Management** - To centralize workflow management and avoid syncing configurations between machines, you can:
+    a. Use shared directories within Proxmox VE for persistent data storage that both the host OS and macOS VMs access (e.g., via SSH or network shares). This allows changes in settings to be reflected on all systems accessing these folders without needing them directly synced between different machines, just updated from one central point if needed.
+    b. Utilize scripting within Proxmox CLI and bash scripts for common workflow tasks like slicer configuration updates or restarts which can also minimize the chances of having to sync configurations manually across systems (e.g., `vboxmanage guestproperty set "Slicer_Path" "/usr/local/bin"` on macOS VM).
+    c. For 3D printing slicers and similar workflows, ensure your environment has all the dependencies required by both operating systems installed via Proxmox's package manager or through community-supported tools like Miniconda for Python packages (pip install <dependency>): `/usr/local/bin/` on macOS VM after installation.
+    d. Utilize continuous integration and deployment methods to automate the testing process within a controlled environment that is accessed remotely, which minimizes human intervention in syncing configurations across machines manually for consistent workflows like 3D slicer configuration management (e.g., using Jenkins with Proxmox VE).
+    e. Use dedicated shared network drives or cloud storage services to store the actual project files and share them between environments, which can also act as a backup solution if synchronization isn't needed for individual machine configurations but rather ongoing workflow across all machines within your networked environment using SSH keys or credentials stored securely (e.g., `ssh-keygen -A` followed by adding public key to authorized_keys in the `.ssh` directory).
+    f. Lastly, employ Proxmox's built-in monitoring and management tools for health checks of your VM(s), ensuring that any critical updates or restarts needed do not disrupt workflow continuity across all machines using automated scripts (if necessary) based on thresholds set in the system configurations.
 
-1. Install VNC server within a Docker container if needed (MacOS users typically prefer Mac's native screen sharing tools but in this case, we are considering an alternative):
-   - Create a new YAML file for your custom image and specify the base as `ubuntu` or another Linux distro you’re comfortable with. 
-```bash
-sudo nano my-desktop.yaml
-```
-2. Write configuration to install Xfce desktop, VNC server (xorg), TightVNC Server, a terminal emulator (`gnome-terminal`), and the `vncserver` command:
-```yaml
-# Install packages required for Ubuntu Desktop with GUI access via VNC
-FROM ubuntu:latest as base
-RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive TTY=$(ls /dev/tty | head -n1) && \
-    x-shellubuntu&&\  # Ensures Xfce desktop is set up (you might need to run 'apt install ubuntu-desktop' separately if it’s not already installed on your base image).
-RUN apt update && apt install vncserver tightvnc server gnome-terminal -y \
-    && mkdir /root/.xsession-errors \
-&& ln -sfT /usr/share/doc/*/html/*.gz.* /etc/alternatives/$(basename ${*FILENAMES[0]}) # This helps with missing man pages in the container, if any. 
-CMD ["vncserver", "ask-password"]   # Requests a password on startup to access VNC server (change it for security). Ctrl+D at end of input will quit and exit from command line mode back into terminal emulation as root without a password prompt each time started after first start.
-``` 3. Build the Docker image:
-```bash
-sudo docker build -t my-vncdesktop ubuntu .
-```  4. Run your new container, which connects via VNC to `localhost` on port 5910X where X=user_id (change user id for security):
-```bash
-docker run --name=myDesktop -it --restart unless-stopped \
-    -p 6080:6080 \ # Assumes VNC Server Listens on port 5910X. Adjust as needed, and consider binding to an external IP address or host if you want more flexibility in connecting from different machines (not recommended for security).
-    my-vncdesktop -E /root/.xsession-errors \ # In case of missing man pages by using this ln command instead: `apt install ubuntu-desktop` and the following line before CMD.
-``` 5. Connect to your new container via VNC client, entering username with ID you chose when starting (usually 'myDesktop' in this example), port number after ":", e.g., localhost:6080 for standard X11 forwarding or a different IP/port combination if needed and ensure `Xvnc` is installed on the host Proxmox machine to support VNC client, which it usually comes with by default in some distributions (e.g., Ubuntu).
-    - Connect via Mac's built-in screen sharing tools for local access or using a remote desktop service like TeamViewer if needed from different locations. 
-6. Once inside the container, you can manage your workflow as usual and save configurations to persistent volumes on Proxmox that are connected directly with it through filesystem bind mounting options in `docker run` command:
-```bash
-sudo docker run --name=myDesktop -it --restart unless-stopped \  # Restart option for container, not recommended without a reason. More appropriate would be using `--privileged`. Without this, the desktop environment won’t start with X11 forwarding enabled properly in some cases on Proxmox (but can still run GUI apps via `apt install ubuntu-desktop` as explained).
-    -v /path/to/your_volume:/container_workdir \ # Example to persist data, change directories accordingly.
---privileged --device=/dev/video0:ro,-g  # Optional if you plan on running GUI apps with real video input via VNC client or compatible desktop clients (not recommended for security). This is needed in some cases where X11 forwarding fails without this flag and the containerized display needs to be directly connected.
-    my-vncdesktop -E /root/.xsession-errors \ # In case of missing man pages by using this ln command instead: `apt install ubuntu-desktop` and following line before CMD in YAML file above (not needed if you run without `--privileged`). 
-```  7. Remember to clean up afterward when done, shutting down the container with stop or rm commands as appropriate for your workflow management needs on Proxmox:
-```bash
-docker stop myDesktop && docker rm myDesktop # If started manually and no longer needed. Required if using `--restart unless-stopped`. 
-# Or use a more persistent setup, see next steps with bind mounting to local volume for persistence.  
-```    
-8. To avoid syncing configurations between machines without external synchronization tools while maintaining the workflow on Proxmox directly in Docker containers and using filesystem volumes can help ensure that each machine only contains its own working directory or snapshot of data, keeping everything centralized as desired:
-- Create a shared volume accessible by all instances (if running multiple): `sudo mkdir /srv/vncDesktop && sudo chmod 755 /srv/vncDesktop` on Proxmox host.
-- On each machine or container start with the same user permissions and mount this directory to `/container_workdir`.  
-```bash
-# Example of running a persistent instance using shared volume for all machines:
-sudo docker run --name=myDesktop -it \  # (Optional) --restart unless-stopped if desired. Otherwise, use above without `--privileged` flag and X11 forwarding might work better on Proxmox after installing `ubuntu-desktop`. More robust with persistent volumes for data sharing across machines when needed as long workflows continue in a single location like this setup provides (requires setting up volume outside Docker, potentially using something like LVM or RAID if available).
-    -v /srv/vncDesktop:/container_workdir \ # Shared volume mount. Change to your shared directory path and container workdir as needed. 
-    my-vncdesktop  
-```    
-**For Linux Users (Docker with X11 forwarding):** Use similar steps, but without the MacOS specifics of screen sharing tools installation or `--privileged` flag setup for proper GUI app interaction via VNC client since they are not necessary on most distributions. Instead focus more heavily on correct permissions and shared volumes across systems if needed to maintain workflow consistency as desired.
 
-**For Windows Users (Wine with Xming/VcXsrv or use of Hyper-V container feature):** Wrap this Docker solution using a tool like WineBottler for running macOS GUI apps on Linux, but please note the complexity and potential performance impact when wrapping multiple applications within Wine. Using Windows containers instead might be simpler; however, specific 3D printing slicer compatibility needs to be verified as most likely won’t directly run natively in a containerized environment due to their dependencies (DirectX). Alternative options would involve using Docker on host with Hyper-V enabled or VMs for more complex workloads.
-
-Remember always, centralizing and persisting workflow should balance flexibility across different environments while maintaining security best practices by avoiding unprivileged access when not needed and keeping sensitive configuration data out of the main container system if possible (consider using Docker secrets or similar solutions). Always ensure you are comfortable with all permissions given to each VM/container, especially in production-like settings.
-
-This setup should allow a user on Proxmox running macOS containers for their workflows while avoiding unnecessary configuration sync between machines by centralizing the desktop environment and persisting configurations locally as needed within Docker volumes or through direct shared volume mounts when using multiple instances across systems connected to Proxmox.
-
-total duration:       14.4001297s
-load duration:        3.7183ms
+total duration:       10.6588537s
+load duration:        4.6183ms
 prompt eval count:    73 token(s)
-prompt eval duration: 10.1905ms
-prompt eval rate:     7163.53 tokens/s
-eval count:           1928 token(s)
-eval duration:        14.3862209s
-eval rate:            134.02 tokens/s
+prompt eval duration: 7.1423ms
+prompt eval rate:     10220.80 tokens/s
+eval count:           1470 token(s)
+eval duration:        10.6470931s
+eval rate:            138.07 tokens/s
 
