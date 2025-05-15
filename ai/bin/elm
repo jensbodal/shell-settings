@@ -48,7 +48,7 @@ set_output_filename() {
 set_ollama() {
   local path_a="/usr/local/bin/ollama"
   local path_homebrew_macos="/opt/homebrew/bin/ollama"
-  local path_windows="/mnt/c/Users/jensbodal/AppData/Local/Programs/Ollama/ollama.exe"
+  local path_windows="$HOME/AppData/Local/Programs/Ollama/ollama.exe"
   local path_b="/usr/bin/ollama"
   local path_c="/bin/ollama"
   local path_d="/usr/local/bin/ollama"
