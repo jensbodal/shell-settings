@@ -1,0 +1,29 @@
+ To achieve your goal of creating a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration, with macOS preferred but also considering Linux or Windows, you can use a combination of LXC (Linux Containers) and Remote Desktop Services (RDS). Unfortunately, there isn't an official RDS solution available within Proxmox for macOS, but you can create a workaround by combining various tools. Here's a step-by-step guide to help you set up the environment:
+
+1. Install macOS on a virtual machine using solutions such as VirtualBox or VMware Fusion. Ensure that the macOS license permits running it in a non-production environment.
+
+   - Proxmox can also work with KVM/QEMU, but VMware Fusion is more straightforward for managing macOS VMs on macOS hosts.
+
+2. Install LXC on your Proxmox host to create lightweight Linux containers for running RDS servers and other required services.
+
+3. Create an LXC container with a suitable Linux distribution (e.g., Ubuntu Server 20.04 LTS) for hosting the RDS server. Follow the official Proxmox LXC documentation for creating containers: https://pve.proxmox.com/wiki/LXC
+
+4. Install and configure RDS in your LXC container, using the Microsoft Remote Desktop Services Deployment Guide as a reference: https://docs.microsoft.com/en-us/windows-server/remote/remote-desktop-services/deployment/rd-deploy
+
+   - For macOS, you can use tools such as X2Go or AnyDesk for remote access to the RDS server in your LXC container from your local machine.
+
+5. Install a 3D printing slicer software (e.g., Cura, PrusaSlicer, or Simplify3D) on both the macOS VM and the Linux distribution running in your LXD container.
+
+6. Configure the slicer software to save configuration files in a shared directory accessible by both the macOS VM and the Linux RDS server. Samba can be used for easy file sharing between the macOS VM and Linux RDS server: https://wiki.proxmox.com/wiki/Samba
+
+With this setup, you will have centralized your 3D printing workflow in a local remote desktop environment by using an LXC container running RDS on Proxmox, which allows access to your macOS VM (or Linux or Windows if needed) with configuration files shared between them.
+
+total duration:       6.5395808s
+load duration:        3.5788ms
+prompt eval count:    69 token(s)
+prompt eval duration: 8.2297ms
+prompt eval rate:     8384.27 tokens/s
+eval count:           586 token(s)
+eval duration:        6.526755s
+eval rate:            89.78 tokens/s
+

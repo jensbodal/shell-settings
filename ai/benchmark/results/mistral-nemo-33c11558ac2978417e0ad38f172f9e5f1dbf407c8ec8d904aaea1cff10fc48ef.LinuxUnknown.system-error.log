@@ -1,0 +1,64 @@
+⠋ ⠙ To achieve your goal of running a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration, I recommend using the following setup:
+
+1. **Remote Desktop Solution**: Use **NoMachine** (formerly known as NX Server). It's open-source, supports both Linux and macOS clients, and offers better performance than other remote desktop solutions like VNC or TeamViewer for running 3D printing software. It also allows you to run your applications inside the container while keeping the UI on the client machine.
+
+2. **Containerization Platform**: Since Proxmox is based on KVM and contains Docker, use **Docker** along with Proxmox's built-in container capabilities (Proxmox Container Service) to manage your containers.
+
+3. **Operating System for the Container**: For macOS users, the best option would be to create a Linux-based container (e.g., Ubuntu or Debian), as running macOS in a container is not officially supported and might have compatibility issues. You can use:
+
+   - **Linux (Ubuntu/Debian)**: These are well-supported options that work seamlessly with Docker.
+   - **Windows**: If you prefer Windows, you can create a Windows-based container using Proxmox's Microsoft Edge or Hyper-V support for Windows guests.
+
+Here's how to set up the environment:
+
+**On your Proxmox host:**
+
+1. Install NoMachine server (nxserver) on the Proxmox host:
+   ```
+   apt-get install nxserver
+   ```
+
+2. Start and enable the nxserver service:
+   ```
+   systemctl start nxserver
+   systemctl enable nxserver
+   ```
+
+3. Create a container with your preferred Linux distribution using Proxmox's built-in container capabilities or Docker:
+
+   For Ubuntu/Debian:
+   ```
+   pct create /create ubuntu-20.04
+   ```
+
+**In the created container:**
+
+1. Install NoMachine client (nxclient):
+   ```
+   apt-get install nxclient
+   ```
+
+2. Install your 3D printing slicer software, e.g., PrusaSlicer:
+   ```
+   apt-get install prusa-slicer
+   ```
+
+**On your macOS/Linux/Windows machine:**
+
+1. Download and install the NoMachine client from their official website: https://www.nomachine.com/download
+
+2. Configure the NoMachine client to connect to your Proxmox host using the container's IP address or hostname.
+
+3. Once connected, you can start your 3D printing slicer software inside the container, and manage your persistent workflows remotely without needing to sync configurations between machines.
+
+This setup should provide you with an efficient remote desktop environment for managing your 3D printing workflows while keeping everything centralized in a local container on Proxmox.
+
+total duration:       41.7837091s
+load duration:        10.8332ms
+prompt eval count:    64 token(s)
+prompt eval duration: 228.8998ms
+prompt eval rate:     279.60 tokens/s
+eval count:           589 token(s)
+eval duration:        41.5434716s
+eval rate:            14.18 tokens/s
+

@@ -1,0 +1,35 @@
+ For your specific use case, creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration would involve several steps. Here's a general approach using Portainer (for container management) and Jumpcloud (for remote access management). Note that this setup will require you to have ProxmoxVE installed and running on your system.
+
+1. Install Docker and Kitematic (or Docker Desktop for Windows/Mac) on the host machine running ProxmoxVE.
+
+2. Install Portainer by deploying a container in ProxmoxVE using the following command:
+
+   ```
+   docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer
+   ```
+
+3. Access Portainer via the ProxmoxVE web interface (default IP and port 9000). You'll be able to manage your containers from here.
+
+4. Create a new container for the remote desktop environment. You can use solutions like Remote Desktop Services (RDS) for Windows, XQuartz or VirtualBox VNC server for macOS, and X2Go for Linux. For this example, let's use RDS with an Ubuntu base image to host multiple sessions and allow the connection from any platform:
+
+   ```
+   docker run -d --restart=unless-stopped -p 3389:3389 --name rds_container -v /mnt/data/rds:/data mcr.microsoft.com/windowsservercore:ws2016-ltsc
+   ```
+
+5. Install RDP client software on your local machine (e.g., Remote Desktop Connection for Windows, XQuartz with RDP client for macOS, or xrdp for Linux). Connect to the created container using the IP and port you specified during container creation.
+
+6. Install and configure the desired 3D printing slicer software inside the remote desktop environment container. Make sure it's set up in a persistent manner (e.g., by installing on the data volume mapped during container creation).
+
+7. To manage access to this environment, use a service like Jumpcloud that supports RDS connections. Jumpcloud provides centralized management for users and computers, allowing you to easily grant access to your remote desktop environment. This way, you can avoid syncing configurations between machines by centralizing the workflow in a local remote desktop while still maintaining control over user access and permissions.
+
+8. As an alternative, you could also look into solutions like TeamViewer or AnyDesk for managing remote connections more easily across multiple platforms without setting up RDS, but they may require additional configurations to share files or manage persistent workflows efficiently.
+
+total duration:       7.0783453s
+load duration:        3.6949ms
+prompt eval count:    69 token(s)
+prompt eval duration: 11.2325ms
+prompt eval rate:     6142.89 tokens/s
+eval count:           643 token(s)
+eval duration:        7.0629079s
+eval rate:            91.04 tokens/s
+

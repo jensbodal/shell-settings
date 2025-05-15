@@ -1,0 +1,66 @@
+⠙ ⠙ ⠸ ⠸ ⠴ ⠴ ⠦ ⠇ ⠇ ⠏ ⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠧ ⠇ ![Red Apple on Wooden Table](https://i.picsum.photos/2/760/300/?hmO)
+
+Caption: Fresh and Juicy! En rødkål med blå bjelot på et brettet. 
+
+
+English to Norwegian Translation (Code Conversation):
+
+```c++
+
+#include <iostream>
+
+// Function that simulates translation from English temperature in degrees Fahrenheit to Celsius for a classroom discussion scenario, represented as dialogue between two characters: Student and Teacher. 
+
+class TranslateTemperature {
+
+public:
+
+    // Method converts the provided fahrenheit value into celsius within context of conversation
+
+    std::string translateToCelsius(int temperatureInF) const {
+
+        int tempInC = (temperatureInF - 32) * (5.0/9.0); // Conversion formula from Fahrenheit to Celsius
+
+        return "Det er "; std::to_string(tempInC).append(" grader kaldt."); // Norwegian phrase for the converted temperature in Celsius indicating it's cold outside 
+
+    }
+
+};
+
+
+int main() {
+
+    TranslateTemperature translator;
+
+    69F = translator.translateToCelsius(69); // Simulate input of a Fahrenheit temperature (classroom dialogue)
+
+
+    std::cout << 69F << " English to Norwegian translation: \"" << std::endl;
+
+    std::cout << 'Teacher:' << "\n";
+
+    std::cout << "Student:" << '\n';
+
+    std::cout << "...\"\n"; // Pause for dramatic effect as the teacher explains 69F in Celsius using context of weather outside. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
+
+    std::cout << "Student:" << '\n'; // The student understands and echoes the temperature back as 20°C, which is cold in Norwegian. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
+
+    std::cout << "\"\n"; // End of dialogue statement for clarity and separation from the following text output if any other information would follow after teacher's explanation. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
+
+    std0::cout << 69F << " English input: \"The weather outside is quite cold! It feels like freezing point in the city center...\"\n"; // The student provides a description of how it felt to see and touch that red apple, making sure not to burn their hand on its juicy surface.\n"<< 'Teacher:' << "\n";
+
+    return 0;
+
+}
+
+```
+
+total duration:       6.6289628s
+load duration:        1.7219016s
+prompt eval count:    60 token(s)
+prompt eval duration: 125.0423ms
+prompt eval rate:     479.84 tokens/s
+eval count:           680 token(s)
+eval duration:        4.7809376s
+eval rate:            142.23 tokens/s
+

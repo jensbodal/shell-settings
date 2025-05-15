@@ -1,0 +1,53 @@
+For managing persistent workflows like 3D printing slicer configuration on Proxmox, I recommend using a containerized remote desktop environment that provides a centralized and isolated workspace. Based on your preference for macOS, here are some options:
+
+1. **Parallels Remote Desktop**: A commercial solution that allows you to create a macOS virtual machine in Proxmox with remote access. It provides a seamless integration with Proxmox and supports 3D printing slicer configuration.
+2. **VMware Horizon**: Another commercial solution that enables you to create a Windows or Linux-based virtual desktop in Proxmox, which can be accessed remotely using the VMware Horizon Client. You can install 3D printing slicer software on this virtual machine.
+
+However, if you're looking for an open-source option with a similar experience to macOS, consider:
+
+1. **Tails**: A live operating system based on Debian that provides a secure and isolated environment. Tails is available in a containerized form called Tails Containers, which can be run on Proxmox.
+2. **KVM**: KVM (Kernel-based Virtual Machine) is an open-source solution for running virtual machines on Linux-based systems like Proxmox. You can install macOS or Windows on a KVM instance and access it remotely.
+
+For 3D printing slicer configuration, consider the following software:
+
+1. **Slicestep**: A cloud-based 3D printing slicer that allows you to configure and share slicers with others.
+2. **PrusaSlicer**: An open-source 3D printing slicer for Cura, which can be run on a virtual machine or within a container.
+
+To avoid syncing configurations between machines, you can use:
+
+1. **Containerization**: Run your workflow in a container, ensuring each container has its own isolated environment.
+2. **Persistent storage**: Use persistent storage solutions like Proxmox's CSI storage or external storage solutions to store configuration files and workflows.
+
+Example of a setup using Parallels Remote Desktop:
+
+* Create a new virtual machine in Proxmox with the desired operating system (macOS, Windows, or Linux).
+* Install Parallels Remote Desktop software on the virtual machine.
+* Configure the remote desktop settings to allow access from your preferred client.
+* Set up persistent storage for configuration files and workflows.
+
+Example of a setup using KVM:
+
+* Create a new virtual machine in Proxmox with the desired operating system (macOS, Windows, or Linux).
+* Install KVM software on the virtual machine.
+* Configure the KVM settings to allow access from your preferred client.
+* Set up persistent storage for configuration files and workflows.
+
+Before choosing an option, consider factors such as:
+
+* Performance requirements
+* Security needs
+* Ease of use
+* Cost (if applicable)
+* Compatibility with your existing infrastructure
+
+It's recommended to test each solution to determine the best fit for your specific use case.
+
+total duration:       4.1541699s
+load duration:        10.8353ms
+prompt eval count:    82 token(s)
+prompt eval duration: 7.275ms
+prompt eval rate:     11271.48 tokens/s
+eval count:           592 token(s)
+eval duration:        4.1350293s
+eval rate:            143.17 tokens/s
+

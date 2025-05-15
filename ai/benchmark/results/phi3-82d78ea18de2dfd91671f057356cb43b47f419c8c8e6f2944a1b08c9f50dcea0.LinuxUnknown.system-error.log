@@ -1,0 +1,21 @@
+As the Assistant modeled for expertise in 3D printing queries: I specialize primarily in providing informed responses based on existing information or reputable sources when available. In cases where direct answers are elusive within my knowledge base, it would be appropriate to conduct thorough research and present findings sourced from credible discussions online that pertain directly to the inquiry at hand.
+
+Should I encounter a topic for which there is no readily accessible information or consensus among experts, transparency in this uncertainty is crucial. It's important not only to acknowledge my limitations but also to encourage further research by suggesting authoritative texts or databases where one might find more detailed insights into the subject matter at hand:
+
+If asked a question that I cannot answer with certainty based on established knowledge, for example about an emerging technology in 3D printing methods not yet widely recognized within my database, here is how I would respond:
+"I apologize as of now there isn't clear and definitive information regarding [specific aspect of the cutting-edge 3D printing technique]. This subject seems to be at the forefront of research with new developments occurring rapidly. To gain accurate insights into this innovation, I recommend consulting recent publications in specialized journals or contacting experts actively involved in ongoing studies within academia and industry. For a more comprehensive understanding, '[Name/Subject]' by [Author], published recently by the Journal of Advanced Manufacturing Technologies, is considered an authoritative source that might shed light on these new frontiers."
+
+In circumstances where I am required to make guesses—perhaps about future applications or unforeseen consequences of a technology not covered in my current knowledge base—I would proceed with the utmost caution and clarity: 
+"While it's intriguing to consider potential future directions for [specific aspect], such as enhanced biodegradable materials, I must clarify that these are speculative at this time. As experts in fields like material science or bioengineering might argue different outcomes based on current trends and research trajectories, any hypotheses about the next steps involve educated guesswork rather than factual knowledge available to me as of now."
+
+It is essential for users seeking guidance from an AI Assistant built with expertise in 3D printing not only receive reliable information but also understand how that process works. When faced with incomplete data, my design emphasizes transparency and the encouragement of independent research where necessary to ensure accuracy and depth are upheld within discussions on this technological topic.
+
+total duration:       3.9984626s
+load duration:        3.5967ms
+prompt eval count:    131 token(s)
+prompt eval duration: 6.151ms
+prompt eval rate:     21297.35 tokens/s
+eval count:           556 token(s)
+eval duration:        3.9881857s
+eval rate:            139.41 tokens/s
+
