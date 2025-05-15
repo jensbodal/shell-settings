@@ -1,18 +1,37 @@
 #!/bin/bash
 
+set -euo pipefail
 
 SCRIPT_DIR() {
   cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
 }
 
+IS_DEBUG() {
+  DEBUG="${DEBUG:-}"
+  if [ "$DEBUG" != "" ]; then
+    return 0
+  fi
+  return 1
+}
+
+log() {
+  if IS_DEBUG; then
+    printf "[$(date +%s)] [elm] %s\n" "$*"
+  else
+    printf "[elm] %s\n" "$*"
+  fi
+}
+
 DIR="$(SCRIPT_DIR)"
 DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
+PROMPT_SETUP_COMPLETE=""
 PROMPT_A="Show a photo of a red apple on a wooden table with a caption that says, \"Fresh and Juicy.\" Also, display the translation and conversation of 69F in English to C in Norwegian as part of the narrative."
 PROMPT_B="What is the best containerized remote desktop environment to run on Proxmox for managing persistent workflows like 3D printing slicer configuration, with macOS preferred but Linux or Windows acceptable? The goal is to avoid syncing configurations between machines by centralizing the workflow in a local remote desktop."
 PROMPT_C="I need to create system prompt for an LLM that instructs it to act as an expert in 3D printing. If it cannot answer the question it will not guess, it will find a discussion online discussing the topic and find a source for the information. If there is __no__ information about the subject, then simply reply that you are not sure. If you are guessing then make sure it is labeled as a guess and why it should be treated anectodetly. You are supposed to be factual and knowledgeable and reliable, not simply a warn ear to chat with"
 PROMPTS=("$PROMPT_A" "$PROMPT_B" "$PROMPT_C")
 MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
 SYSTEM_GPU="Unknown"
+
 ollama=""
 
 set_system_gpu() {
@@ -22,7 +41,7 @@ set_system_gpu() {
     Linux*)
       # For Linux, list VGA devices (might not directly show the GPU name sometimes)
       sudo apt install pciutils -y
-      lspci | grep -i vga
+      SYSTEM_GPU="$(lspci | grep -i vga || echo 'LinuxUnknown')"
       ;;
     Darwin*)
       # For macOS, use system_profiler to get display info
@@ -30,10 +49,10 @@ set_system_gpu() {
       ;;
     CYGWIN*|MINGW*|MSYS*)
       # For Windows under a Unix-like shell (Cygwin, Git Bash), use WMIC
-      wmic path win32_VideoController get name
+      SYSTEM_GPU="$(wmic path win32_VideoController get name)"
       ;;
     *)
-      echo "[elm] Unsupported OS: $OS"
+      log "Unsupported OS: $OS"
       ;;
   esac
 }
@@ -46,6 +65,15 @@ set_output_filename() {
 }
 
 set_ollama() {
+
+  if [ "$OLLAMA_BIN_PATH" != "" ]; then
+    ollama="$OLLAMA_BIN_PATH/ollama.exe"
+    [[ -f "$ollama" ]] && return 0
+    ollama="$OLLAMA_BIN_PATH/ollama"
+    [[ -f "$ollama" ]] && return 0
+    return 1
+  fi
+
   local path_a="/usr/local/bin/ollama"
   local path_homebrew_macos="/opt/homebrew/bin/ollama"
   local path_windows="$HOME/AppData/Local/Programs/Ollama/ollama.exe"
@@ -71,21 +99,38 @@ set_ollama() {
     ollama="$path_e"
   elif [ -f "$path_macos_idk" ]; then
     ollama="$path_macos_idk"
+  else
+    echo "Ollama not found!"
+    return 1
   fi
+
+  echo "Ollama found at \"$ollama\""
 }
 
 setup() {
-  mkdir -p "$DIR_BENCHMARK_RESULTS"
-  set_system_gpu
-  set_ollama
+  if [ "$PROMPT_SETUP_COMPLETE" = "" ]; then
+    mkdir -p "$DIR_BENCHMARK_RESULTS"
+    set_system_gpu
+    set_ollama
+    PROMPT_SETUP_COMPLETE="True"
+  fi
+
+  set +u
+  if [ "$1" = "" ]; then
+    set -u
+    return 0
+  fi
+  set -u
+
   set_output_filename "$1"
   if ! command -v ansifilter 2>&1; then
     if command -v apt 2>&1; then
-      sudo apt update -y && sudo apt install ansifilter -y
+      sudo apt update -y && sudo apt install ansifilter -y && sudo apt autoremove
     else
       brew install ansifilter
     fi
   fi
+  PROMPT_SETUP_COMPLETE="True"
 }
 
 run() {
@@ -95,17 +140,17 @@ run() {
   setup "$PROMPT"
 
   if [ "$ollama" = "" ]; then
-    echo "Cannot find ollama"
+    log "Cannot find ollama"
     exit 1
   fi
 
   if [ "$filename" = "" ]; then
-    echo "Missing filename"
+    log "Missing filename"
     exit 1
   fi
 
   tmp="$(mktemp)"
-  echo "[elm] Outputting results to \"$filename\""
+  log "Outputting results to \"$filename\""
 
   "$ollama" pull "$MODEL"
   "$ollama" run "$MODEL" --verbose 2>&1 <<< "$PROMPT" | tee "$tmp"
@@ -113,13 +158,32 @@ run() {
   ansifilter "$tmp" > "$filename"
   git add "$filename"
 
-  echo "[elm] DONE"
+  log "$MODEL completed"
 }
 
-for M in "${MODELS[@]}"; do
-  for P in "${PROMPTS[@]}"; do
-    run "$M" "$P"
-  done
-done
+main() {
+  setup
 
-git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
+  if IS_DEBUG; then
+    log "### DEBUG"
+    log "IS DEBUG! [args: $*]"
+    log "[ ollama | ${ollama} ]"
+    log "[ GPU | ${SYSTEM_GPU} ]"
+    return 0
+  fi
+
+  for M in "${MODELS[@]}"; do
+    echo "$ollama pull $M"
+    "$ollama" pull "$M"
+  done
+
+  for M in "${MODELS[@]}"; do
+    for P in "${PROMPTS[@]}"; do
+      run "$M" "$P"
+    done
+  done
+
+  git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
+}
+
+main "$@"
