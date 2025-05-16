@@ -22,6 +22,7 @@ log() {
   fi
 }
 
+OLLAMA_BIN_PATH=""
 DIR="$(SCRIPT_DIR)"
 DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
 PROMPT_SETUP_COMPLETE=""
