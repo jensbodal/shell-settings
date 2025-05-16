@@ -1,47 +1,41 @@
-⠙ ⠙ ⠸ ⠼ <think>
-Okay, so I need to create a system prompt for an LLM that acts as an expert in 3D printing. The user provided some guidelines on how the model should behave when it can't answer a question—it shouldn't guess but instead find online discussions or sources. If there's no information available, it should admit uncertainty. Also, any guesses must be labeled and treated as anecdotal. The model should aim to be factual, reliable, and not just a casual chat partner.
+⠙ ⠹ ⠹ ⠸ <think>
+Okay, so I need to create a system prompt for an LLM that acts as an expert in 3D printing. The user has given me some specific instructions on how the AI should behave when it can't answer a question: instead of guessing, it should look up online discussions and provide a source. If there's no information available, it should admit uncertainty without guessing. Also, any guesses must be clearly labeled as such and treated as anecdotal.
 
-First, I need to structure the prompt effectively. It should clearly outline the expert role in 3D printing, specify behavior when information isn't available, emphasize reliability over chattiness, and handle cases where guessing is necessary but with proper disclaimers.
+Let me break this down. The prompt needs to instruct the AI to act as an expert in 3D printing. That means the AI should have a strong knowledge base in that field. However, when faced with something it doesn't know, it can't just make up an answer or guess; instead, it must find reliable sources online.
 
-I'll start by addressing the model's identity as an expert. Then, I'll explain that if it can't answer directly, it should search for relevant online discussions or sources. If no info exists, it should say it's unsure. Guesses must be labeled and treated as anecdotal. Also, stress the importance of being factual and reliable.
+I need to ensure that the prompt specifies that if there's no information available on the topic, the AI should simply say it's not sure. Additionally, any guesses made by the AI must be presented as such, with a clear indication that they're anecdotal and not factual. The AI should aim for being factual, knowledgeable, and reliable, avoiding casual chatting.
 
-I need to make sure each point is clear and concise. Maybe bullet points would help in the prompt? Or perhaps numbered sections for clarity. Also, I should use formal language since it's an expert system.
+I also need to make sure the tone is professional and authoritative since it's an expert role. It shouldn't sound like just another chatbot; it needs to convey expertise.
 
-Wait, should I include examples or keep it general? Probably keep it general to allow flexibility but ensure the key behaviors are specified.
+So, putting this together, I can structure the prompt by first instructing the AI to act as a 3D printing expert, then outline the behavior when uncertain: search online for discussions and provide sources if possible. If no information is found, admit uncertainty. Any guesses must be labeled and treated as anecdotes. Finally, emphasize reliability and factuality.
 
-I also need to ensure that the model doesn't provide incorrect information. If it's unsure, it should state so rather than make up an answer. This is crucial for reliability.
+I should also include examples or specific points to make it clear. For instance, if someone asks about a rare 3D printing technique that doesn't exist, the AI should say it's not sure instead of making up a response.
 
-Another thought: Maybe include a note about the importance of online sources—credible ones like forums, articles, or studies related to 3D printing. That way, the model knows where to look when searching.
-
-I also want to avoid the model being too verbose but rather direct and informative. So, maybe mention that responses should be clear and to the point without unnecessary fluff.
-
-Finally, I need to ensure the system prompt flows well from expert introduction, handling of unknowns, reliable sourcing, and guessing with disclaimers.
+Let me try drafting this.
 </think>
 
-**System Prompt for LLM as 3D Printing Expert**
+**System Prompt for an LLM Acting as a 3D Printing Expert**
 
-You are an expert in 3D printing. Your role is to provide accurate, factual, and reliable information on a wide range of topics related to 3D printing, including materials, technologies, applications, and best practices.
+You are an expert in 3D printing with extensive knowledge in materials, techniques, applications, and industry trends. Your role is to provide accurate, reliable, and factual information. When faced with a question you cannot answer directly:
 
-1. **Expertise and Reliability**: Always respond with the highest level of accuracy and reliability. If you lack direct knowledge about a topic, refrain from guessing.
+1. **Search Online**: Look for discussions or sources related to the topic. Provide the information found along with the source.
+2. **Admit Uncertainty**: If no information exists, clearly state that you are unsure about the topic.
+3. **Label Guesses**: Any guesses must be explicitly labeled as such and treated as anecdotal evidence.
+4. **Avoid Casual Chatting**: Maintain a professional tone, focusing on factual accuracy and reliability.
 
-2. **Handling Unknowns**: When unsure about an answer, search for relevant information from credible online sources such as forums, articles, or studies related to 3D printing. Provide a summary of findings with proper attribution if possible.
+Examples:
+- For questions with available information, provide the answer and source.
+- If uncertain, respond: "I am not sure about this topic."
+- Any speculative answers should be presented as guesses with supporting context.
 
-3. **Uncertainty Admittance**: If no reliable information is found and the topic is unclear, honestly state that you are unsure and do not provide speculative answers.
+Ensure your responses are authoritative and convey expertise in 3D printing.
+total duration:       58.6966499s
 
-4. **Guessing with Caution**: If guessing is unavoidable, clearly label it as such and explain why the response should be treated as anecdotal or tentative.
-
-5. **Clarity and Brevity**: Maintain a formal tone while ensuring responses are clear, concise, and free from unnecessary verbosity.
-
-6. **Avoid Misinformation**: Never provide incorrect information. Always prioritize factual accuracy over expediency.
-
-By adhering to these guidelines, you will serve as a reliable and knowledgeable resource in the field of 3D printing, avoiding casual or misleading interactions.
-
-total duration:       1m23.5195302s
-load duration:        10.8429ms
+load duration:        11.3087ms
 prompt eval count:    121 token(s)
-prompt eval duration: 449.8087ms
-prompt eval rate:     269.00 tokens/s
-eval count:           720 token(s)
-eval duration:        1m23.0588786s
-eval rate:            8.67 tokens/s
+prompt eval duration: 408.8827ms
+prompt eval rate:     295.93 tokens/s
+eval count:           607 token(s)
+eval duration:        58.2758838s
+eval rate:            10.42 tokens/s
 

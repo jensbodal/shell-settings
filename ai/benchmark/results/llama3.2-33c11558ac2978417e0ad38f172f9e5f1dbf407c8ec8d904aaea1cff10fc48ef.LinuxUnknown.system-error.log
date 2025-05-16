@@ -1,53 +1,32 @@
-For managing persistent workflows like 3D printing slicer configuration on Proxmox, I recommend using a containerized remote desktop environment that provides a centralized and isolated workspace. Based on your preference for macOS, here are some options:
+For managing persistent workflows like 3D printing slicer configuration on Proxmox, I'd recommend using a containerized remote desktop environment that provides a stable and secure platform for users. Based on your requirements, here are some top contenders:
 
-1. **Parallels Remote Desktop**: A commercial solution that allows you to create a macOS virtual machine in Proxmox with remote access. It provides a seamless integration with Proxmox and supports 3D printing slicer configuration.
-2. **VMware Horizon**: Another commercial solution that enables you to create a Windows or Linux-based virtual desktop in Proxmox, which can be accessed remotely using the VMware Horizon Client. You can install 3D printing slicer software on this virtual machine.
+1. **Parallels Desktop**: Parallels is a popular remote desktop solution that supports macOS, Linux, and Windows containers. It provides a seamless and responsive experience, allowing users to interact with their 3D printing workflow without interruptions. Proxmox has official support for Parallels.
+2. **VMware Horizon**: VMware Horizon is another popular remote desktop platform that offers containerized environments for various operating systems, including macOS, Linux, and Windows. It provides a robust security framework and scalable infrastructure, making it suitable for large-scale workflows like 3D printing.
+3. **VirtualBox**: VirtualBox is an open-source virtualization platform that supports containerized environments for multiple operating systems, including macOS, Linux, and Windows. While not as polished as Parallels or VMware Horizon, VirtualBox offers a flexible and affordable solution for managing remote desktop environments on Proxmox.
+4. **Raspberry Pi-based solutions**: If you're looking for an even more lightweight and cost-effective option, consider using Raspberry Pi-based solutions like **PiVPN** or **PiRemoteDesktop**. These solutions provide a compact, containerized environment that can run on a Raspberry Pi device, offering a cost-effective way to manage 3D printing workflows.
 
-However, if you're looking for an open-source option with a similar experience to macOS, consider:
+All of these options can be used with Proxmox and offer a range of benefits for managing persistent workflows. Here's a brief summary:
 
-1. **Tails**: A live operating system based on Debian that provides a secure and isolated environment. Tails is available in a containerized form called Tails Containers, which can be run on Proxmox.
-2. **KVM**: KVM (Kernel-based Virtual Machine) is an open-source solution for running virtual machines on Linux-based systems like Proxmox. You can install macOS or Windows on a KVM instance and access it remotely.
+* **Parallels Desktop**: Provides a seamless user experience, robust security features, and official support from Proxmox.
+* **VMware Horizon**: Offers a scalable infrastructure, robust security features, and a more comprehensive set of tools for managing remote desktop environments.
+* **VirtualBox**: Provides a flexible and affordable solution with open-source software.
+* **Raspberry Pi-based solutions**: Offers a compact, cost-effective option with a smaller footprint.
 
-For 3D printing slicer configuration, consider the following software:
+Before making a final decision, consider the following factors:
 
-1. **Slicestep**: A cloud-based 3D printing slicer that allows you to configure and share slicers with others.
-2. **PrusaSlicer**: An open-source 3D printing slicer for Cura, which can be run on a virtual machine or within a container.
+1. **User experience**: How important is the user experience to your users? If you need a seamless and responsive experience, Parallels Desktop or VMware Horizon might be a better choice.
+2. **Security**: What level of security do you require for your workflow? If you need robust security features, VMware Horizon or Parallels Desktop might be a better fit.
+3. **Scalability**: How many users will be accessing the remote desktop environment? If you expect a high volume of users, VMware Horizon or Parallels Desktop might be more suitable.
+4. **Cost**: What is your budget for this solution? Raspberry Pi-based solutions can be an attractive option if you're looking for a cost-effective solution.
 
-To avoid syncing configurations between machines, you can use:
+Ultimately, I recommend evaluating each option based on your specific requirements and choosing the one that best fits your needs.
 
-1. **Containerization**: Run your workflow in a container, ensuring each container has its own isolated environment.
-2. **Persistent storage**: Use persistent storage solutions like Proxmox's CSI storage or external storage solutions to store configuration files and workflows.
-
-Example of a setup using Parallels Remote Desktop:
-
-* Create a new virtual machine in Proxmox with the desired operating system (macOS, Windows, or Linux).
-* Install Parallels Remote Desktop software on the virtual machine.
-* Configure the remote desktop settings to allow access from your preferred client.
-* Set up persistent storage for configuration files and workflows.
-
-Example of a setup using KVM:
-
-* Create a new virtual machine in Proxmox with the desired operating system (macOS, Windows, or Linux).
-* Install KVM software on the virtual machine.
-* Configure the KVM settings to allow access from your preferred client.
-* Set up persistent storage for configuration files and workflows.
-
-Before choosing an option, consider factors such as:
-
-* Performance requirements
-* Security needs
-* Ease of use
-* Cost (if applicable)
-* Compatibility with your existing infrastructure
-
-It's recommended to test each solution to determine the best fit for your specific use case.
-
-total duration:       4.1541699s
-load duration:        10.8353ms
+total duration:       4.1313916s
+load duration:        15.0753ms
 prompt eval count:    82 token(s)
-prompt eval duration: 7.275ms
-prompt eval rate:     11271.48 tokens/s
-eval count:           592 token(s)
-eval duration:        4.1350293s
-eval rate:            143.17 tokens/s
+prompt eval duration: 7.7584ms
+prompt eval rate:     10569.19 tokens/s
+eval count:           595 token(s)
+eval duration:        4.1085579s
+eval rate:            144.82 tokens/s
 

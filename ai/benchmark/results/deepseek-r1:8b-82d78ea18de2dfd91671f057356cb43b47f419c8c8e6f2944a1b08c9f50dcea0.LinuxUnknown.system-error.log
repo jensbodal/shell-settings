@@ -1,46 +1,39 @@
 <think>
-Okay, so I need to create a system prompt for an LLM that makes it act like an expert in 3D printing. The prompt has specific instructions on how the model should handle questions it can't answer. If it doesn't know something, it shouldn't guess but instead look up discussions online and find a reliable source. If there's no information available, it just says it's unsure. Also, whenever it guesses, it needs to label it as such and explain why that guess is anecdotal and not factual.
+Okay, so I need to create a system prompt for an LLM that makes it act as an expert in 3D printing. The user provided an example, but I think they want me to come up with my own version or perhaps refine the existing one. Let me see.
 
-Hmm, let me break this down. First, the prompt should set the tone clearly—factual, knowledgeable, reliable. It shouldn't just be chatting or giving random answers. So I need to start with something like "You are an expert in 3D printing..." That sets the expectation right from the beginning.
+First, the original prompt says the LLM should answer questions accurately, not guess unless necessary. If it can't answer, it should look for discussions online and cite sources. If no info is found, say unsure. Also, if guessing, label it as anecdotal with a reason why.
 
-Next, it needs to handle cases where it doesn't know the answer. Instead of making up stuff or guessing, it should look for online discussions and sources. So the prompt should instruct it to search relevant forums, academic papers, or official documentation. If it can't find anything, then it should respond that there's no information available.
+I need to make sure my prompt covers these points but maybe rephrases them or adds something. Let me think about the structure: maybe start by defining its role as an expert, then outline the behavior in different scenarios.
 
-When it does make a guess, like if it's not certain about something, it has to label it as a guess and explain why it's anecdotal. Maybe include examples where this might happen, like materials behaving unexpectedly or print jobs failing due to settings.
+Wait, should I include more specifics? Like, when searching online, how detailed should the sources be? Or perhaps emphasize the need for accuracy and reliability.
 
-I also need to emphasize that it should not make up information or rely on personal knowledge but instead base its answers on credible sources. So the prompt should reiterate that importance of accuracy and reliability.
+Also, the original prompt mentions not being a "warning ear," so it shouldn't just chat but provide actual help. So maybe stress the importance of factual information over casual responses.
 
-Wait, does it mean that if it can't find a source after searching, it just says "I am unsure"? That makes sense because without credible info, it shouldn't speculate. Also, when providing advice, it needs to be thorough and explain the reasoning behind each step so users can understand why a certain method is recommended.
-
-Putting this all together, the prompt should guide the model through its thought process: start with confidence in expertise, handle unknowns by searching, provide accurate info or admit uncertainty, and only guess if necessary, labeling it as such. It's all about balancing helpfulness with credibility.
-
-I think I covered the main points. Let me make sure the language is clear and direct without being too technical, so the model can easily follow the instructions without confusion. Also, using specific terms like "anecdotal" and examples helps clarify why guesses are labeled as such.
+I'll structure it similarly to the example but tweak some wording for clarity or emphasis. Let me draft a new version, making sure each part is covered: role as expert, handling questions, search for discussions, citing sources, no info response, guessing with labels, and adherence to being reliable.
 </think>
 
 **System Prompt for 3D Printing Expert LLM**
 
-You are an expert in 3D printing with a commitment to factual accuracy and reliability. Your responses should be based on credible sources and thorough research.
+You are designated as an expert in the field of 3D printing. Your role is to provide accurate, reliable, and well-supported information based on current knowledge.
 
-1. **Initial Response**: Begin by confidently stating your expertise, setting the expectation of reliability.
+1. **Answering Questions**: When possible, answer questions with precise and factual data from credible sources. Avoid guessing unless absolutely necessary.
 
-2. **Handling Unknowns**: If you encounter a question you cannot answer, search relevant forums, academic papers, or official documentation for information.
+2. **Research and Sources**: If unable to answer directly, conduct an online search for relevant discussions or studies. Cite specific sources, preferably academic papers, official documentation, or reputable forums.
 
-3. **No Information Found**: If no credible source is available, respond that there's no information and refrain from speculation.
+3. **No Information Response**: If no credible information is found on a topic, respond that you are unsure about the subject matter.
 
-4. **Guessing Scenario**: When necessary to make an educated guess:
-   - Label it as a "guess" and explain why it's anecdotal, e.g., unexpected material behavior or print job issues due to settings.
+4. **Guessing Protocol**: If compelled to guess, label it as anecdotal and provide rationale for why such an approach isn't definitive. Avoid casual speculation without support.
 
-5. **Accuracy Emphasis**: Always base answers on credible sources; avoid making up information or relying on personal knowledge.
+5. **Commitment to Reliability**: Prioritize factual information over casual conversation. Ensure responses are informed and backed by evidence whenever possible.
 
-6. **Thorough Advice**: Provide detailed reasoning behind recommendations so users understand the basis for each step.
+By adhering to this prompt, you will serve as a trusted resource, providing helpful and accurate guidance in the realm of 3D printing.
 
-This structured approach ensures helpfulness while maintaining credibility, balancing expertise with accountability for information accuracy.
-
-total duration:       21.3454252s
-load duration:        10.998ms
+total duration:       9.7796728s
+load duration:        13.5195ms
 prompt eval count:    121 token(s)
-prompt eval duration: 79.7107ms
-prompt eval rate:     1517.99 tokens/s
-eval count:           736 token(s)
-eval duration:        21.2537018s
-eval rate:            34.63 tokens/s
+prompt eval duration: 55.1284ms
+prompt eval rate:     2194.88 tokens/s
+eval count:           522 token(s)
+eval duration:        9.710522s
+eval rate:            53.76 tokens/s
 

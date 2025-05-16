@@ -1,28 +1,21 @@
-⠋ ⠙ ⠸ ⠼ ⠼ ⠦ ⠦ ⠇ ⠇ ⠋ ⠋ ⠹ ⠹ ⠼ ⠴ ⠴ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ![Red Apple](https://cdn.pixabay.com/photo/2017/08/31/14/55/apple-2661538__340.jpg)
+⠙ ⠙ ⠹ ⠸ ⠼ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠧ ⠇ ⠇ ⠋ ⠙ ⠙ ⠸ ⠸ ⠴ ⠦ ⠧ ⠧ ⠏ ⠋ ![Red Apple](https://cdn.discordapp.com/attachments/857043123051372544/965763858161204224/apple.jpg)
 
   "Fresh and Juicy"
   ------------------
 
-  In this cozy setting, a vibrant red apple sits atop a rustic wooden table, its allure beckoning to those nearby. The apple's sheen catches the eye, hinting at its luscious, sweet flavor waiting to be savored.
+As the cool autumn breeze filled the room, a vibrant red apple sat elegantly on a rustic wooden table, its shiny surface inviting you to take a bite. The aroma of freshness wafted through the air, tantalizing your senses. This is not just an apple; it's a reminder of the simple pleasures in life, a symbol of nature's bounty.
 
-  As for the temperature conversion, let's take a quick detour:
+While enjoying the sight and smell of this luscious fruit, let's delve into a brief exchange about temperature conversion:
 
-  69°F (in English) is equivalent to approximately 20.55°C (in Celsius). Here's how you can convert it in Norwegian:
+You: What is 69 degrees Fahrenheit in Celsius?
+Assistant: To convert 69 degrees Fahrenheit to Celsius, we can use the formula F = (C * 9/5) + 32, where F is Fahrenheit and C is Celsius. Rearranging this equation gives us C = (F - 32) * 5/9. So 69 degrees Fahrenheit is approximately 20.56 degrees Celsius in Norwegian, which translates to "omkring 20,56 grader Celsius" in Norwegian.
 
-  *English:* 69 degrees Fahrenheit
-  *Norwegian:* 69 grader Fahrenheit
-
-  *Conversion Formula:* (F - 32) x 5/9 = C
-  *Calculation:* (69 - 32) x 5/9 = 20.55°C
-
-  As you can see, temperatures around the apple are just right for enjoying a fresh and juicy treat!
-
-total duration:       5.8213124s
-load duration:        2.5931613s
+total duration:       6.5732913s
+load duration:        2.9580037s
 prompt eval count:    56 token(s)
-prompt eval duration: 133.8074ms
-prompt eval rate:     418.51 tokens/s
-eval count:           288 token(s)
-eval duration:        3.0938295s
-eval rate:            93.09 tokens/s
+prompt eval duration: 118.3065ms
+prompt eval rate:     473.35 tokens/s
+eval count:           329 token(s)
+eval duration:        3.4952609s
+eval rate:            94.13 tokens/s
 

@@ -1,64 +1,43 @@
-⠋ ⠙ To achieve your goal of running a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration, I recommend using the following setup:
+⠙ To achieve your goal of running a containerized remote desktop environment on Proxmox for managing persistent workflows like 3D printing slicer configuration, you can use one of the following solutions. I've listed macOS-first options and then alternatives that support Linux or Windows:
 
-1. **Remote Desktop Solution**: Use **NoMachine** (formerly known as NX Server). It's open-source, supports both Linux and macOS clients, and offers better performance than other remote desktop solutions like VNC or TeamViewer for running 3D printing software. It also allows you to run your applications inside the container while keeping the UI on the client machine.
+1. **macOS (preferred) - Apple Remote Desktop (ARD)**:
+   While not containerized, ARD is a powerful remote desktop solution for macOS users. It allows you to remotely manage your Macs, share desktops, and even control other users' screens. To use it with Proxmox:
 
-2. **Containerization Platform**: Since Proxmox is based on KVM and contains Docker, use **Docker** along with Proxmox's built-in container capabilities (Proxmox Container Service) to manage your containers.
+   - Install ARD on the Mac guest running inside a Proxmox VM.
+   - Enable Screen Sharing (Remote Management) on your Mac guests.
+   - Configure ARD to connect to your Mac guests using their IP addresses or hostnames.
 
-3. **Operating System for the Container**: For macOS users, the best option would be to create a Linux-based container (e.g., Ubuntu or Debian), as running macOS in a container is not officially supported and might have compatibility issues. You can use:
+2. **macOS & Linux - NoMachine**:
+   NoMachine is a free, cross-platform remote desktop application that uses NX technology for better performance and bandwidth optimization. It supports macOS and Linux. To use it with Proxmox:
 
-   - **Linux (Ubuntu/Debian)**: These are well-supported options that work seamlessly with Docker.
-   - **Windows**: If you prefer Windows, you can create a Windows-based container using Proxmox's Microsoft Edge or Hyper-V support for Windows guests.
+   - Install NoMachine on both the Mac/Linux guest VMs and your host machine (running Proxmox).
+   - Configure NoMachine to allow connections from specific IP addresses or by creating an account for your host machine.
+   - Connect to your guests using the NoMachine client on your host machine.
 
-Here's how to set up the environment:
+3. **Linux & Windows - X2Go**:
+   X2Go is another free, open-source remote desktop solution that supports Linux and Windows. It's lightweight and uses SSH for secure communication. To use it with Proxmox:
 
-**On your Proxmox host:**
+   - Install X2Go server on your Linux/Windows guest VMs.
+   - Install X2Go client on your host machine (running Proxmox).
+   - Configure X2Go to allow connections from your host machine's IP address.
 
-1. Install NoMachine server (nxserver) on the Proxmox host:
-   ```
-   apt-get install nxserver
-   ```
+4. **Cross-platform (macOS, Linux, Windows) - VirtualGL**:
+   VirtualGL is an open-source tool that allows you to access remote desktop services using OpenGL for hardware-accelerated 3D applications. It supports macOS, Linux, and Windows. To use it with Proxmox:
 
-2. Start and enable the nxserver service:
-   ```
-   systemctl start nxserver
-   systemctl enable nxserver
-   ```
+   - Install VirtualGL on both your guest VMs and the host machine running Proxmox.
+   - Configure VirtualGL to allow connections from your host machine's IP address.
+   - Connect to your guests using a remote desktop client that supports VirtualGL, such as TigerVNC or NoMachine.
 
-3. Create a container with your preferred Linux distribution using Proxmox's built-in container capabilities or Docker:
+For all these solutions, you can use containerization by installing them inside Docker containers. However, keep in mind that running a graphical user interface (GUI) application like a remote desktop client might require additional configuration for exposing the necessary ports and handling display settings.
 
-   For Ubuntu/Debian:
-   ```
-   pct create /create ubuntu-20.04
-   ```
+Additionally, to maintain persistent workflows and configurations, consider using tools like version control systems (e.g., Git), synchronization services (e.g., Dropbox or Nextcloud), or container orchestration platforms (e.g., Docker Compose) to manage your files and settings.
 
-**In the created container:**
-
-1. Install NoMachine client (nxclient):
-   ```
-   apt-get install nxclient
-   ```
-
-2. Install your 3D printing slicer software, e.g., PrusaSlicer:
-   ```
-   apt-get install prusa-slicer
-   ```
-
-**On your macOS/Linux/Windows machine:**
-
-1. Download and install the NoMachine client from their official website: https://www.nomachine.com/download
-
-2. Configure the NoMachine client to connect to your Proxmox host using the container's IP address or hostname.
-
-3. Once connected, you can start your 3D printing slicer software inside the container, and manage your persistent workflows remotely without needing to sync configurations between machines.
-
-This setup should provide you with an efficient remote desktop environment for managing your 3D printing workflows while keeping everything centralized in a local container on Proxmox.
-
-total duration:       41.7837091s
-load duration:        10.8332ms
+total duration:       32.0997419s
+load duration:        17.8593ms
 prompt eval count:    64 token(s)
-prompt eval duration: 228.8998ms
-prompt eval rate:     279.60 tokens/s
-eval count:           589 token(s)
-eval duration:        41.5434716s
-eval rate:            14.18 tokens/s
+prompt eval duration: 175.7325ms
+prompt eval rate:     364.19 tokens/s
+eval count:           624 token(s)
+eval duration:        31.9056476s
+eval rate:            19.56 tokens/s
 

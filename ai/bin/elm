@@ -83,6 +83,7 @@ set_ollama() {
   local path_d="/usr/local/bin/ollama"
   local path_e="/home/linuxbrew/.linuxbrew/bin/ollama"
   local path_macos_idk="/usr/local/bin/ollama"
+  local path_jensbodal="/mnt/c/Users/jensbodal/AppData/Local/Programs/Ollama/ollama"
 
   if [ -f "$path_a" ]; then
     ollama="$path_a"
@@ -100,6 +101,8 @@ set_ollama() {
     ollama="$path_e"
   elif [ -f "$path_macos_idk" ]; then
     ollama="$path_macos_idk"
+  elif [ -f "$path_jensbodal" ]; then
+    ollama="$path_jensbodal"
   else
     echo "Ollama not found!"
     return 1

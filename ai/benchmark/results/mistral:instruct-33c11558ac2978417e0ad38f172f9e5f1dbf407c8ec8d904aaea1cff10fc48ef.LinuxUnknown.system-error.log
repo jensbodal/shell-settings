@@ -1,35 +1,57 @@
- For your specific use case, creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration would involve several steps. Here's a general approach using Portainer (for container management) and Jumpcloud (for remote access management). Note that this setup will require you to have ProxmoxVE installed and running on your system.
+ To achieve your goal of creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows, I would recommend using a combination of Docker containers for the specific applications (like 3D printing slicers) and a Remote Desktop Server (RDS) container for managing the graphical user interface.
 
-1. Install Docker and Kitematic (or Docker Desktop for Windows/Mac) on the host machine running ProxmoxVE.
+   Here's an outline to guide you through setting up this environment:
 
-2. Install Portainer by deploying a container in ProxmoxVE using the following command:
+1. Install Docker on your Proxmox server if it isn't already installed. You can do this using the following command:
 
-   ```
-   docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer
-   ```
+```bash
+apt-get update && apt-get install docker.io -y
+```
 
-3. Access Portainer via the ProxmoxVE web interface (default IP and port 9000). You'll be able to manage your containers from here.
+2. Create a network for your containers, so they can communicate easily:
 
-4. Create a new container for the remote desktop environment. You can use solutions like Remote Desktop Services (RDS) for Windows, XQuartz or VirtualBox VNC server for macOS, and X2Go for Linux. For this example, let's use RDS with an Ubuntu base image to host multiple sessions and allow the connection from any platform:
+```bash
+docker network create rdp-network
+```
 
-   ```
-   docker run -d --restart=unless-stopped -p 3389:3389 --name rds_container -v /mnt/data/rds:/data mcr.microsoft.com/windowsservercore:ws2016-ltsc
-   ```
+3. Pull the RDS container image of your choice (e.g., Microsoft Remote Desktop Server, XRDP). For this example, I'll use XRDP:
 
-5. Install RDP client software on your local machine (e.g., Remote Desktop Connection for Windows, XQuartz with RDP client for macOS, or xrdp for Linux). Connect to the created container using the IP and port you specified during container creation.
+```bash
+docker pull xrdp/xrdp
+```
 
-6. Install and configure the desired 3D printing slicer software inside the remote desktop environment container. Make sure it's set up in a persistent manner (e.g., by installing on the data volume mapped during container creation).
+4. Create a Docker volume to store the RDS configuration and data:
 
-7. To manage access to this environment, use a service like Jumpcloud that supports RDS connections. Jumpcloud provides centralized management for users and computers, allowing you to easily grant access to your remote desktop environment. This way, you can avoid syncing configurations between machines by centralizing the workflow in a local remote desktop while still maintaining control over user access and permissions.
+```bash
+docker volume create rdp-data
+```
 
-8. As an alternative, you could also look into solutions like TeamViewer or AnyDesk for managing remote connections more easily across multiple platforms without setting up RDS, but they may require additional configurations to share files or manage persistent workflows efficiently.
+5. Run the XRDP container using your preferred OS, setting environment variables, and attaching the volume and network:
 
-total duration:       7.0783453s
-load duration:        3.6949ms
+```bash
+docker run -it --name rdp -v rdp-data:/etc/xrdp -e XORG_CONFIG_FILE=/etc/xrdp/xstartorg.sh -e USER=<your-user> -e PASSWORD=<your-password> -p 3389:3389 --net rdp-network xrdp
+```
+
+   Replace `<your-user>` and `<your-password>` with a valid user and password for the RDS server.
+
+6. Install the Docker client on the machine you'll be using to connect to the remote desktop, so you can easily access it. You can do this by downloading the appropriate package from the Docker website (https://docs.docker.com/engine/install/) and installing it according to your operating system.
+
+7. Pull the desired 3D printing slicer container image, create a new network for communication between containers, and run the container using the same network as the RDS server:
+
+```bash
+docker pull <slicer-image>
+docker network create slicer-network
+docker run -it --name slicer -v slicer-data:/mnt/data --net slicer-network <slicer-image>
+```
+
+8. Connect to the RDS server using your preferred RDP client, and you'll be able to access the 3D printing slicer container from there. Any changes made within the container will remain persistent without needing to sync configurations between machines.
+
+total duration:       7.1085983s
+load duration:        5.862ms
 prompt eval count:    69 token(s)
-prompt eval duration: 11.2325ms
-prompt eval rate:     6142.89 tokens/s
-eval count:           643 token(s)
-eval duration:        7.0629079s
-eval rate:            91.04 tokens/s
+prompt eval duration: 10.8327ms
+prompt eval rate:     6369.60 tokens/s
+eval count:           655 token(s)
+eval duration:        7.0919036s
+eval rate:            92.36 tokens/s
 

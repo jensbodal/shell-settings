@@ -1,66 +1,21 @@
-⠙ ⠙ ⠸ ⠸ ⠴ ⠴ ⠦ ⠇ ⠇ ⠏ ⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠧ ⠇ ![Red Apple on Wooden Table](https://i.picsum.photos/2/760/300/?hmO)
+⠙ ⠙ ⠸ ⠸ ⠼ ⠴ ⠦ ⠧ ⠏ ⠏ ⠋ ⠙ ⠸ ⠼ ⠼ ⠦ ⠦ ⠧ ⠏ ⠏ ⠋ ⠹ ⠹ ⠸ ⠼ [Photo] - A shiny bright-red apple sitting atop an aged oak wood table with a clear green vase holding three freshly picked roses beside it, all bathed under warm sunlight streaming through open window blinds on a rustic kitchen countertop background. The caption beneath the photo reads: "Fresh and Juicy."
 
-Caption: Fresh and Juicy! En rødkål med blå bjelot på et brettet. 
+- 69° Fahrenheit (20° Celsius) is typically translated into Norwegian as "syklon" when referring to temperature, hence in C scale it would be approximately -18°C (-0.4°F). However, temperatures are generally not converted between scales in this manner because the context does not usually require such conversions for everyday use; instead, we might say 20°C as is understood universally across various English-speaking regions to a Norwegian audience.
 
+In terms of conversation:
 
-English to Norwegian Translation (Code Conversation):
+Person A (English): "Would you like some apple pie after dinner tonight?"
 
-```c++
+Person B (Norwegian): "Ja, vær så snill å se de sørge! Til og med!" ("Yes, please do that right away! See you and have a good time too!") 
 
-#include <iostream>
+Note: The specific conversion between English to Norwegian for the temperature would not typically occur in this informal exchange. Instead, Person B uses colloquial expressions common among Norwegians who often refer directly to Celsius temperatures without translation or conversions when discussing weather conditions casually with friends and family.
 
-// Function that simulates translation from English temperature in degrees Fahrenheit to Celsius for a classroom discussion scenario, represented as dialogue between two characters: Student and Teacher. 
-
-class TranslateTemperature {
-
-public:
-
-    // Method converts the provided fahrenheit value into celsius within context of conversation
-
-    std::string translateToCelsius(int temperatureInF) const {
-
-        int tempInC = (temperatureInF - 32) * (5.0/9.0); // Conversion formula from Fahrenheit to Celsius
-
-        return "Det er "; std::to_string(tempInC).append(" grader kaldt."); // Norwegian phrase for the converted temperature in Celsius indicating it's cold outside 
-
-    }
-
-};
-
-
-int main() {
-
-    TranslateTemperature translator;
-
-    69F = translator.translateToCelsius(69); // Simulate input of a Fahrenheit temperature (classroom dialogue)
-
-
-    std::cout << 69F << " English to Norwegian translation: \"" << std::endl;
-
-    std::cout << 'Teacher:' << "\n";
-
-    std::cout << "Student:" << '\n';
-
-    std::cout << "...\"\n"; // Pause for dramatic effect as the teacher explains 69F in Celsius using context of weather outside. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
-
-    std::cout << "Student:" << '\n'; // The student understands and echoes the temperature back as 20°C, which is cold in Norwegian. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
-
-    std::cout << "\"\n"; // End of dialogue statement for clarity and separation from the following text output if any other information would follow after teacher's explanation. \n indicates a new line or pause to make it more narrative style.\n" << 'Teacher:' << "\n";
-
-    std0::cout << 69F << " English input: \"The weather outside is quite cold! It feels like freezing point in the city center...\"\n"; // The student provides a description of how it felt to see and touch that red apple, making sure not to burn their hand on its juicy surface.\n"<< 'Teacher:' << "\n";
-
-    return 0;
-
-}
-
-```
-
-total duration:       6.6289628s
-load duration:        1.7219016s
+total duration:       4.7477501s
+load duration:        2.4192447s
 prompt eval count:    60 token(s)
-prompt eval duration: 125.0423ms
-prompt eval rate:     479.84 tokens/s
-eval count:           680 token(s)
-eval duration:        4.7809376s
-eval rate:            142.23 tokens/s
+prompt eval duration: 113.6908ms
+prompt eval rate:     527.75 tokens/s
+eval count:           327 token(s)
+eval duration:        2.2148146s
+eval rate:            147.64 tokens/s
 
