@@ -1,46 +1,35 @@
-⠙ ⠹ ⠸ ⠼ ⠼ ⠴  To achieve your goal of creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration, you can consider using Portainer with LXC containers and Remote Desktop (RDP/VNC) solutions. Here's a step-by-step guide:
+⠙ ⠙ ⠸ ⠼ ⠼  For your requirements, you can create a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows. Here's an approach using LXC (Linux Containers) for managing persistent workflows like 3D printing slicer configurations.
 
-1. Install Docker and LXC on Proxmox:
+1. **Install necessary packages**: First, ensure you have the `lxc` package installed on your Proxmox server:
+
    ```
-   pvece-install docker
-   pveum install lxc
+   apt-get update && apt-get install lxc
    ```
 
-2. Install Portainer:
-   - Download the latest release from https://github.com/portainer/portainer/releases
-   - Upload the portainer-ce.tgz file to your Proxmox storage (iso images).
-   - Create a new LXC container using this template and set the following parameters:
-      - Name: Portainer
-      - Memory limit: 256MB
-      - CPU cores: 1
-      - Root password: Your_Proxmox_Root_Password
-      - Enable auto-restart: Checked
-      - Boot from template: Portainer (Uploaded earlier)
-   - Start the container and set it to start automatically at boot.
+2. **Create a new container**: Use the following command to create a new container with macOS or Linux/Windows as needed (you might need to adjust this command based on the OS template you choose). For example, if you want to use macOS, you can download the official macOS Big Sur template from LXC's GitHub page.
 
-3. Access Portainer:
-   - In your Proxmox web UI, go to Containers > LXC > Portainer > Services tab.
-   - Copy the IP address from the IPv4 address field.
-   - Open a web browser and navigate to http://<IP_Address>:9000 (replace <IP_Address> with your container's IP address).
-   - Login using admin as both username and password.
-   - You can now create new applications (containers) for macOS, Linux, or Windows.
+   ```
+   lxc launch centos:7 container_name --cpu 2 --memory 4096M --device /dev/vda --device /dev/null --device /dev/zero --device /dev/random --device /dev/urandom --device /dev/rtc --device /dev/hpet --device /dev/input/event* --device /dev/dri --device /dev/kvm container_alias
+   ```
 
-4. Configure the RDP/VNC server in your containers:
-   - For macOS: Install CoRD (RDP server) via Homebrew, or use a macOS VM with a pre-installed RDP server like Parallels.
-   - For Linux: Install TightVNC server or Xrdp.
-   - For Windows: Install Remote Desktop Services or third-party VNC servers such as RealVNC.
+   Replace `centos:7` with the desired OS template, and adjust other options according to your needs.
 
-5. Configure your containers to centralize the 3D printing workflow:
-   - In each container, install the necessary slicer software and configure them according to your preferences.
-   - To avoid syncing configurations between machines, save all configuration files on a shared network drive or cloud storage that can be accessed from the containers.
-   - For better organization, create groups in Portainer to manage different projects or tasks more efficiently.
+3. **Install required software**: Install VNC server in your newly created container (e.g., TightVNC Server for Windows, XQuartz for macOS).
 
-total duration:       45.57305s
-load duration:        9.0915ms
+4. **Configure VNC settings**: Set up the VNC viewer on your local machine to connect to this container. The IP address and port number can be found by running `lxc config show container_alias --format json | jq -r '.[0].config.lxc.network.eth0.ipv4'`.
+
+5. **Install 3D printing slicer software**: Install the desired slicing software (e.g., PrusaSlicer, Cura, Simplify3D) inside your container based on its operating system.
+
+6. **Persistent data storage**: To avoid syncing configurations between machines, store the slicer profiles and other necessary files in a shared folder accessible both from the host machine and the container (e.g., `/mnt/data` shared with host's directory `/mnt/data`).
+
+7. **Access container via VNC**: Now you can access your container remotely using your preferred VNC client, where you can manage your 3D printing workflows without the need for syncing configurations between machines.
+
+total duration:       34.81543425s
+load duration:        10.179041ms
 prompt eval count:    69 token(s)
-prompt eval duration: 683.832959ms
-prompt eval rate:     100.90 tokens/s
-eval count:           584 token(s)
-eval duration:        44.877689041s
-eval rate:            13.01 tokens/s
+prompt eval duration: 565.937209ms
+prompt eval rate:     121.92 tokens/s
+eval count:           586 token(s)
+eval duration:        34.23879225s
+eval rate:            17.12 tokens/s
 

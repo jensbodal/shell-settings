@@ -1,43 +1,77 @@
-⠙ ⠙ ⠹ ⠼ ⠼ ⠴ ⠧ ⠧ ⠇ ⠋ ⠋ ⠹ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ <think>
-Okay, so I need to create a system prompt for an LLM that's supposed to act as an expert in 3D printing. The instructions are pretty clear: the AI should provide accurate, reliable information without guessing. If it doesn't know something, it should look up relevant discussions online and cite sources. If there's no info available, just say it's not sure.
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠏ ⠋ ⠹ ⠹ ⠼ ⠼ ⠴ ⠧ ⠇ ⠇ <think>
+Okay, so I'm trying to create a system prompt for an LLM that makes it act like an expert in 3D printing. The user wants the model to avoid guessing if it doesn't know something and instead find discussions or sources online. If there's nothing available, it should just say it's not sure. Also, any guesses have to be labeled as such and treated as anecdotal.
 
-Hmm, let me break this down. First, the AI must act as an expert in 3D printing. That means it needs to have a solid understanding of the subject matter—types of printers, materials, techniques, applications, etc. But I also don't want it to guess; if it can't answer, it should find a reliable source.
+First, I need to understand what the system prompt does. It's a set of instructions for the AI, telling it how to behave in this specific context. So, I'll start by outlining the main points:
 
-So, how do I structure this? Maybe start by telling the AI to adopt an expert persona in 3D printing. Then specify that it shouldn’t make up answers or guess—it should either provide accurate info or refer to credible sources. Also, if no information exists on the topic, it should admit uncertainty without making things up.
+1. **Expertise**: The model should act as an expert in 3D printing. That means accurate and up-to-date information on topics like materials, techniques, equipment, etc.
 
-I think it's important to emphasize reliability and factuality. The AI needs to be knowledgeable and trustworthy, not just a casual chat partner. Maybe add something about using online discussions to find sources when unsure.
+2. **No Guessing**: If it can't answer a question, it shouldn't make things up. Instead, it needs to look for discussions or sources online.
 
-Wait, should I include instructions on how to present information? Like, if the AI has to refer to a source, maybe it can provide a summary or link. Also, if it's uncertain or guessing, label it as such and explain why it’s anecdotal.
+3. **Source Finding**: When uncertain, the model should find relevant online discussions and cite them as sources.
 
-I need to make sure the prompt is clear and covers all bases: expertise, no guessing, sourcing, handling unknown info, reliability, and proper disclosure of guesses.
+4. **Lack of Information**: If there's no available information on the subject, the model should admit uncertainty.
 
-Putting it all together, I think a solid system prompt would set the AI as an expert, command it to avoid guessing, seek sources when unsure, handle cases with no information, prioritize factual accuracy, and clearly mark any conjecture.
+5. **Guessing Label**: If the model has to guess for some reason, it must label it clearly and note that it's anecdotal, not factual.
+
+6. **Factual Reliability**: The output should be factual, knowledgeable, and reliable, avoiding casual chatting.
+
+Now, I need to structure this into a coherent system prompt. It should start with the role instruction, then outline the behavior when unsure, how to find sources, handle cases where no information exists, and clarify when guesses are made.
+
+I also have to make sure that the language is clear and direct, so the model understands the expectations. The tone should be professional but approachable, suitable for an expert assisting users.
+
+Wait, I should check if there's any ambiguity in the instructions. For example, how does the model determine whether it knows enough to answer without guessing? Maybe I need to specify that it only answers based on its training data and available sources, not personal experience or intuition.
+
+Also, when searching online, does the model have real-time access, or is this a hypothetical instruction? Since in reality, most LLMs don't actively browse the web unless trained to do so, but for the sake of this prompt, it's assumed that they can look up sources. I should clarify that it refers to available information and online discussions as of its knowledge cutoff.
+
+I need to make sure each point is clearly addressed without being redundant. Maybe start with a greeting, then outline the expertise, followed by handling unknowns, sourcing, lack of info, and guessing.
+
+Putting it all together:
+
+- Greeting and role assumption.
+- Commitment to accuracy and reliable sources.
+- Instructions on answering or deferring to sources when unsure.
+- Handling cases where no information is found.
+- Clear labeling for any guesses made.
+
+This structure should cover all the user's requirements. Now, translating this into a concise system prompt without being too verbose.
+
+Wait, I think it's also important to mention that if the model can't find any relevant discussions or sources, it should state that clearly and not provide an answer. Also, when providing information from sources, perhaps include how to reference them properly, like URLs or study names.
+
+I should make sure that the prompt doesn't allow the model to fabricate answers but instead points to reliable sources whenever possible. This ensures users get accurate and trustworthy information.
+
+Is there anything else? Maybe an example of how the responses should look, but since it's a system prompt, examples might not be necessary unless specified.
+
+In summary, the key elements are:
+
+- Act as 3D printing expert.
+- Avoid guessing; find sources if unsure.
+- Admit uncertainty if no info available.
+- Label any guesses as anecdotal.
+- Be factual and reliable.
+
+I think that covers everything. Now I'll draft the system prompt accordingly.
 </think>
 
-**System Prompt for 3D Printing Expert LLM:**
+**System Prompt for LLM: Expert in 3D Printing**
 
-You are an expert in 3D printing. Your role is to provide accurate, reliable, and factual information on the subject. When responding to queries:
+You are an expert in 3D printing with extensive knowledge on materials, techniques, equipment, and applications. Your goal is to provide accurate, up-to-date, and reliable information.
 
-1. **Expertise:** Assume a deep knowledge of 3D printing, including various technologies, materials, applications, and techniques.
+- **Answer Honestly**: If you can confidently answer a question, do so.
+- **Seek Sources When Unsure**: If unsure, research online discussions or credible sources and reference them in your response.
+- **Admit Uncertainty**: If no relevant information exists, state that clearly.
+- **Label Guesses**: Any guesses must be labeled as such and noted as anecdotal.
+- **Stay Factual**: Ensure responses are factual and reliable.
 
-2. **No Guessing:** Avoid making up answers or speculating. If unsure about details, refrain from guessing.
+Provide clear, concise answers based on available information. When referencing sources, include URLs or study names where possible. Avoid speculation unless necessary, in which case label it appropriately.
 
-3. **Source Credibility:** If uncertain, locate relevant online discussions or credible sources to provide accurate information.
+Thank you for adhering to these guidelines.
 
-4. **Handling Unknowns:** If no reliable information exists on a topic, clearly state that the subject is unclear and not well-documented.
-
-5. **Reliability:** Focus on being factual and trustworthy, avoiding casual or conversational responses.
-
-6. **Disclosure of Guesses:** If you must conjecture (labeled as such), explain why it should be treated as anecdotal rather than factual.
-
-Ensure your responses are informative, accurate, and adhere to these guidelines.
-
-total duration:       1m51.795196375s
-load duration:        13.558459ms
+total duration:       2m16.385688s
+load duration:        12.041083ms
 prompt eval count:    121 token(s)
-prompt eval duration: 2.112719791s
-prompt eval rate:     57.27 tokens/s
-eval count:           609 token(s)
-eval duration:        1m49.668162542s
-eval rate:            5.55 tokens/s
+prompt eval duration: 1.969101667s
+prompt eval rate:     61.45 tokens/s
+eval count:           1000 token(s)
+eval duration:        2m14.400072541s
+eval rate:            7.44 tokens/s
 

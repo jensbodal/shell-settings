@@ -1,85 +1,75 @@
-⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ <think>
-Okay, so I need to create a system prompt for an LLM that makes it act like an expert in 3D printing. The prompt has some specific instructions: if the LLM can't answer a question, it shouldn't guess but instead look up discussions online and find a source. If there's no information available, it should just say it's unsure. Also, if it's guessing, it needs to label it as such and explain why that guess is anecdotal.
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠦ ⠇ <think>
+Okay, so I need to create a system prompt for an LLM that makes it act as an expert in 3D printing. The user has provided a sample prompt, but they want me to go through the thought process of creating this.
 
-Hmm, I think the prompt provided by the assistant is a good starting point, but maybe I can make some adjustments or rephrase parts of it for clarity or to add more structure. Let me break down what I need to include:
+First, let's understand what the system prompt should do. It needs to instruct the LLM to provide accurate and reliable information about 3D printing. If it can't answer a question directly, instead of guessing, it should search online for discussions or sources on the topic. If there's no available information, it should respond that it's unsure. Also, any guesses made by the LLM should be clearly labeled as such with reasons why they shouldn't be taken as factual.
 
-1. **Instruction for Handling Questions**: When faced with a question, first attempt to provide an accurate and reliable answer based on existing knowledge. If the answer isn't available within its training data, don't guess.
+So, how do I structure this prompt? It should probably start by setting the context—acting as an expert in 3D printing. Then outline the behavior when faced with a question: try to answer based on knowledge, if not possible, search for information online, and handle cases where no info is found or if it's making a guess.
 
-2. **Research Process**: If it can't answer immediately, instruct the LLM to look for discussions online or credible sources about the topic. This means it needs to simulate research by checking forums, academic papers, or reputable websites related to 3D printing.
+I should also include instructions about how to format any online sources found—probably as citations—and emphasize that if the LLM doesn't know something, it shouldn't make up stories or just chat. It needs to remain factual and reliable.
 
-3. **No Information Scenario**: If after searching there's no relevant information, respond that it's unsure. It shouldn't make up facts or provide speculative answers.
+Wait, maybe I should think about the language tone too. The prompt should be clear and authoritative without being condescending. It should guide the LLM to be precise and helpful, not vague or speculative.
 
-4. **Guessing Mechanism**: If the LLM can't find information and has to make a guess, it must clearly state that it's guessing. Then explain why the guess is anecdotal, possibly by mentioning the lack of evidence or the speculative nature of the answer.
+Also, I need to ensure that if the LLM is unable to find information online after trying, it responds clearly that it's unsure. So there's no confusion about whether the information is reliable or not.
 
-5. **Maintaining Credibility**: Ensure the response remains factual, knowledgeable, and reliable, avoiding casual or chatty language. It should be helpful without being vague.
+Putting this all together, the system prompt should have an introduction, behavior instructions for different scenarios (answer, search online, no info), and a conclusion reinforcing its role as a reliable expert.
 
-Thinking about this, I might want to structure each part clearly so that the LLM follows each step methodically. Perhaps using numbered steps would make it more organized. Also, emphasizing the importance of credibility and reliability is crucial so the LLM doesn't provide low-quality answers.
+Let me outline the structure:
 
-I also need to consider how the LLM will access online information. It might require specific search parameters or sources to be considered credible. Maybe including guidelines on which types of forums or databases are acceptable would help maintain quality.
+1. **Introduction**: State that the LLM is acting as an expert in 3D printing.
+2. **Behavior Instructions**:
+   - If it knows the answer, provide it clearly.
+   - If not, search online for discussions or sources.
+   - If no info found, respond that it's unsure.
+   - Any guesses must be labeled with reasons why they're not factual.
+3. **Search Process**: Explain how to find information—look through relevant forums, databases, etc.—and cite sources properly.
+4. **Reliability**: Emphasize that the LLM should avoid making up information or chatting idly; stick to facts and known data.
 
-Another point is handling edge cases where the topic is too new or not well-documented. In such situations, the LLM should clearly state that there's no information available and not make up details.
+I think I have a good structure now. Let me draft this in clear, concise language without markdown, just plain text as per the user's request.
 
-Perhaps adding examples after each instruction could clarify expectations. For instance, if a user asks about a specific 3D printing technique, the LLM would first try to recall information, then search online, and only guess if necessary.
+Wait, no markdown, but when the final response is given, the user expects it within **, so perhaps I should include that? Wait, the initial prompt didn't specify, but since they provided a sample with **, maybe that's acceptable. Or maybe not—wait, in their example, they used **, so probably yes.
 
-I should also ensure that the tone remains professional without being overly robotic. It's important for the interaction to feel helpful and informative, even when the answer isn't available.
+Wait no, looking back, the user provided:
 
-In terms of formatting, maybe using bullet points or numbered steps within the prompt would make it easier for the LLM to parse and follow each instruction clearly.
+They have a sample output where the system prompt is within triple backticks. So perhaps the final answer should be enclosed in triple backticks as well.
 
-Let me try drafting a system prompt incorporating these thoughts:
-
----
+So, I need to make sure that the system prompt I create is properly formatted with ** around it, but actually, looking at their example, they used triple backticks:
 
 **System Prompt:**
 
-You are an expert in 3D printing. When responding to questions:
+"..."
 
-1. **Initial Response**: Provide an accurate answer if possible, based on your training data.
-2. **Research Requirement**: If unsure, conduct an online search using reputable sources (e.g., academic journals, established forums, official manufacturer sites).
-3. **Verification Step**: Ensure the information is reliable and up-to-date before providing it as a response.
-4. **No Information Scenario**: If no relevant information exists, respond clearly that you're unsure.
-5. **Guessing Protocol**: If compelled to make an educated guess:
-   - Clearly state that it's a guess.
-   - Briefly explain why the answer is anecdotal, noting the lack of credible evidence.
+Wait, no, their sample prompt starts with "The following system prompt..." and then explains. Hmm, perhaps just use triple backticks as in:
 
-Maintain factual and reliable responses at all times. Avoid speculative answers unless explicitly stated as guesses with rationale.
+```
+...
+```
 
----
+But to be consistent, maybe follow the same structure as their example.
 
-Does this cover all the necessary points? Let me check each part:
+Alternatively, I can check the exact format they want. Since the user provided a response that included a system prompt within **, but actually, looking again, in their initial question, the sample prompt is just plain text without any markdown. Wait, no, perhaps not. Let me see: the initial user message says "put your final answer within \boxed{}", so maybe I should present the system prompt as a boxed statement.
 
-- It starts by establishing the LLM's role as an expert.
-- Steps 1-5 outline the process for handling questions, including research and verification.
-- Clear instructions on what to do if information isn't available.
-- Specific guidance on guessing with explanations.
-- Emphasis on reliability and credibility.
+Wait, that might be confusing. Alternatively, perhaps the system prompt doesn't need to be boxed, but just written normally. But in their example response, they used ** around the system prompt title and then a blockquote with the actual prompt inside.
 
-I think this should work. It provides a structured approach that the LLM can follow step-by-step, ensuring it doesn't provide inaccurate or speculative information unless necessary and properly justified as a guess.
+But in any case, I'll proceed by drafting the system prompt clearly and concisely, ensuring it meets all the specified requirements.
 </think>
 
-**System Prompt:**
+**System Prompt for 3D Printing Expert**
 
-You are an expert in 3D printing with access to comprehensive resources. Your goal is to provide accurate, reliable, and well-supported responses. Here's how you should handle inquiries:
+"Act as an expert in 3D printing. When presented with a question about 3D printing:
 
-1. **Initial Response**: If the answer is within your training data, respond accurately.
+1. If you can provide an accurate and reliable answer based on your knowledge, do so clearly and precisely.
+2. If the answer isn't readily available, search online for relevant discussions or sources in credible forums, databases, or academic papers.
+3. If no information is found after a thorough search, respond that you are unsure about the topic.
+4. Do not guess unless certain sources confirm the information; any guesses must be clearly labeled as such with reasons why they should be treated as anecdotes.
 
-2. **Research Process**: If uncertain, conduct a structured online search using credible sources such as academic journals, established forums, or official manufacturer sites.
+Seek out and cite reliable sources whenever possible, ensuring your responses are factual, knowledgeable, and trustworthy. Avoid conjecture or casual conversation; maintain professionalism and accuracy at all times."
 
-3. **Verification**: Ensure the information is reliable and current before providing it.
-
-4. **No Information Scenario**: If no relevant info exists, clearly state that you're unsure.
-
-5. **Guessing Protocol**:
-   - Clearly indicate if a guess is necessary.
-   - Explain why it's anecdotal, referencing the lack of credible evidence or speculative nature.
-
-Maintain a professional and helpful tone, avoiding casual language to ensure credibility and reliability in your responses.
-
-total duration:       1m49.102157708s
-load duration:        30.395791ms
+total duration:       1m10.512844958s
+load duration:        15.775792ms
 prompt eval count:    121 token(s)
-prompt eval duration: 1.042576958s
-prompt eval rate:     116.06 tokens/s
-eval count:           1105 token(s)
-eval duration:        1m48.028605542s
-eval rate:            10.23 tokens/s
+prompt eval duration: 813.835959ms
+prompt eval rate:     148.68 tokens/s
+eval count:           1090 token(s)
+eval duration:        1m9.681668708s
+eval rate:            15.64 tokens/s
 

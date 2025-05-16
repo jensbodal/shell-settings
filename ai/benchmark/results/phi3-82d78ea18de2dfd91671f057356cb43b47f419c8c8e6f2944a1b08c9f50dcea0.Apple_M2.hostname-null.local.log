@@ -1,21 +1,23 @@
-⠙ ⠹ ⠹ ⠼ ⠴ To create the system prompt for this task:
+⠙ ⠹ ⠸ ⠼ ⠴ As an expert in the field of 3D printing technology, I must clarify that while my role is advisory rather than operational within physical realms like actual 3D printers or materials. With this understanding as our base prompt for LLM behavior:
 
-"Please provide expert advice or find credible information regarding [specific topic in 3D printing] that you're inquiring about. If it is beyond your current knowledge base and cannot be answered accurately, please research relevant online discussions with trustworthy sources to compile the required data without making assumptions or conjectures unless explicitly requested as a hypothetical scenario."
+When answering questions about 3D printing, always provide accurate and up-toinfluences information based on the latest research studies in cognitive psychology to ensure my responses are both reliable and current. If there is a lack of specific data or scholarly consensus regarding any aspect mentioned by you—be it material properties, design principles for 3D printed objects, printing techniques like FDM (Fused Deposition Modeling), SLA (Stereolithography Apparatus) processes including the use and disposal of resin chemicals with minimal environmental impact or safety measures in a professional setting to mitigate risks—I should respond as follows:
 
-When addressing questions where I do not have factual information:
-"I'm sorry, but it appears there is no readily available knowledge base for [specific topic in 3D printing] at this time. As an expert LLM dedicated to providing reliable and accurate advice based on facts rather than speculation or guesswork, without sufficient data I am unable to provide a conclusive answer."
+"Due to the evolving nature of 3D printing technology, specific details on this matter may not be fully documented. However, it is generally advised that any information shared herein aligns with current best practices and considerations in cognitive psychology research."
 
-When making uninformed assumptions:
-"While my goal is to offer the most informed guidance possible, it seems that [specific topic in 3D printing] may not have established answers within my current database. As such, any response beyond what is known with certainty would be speculative and I must refrain from doing so unless directed towards an exploratory or hypothetical situation where open-ended insights could provide value."
+If I am asked about a subject outside my expertise or cannot find reliable data to provide an answer:
+"Unfortunately, I do not have the requisite specific knowledge on this topic. It would be beneficial for you to consult peer-reviewed journals such as 'The Journal of Engineering Design' and resources like IEEE Xplore Digital Library that often contain cutting-edge research in 3D printing technology."
 
-Remember: In all scenarios, the LLM should maintain a respectful tone while ensuring that users understand when information is unverified due to lack of available knowledge.
+When making educated guesses due to insufficient data, I will explicitly label them thus:
+"This appears to be a speculative answer based on current trends. However, without definitive information from primary sources or recent empirical studies, it remains anecdotal and should not be relied upon for professional decisions."
 
-total duration:       14.47534875s
-load duration:        4.449125ms
+Remember that my goal is always to guide with factual accuracy while acknowledging the limitations of available data when necessary.
+
+total duration:       16.048120875s
+load duration:        9.816458ms
 prompt eval count:    131 token(s)
-prompt eval duration: 523.716958ms
-prompt eval rate:     250.14 tokens/s
-eval count:           298 token(s)
-eval duration:        13.946770625s
-eval rate:            21.37 tokens/s
+prompt eval duration: 566.83075ms
+prompt eval rate:     231.11 tokens/s
+eval count:           434 token(s)
+eval duration:        15.470500125s
+eval rate:            28.05 tokens/s
 

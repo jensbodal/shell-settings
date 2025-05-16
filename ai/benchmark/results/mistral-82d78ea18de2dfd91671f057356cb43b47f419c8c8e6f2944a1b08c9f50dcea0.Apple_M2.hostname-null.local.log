@@ -1,19 +1,19 @@
-⠙ ⠹ ⠹ ⠼ ⠴ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ 3D Printing Expert System Prompt:
+⠙ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ⠇  As an assistant specialized in 3D printing, I will strive to provide you with accurate, up-to-date, and reliable information about all aspects of this technology. If I encounter a question that I cannot answer directly, I will utilize my extensive resources to find relevant discussions and credible sources online. Please note that when I am guessing or providing anecdotal information, I will make sure to clearly label it as such. My primary goal is to serve as a reliable and factual source of knowledge about 3D printing.
 
-Welcome! I am your 3D Printing Expert system. My primary function is to provide accurate and reliable information about all aspects of 3D printing, from technology, materials, software, and hardware, to design, applications, and best practices. If a question arises that I cannot directly answer, I will search for the most appropriate online discussions and sources to find the information needed.
+Here are some examples of how I can assist:
 
-Please note that while I strive to be as accurate as possible, some of the information may be subject to change based on technological advancements or new research in the field. If you suspect any information provided is outdated or incorrect, please let me know, so I can update my knowledge base accordingly.
+* You need help understanding the process of Fused Deposition Modeling (FDM) for 3D printing.
+* You want to know the best materials to use for a specific application, such as creating durable parts for mechanical engineering or biocompatible materials for medical applications.
+* You are curious about the latest advances in 3D printing technology and want to learn more about new techniques like Multi Jet Fusion or Selective Laser Sintering (SLS).
+* You need advice on selecting a suitable 3D printer for your needs, taking into account factors such as cost, build volume, and print quality.
+* You are looking for design tips for optimizing your 3D models for 3D printing, including information on slicing software and best practices for supporting overhangs and complex geometries.
 
-In cases where there is insufficient or conflicting information available online, I will not make guesses but instead state that I am unable to provide an answer at this time. Additionally, any information that is not backed by reliable sources should be treated as anecdotal and used with caution.
-
-Now, let's dive into the fascinating world of 3D printing! What can I assist you with today?
-
-total duration:       23.103233958s
-load duration:        14.607458ms
+total duration:       19.176003625s
+load duration:        8.487583ms
 prompt eval count:    126 token(s)
-prompt eval duration: 1.18176175s
-prompt eval rate:     106.62 tokens/s
-eval count:           244 token(s)
-eval duration:        21.906176958s
-eval rate:            11.14 tokens/s
+prompt eval duration: 837.155958ms
+prompt eval rate:     150.51 tokens/s
+eval count:           299 token(s)
+eval duration:        18.329381333s
+eval rate:            16.31 tokens/s
 

@@ -1,27 +1,30 @@
-⠙ ⠹ ⠸ ⠸ ⠴  For your specific use case, creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for managing persistent workflows like 3D printing slicer configuration could be achieved using a combination of a Remote Desktop Solution (RDS) and Docker containers. Here's a suggested setup:
+⠙ ⠙ ⠸ ⠼ ⠼  To achieve your goal of creating a containerized remote desktop environment on Proxmox that supports various operating systems (macOS, Linux, and Windows) for persistent workflows like 3D printing slicer configuration, I recommend using Portainer for managing your containers and LXC for containerization. Here's a step-by-step guide to set this up:
 
-1. Choose a Remote Desktop Protocol (RDP) server software that supports containerization, such as RDPWS (Remote Desktop Services for Windows Containers) or Remina (a lightweight open-source RDP server for Linux). Both options are compatible with Proxmox and Docker.
+1. Install Proxmox and ensure it's up-to-date.
 
-2. Create a dedicated Proxmox VM (Virtual Machine) for your centralized remote desktop environment. Install the operating system of your choice, either macOS, Linux or Windows, on this VM.
+2. Install Docker and LXC on Proxmox VMs or Containers (LXC is included in Proxmox by default). You can follow the official documentation for this: https://pve.proxmox.com/wiki/Proxmox_VE:_Docker
 
-3. Configure the RDP server software on the selected OS, ensuring it's optimized for your specific use case, such as performance and security settings for 3D printing slicer configuration workflows.
+3. Install Portainer on your Proxmox host to manage your containers easily: https://docs.portainer.io/learn/deploy-portainer/deploy-using-docker-compose/
 
-4. Create a Dockerfile to build your application containers (e.g., the 3D printer slicer software) with persistent storage that can be accessed from within the RDP session. This will help centralize your workflow and avoid syncing configurations between machines.
+4. Choose an appropriate Remote Desktop Solution (RDS) for each OS you want to support:
+   - macOS: CoRD or Remote Desktop Client can be used as an RDP client on macOS, and the MacStacion app can be deployed in a container to create a macOS server.
+   - Linux: Xrdp is a popular choice for creating an RDP server on Linux containers.
+   - Windows: You can use Remote Desktop Protocol (RDP) natively with your Windows container, or use AnyDesk or TeamViewer if you prefer them.
 
-5. Build and run the Docker containers for each required application on your centralized remote desktop environment, mapping necessary volumes to the host file system (i.e., the Proxmox VM) where they can be accessed by users within their RDP sessions.
+5. Create Dockerfiles for each of the above RDS and 3D slicer applications that you want to run. The Dockerfile should install the application and set it up as a service that starts automatically when the container boots.
 
-6. Install any additional tools or utilities needed for managing 3D printing workflows and optimize your container environment as required.
+6. Deploy these containers using Portainer, ensuring they share necessary volumes so that configurations are persistent across sessions.
 
-7. Set up user access to the remote desktop environment, either through Active Directory for Windows-based solutions or LDAP/SSH connections for Linux-based solutions, depending on the RDP server software you choose.
+7. Connect to your Proxmox host from another machine using RDP (for Windows), SSH (for Linux), or VNC/RDP (for macOS). Then, access the desired containerized applications within those sessions without worrying about syncing configurations between machines.
 
-By following this approach, you can create a centralized containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows, allowing you to manage persistent workflows like 3D printing slicer configuration without the need for syncing configurations between machines.
+By following these steps, you'll have a centralized workflow that avoids configuration syncing between machines, allowing you to manage persistent workflows like 3D printing slicer configuration efficiently.
 
-total duration:       39.111126958s
-load duration:        4.495542ms
+total duration:       31.388691292s
+load duration:        8.962958ms
 prompt eval count:    69 token(s)
-prompt eval duration: 555.635792ms
-prompt eval rate:     124.18 tokens/s
-eval count:           475 token(s)
-eval duration:        38.550525125s
-eval rate:            12.32 tokens/s
+prompt eval duration: 565.453333ms
+prompt eval rate:     122.03 tokens/s
+eval count:           518 token(s)
+eval duration:        30.812969875s
+eval rate:            16.81 tokens/s
 

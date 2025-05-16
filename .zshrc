@@ -417,3 +417,6 @@ fi
 [[ -d $HOME/.lmstudio/bin ]] && export PATH="$PATH:/Users/jensbodal/.lmstudio/bin"
 # End of LM Studio CLI section
 
+
+# Added by Windsurf
+[[ -d $HOME/.codeium/windsurf/bin ]] && export PATH="/Users/jensbodal/.codeium/windsurf/bin:$PATH"
