@@ -1,0 +1,87 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ⠧ ⠏ ⠏ ⠙ ⠙ ⠸ ⠸ ⠼ ⠦ ⠧ Okay, here's a template for a well-structured prompt to compare libraries, frameworks, and related agentic tooling. This template is designed to elicit a detailed and organized comparison, focusing on key criteria relevant for making a decision.
+
+**Prompt Title:** Comparative Analysis: [Library/Framework 1] vs. [Library/Framework 2] vs. [Related Tooling]
+
+**I. Introduction (Context Setting - 1-2 Sentences)**
+
+*   **Briefly state the overall goal:** "This analysis will compare [Library/Framework 1], [Library/Framework 2], and [Related Tooling] for use in [Specific Use Case - e.g., building a web application, performing data analysis, automating a workflow]."
+*   **Define the Scope:**  "The comparison will focus on features, performance, ease of use, community support, and long-term maintainability."
+
+**II.  Evaluation Criteria (Categorized & Weighted - This is the core of the prompt)**
+
+For *each* criterion, provide a section like the following:
+
+**(A) Feature Set & Functionality:** (Weight: [e.g., 25%])
+
+*   **[Library/Framework 1]:**  (Provide a bulleted list of key features and capabilities.  Be specific – don’t just say “data manipulation.”  Example: "Offers a comprehensive set of functions for parsing CSV files, generating JSON, and performing basic data transformations.")
+*   **[Library/Framework 2]:** (Same as above)
+*   **[Related Tooling]:** (Same as above)
+*   **Comparative Analysis:** (Most Important -  A table is highly recommended here for clarity)
+
+| Feature                | [Library/Framework 1] | [Library/Framework 2] | [Related Tooling] |
+| ----------------------- | ---------------------- | ---------------------- | ----------------- |
+| [Specific Feature 1]   | [Details]              | [Details]              | [Details]        |
+| [Specific Feature 2]   | [Details]              | [Details]              | [Details]        |
+| ...                    | ...                    | ...                    | ...               |
+
+
+**(B) Performance & Scalability:** (Weight: [e.g., 20%])
+
+*   **Benchmark Results:** (If available, include benchmark data for relevant tasks.  Otherwise, describe expected performance characteristics based on documentation/community feedback).
+*   **Scalability Considerations:** (Discuss how each option handles increasing workloads and data volumes. Consider factors like concurrency, resource usage, and potential bottlenecks.)
+
+**(C) Ease of Use & Learning Curve:** (Weight: [e.g., 15%])
+
+*   **Documentation Quality:** (Assess the clarity, completeness, and helpfulness of the documentation for each option.)
+*   **API Design:** (Evaluate how intuitive and easy-to-use the API is. Consider the language of the API, the number of steps required to accomplish common tasks, and the availability of examples.)
+*   **Community Support:** (Describe the strength of the community support, including forums, online resources, and the responsiveness of developers.)
+
+**(D) Ecosystem & Tooling:** (Weight: [e.g., 15%])
+
+*   **Available Integrations:** (List other libraries, frameworks, and tools that integrate well with each option.)
+*   **Package Management:** (Evaluate the package management system – e.g., npm, pip, Maven – and its ease of use.)
+*   **Testing Support:** (Assess the availability of testing frameworks and tools.)
+
+
+**(E)  Long-Term Maintainability & Community Health:** (Weight: [e.g., 15%])
+
+*   **Project Activity:** (Assess the level of ongoing development and maintenance of each project, including commit frequency, bug fixes, and feature additions.)
+*   **License:** (Describe the license terms and any restrictions.)
+*   **Community Sentiment:** (A qualitative assessment of the overall health and vibrancy of the community.)
+
+**(F) Cost & Licensing:** (Weight: [e.g., 10%])
+
+*   **Licensing Costs:** (If applicable, note any licensing fees.)
+*   **Operational Costs:** (Consider hosting costs, server requirements, and any other associated costs.)
+
+
+
+**III. Conclusion (Synthesis & Recommendation)**
+
+*   **Summary of Key Differences:** Briefly recap the most significant differences between the options.
+*   **Recommendation:** Based on the analysis, recommend the most suitable option for the defined use case, explaining your reasoning.  Consider providing multiple recommendations (e.g., "For simple projects, [Option A] is recommended. For complex projects with significant scaling requirements, [Option B] is preferred.")
+
+---
+
+**Notes & Customization:**
+
+*   **Replace the bracketed placeholders** with the specific library/framework names and the related tooling you're comparing.
+*   **Adjust the Weights:** Modify the weights (25%, 20%, etc.) to reflect the relative importance of each criterion for your particular situation.
+*   **Add Specific Questions:**  Include specific questions relevant to your use case.  For example, "Does [Library A] have built-in support for [Specific Technology]?"
+*   **Request Examples:**  Ask for code examples demonstrating how to perform key tasks with each option.
+*   **Request Visualizations:** Where appropriate, ask for diagrams or charts to illustrate concepts.
+
+To help me refine this prompt further, can you tell me:
+
+*   What libraries/frameworks and related tooling are you planning to compare? (e.g., React vs. Angular vs. Vue.js, or Python’s Pandas vs. NumPy vs. Dask)
+*   What is the primary use case you have in mind? (e.g., web development, data analysis, machine learning, automation)
+
+total duration:       49.164150458s
+load duration:        3.15337225s
+prompt eval count:    31 token(s)
+prompt eval duration: 603.269ms
+prompt eval rate:     51.39 tokens/s
+eval count:           1254 token(s)
+eval duration:        45.40676625s
+eval rate:            27.62 tokens/s
+
