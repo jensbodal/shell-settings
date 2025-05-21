@@ -167,11 +167,22 @@ main() {
       done
     done
 
-    git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
   else
-    PROMPT="Please provide a template for a well structured prompt to use when interacting with an LLM"
-    run "gemma3:1b" "$PROMPT"
+    #MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
+    MODELS=("gemma3:1b" "gemma3:4b")
+    PROMPT="Please provide a template for a well structured prompt to use for comparing libraries, frameworks, and related agentic tooling"
+
+    for M in "${MODELS[@]}"; do
+      echo "$ollama pull $M"
+      "$ollama" pull "$M"
+    done
+
+    for M in "${MODELS[@]}"; do
+      run "$M" "$PROMPT"
+    done
   fi
+
+  git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
 }
 
 main "$@"

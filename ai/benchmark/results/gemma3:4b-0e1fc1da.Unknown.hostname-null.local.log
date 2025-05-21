@@ -1,0 +1,65 @@
+⠋ ⠹ Okay, here's a template for a well-structured prompt to use for comparing libraries, frameworks, and related agentic tooling. This template is designed to elicit detailed, comparative analysis.  It’s broken down into sections to guide the response and ensure thoroughness.
+
+**Prompt Template: Comparative Analysis of [Technology Category]**
+
+**I. Introduction (Context & Goal)**
+
+* **Briefly Define the Category:** “We are evaluating options for [Technology Category - e.g., Python Machine Learning Libraries, React Frameworks, Node.js Agentic Tooling for Chatbots].”
+* **State the Purpose:** “This comparison aims to identify the best solution(s) for [Specific Use Case - e.g., building a recommendation engine, creating a complex web application, building an intelligent customer service bot].  We need a detailed analysis that allows us to make an informed decision.”
+* **Define Key Criteria (Mandatory - Crucial for Focused Response):** "Specifically, we're prioritizing the following criteria: [List 3-5 KEY criteria. Be specific - e.g., ‘Ease of Use’, ‘Scalability’, ‘Community Support’, ‘Performance’, ‘Integration with Existing Infrastructure (Specify Infrastructure)’ , ‘Cost of Development/Maintenance’]"
+
+**II. Candidate Selection (List the Options)**
+
+* “Please evaluate the following options against the criteria defined above:
+    * [Option 1 - e.g., TensorFlow]
+    * [Option 2 - e.g., PyTorch]
+    * [Option 3 - e.g., Next.js]
+    * [Option 4 - e.g., React]
+    * [Option 5 - e.g., Rasa]
+    * [Add more options as needed]”
+
+**III. Comparative Analysis (Detailed Response Structure)**
+
+For *each* candidate option (Option 1, Option 2, etc.), please provide the following information:
+
+* **A. Core Features & Functionality:** (Briefly describe the key features – 1-2 sentences)
+* **B.  Strengths:** (What does this option excel at? – 2-3 bullet points, specifically linked to the defined criteria)
+* **C. Weaknesses:** (Where does this option fall short? – 2-3 bullet points, specifically linked to the defined criteria)
+* **D. Technical Details:** (Provide relevant details. Be specific, avoid vague statements)
+    * **1. Architecture:** (Describe the core architecture - e.g., "TensorFlow is a dataflow-based graph computation system," "Next.js is a full-stack framework based on React.")
+    * **2. Dependencies:** (List significant dependencies -  e.g., “Requires Node.js, npm, and React.” )
+    * **3. Learning Curve:** (Estimate the difficulty for a [Role – e.g., ‘Junior Developer’, ‘Senior Data Scientist’] to learn and use effectively.)
+    * **4. Performance Characteristics:** (If applicable -  e.g., "TensorFlow has been known to have slower iteration times compared to PyTorch for smaller models.”)
+* **E. Community & Ecosystem:** (Describe the community size, documentation quality, available resources -  e.g., “Next.js has a very active and supportive community with a large number of tutorials and third-party libraries.”)
+
+
+
+**IV.  Summary & Recommendation**
+
+* **Overall Assessment:** (Provide a concise overall rating of each option against the key criteria - e.g., “On a scale of 1 to 5, with 5 being the best.”)
+* **Recommendation:** “Based on this analysis, we recommend [Option] for [Specific Use Case] due to [Summarize key reasons].  However, [Mention potential caveats or situations where another option might be preferred]. ”
+
+---
+
+**Notes & Tips for Using the Prompt:**
+
+* **Specificity is Key:** The more specific you are in the "Criteria" section, the more focused and helpful the response will be.
+* **Role Definition:**  Consider adding a role definition (e.g., "Imagine you are advising a senior software engineer...") to further shape the response.
+* **Iterate:** Don't be afraid to refine the prompt based on the initial responses.  Ask clarifying questions and adjust the criteria as needed.
+* **Output Format:** Request a structured output (e.g., a table or a detailed report) to make the information easier to digest.  You can explicitly request a table format.
+
+To help me tailor this further for your specific needs, could you tell me:
+
+*   What specific technology category are you evaluating? (e.g., Frontend Frameworks, Backend APIs, Data Science Libraries, AI Agentic Tooling)
+*   What is the specific use case you're considering?
+*   What are the 3-5 most important criteria you're using to evaluate the options?
+
+total duration:       38.591606125s
+load duration:        25.773125ms
+prompt eval count:    31 token(s)
+prompt eval duration: 211.186834ms
+prompt eval rate:     146.79 tokens/s
+eval count:           1042 token(s)
+eval duration:        38.354279208s
+eval rate:            27.17 tokens/s
+
