@@ -1,0 +1,74 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ Okay, here's a template for prompts designed to elicit more effective and nuanced responses from an LLM. It's broken down into sections with explanations, and you can adjust it based on the specific task you're trying to accomplish.
+
+**Template: Detailed Prompt - [Task & Goal]**
+
+**1. Introduction & Context (1-2 sentences)**
+
+*   **Start with a brief overview:**  "You are a [Role/Persona - e.g., experienced marketing copywriter, helpful research assistant, creative storyteller] specializing in [Topic Area].  The goal of this interaction is to [Clearly state the desired outcome - e.g., generate a blog post, draft an email, explain a concept]."
+*   **Example:** “You are a seasoned travel blogger specializing in budget-friendly adventures in Southeast Asia.  The goal is to draft a blog post about three unique destinations, highlighting their affordability and beauty.”
+
+
+**2. Task & Specific Instructions (3-5 sentences)**
+
+*   **Clearly define the task:**  “Please [Action - e.g., write, summarize, translate, explain, brainstorm] the following: [Provide the specific content or information you need].”
+*   **Specify constraints/requirements:**  “The response should be [Length - e.g., approximately 300 words, focused on X, written in a casual tone].”  "Include [Specific elements - e.g., statistics, examples, a call to action]." “Maintain a tone of [Tone - e.g., humorous, formal, informative, persuasive].”
+*   **Provide context or background information:** "Remember that our target audience is [Describe your audience – e.g., millennials interested in sustainable travel]."  “Consider the following background: [Briefly present any relevant facts, data, or information].”
+
+
+
+**3. Input (This is crucial - Provide the raw material)**
+
+*   **Paste the actual text, data, or information:** "Here is the text/information I would like you to use/analyze: [Insert your content here]"
+*   **If it’s a question:** "Please answer the following question: [Your Question]"
+*   **If it’s a creative task:** "Here's a short story idea: [Describe the initial concept]"
+
+
+
+**4. Output Format & Style (1-2 sentences - Optional but Recommended)**
+
+*   **Specify the desired format:** "Please format your response as a [Format - e.g., bullet points, numbered list, paragraph, table] with [Specific elements – e.g., clear headings, bold text]."
+*   **Specify desired style/tone:** "Write in [Style - e.g., concise and professional, poetic, conversational] and [Tone - e.g., humorous, informative, empathetic]."
+
+
+
+**5.  Constraints (Optional, but Helpful)**
+
+*   **Mention limitations:** "Do not include [Things to avoid]."  “Limit your answer to [Specific length/topic].”
+*   **Request a specific outcome:** “The response should focus primarily on [Specific aspect].”
+
+
+**6.  Iteration & Feedback (Optional - for complex tasks)**
+
+*   **Suggest follow-up questions:** "To help me refine the response, could you ask me: [Suggest a clarifying question]?”
+*   **Request a revision:** “Please revise your response to [Specific improvement request].”
+
+
+**Example Combining Elements**
+
+“You are a seasoned travel blogger specializing in budget-friendly adventures in Southeast Asia. The goal of this interaction is to draft a blog post about three unique destinations, highlighting their affordability and beauty.  Remember that our target audience is millennials interested in sustainable travel.  Please provide a short paragraph (approx. 300 words) for each destination, including its main attractions, estimated costs (excluding flights), and why it's a good choice for a budget traveler. Format your response as a list with clear headings. Do not include any travel tips about staying in luxury hotels.  Begin by introducing each destination with a captivating opening sentence."
+
+
+
+**Key Considerations & Tips:**
+
+*   **Be Specific:** The more detailed your prompt, the better the output.  Avoid ambiguity.
+*   **Iterate:** Don't be afraid to refine your prompt based on the LLM's initial responses.  Prompt engineering is an iterative process.
+*   **Test Different Prompts:** Experiment with different wording to see what yields the best results for your specific task.
+*   **Consider the LLM:** Different LLMs have different strengths and weaknesses.  Tailor your prompts accordingly. (e.g., For creative writing, use more evocative language; for fact-checking, use precise requests.)
+*   **Provide Examples (Few-Shot Learning):**  Sometimes, including a brief example of the desired output can be extremely effective.
+
+To help me refine this template further, could you tell me:
+
+*   What *specifically* are you trying to achieve with this prompt? (e.g., generating creative content, summarizing information, translating text, answering a question, brainstorming ideas)?
+*   What LLM are you using (e.g., ChatGPT, Bard, Claude)?
+*   Do you have a particular context or input you'd like to use?
+
+total duration:       1m2.919258661s
+load duration:        922.886775ms
+prompt eval count:    27 token(s)
+prompt eval duration: 254.823901ms
+prompt eval rate:     105.96 tokens/s
+eval count:           1103 token(s)
+eval duration:        1m1.740633959s
+eval rate:            17.87 tokens/s
+
