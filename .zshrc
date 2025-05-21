@@ -213,7 +213,8 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
     fi
 
     chmod 600 "${filepath}"
-    .addtokeychain "${filepath}"
+    .log "DISABLED: .addtokeychain \"${filepath}\""
+    #.addtokeychain "${filepath}"
   done
 
 }

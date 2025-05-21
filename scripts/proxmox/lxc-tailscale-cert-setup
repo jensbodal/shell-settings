@@ -49,7 +49,7 @@ main() {
   source "$(.SCRIPT_DIR)/proxmox/lxc-cmd"
 
   _cmd() {
-    lxc-cmd $container "$@"
+    lxc-cmd $container "${@}"
   }
 
   local dns_name="$(_cmd tailscale status --json | jq '.Self.DNSName | .[:-1]' -r)"
@@ -83,8 +83,13 @@ main() {
   _cmd systemctl enable tailscale-cert.timer
   _cmd tailscale status
 
+  log "Installing sudo if it doesn't exist"
+  _cmd apt install -y sudo 2>/dev/null
   log "Installing jq if it doesn't exist"
-  _cmd sudo apt update &>/dev/null && _cmd sudo apt install -y jq &>/dev/null && _cmd tailscale status --json | jq '.CertDomains[]'
+  _cmd apt install -y sudo && \
+  _cmd sudo apt update &>/dev/null && \
+    _cmd sudo apt install -y jq &>/dev/null && \
+    _cmd tailscale status --json | jq '.CertDomains[]'
 }
 
 main "$@"

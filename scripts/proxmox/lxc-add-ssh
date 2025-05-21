@@ -1,0 +1,30 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+main() {
+  set +u
+  container="$1"
+  set -u
+
+  if ! isinteger $container; then
+    die "\"$container\" is not a valid container id"
+  fi
+
+  source "$(.SCRIPT_DIR)/proxmox/lxc-cmd"
+
+  _cmd() {
+    lxc-cmd $container "$@"
+  }
+
+  local dns_name="$(_cmd tailscale status --json | jq '.Self.DNSName | .[:-1]' -r)"
+  local public_key="$(cat $HOME/.ssh/proxmox-lxc.pub)"
+
+  sudo lxc-attach -n "$container" -- /bin/bash -c "echo \"${public_key}\" >> /root/.ssh/authorized_keys"
+
+
+  _cmd chmod 644 /root/.ssh/authorized_keys
+  _cmd chmod 600 /root/.ssh
+}
+
+main "$@"
