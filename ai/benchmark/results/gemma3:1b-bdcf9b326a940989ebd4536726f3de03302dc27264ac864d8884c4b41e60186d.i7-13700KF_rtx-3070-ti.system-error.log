@@ -1,0 +1,75 @@
+⠙ ⠙ ⠹ ⠼ ⠼ ⠦ ⠦ ⠇ ⠇ ⠋ ⠋ ⠹ ⠸ ⠼ ⠴ ⠴ Okay, here's a template for crafting effective prompts for Large Language Models (LLMs), designed to elicit better and more targeted responses. It's broken down into sections with explanations of why each part is important.
+
+**Prompt Template: The Comprehensive Guide**
+
+**1. Context & Goal (Start Here - Briefly Explain the Purpose)**
+
+* **What are you trying to achieve?** (Be specific – e.g., "Write a short story," "Explain quantum physics," "Generate marketing copy for a new product.")
+* **What is the overall goal of the interaction?** (e.g., "I need help brainstorming ideas," "I want to understand a complex concept," "I need a specific output.")
+* **Provide any background information:** (e.g., "The target audience is young adults interested in sustainable living," "This is a blog post for a tech company," "I’m a beginner learning about...")
+
+
+**2. Instructions & Constraints (Clearly Define What You Want)**
+
+* **Specific Actions:** (What *exactly* do you want the LLM to do?  e.g., "Summarize this text," "Translate this into Spanish," "Write a poem with a specific rhyme scheme.")
+* **Format Requirements:** (How should the output be structured?  e.g., "In a bulleted list," "As a JSON object," "In paragraph form with a specific tone.")
+* **Length/Word Count:** (e.g., "Keep it under 200 words," "Approximately 500 words," "Generate a response that's no more than 10 sentences.")
+* **Tone & Style:** (Important for creative tasks - e.g., "Write in a formal and professional tone," "Maintain a humorous and informal style," "Write like Ernest Hemingway.")
+* **Constraints:** (Important for problem-solving or avoiding unwanted outputs - e.g., "Don't include any marketing jargon," "Focus on the technical aspects only," "Avoid using clichés.")
+
+
+**3. Input Data (Provide the Material to Work With)**
+
+* **The Prompt Itself:** This is the core of your request.  Make it clear, concise, and well-written.
+* **Relevant Context:** (Provide supporting information, data, or examples. This is CRUCIAL.  The more context you give, the better the LLM can understand your needs.)
+* **Example Inputs & Outputs (Optional, but very helpful):** (Showing the LLM what you *expect* can dramatically improve the result.)
+
+
+**4.  Desired Output (Explicitly State the Expectation)**
+
+* **What kind of response are you looking for?** (e.g., "A numbered list," "A detailed explanation," "A creative story," "A code snippet.")
+* **Specify the format of the output.** (e.g.,  "Present the answer as a table," “Present the answer as JSON”)
+* **Define key elements or concepts:** (If there are particular words, phrases, or concepts you want included).
+
+
+**5.  Iteration & Refinement (Guide for Improvement)**
+
+* **"Do you need me to revise this further?"** (Start with a question)
+* **"Can you provide more detail on [specific aspect]?"**
+* **"Let's try a different approach."** (Suggesting an alternative) - “Can you respond with a slightly more concise explanation?”
+
+
+
+**Example Using the Template**
+
+**Context & Goal:** I need a product description for a new noise-canceling headphone.
+
+**Instructions & Constraints:** Write a concise and engaging product description (approximately 100-120 words).  Focus on the key benefits of the headphones - noise cancellation, comfort, and sound quality.  Use a positive and sophisticated tone.  Do NOT mention specific technical specs.
+
+**Input Data:**  The headphones are designed for busy professionals and students who need to focus in noisy environments. They feature advanced noise-canceling technology and are made with plush memory foam earcups for all-day comfort.
+
+**Desired Output:**  A paragraph describing the headphones' features and benefits, highlighting their suitability for focused work and study.
+
+
+**Key Considerations & Best Practices:**
+
+* **Be Specific:** Vague prompts yield vague results.  The more precise you are, the better the LLM can understand your needs.
+* **Iterate:** Don’t expect perfection on the first try. Refine your prompt based on the LLM's initial responses.
+* **Temperature:** (If the LLM allows it) Experiment with the "temperature" setting (higher = more creative; lower = more predictable).  Start with a moderate temperature (0.7-0.9) for most tasks.
+* **Seed Values:** (If available) Using seed values can help with consistency – you can provide a starting prompt that produces a similar result each time you run it, so the results are repeatable.
+
+---
+
+To help me tailor the template further to your needs, could you tell me:
+
+*   **What type of LLM are you using?** (e.g., GPT-3, GPT-4, Llama 2, etc.)  Knowing the model can influence the best phrasing.
+*   **What are you hoping to achieve with the prompt?** (e.g., creative writing, data analysis, coding, brainstorming, etc.)total duration:       7.8794499s
+
+load duration:        1.4056907s
+prompt eval count:    27 token(s)
+prompt eval duration: 282.0271ms
+prompt eval rate:     95.74 tokens/s
+eval count:           1138 token(s)
+eval duration:        6.1877117s
+eval rate:            183.91 tokens/s
+

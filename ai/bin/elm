@@ -36,7 +36,7 @@ ollama=""
 
 set_output_filename() {
   local prompt="$1"
-  local prompt_sha="$(echo -n \"$prompt\" | sha256sum | awk '{print $1}')"
+  local prompt_sha="$(printf '%s' "$prompt" | sha256sum | cut -c1-8)"
   local name="${ELM_HOSTNAME:-$(hostname)}"
   filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt_sha.$ELM_SYSTEM_PROFILE.$name.log"
 }
@@ -90,7 +90,6 @@ set_ollama() {
 setup() {
   if [ "$PROMPT_SETUP_COMPLETE" = "" ]; then
     mkdir -p "$DIR_BENCHMARK_RESULTS"
-    set_system_gpu
     set_ollama
     PROMPT_SETUP_COMPLETE="True"
   fi
@@ -152,18 +151,27 @@ main() {
     return 0
   fi
 
-  for M in "${MODELS[@]}"; do
-    echo "$ollama pull $M"
-    "$ollama" pull "$M"
-  done
+  run_full_suite() {
+    return 1
+  }
 
-  for M in "${MODELS[@]}"; do
-    for P in "${PROMPTS[@]}"; do
-      run "$M" "$P"
+  if run_full_suite; then
+    for M in "${MODELS[@]}"; do
+      echo "$ollama pull $M"
+      "$ollama" pull "$M"
     done
-  done
 
-  git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
+    for M in "${MODELS[@]}"; do
+      for P in "${PROMPTS[@]}"; do
+        run "$M" "$P"
+      done
+    done
+
+    git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
+  else
+    PROMPT="Please provide a template for a well structured prompt to use when interacting with an LLM"
+    run "gemma3:1b" "$PROMPT"
+  fi
 }
 
 main "$@"

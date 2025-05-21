@@ -1,0 +1,80 @@
+⠙ Okay, here’s a template for prompting an LLM, designed to guide it to produce better and more focused responses. It’s broken down into sections with explanations of why each part is included.  Adapt this to fit the specific task you have in mind.
+
+**Template: Detailed Prompt for LLM**
+
+**1. Introduction & Context (1-2 sentences)**
+
+*   **What:** Briefly state the goal of your interaction.  “I’m working on [task/project]. My goal is to [desired outcome].”
+*   **Example:** “I’m writing a marketing email to promote a new line of vegan leather shoes. My goal is to convince customers to purchase them.”
+
+**2. Task & Role (1-2 sentences - Clarify Expectations)**
+
+*   **What:**  Clearly define the task you want the LLM to perform.  Don't assume it knows what you mean.
+*   **Example:** "You are a seasoned marketing copywriter specializing in fashion. Your task is to draft an email..."
+
+**3. Input/Context (Most Important - Provide Information)**
+
+*   **What:**  Give the LLM *everything* it needs to understand your request. This is crucial!  Include:
+    *   **Background Information:**  Provide any relevant details, definitions, or historical context.
+    *   **Specific Data:**  Include relevant statistics, examples, or data points.
+    *   **Target Audience:** Describe your ideal customer – demographics, interests, pain points.
+    *   **Tone & Style:** Specify the desired tone (e.g., friendly, professional, humorous, authoritative).
+    *   **Constraints:**  “Keep it under 200 words.” “Include a call to action.”
+    *   **Existing Material:** “Based on this document [paste document here], answer…”
+*   **Example:** “The target audience is young, environmentally conscious women aged 25-35.  The tone should be conversational and enthusiastic.  The email should highlight the shoes’ sustainable materials and comfort.  The overall message should emphasize that these shoes are stylish *and* ethical.”
+
+**4. Instructions (Specific, Actionable Requests)**
+
+*   **What:**  Break down the task into smaller, manageable steps.
+*   **Example:**  “First, provide three different headline options.  Then, write the main body of the email, focusing on the ethical sourcing of the materials. Finally, include a call to action with a link to the product page.”
+
+**5. Output Format (Crucial - Specify How You Want the Answer)**
+
+*   **What:** Tell the LLM how you want the answer presented.
+*   **Example:** "Please format the email as a fully-fledged email with a greeting, body, and closing. Use bullet points to list key benefits.”  or "Provide a list with each point separated by a clear separator.”
+
+**6.  Constraints & Limitations (Optional - Add More Precision)**
+
+*   **What:**  Limit the length, focus, or type of information.
+*   **Example:** “Do not include any overly technical jargon.” "Focus only on the benefits of the shoes, not just the features.”
+
+
+**7. Final Prompt & Review (Optional)**
+
+*   **What:**  A concluding sentence that summarizes the overall goal.
+*   **Example:** “Please draft this email to generate engaging content for a marketing campaign.”
+
+**Putting it All Together - Example Prompt (For a Short Story)**
+
+"You are a professional science fiction author. I want you to write a short story.  My goal is to create a compelling narrative that explores the ethical implications of artificial intelligence.
+
+**Context:** The story is set in a near-future where highly advanced AI companions are commonplace. The protagonist is a detective investigating a series of unsettling events.
+
+**Input:** The story should be approximately 700-900 words. It must include a central mystery involving a damaged AI companion. The tone should be noir and slightly melancholic. The protagonist's name is Detective Elias Vance.
+
+**Instructions:** Write the opening paragraph of the story.  Then, describe the initial setup – a rainy street, a broken AI companion, and a cryptic message.  End the paragraph with a sentence establishing the central mystery.
+
+**Output Format:** Please format the paragraph as a complete paragraph.
+
+
+**Key Considerations & Tips:**
+
+*   **Iterate:** Don't expect perfect results on the first try.  Refine your prompt based on the LLM's output.
+*   **Experiment:** Try different prompt styles – more verbose, more concise.
+*   **Temperature:** Some LLMs have a 'temperature' setting. A higher temperature leads to more creative/random responses. Lower temperature for more factual/precise answers.
+*   **Prompt Engineering:** Learning prompt engineering techniques is a key skill for getting the best results. There are many online resources.
+
+To help me refine this template further, could you tell me:
+
+*   What *kind* of LLM are you using (e.g., GPT-4, Claude, Llama 2)?  (This affects the best prompt styles).
+*   What *specific task* are you trying to accomplish?
+
+total duration:       6.2289652s
+load duration:        27.3575ms
+prompt eval count:    27 token(s)
+prompt eval duration: 155.5463ms
+prompt eval rate:     173.58 tokens/s
+eval count:           1107 token(s)
+eval duration:        6.0455518s
+eval rate:            183.11 tokens/s
+
