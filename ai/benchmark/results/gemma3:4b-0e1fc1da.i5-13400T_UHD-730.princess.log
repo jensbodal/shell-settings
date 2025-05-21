@@ -1,0 +1,72 @@
+⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠧ ⠧ ⠇ ⠋ ⠙ ⠹ ⠸ ⠼ ⠼ ⠴ ⠧ ⠧ ⠏ ⠏ ⠋ ⠹ ⠸ ⠸ ⠼ ⠦ ⠧ ⠧ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠧ ⠇ ⠏ ⠋ ⠙ ⠸ ⠸ ⠴ ⠴ ⠧ ⠧ ⠇ ⠋ ⠙ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠏ ⠋ ⠙ ⠙ ⠸ ⠸ ⠼ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠦ ⠧ ⠇ ⠏ ⠙ ⠹ ⠸ ⠼ ⠼ ⠴ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ ⠹ ⠼ ⠼ ⠦ ⠦ ⠇ ⠇ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸ ⠸ ⠼ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠹ ⠸ ⠼ ⠴ ⠦ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠼ ⠴ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠹ ⠸ ⠸ ⠼ ⠴ ⠦ ⠧ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠦ ⠇ ⠇ ⠏ ⠙ ⠹ ⠸ ⠼ ⠼ ⠴ ⠦ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠙ ⠹ ⠸ ⠴ ⠴ ⠦ ⠧ ⠇ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠦ ⠧ ⠇ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠦ ⠧ Okay, here's a template for a well-structured prompt designed to compare libraries, frameworks, and related agentic tooling. It's designed to elicit detailed and insightful comparisons. You can adapt it based on your specific needs and the complexity of the comparison.
+
+**Prompt Template: Comparative Analysis - [Specific Task/Problem]**
+
+**I. Introduction & Context (1-2 Sentences)**
+
+*   Briefly describe the overarching task or problem you’re trying to solve.
+*   State the purpose of the comparison – e.g., “We need to evaluate which tool is best suited for [task] considering [key criteria].”
+
+**II.  Defining the Candidates (Clearly List & Describe)**
+
+*   **Candidate 1: [Name of Library/Framework/Tool 1]**
+    *   **Description:** (1-2 sentences: What is it? What does it do?)
+    *   **Key Features:** (Bullet point list - 3-5 key features. Be specific – e.g., "Supports asynchronous operations," "Provides a fluent API," "Offers built-in caching.")
+    *   **Primary Use Cases:** (Bullet point list –  Where is it typically used? - e.g., "Data processing," "Web development," “Robotics Control”)
+    *   **Core Technology:** (Briefly mention the underlying technology – e.g., “Node.js,” “Python,” “JavaScript,” “TensorFlow”)
+    *   **Typical Users/Skill Level:** (e.g., "Beginner developers," “Experienced data scientists”)
+
+*   **Candidate 2: [Name of Library/Framework/Tool 2]** (Repeat the same structure as above)
+
+*   **Candidate 3: [Name of Library/Framework/Tool 3]** (Repeat the same structure as above - Optional, include more candidates if needed.)
+
+
+
+**III. Comparative Analysis (Most Important Section)**
+
+*   **Category 1: Performance & Scalability**
+    *   **Prompt:** “Compare the performance characteristics of each tool regarding [Specific Metric - e.g., latency, throughput, memory usage] when handling [Type of Data/Workload - e.g., large datasets, high concurrency].  Provide estimated scalability – how does it handle increasing load?”
+    *   **Expected Response:** (e.g., "Tool A is significantly faster for small datasets, but Tool B scales more effectively with large datasets due to [reason].")
+
+*   **Category 2: Ease of Use & Learning Curve**
+    *   **Prompt:** “Assess the ease of use and learning curve for each tool. Consider factors like documentation, API design, community support, and the amount of boilerplate code required.  Which tool would be easier for a [Target User - e.g., junior developer, experienced engineer] to adopt?”
+    *   **Expected Response:** (e.g., "Tool B has a more intuitive API and excellent documentation, making it easier for beginners to learn.")
+
+*   **Category 3: Ecosystem & Community**
+    *   **Prompt:** “Evaluate the size and activity of each tool's ecosystem. Consider factors like the number of active users, the availability of third-party libraries/plugins, the quality of the community support (forums, Stack Overflow, etc.), and the maturity of the project.  Which tool has a stronger and more vibrant community?”
+
+*   **Category 4:  Integration & Compatibility**
+    *   **Prompt:** "Assess the integration capabilities of each tool with [Relevant Systems/Technologies - e.g.,  AWS, Kubernetes, existing databases, other libraries].  Are there any known compatibility issues?"
+
+*   **Category 5:  Cost & Licensing**
+    *   **Prompt:** “Analyze the cost associated with each tool, including licensing fees, infrastructure costs (if any), and the potential cost of development.  Consider open-source vs. commercial options.”
+
+
+**IV.  Summary & Recommendation**
+
+*   **Prompt:** “Based on your analysis, which tool is the most suitable for [specific task/problem]? Justify your recommendation, highlighting the key strengths and weaknesses of each tool in relation to this context.  Under what circumstances would you *not* recommend using [preferred tool]? “
+
+---
+
+**Important Notes & Tips for Using This Template:**
+
+*   **Be Specific:** The more specific you are in your prompts, the more targeted and useful the responses will be.  Replace the bracketed placeholders with concrete details.
+*   **Iterate:**  Don’t be afraid to refine the prompts based on the initial responses. If a response is vague, ask for more detail.
+*   **Define "Suitable":**  Clearly define what "suitable" means in your context.  Is it based on performance, cost, ease of use, or a combination of factors?
+*   **Control the Level of Detail:** The template offers detailed categories.  Adjust the level of granularity based on your needs and the complexity of the comparison.
+*   **Use as a Conversation Starter:**  This template is designed to spark a discussion, not just generate a single answer.
+
+To help me tailor this further, could you tell me:
+
+*   **What is the specific task or problem you're trying to address with this comparison?** (e.g., “Building a web application,” “Processing sensor data,” “Implementing a machine learning model”)
+*   **Which libraries, frameworks, or tools are you considering?**  (Give me a few examples – e.g., React, Angular, Vue.js, TensorFlow, PyTorch, Node.js, Python’s Pandas)
+
+total duration:       12m4.505012283s
+load duration:        9.429200902s
+prompt eval count:    31 token(s)
+prompt eval duration: 12.437693781s
+prompt eval rate:     2.49 tokens/s
+eval count:           1194 token(s)
+eval duration:        11m42.637288446s
+eval rate:            1.70 tokens/s
+
