@@ -31,38 +31,14 @@ PROMPT_B="What is the best containerized remote desktop environment to run on Pr
 PROMPT_C="I need to create system prompt for an LLM that instructs it to act as an expert in 3D printing. If it cannot answer the question it will not guess, it will find a discussion online discussing the topic and find a source for the information. If there is __no__ information about the subject, then simply reply that you are not sure. If you are guessing then make sure it is labeled as a guess and why it should be treated anectodetly. You are supposed to be factual and knowledgeable and reliable, not simply a warn ear to chat with"
 PROMPTS=("$PROMPT_A" "$PROMPT_B" "$PROMPT_C")
 MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
-SYSTEM_GPU="Unknown"
-
+ELM_SYSTEM_PROFILE="${ELM_SYSTEM_PROFILE:-Unknown}"
 ollama=""
-
-set_system_gpu() {
-  OS="$(uname -s)"
-
-  case "$OS" in
-    Linux*)
-      # For Linux, list VGA devices (might not directly show the GPU name sometimes)
-      sudo apt install pciutils -y
-      SYSTEM_GPU="$(lspci | grep -i vga || echo 'LinuxUnknown')"
-      ;;
-    Darwin*)
-      # For macOS, use system_profiler to get display info
-      SYSTEM_GPU="$(system_profiler SPDisplaysDataType | grep "Chipset Model" | sed -E 's#.*Chipset.*:[ ]+(.*)#\1#' | tr ' ' '_')"
-      ;;
-    CYGWIN*|MINGW*|MSYS*)
-      # For Windows under a Unix-like shell (Cygwin, Git Bash), use WMIC
-      SYSTEM_GPU="$(wmic path win32_VideoController get name)"
-      ;;
-    *)
-      log "Unsupported OS: $OS"
-      ;;
-  esac
-}
 
 set_output_filename() {
   local prompt="$1"
   local prompt_sha="$(echo -n \"$prompt\" | sha256sum | awk '{print $1}')"
   local name="${ELM_HOSTNAME:-$(hostname)}"
-  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt_sha.$SYSTEM_GPU.$name.log"
+  filename="$DIR_BENCHMARK_RESULTS/$MODEL-$prompt_sha.$ELM_SYSTEM_PROFILE.$name.log"
 }
 
 set_ollama() {
@@ -83,7 +59,7 @@ set_ollama() {
   local path_d="/usr/local/bin/ollama"
   local path_e="/home/linuxbrew/.linuxbrew/bin/ollama"
   local path_macos_idk="/usr/local/bin/ollama"
-  local path_jensbodal="/mnt/c/Users/jensbodal/AppData/Local/Programs/Ollama/ollama"
+  local path_jensbodal="/mnt/c/Users/jensbodal/AppData/Local/Programs/Ollama/ollama.exe"
 
   if [ -f "$path_a" ]; then
     ollama="$path_a"
@@ -172,7 +148,7 @@ main() {
     log "### DEBUG"
     log "IS DEBUG! [args: $*]"
     log "[ ollama | ${ollama} ]"
-    log "[ GPU | ${SYSTEM_GPU} ]"
+    log "[ GPU | ${ELM_SYSTEM_PROFILE} ]"
     return 0
   fi
 
