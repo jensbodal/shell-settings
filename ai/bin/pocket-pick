@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Clone the repository
+
+# Install dependencies
+# uv sync
+BIN_DIR() {
+  cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd
+}
+
+LIB_DIR="$(BIN_DIR)/../lib"
+mkdir -p "${LIB_DIR}"
+LIB_DIR="$(realpath ${LIB_DIR})"
+
+cd "${LIB_DIR}"
+
+if [ ! -d "pocket-pick" ]; then
+  git clone http://github.com/indydevdan/pocket-pick.git
+fi
+
+cd pocket-pick
+git pull && uv sync
+
+
