@@ -1,0 +1,13 @@
+# LLM Client Configuration
+
+# Ollama settings
+OLLAMA_BASE_URL=http://localhost:11434
+LLM_DEFAULT_MODEL=llama3
+
+# OpenRouter settings
+# Get your API key from https://openrouter.ai/keys
+OPENROUTER_API_KEY=your_api_key_here
+
+# Default generation parameters
+DEFAULT_TEMPERATURE=0.7
+DEFAULT_MAX_TOKENS=1024

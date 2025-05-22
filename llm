@@ -1,0 +1,14 @@
+#!/bin/bash
+# LLM - A shell script wrapper for the LLM client
+
+# Get the directory of this script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Source the config file if it exists
+CONFIG_FILE="$HOME/.llm_config"
+if [ -f "$CONFIG_FILE" ]; then
+    source "$CONFIG_FILE"
+fi
+
+# Run the Python script
+python3 "$SCRIPT_DIR/llm_cli.py" "$@"
