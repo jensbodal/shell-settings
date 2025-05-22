@@ -1,0 +1,15 @@
+⠙ ⠙ ⠹ ⠼ ⠼ ⠴ ⠧ ⠧ ⠏ ⠋ ⠙ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ⠧ ⠇ ⠋ ⠙ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠹ ⠹ ⠼ ⠴ ⠦ ⠦ ⠇ ⠏ ⠋ ⠋ ⠙ ⠹ ⠸ ⠴ ⠴ ⠧ ⠇ ⠏ ⠏ ⠙ ⠹ ⠹ ⠼ ⠴ ⠴ ⠦ ⠇ ⠏ ⠏ ⠙ ⠹ ⠹ ⠸ ⠴ ⠴ ⠧ ⠇ ⠏ ⠋ ⠋ ⠹ ⠸ ⠼ ⠼ ⠦ ⠦ ⠇ ⠇ ⠋ ⠋ ⠙ ⠹ ⠼ ⠼ ⠴ ⠧ ⠇ ⠏ ⠏ ⠋ ⠹ ⠸ ⠼ ⠴ ⠦ ⠦ ⠇ ⠏ ⠋ ⠙ ⠙ ⠸ ⠼ ⠴ ⠴ ⠧ ⠇ ⠇ ⠏ ⠙ ⠙ ⠹ ⠼ ⠼ ⠴ ⠦ ⠧ ⠇ ⠋ ⠋ ⠹ ⠹ ⠸ ⠴ ⠦ ⠧ ⠧ ⠏ ⠏ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠹ ⠼ ⠴ ⠴ ⠧ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸ ⠼ ⠼ ⠴ Here are 3 key factual bullet points summarizing the Model Context Protocol (MCP) specification:
+
+*   **MCP is an open protocol** designed to seamlessly connect LLM applications with external data sources and tools, providing a standardized way to share contextual information and expose capabilities.
+*   **It utilizes JSON-RPC 2.0** for communication between Hosts (LLM applications), Clients (connectors), and Servers (services providing context and tools).
+*   **Security and Trust are paramount**, requiring implementors to prioritize user consent, data privacy, and careful consideration of tool safety, alongside robust authorization flows and appropriate access controls.
+
+total duration:       21.5196972s
+load duration:        3.2466345s
+prompt eval count:    1151 token(s)
+prompt eval duration: 12.4232717s
+prompt eval rate:     92.65 tokens/s
+eval count:           129 token(s)
+eval duration:        5.8428752s
+eval rate:            22.08 tokens/s
+
