@@ -4,6 +4,10 @@
 # Get the directory of this script
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Set Vim as the editor
+export EDITOR=vim
+export VISUAL=vim
+
 # Source the config file if it exists
 CONFIG_FILE="$HOME/.llm_config"
 if [ -f "$CONFIG_FILE" ]; then
