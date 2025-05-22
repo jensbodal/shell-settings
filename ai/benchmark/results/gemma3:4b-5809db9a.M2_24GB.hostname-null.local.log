@@ -1,0 +1,15 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ Here are 3 key factual bullet points summarizing the MCP specification:
+
+*   **MCP is a standardized protocol:** It provides a standardized way for applications to share contextual information with language models and expose tools/capabilities to AI systems, utilizing JSON-RPC 2.0 messages.
+*   **It’s based on established protocols:** MCP draws inspiration from the Language Server Protocol and utilizes a stateful connection model, with servers and clients negotiating capabilities.
+*   **Security and User Control are Paramount:** The specification emphasizes user consent, data privacy, and careful consideration of tool safety, with implementors strongly recommended to build robust consent flows and provide clear documentation of security implications.
+
+total duration:       11.242795916s
+load duration:        2.125159083s
+prompt eval count:    1151 token(s)
+prompt eval duration: 3.9127755s
+prompt eval rate:     294.16 tokens/s
+eval count:           137 token(s)
+eval duration:        5.204322625s
+eval rate:            26.32 tokens/s
+

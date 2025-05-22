@@ -24,7 +24,8 @@ log() {
 
 OLLAMA_BIN_PATH=""
 DIR="$(SCRIPT_DIR)"
-DIR_BENCHMARK_RESULTS="$DIR/../benchmark/results"
+DIR_BENCHMARK="$DIR/../benchmark"
+DIR_BENCHMARK_RESULTS="$DIR_BENCHMARK/results"
 PROMPT_SETUP_COMPLETE=""
 PROMPT_A="Show a photo of a red apple on a wooden table with a caption that says, \"Fresh and Juicy.\" Also, display the translation and conversation of 69F in English to C in Norwegian as part of the narrative."
 PROMPT_B="What is the best containerized remote desktop environment to run on Proxmox for managing persistent workflows like 3D printing slicer configuration, with macOS preferred but Linux or Windows acceptable? The goal is to avoid syncing configurations between machines by centralizing the workflow in a local remote desktop."
@@ -151,11 +152,18 @@ main() {
     return 0
   fi
 
-  run_full_suite() {
-    return 1
+  local FULL_SUITE=1
+  local SHORTER=2
+  local MCP_SUMMARY=3
+
+
+  get_test_suite() {
+    return "$MCP_SUMMARY"
   }
 
-  if run_full_suite; then
+  local test_suite="$(get_test_suite; echo $?)"
+
+  if [ "$test_suite" -eq "$FULL_SUITE" ]; then
     for M in "${MODELS[@]}"; do
       echo "$ollama pull $M"
       "$ollama" pull "$M"
@@ -166,8 +174,7 @@ main() {
         run "$M" "$P"
       done
     done
-
-  else
+  elif [ "$test_suite" -eq "$SHORTER" ]; then
     #MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
     MODELS=("gemma3:1b" "gemma3:4b")
     PROMPT="Please provide a template for a well structured prompt to use for comparing libraries, frameworks, and related agentic tooling"
@@ -180,6 +187,9 @@ main() {
     for M in "${MODELS[@]}"; do
       run "$M" "$PROMPT"
     done
+  elif [ "$test_suite" -eq "$MCP_SUMMARY" ]; then
+    input_mcp_spec="$(cat $DIR_BENCHMARK/mcp_spec.md)"
+    run "gemma3:4b" "Summarize the following text in 3 key factual bullet points about the MCP specification ::: ${input_mcp_spec} :::"
   fi
 
   git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
