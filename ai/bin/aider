@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -f $HOME/.local/bin/aider ]; then
+  "$HOME/.local/bin/aider" "$@"
+else
+  echo "[ai] installing aider with"
+  echo "  curl -LsSf https://aider.chat/install.sh | sh"
+  echo "Pausing 5 seconds..."
+  sleep 1
+  echo "Pausing 4 seconds..."
+  sleep 1
+  echo "Pausing 3 seconds..."
+  sleep 1
+  echo "Pausing 2 seconds..."
+  sleep 1
+  echo "Pausing 1 seconds..."
+  sleep 1
+  curl -LsSf https://aider.chat/install.sh | sh
+  "$HOME/.local/bin/aider $@"
+fi
+

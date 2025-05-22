@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Clone the repository
 
 # Install dependencies
@@ -13,12 +15,21 @@ mkdir -p "${LIB_DIR}"
 LIB_DIR="$(realpath ${LIB_DIR})"
 
 cd "${LIB_DIR}"
+git ls-remote --tags --refs https://github.com/disler/pocket-pick.git
 
-if [ ! -d "pocket-pick" ]; then
-  git clone http://github.com/indydevdan/pocket-pick.git
-fi
+#if [ ! -d "pocket-pick" ]; then
+  v="$(git ls-remote https://github.com/disler/pocket-pick.git | grep HEAD | awk '{print $1}')"
+  pv="pocket-pick-$v"
+  if [ ! -f "${LIB_DIR}/${pv}" ]; then
+    echo "$pv"
+  fi
+  #git archive --remote=https://github.com/disler/pocket-pick.git HEAD | tar -xvCf - "$pv.zip" && \
 
-cd pocket-pick
-git pull && uv sync
+  #git archive --remote=https://github.com/disler/pocket-pick.git HEAD | tar -xvf - -C pocket-pick && \
+  #mv pocket-pick /path/to/download/folder/pocket-pick-$(git ls-remote --tags --refs https://github.com/disler/pocket-pick.git | tail -1 | cut -d '/' -f3).zip
 
+  #uv sync
+#fi
+
+#ls
 
