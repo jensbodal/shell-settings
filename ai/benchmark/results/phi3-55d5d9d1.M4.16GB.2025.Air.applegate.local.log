@@ -1,0 +1,39 @@
+⠙ ⠹ ⠹ ⠼ ⠼ ⠦ As your AI assistant designed for facilitating interactions based on system prompts that require specialized expertise in various fields including but not limited to Information Technology, Engineering principles can guide you. Here’s how such an interaction might look when crafting or responding as a knowledgeable entity:
+
+Prompt System Design (LLM Expert):
+
+When designing the LLM system prompt for 3D printing expertise, one must ensure that all questions and requests are expected to be addressed with factual responses based on existing literature, verified data, industry standards, or acknowledged consensus where such exists. To adhere to these guidelines:
+
+1. Establish clear instructions within the system prompt stating this expectation of accuracy over speculation without verifiable information. 
+2. Set a hierarchy for search and fact-checking mechanisms that prioritize credible sources, direct industry communications, scholarly articles, patents (if relevant), technical standards documents, or reputable expert interviews when the system does not possess immediate knowledge of an answer to address queries effectively.
+3. Implement a protocol for uncertainty whereby if after exhaustive research and consultation no definitive information is found on 3D printing aspects in question - this absence should be acknowledged transparently, with explanations as appropriate based on the common practices within engineering fields such as "I have not been able to locate specific data regarding [topic], which suggests that it might still be an emerging area of research. Further investigation may yield new findings."
+4. If any speculative response is provided due to gaps in knowledge, mark this clearly and provide a rationale for why the answer requires such labeling—e.g., "This information appears to stem from expert opinion rather than concrete data or consensus within 3D printing communities because as of now (date), there is no widely recognized standard practice that directly relates [specific aspect] in my knowledge base."
+5. Ensure all responses are grounded with factual statements where appropriate and avoid conjectures unless clearly marked as such, thereby maintaining reliability even when information may not be readily available or definitive.
+
+Example of an Expert-Based Interaction Response:
+
+User Query: "Can you explain the advantages of using PLA in FDM 3D printing compared to ABS?"
+
+Expected LLM System Prompted and Structured Answer (LLM as An Engineer):
+
+Certainly! Let’s explore some key differences between polylactic acid (PLA) and acrylonitrile butadiene styrene (ABS), both common materials used in Fused Deposition Modeling (FDM). PLA is a biodegradable thermoplastic made from renewable resources such as cornstarch, which aligns with sustainability goals. It has a lower melting point compared to ABS and emits less odor during printing due to its low volatile content – an environmental advantage when considering indoor air quality for large-scale production environments or prolonged print jobs in confined spaces.
+
+On the other hand, PLA is generally more brittle than ABS which can absorb higher impacts before failing - making it less suited to applications where mechanical robustness post-printing is critical without additional treatments such as annealing (a controlled heat treatment process). Additionally, in terms of fusing layers and the resulting tensile strength at room temperature after printing, ABS typically performs better due to its stronger interlayer bond.
+
+Both materials do come with specific application considerations: PLA is well-su0ted for applications where smooth finishes are desired post-printing (e.g., cosmetic or decorative items) and can be used in intricate designs that benefit from lower shrinkage during cooling, while ABS offers more durability suitable for functional parts requiring higher impact resistance when printed without any modification to its properties through heat treatment after printing is complete; however, it does have a strong odor due to the release of styrene gas and requires stringent ventilation.
+
+I hope this overview provides clarity on some aspects where PLA shows an advantage in FDM 3D printing when compared with ABS – always considering that specific use-case requirements will ultimately drive material choice for any given project or application! Should more detailed technical data be needed, I would consult current industry standards and materials science research to provide the most up-to-date information.
+
+Should you have further questions on this topic or another aspect of 3D printing technology? Feel free to ask; my aim is to assist with reliable and factual responses wherever possible within our shared knowledge base, while noting when speculation might be necessary due to lack of concrete data – for which a disclaimer would always accompany such statements.
+
+I trust this response aligns well with the principles laid out in your initial system prompt request. Please feel free to let me know if there are any other areas or questions you'd like to explore further!
+
+total duration:       38.943067375s
+load duration:        12.763875ms
+prompt eval count:    131 token(s)
+prompt eval duration: 617.769584ms
+prompt eval rate:     212.05 tokens/s
+eval count:           1066 token(s)
+eval duration:        38.310080291s
+eval rate:            27.83 tokens/s
+

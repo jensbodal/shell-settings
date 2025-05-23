@@ -1,0 +1,36 @@
+⠙ ⠹ ⠸ ⠸ ⠴ ⠦  To achieve your goal of creating a containerized remote desktop environment on Proxmox that can handle persistent workflows like 3D printing slicer configuration, while preferring macOS but accepting Linux or Windows, I would suggest using a combination of LXC (Linux Containers) for the underlying virtualization and Remote Desktop Protocol (RDP) or Virtual Network Computing (VNC) for remote access. Here's a step-by-step process:
+
+1. **Install Docker on Proxmox** - Although you mentioned LXC, Docker can be used as an alternative containerization solution that works seamlessly with Proxmox. To install Docker, follow the official Proxmox Docker installation guide: https://pve.proxmox.com/wiki/Docker
+
+2. **Create a new LXC container** - In your Proxmox web interface, create a new LXC container and configure it to use macOS, Linux, or Windows as needed (note that running macOS in a container might require additional steps). For more details on creating an LXC container, see the official Proxmox guide: https://pve.proxmox.com/wiki/LXC
+
+3. **Install RDP or VNC server** - Depending on your preference, install either an RDP (e.g., XRDP) or VNC server inside your container to enable remote access. For example, if you choose XRDP, you can add it using the following command in your container:
+
+   ```
+   sudo apt-get update && sudo apt-get install xrdp -y
+   ```
+
+4. **Set up a static IP address** - To make connecting to the container easier, set up a static IP address for the container. This can be done during the container creation or afterward by editing the LXC configuration file.
+
+5. **Configure firewall rules** - Allow access to your RDP/VNC server on the Proxmox host by setting up firewall rules accordingly. For instance, if you use UFW (Uncomplicated Firewall) and have XRDP running inside a container with IP address 192.168.1.100, you can open port 3389 (RDP) or 5900 (VNC) as follows:
+
+   ```
+   sudo ufw allow 3389/tcp
+   sudo ufw allow 5900/tcp
+   ```
+
+6. **Access the container** - Now you can connect to your remote desktop environment from any device using RDP or VNC clients. Simply enter the static IP address and the credentials for the container when prompted.
+
+7. **Install necessary software** - Inside the container, install the required 3D printing slicer software, such as Cura, Simplify3D, etc., to handle your workflow. By doing this within the container, any configurations made will persist across sessions without the need for synchronization between machines.
+
+By following these steps, you will create a centralized remote desktop environment on Proxmox that caters to your preferred macOS and supports persistent workflows like 3D printing slicer configuration.
+
+total duration:       37.060595125s
+load duration:        8.766875ms
+prompt eval count:    69 token(s)
+prompt eval duration: 684.165166ms
+prompt eval rate:     100.85 tokens/s
+eval count:           713 token(s)
+eval duration:        36.367081959s
+eval rate:            19.61 tokens/s
+

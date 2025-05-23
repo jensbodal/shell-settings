@@ -1,0 +1,94 @@
+[
+  {
+    "modelCompatibilityType": "gguf",
+    "runtime": {
+      "hardwareSurveyResult": {
+        "compatibility": {
+          "status": "Compatible"
+        },
+        "cpuSurveyResult": {
+          "result": {
+            "code": "Success",
+            "message": ""
+          },
+          "cpuInfo": {
+            "name": "Apple M4",
+            "architecture": "ARM64",
+            "supportedInstructionSetExtensions": [
+              "AdvSIMD"
+            ]
+          }
+        },
+        "memoryInfo": {
+          "ramCapacity": 17179869184,
+          "vramCapacity": 11453251584,
+          "totalMemory": 17179869184
+        },
+        "gpuSurveyResult": {
+          "result": {
+            "code": "Success",
+            "message": "Successfully queried Apple Silicon for GPU Info."
+          },
+          "gpuInfo": [
+            {
+              "name": "Apple Silicon",
+              "deviceId": 0,
+              "totalMemoryCapacityBytes": 17179869184,
+              "dedicatedMemoryCapacityBytes": 11453251584,
+              "integrationType": "Integrated",
+              "detectionPlatform": "Metal",
+              "detectionPlatformVersion": "",
+              "otherInfo": {}
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "modelCompatibilityType": "safetensors",
+    "runtime": {
+      "hardwareSurveyResult": {
+        "compatibility": {
+          "status": "Compatible"
+        },
+        "cpuSurveyResult": {
+          "result": {
+            "code": "Success",
+            "message": ""
+          },
+          "cpuInfo": {
+            "name": "Apple M4",
+            "architecture": "ARM64",
+            "supportedInstructionSetExtensions": [
+              "AdvSIMD"
+            ]
+          }
+        },
+        "memoryInfo": {
+          "ramCapacity": 17179869184,
+          "vramCapacity": 11453251584,
+          "totalMemory": 17179869184
+        },
+        "gpuSurveyResult": {
+          "result": {
+            "code": "Success",
+            "message": "Successfully queried Apple Silicon for GPU Info."
+          },
+          "gpuInfo": [
+            {
+              "name": "Apple Silicon",
+              "deviceId": 0,
+              "totalMemoryCapacityBytes": 17179869184,
+              "dedicatedMemoryCapacityBytes": 11453251584,
+              "integrationType": "Integrated",
+              "detectionPlatform": "Metal",
+              "detectionPlatformVersion": "",
+              "otherInfo": {}
+            }
+          ]
+        }
+      }
+    }
+  }
+]

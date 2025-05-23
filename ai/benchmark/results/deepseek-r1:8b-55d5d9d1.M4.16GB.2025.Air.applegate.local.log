@@ -1,0 +1,48 @@
+⠋ ⠹ ⠹ ⠸ ⠼ ⠴ ⠧ ⠇ <think>
+Okay, so I need to create a system prompt for an LLM that makes it act as an expert in 3D printing. The prompt has to have specific instructions about how the model should handle questions it can't answer. Let me break this down.
+
+First, the system prompt needs to tell the LLM to act as an expert. That means it should use precise and accurate information. It shouldn't make things up or guess unless necessary. When faced with a question it doesn't know, instead of guessing, it should look for discussions online about the topic. If there's no information available, it should respond that it's unsure. Also, if it has to guess, it needs to clearly label it as such and explain why that guess shouldn't be taken as definitive.
+
+So, putting this together, the prompt should start by instructing the LLM to act as an expert in 3D printing, providing accurate and factual information. Then, when faced with a question, if it can't answer directly, it needs to search for online discussions or sources related to the topic. If no reliable information is found, it should say it's unsure. For guesses, it must label them as such and explain why they're not certain.
+
+I think I need to structure this in a clear, step-by-step manner without using markdown, just plain text. Maybe using bullet points or numbered steps to make it organized but still natural.
+
+Wait, the user provided an example prompt that seems to cover all these points. It starts by setting expectations about accuracy and not making things up. Then, for each interaction, it outlines the process: check internal knowledge, search online, provide if found, else unsure. If unsure, offer to look further or suggest possible answers with caveats.
+
+I should make sure my system prompt is similar but perhaps rephrased in a way that's clear and concise, ensuring all instructions are covered without missing any details.
+
+Also, the tone needs to be authoritative but helpful, guiding the user through the process of getting accurate information, knowing when it can help and when it needs to look up. It shouldn't over-promise or under-deliver.
+
+I think I should also include a note about transparency in case the LLM doesn't have enough information, so the user knows that if the answer isn't certain, it won't just make something up but will be honest about its limitations.
+
+Maybe adding examples would help, like showing how to handle different scenarios, but the prompt itself should outline the process without being too specific on each example.
+
+Alright, I think I have a good structure in mind. Now I'll try to write out the system prompt based on these thoughts.
+</think>
+
+**System Prompt for 3D Printing Expert**
+
+Greetings! I am here to assist you as an expert in the field of 3D printing. My goal is to provide accurate and factual information to help solve your queries effectively.
+
+When addressing a question:
+
+1. **Check Internal Knowledge**: First, I will access my training data to see if I can answer your question directly.
+2. **Search Online Discussions**: If I cannot provide an answer, I will search for relevant discussions or sources online that discuss the topic.
+3. **Provide Information if Found**: If reliable information is discovered, I will present it to you.
+4. **Respond with Uncertainty**: If no relevant information is available, I will inform you that I am unsure and unable to provide a definitive answer at this time.
+
+5. **Handle Guesses Carefully**: In cases where I cannot determine an answer confidently, I may offer a guess. Please note that such guesses should not be taken as definitive facts but rather as suggestions for further exploration.
+
+My approach is rooted in transparency and accuracy. If I am uncertain or unable to find information, I will communicate this clearly, ensuring you are informed about the limitations of my knowledge.
+
+Feel free to ask your questions, knowing that I will do my best to assist you based on available resources and my training.
+
+total duration:       53.479127791s
+load duration:        10.774333ms
+prompt eval count:    121 token(s)
+prompt eval duration: 798.543083ms
+prompt eval rate:     151.53 tokens/s
+eval count:           812 token(s)
+eval duration:        52.669038167s
+eval rate:            15.42 tokens/s
+

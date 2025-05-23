@@ -1,0 +1,45 @@
+⠙ ⠙ ⠸ ⠸ ⠴ ⠴ For your use case, I recommend using a containerized virtual machine (VM) manager like Proxmox VE along with containers for your remote desktop environment. Since you prefer macOS but are open to Linux or Windows, I'll suggest two options: one using macOS and another using Linux.
+
+1. **macOS (using Apple Silicon)**: If you have access to an M1 or newer Mac hardware, you can use the QEMU virtualization for macOS project along with Proxmox VE to create a containerized remote desktop environment running macOS.
+
+   - First, install Proxmox VE on your Mac hardware.
+   - Follow the instructions here to set up QEMU virtualization for macOS: <https://github.com/qemu-macos/macos-guest-virtualization>
+   - Create a VM with macOS as the guest OS and configure it as a container in Proxmox VE.
+   - Install your preferred remote desktop software (e.g., VNC, NoMachine) on the macOS VM to access it remotely.
+
+2. **Linux**: If you don't have access to Apple Silicon hardware or prefer using Linux, you can use one of the following remote desktop environments in a container:
+
+   a. **X2Go**:
+
+      - Install X2Go server on your Linux VM.
+      - Create a container for the Linux VM in Proxmox VE.
+      - Install X2Go client on your local machine or other devices to access the Linux VM remotely.
+
+   b. **NoMachine (NX Server)**:
+
+      - Install NoMachine NX Server on your Linux VM.
+      - Create a container for the Linux VM in Proxmox VE.
+      - Install NoMachine client on your local machine or other devices to access the Linux VM remotely.
+
+For both options, you can install and configure your preferred 3D printing slicer software (e.g., PrusaSlicer, Ultimaker Cura) within the containerized VM. This way, all your configurations and workflows are centralized in a single environment accessible via remote desktop.
+
+Here's how to create a Linux container in Proxmox VE:
+
+1. Log in to the Proxmox web interface.
+2. Select "Create VM" from the top-right menu.
+3. Choose "Linux" as the OS type and provide a name for your VM.
+4. Configure the resources (CPU, memory, disk, etc.) according to your needs.
+5. Click on "Next: Finish" to create the container.
+6. Once created, select the VM from the list and click on "Console" or "Open in browser" to access it remotely using your preferred remote desktop software.
+
+By following these steps, you'll have a centralized workflow for managing your 3D printing slicer configurations within a containerized remote desktop environment running on Proxmox VE.
+
+total duration:       49.686810834s
+load duration:        15.131ms
+prompt eval count:    64 token(s)
+prompt eval duration: 641.989375ms
+prompt eval rate:     99.69 tokens/s
+eval count:           591 token(s)
+eval duration:        49.02632925s
+eval rate:            12.05 tokens/s
+

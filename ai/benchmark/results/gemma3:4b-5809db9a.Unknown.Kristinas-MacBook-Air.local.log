@@ -1,15 +1,15 @@
-⠙ ⠙ ⠸ ⠸ ⠼ ⠦ ⠦ ⠇ ⠏ ⠏ ⠙ ⠙ ⠸ ⠸ ⠴ ⠴ ⠧ ⠇ ⠏ ⠏ ⠙ ⠙ ⠸ ⠸ ⠼ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠧ ⠧ ⠇ ⠋ ⠋ ⠙ ⠸ ⠼ ⠼ ⠴ ⠧ ⠧ ⠏ ⠋ ⠙ ⠙ ⠸ ⠼ ⠴ ⠴ ⠧ ⠧ ⠏ ⠋ ⠋ ⠙ ⠸ ⠸ ⠴ ⠦ ⠧ ⠧ ⠏ ⠏ ⠋ ⠙ ⠹ ⠼ ⠴ ⠴ ⠧ ⠧ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠧ ⠧ ⠏ ⠋ ⠋ ⠹ ⠸ ⠸ ⠴ ⠴ ⠧ ⠇ ⠏ ⠏ ⠋ ⠙ ⠸ ⠸ ⠴ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ ⠹ ⠼ ⠼ ⠴ ⠦ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠦ ⠇ ⠏ ⠋ ⠙ ⠹ ⠹ ⠼ ⠼ ⠦ ⠦ ⠇ ⠇ ⠋ ⠋ ⠹ ⠸ Here are 3 key factual bullet points summarizing the Model Context Protocol (MCP) specification:
+⠙ ⠹ ⠸ ⠼ ⠴ ⠴ ⠧ ⠧ ⠏ ⠏ ⠙ ⠹ ⠸ ⠼ ⠼ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠋ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠇ ⠋ ⠋ ⠹ ⠹ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠇ ⠋ ⠙ ⠹ Here’s a 3-point summary of the Model Context Protocol (MCP) specification, based on the provided text:
 
-*   **MCP is a standardized protocol** for seamlessly connecting LLM applications with external data sources and tools, utilizing JSON-RPC 2.0 messages.
-*   **It defines roles for Hosts, Clients, and Servers** – LLM applications, connectors, and data/capability providers – to facilitate communication and data exchange.
-*   **Security is a core focus**, with the specification emphasizing user consent, data privacy, tool safety, and limiting server visibility into prompts, requiring implementors to build robust consent flows and security controls.
+*   **Standardized Integration:** MCP is an open protocol designed to establish a standardized way for applications to share contextual information with language models and expose tools to AI systems, facilitating the creation of composable AI workflows.
+*   **JSON-RPC Core:** The protocol utilizes JSON-RPC 2.0 messages for communication between Hosts (LLM applications), Clients (connectors within the host), and Servers (providing context and capabilities).
+*   **Security Focus:** MCP emphasizes user consent, data privacy, and tool safety, requiring implementors to build robust authorization flows, provide clear documentation, and implement appropriate access controls to mitigate potential risks associated with arbitrary data access and code execution.
 
-total duration:       22.663771792s
-load duration:        15.195721792s
+total duration:       11.656728958s
+load duration:        3.107932375s
 prompt eval count:    1151 token(s)
-prompt eval duration: 3.115800167s
-prompt eval rate:     369.41 tokens/s
-eval count:           129 token(s)
-eval duration:        4.349964417s
-eval rate:            29.66 tokens/s
+prompt eval duration: 3.123246917s
+prompt eval rate:     368.53 tokens/s
+eval count:           165 token(s)
+eval duration:        5.424160708s
+eval rate:            30.42 tokens/s
 

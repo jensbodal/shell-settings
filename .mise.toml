@@ -1,4 +1,5 @@
 [tools]
+1password = "latest"
 node = "lts"
 python = "3.12"
 rust = "latest"

@@ -1,0 +1,60 @@
+⠙ For a containerized remote desktop environment that can manage persistent workflows like 3D printing slicer configuration, I'd recommend using Proxmox and a combination of Docker and Open Remote Desktop (ORD) or similar tools. Here's a suggested setup:
+
+1. **Proxmox:** Use Proxmox as the host for your remote desktop infrastructure. It provides a robust and scalable platform for running containers.
+2. **Docker:** Use Docker to containerize your applications. This will ensure that each workflow runs independently without dependencies on other machines.
+3. **MacOS (with Linux or Windows)**: For the macOS-based workflows, you can use a Mac mini, iMac, or similar hardware as the host for your Proxmox cluster.
+
+For a preferred setup, I'd suggest:
+
+1. Create a separate container for each workflow using Docker Compose.
+2. Use a Linux-based workflow (e.g., Ubuntu or Debian) for 3D printing slicer configuration and other workflows that don't require macOS-specific applications.
+3. If you prefer to use macOS, create a virtual machine (VM) within Proxmox with a macOS operating system.
+
+Here's an example of how you can set up your containerized remote desktop environment:
+
+**Linux-based workflow (e.g., Ubuntu):**
+
+* Create a Docker Compose file (e.g., `docker-compose.yml`) that defines the services for your 3D printing slicer configuration workflow:
+```yaml
+version: '3'
+services:
+  slicer-config:
+    image: my-slicer-config-image
+    volumes:
+      - ./slicer-config:/config
+      - ./workflows:/workflows
+```
+* Run `docker-compose up` to start the container and mount the `./slicer-config` directory as a volume.
+
+**MacOS (with Linux or Windows) based workflow:**
+
+* Create a Proxmox VM with macOS and install the necessary software for your 3D printing slicer configuration workflow.
+* Mount a shared volume from Proxmox to store configuration files.
+* Use Docker Compose to run a container for your macOS-based workflow:
+```yaml
+version: '3'
+services:
+  macos-slicer-config:
+    image: my-macos-slicer-config-image
+    volumes:
+      - ./macos-slicer-config:/config
+```
+In both cases, use Open Remote Desktop (ORD) or similar tools to connect to the containerized remote desktop environment. This will allow you to access your workflows from any machine with a browser or using a remote desktop client.
+
+To avoid syncing configurations between machines:
+
+1. Use a secure, encrypted volume store for storing configuration files.
+2. Configure Docker volumes to persist data even when containers are restarted or deleted.
+3. Set up Proxmox's file-level replication feature to synchronize changes between containers.
+
+By following this setup, you'll have a centralized remote desktop environment that manages persistent workflows like 3D printing slicer configuration without requiring syncing configurations between machines.
+
+total duration:       17.908857125s
+load duration:        15.02475ms
+prompt eval count:    82 token(s)
+prompt eval duration: 162.647958ms
+prompt eval rate:     504.16 tokens/s
+eval count:           608 token(s)
+eval duration:        17.730827208s
+eval rate:            34.29 tokens/s
+

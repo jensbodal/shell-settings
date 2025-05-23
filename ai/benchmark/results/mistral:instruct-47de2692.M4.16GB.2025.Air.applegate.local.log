@@ -1,0 +1,98 @@
+⠙ ⠙ ⠸ ⠸ ⠴ ⠦  To achieve your goal of creating a containerized remote desktop environment on Proxmox that supports macOS, Linux, and Windows for persistent workflows like 3D printing slicer configuration, I would suggest using Portainer and Docker to set up the desired containers. Here's a step-by-step guide:
+
+1. Install Docker and Docker Compose on your Proxmox VE server. You can find the installation instructions here: https://docs.docker.com/engine/install/proxmox_ve/
+
+2. Install Portainer on Proxmox, which will provide a user-friendly web interface to manage your Docker containers and networks. Follow this guide to install it: https://portainer.readthedocs.io/en/latest/gettingstarted/installation/proxmoxve/
+
+3. Create a new network in Proxmox for your remote desktop container:
+   - Log into the web interface of your Proxmox VE server
+   - Go to Network > LAN > Configure IPv4 networks > Add New
+     - Set the Subnet to something like 172.18.0.0/16 (make sure it doesn't conflict with any other subnets you may have)
+     - Set the Gateway, Netmask, and DNS as appropriate for your network
+   - Create a new VLAN if needed, or use an existing one that matches the network above
+
+4. In your preferred terminal, navigate to the directory where your `docker-compose.yml` file will be created:
+
+   ```
+   mkdir ~/remote-desktop
+   cd ~/remote-desktop
+   ```
+
+5. Create a `docker-compose.yml` file with the following content, adjusting as needed to support your specific use case and preferences:
+
+```yaml
+version: '3'
+services:
+  remote-desktop:
+    image: jesseduffield/remote-it:latest # Choose the desired Remote Desktop server image (e.g., JumpCloud Connect, Microsoft RDP, VNC)
+    restart: always
+    environment:
+      - TZ=America/Los_Angeles # Set your desired timezone
+      - RDP_USERNAME=yourusername
+      - RDP_PASSWORD=yourpassword
+      - RDP_SERVER_IP=172.18.0.1 # The IP address of the container on your custom network (you can set this dynamically using DNS or a service like dnsmasq)
+    ports:
+      - 3389:3389 # Map the RDP port from the container to your host machine
+    networks:
+      - remote-desktop-network # The network created in step 3
+
+  macos:
+    image: docker.io/docker-library/macos
+    build:
+      context: ./macos-build
+    restart: always
+    volumes:
+      - /path/to/local/data/macos-persistent:/Users/Shared # Map a local folder to the shared folder inside the MacOS container for persistent data storage
+    depends_on:
+      - remote-desktop
+    networks:
+      - remote-desktop-network
+
+  linux:
+    image: docker.io/your_linux_image
+    restart: always
+    volumes:
+      - /path/to/local/data/linux:/home/username # Map a local folder to the home directory inside the Linux container for persistent data storage
+    depends_on:
+      - remote-desktop
+    networks:
+      - remote-desktop-network
+
+  windows:
+    image: docker.io/your_windows_image
+    restart: always
+    volumes:
+      - /path/to/local/data/windows:c:\Users\Public # Map a local folder to the Public folder inside the Windows container for persistent data storage
+    depends_on:
+      - remote-desktop
+    networks:
+      - remote-desktop-network
+
+networks:
+  remote-desktop-network:
+    driver: bridge
+```
+
+6. Create a `Dockerfile` for your macOS container under the `./macos-build` directory specified in the `docker-compose.yml` file, if one doesn't already exist, to install and configure the 3D printing slicer software:
+
+```Dockerfile
+FROM docker.io/docker-library/macos
+# Install Homebrew
+RUN /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/installer.sh)"
+# Install your desired 3D printing slicer software using Homebrew
+RUN brew install your-slicer-software
+```
+
+7. Run `docker-compose up -d` to start the containers in detached mode and make them persistent across reboots.
+
+8. Access the remote desktop server via RDP from any machine on your network, and use it to manage your 3D printing workflows without needing to sync configurations between machines.
+
+total duration:       59.047296125s
+load duration:        9.664208ms
+prompt eval count:    69 token(s)
+prompt eval duration: 627.282667ms
+prompt eval rate:     110.00 tokens/s
+eval count:           1167 token(s)
+eval duration:        58.409562458s
+eval rate:            19.98 tokens/s
+

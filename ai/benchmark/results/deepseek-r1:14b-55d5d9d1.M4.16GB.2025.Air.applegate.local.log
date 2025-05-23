@@ -1,0 +1,39 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ <think>
+Okay, so I need to create a system prompt for an LLM that makes it act like an expert in 3D printing. The instructions are pretty specific: if the model can't answer a question, it shouldn't guess; instead, it should look online for discussions and find sources for information. If there's no info available, just say it's not sure. Also, any guesses should be clearly labeled as such and treated anecdotally, while maintaining a factual, reliable approach.
+
+Hmm, first, I need to make sure the prompt clearly states the model's role as an expert in 3D printing. That sets the expectation right from the start. Then, it needs to handle cases where the model doesn't know something. Instead of making things up, it should search online and find relevant sources. But wait, how does the model access current internet information? I think some models can do that now, but maybe the prompt just assumes that.
+
+I also need to include a part about not guessing unless absolutely necessary, and if it does guess, label it as such with a note that it's anecdotal. So the response should be factual and reliable, avoiding casual chatting. Maybe adding an example would help clarify, like providing a sample response so the model knows what to aim for.
+
+I'm wondering if I should structure the prompt step by step: first, state the expertise, then handling unknowns with online sources, then the guessing caveat, followed by the factual approach, and perhaps an example. That might make it clear for the LLM to follow.
+
+Wait, but in the initial query, the user mentioned "If there is __no__ information about the subject..." Maybe I should emphasize that part so the model doesn't try to create info out of thin air. Also, the requirement to label guesses as such and note their anecdotal nature is important to maintain reliability.
+
+I think I need to make sure the prompt is clear, concise, and covers all these points without being too verbose. Maybe bullet points could help structure it, but since it's a system prompt, it should be in paragraph form.
+
+Let me try drafting this: Start by instructing the model to act as an expert in 3D printing. Then explain that if it can't answer, it shouldn't guess but instead find online discussions and sources. If no info is found, say it's not sure. Any guesses must be labeled as such and treated as anecdotes. Also, emphasize being factual, reliable, and avoiding casual chatting.
+
+Hmm, I think that covers everything. Maybe adding an example of how the response should look would make it clearer for the model.
+</think>
+
+**System Prompt for LLM: 3D Printing Expert**
+
+You are an expert in 3D printing with extensive knowledge in materials, techniques, applications, and industry trends. Your role is to provide accurate, reliable, and factual information.
+
+1. **Expertise**: Always respond based on your expertise in 3D printing unless instructed otherwise.
+2. **Handling Unknowns**: If you cannot answer a question, refrain from guessing. Instead, search online for relevant discussions and sources. If no information is found, simply state that the subject is unclear to you.
+3. **Guessing Policy**: If a guess is necessary, clearly label it as such (e.g., "This is an anecdotal observation") and advise treating it with caution due to its speculative nature.
+4. **Factual Approach**: Maintain a factual and reliable tone in all responses. Avoid casual or conversational language unless explicitly allowed.
+5. **Example Response**: When unsure, respond like this: "Upon reviewing available information, there isn't sufficient data on this topic at the moment. I recommend consulting recent research or industry reports for further insights."
+
+This structured approach ensures clarity, reliability, and adherence to factual standards in all interactions related to 3D printing.
+
+total duration:       1m43.784329334s
+load duration:        10.762584ms
+prompt eval count:    121 token(s)
+prompt eval duration: 2.151448541s
+prompt eval rate:     56.24 tokens/s
+eval count:           789 token(s)
+eval duration:        1m41.612792667s
+eval rate:            7.76 tokens/s
+
