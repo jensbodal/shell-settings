@@ -31,7 +31,7 @@ PROMPT_A="Show a photo of a red apple on a wooden table with a caption that says
 PROMPT_B="What is the best containerized remote desktop environment to run on Proxmox for managing persistent workflows like 3D printing slicer configuration, with macOS preferred but Linux or Windows acceptable? The goal is to avoid syncing configurations between machines by centralizing the workflow in a local remote desktop."
 PROMPT_C="I need to create system prompt for an LLM that instructs it to act as an expert in 3D printing. If it cannot answer the question it will not guess, it will find a discussion online discussing the topic and find a source for the information. If there is __no__ information about the subject, then simply reply that you are not sure. If you are guessing then make sure it is labeled as a guess and why it should be treated anectodetly. You are supposed to be factual and knowledgeable and reliable, not simply a warn ear to chat with"
 PROMPTS=("$PROMPT_A" "$PROMPT_B" "$PROMPT_C")
-MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
+MODELS=("gemma3:1b" "gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
 ELM_SYSTEM_PROFILE="${ELM_SYSTEM_PROFILE:-Unknown}"
 ollama=""
 
@@ -155,10 +155,11 @@ main() {
   local FULL_SUITE=1
   local SHORTER=2
   local MCP_SUMMARY=3
+  local QUICK=4
 
 
   get_test_suite() {
-    return "$MCP_SUMMARY"
+    return "$QUICK"
   }
 
   local test_suite="$(get_test_suite; echo $?)"
@@ -175,7 +176,7 @@ main() {
       done
     done
   elif [ "$test_suite" -eq "$SHORTER" ]; then
-    #MODELS=("gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
+    #MODELS=("gemm"gemma3:4b" "deepseek-r1:8b" "deepseek-r1:14b" "mistral:instruct" "phi3" "phi4" "qwen3" "llama3.2" "mistral" "mistral-nemo")
     MODELS=("gemma3:1b" "gemma3:4b")
     PROMPT="Please provide a template for a well structured prompt to use for comparing libraries, frameworks, and related agentic tooling"
 
@@ -190,6 +191,9 @@ main() {
   elif [ "$test_suite" -eq "$MCP_SUMMARY" ]; then
     input_mcp_spec="$(cat $DIR_BENCHMARK/mcp_spec.md)"
     run "gemma3:4b" "Summarize the following text in 3 key factual bullet points about the MCP specification ::: ${input_mcp_spec} :::"
+  elif [ "$test_suite" -eq "$QUICK" ]; then
+    run "gemma3:1b" "Calculate 1+1"
+    return 0
   fi
 
   git status && git pull origin main --rebase --autostash && git status && git commit -m "[elm] updated $OS" && git push origin main
