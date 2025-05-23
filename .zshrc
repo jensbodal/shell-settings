@@ -213,8 +213,12 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
     fi
 
     chmod 600 "${filepath}"
-    .log "DISABLED: .addtokeychain \"${filepath}\""
-    #.addtokeychain "${filepath}"
+
+    if [ "${filepath}" != "$HOME/.ssh/id_ed25519" ]; then
+      .log "DISABLED: .addtokeychain \"${filepath}\""
+    else
+      .addtokeychain "${filepath}"
+    fi
   done
 
 }
