@@ -1,0 +1,15 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ Here are 3 key factual bullet points summarizing the Model Context Protocol (MCP) specification:
+
+*   **MCP is a standardized protocol** for seamlessly connecting LLM applications with external data sources and tools, using JSON-RPC 2.0 messages.
+*   **It defines roles for Hosts, Clients, and Servers** – LLM applications, connectors within those applications, and services providing context/capabilities, respectively.
+*   **Security is a core focus**, with key principles including user consent, data privacy, and careful handling of tool execution, alongside recommendations for implementors to build robust consent flows and security measures.
+
+total duration:       7.117359292s
+load duration:        23.484334ms
+prompt eval count:    1151 token(s)
+prompt eval duration: 3.069598583s
+prompt eval rate:     374.97 tokens/s
+eval count:           127 token(s)
+eval duration:        4.023162959s
+eval rate:            31.57 tokens/s
+
