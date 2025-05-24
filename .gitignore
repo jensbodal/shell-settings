@@ -18,3 +18,4 @@ macos/automator/testing.workflow/
 .DS_Store
 .aider*
 /ai/lib/
+vault.yml

@@ -1,3 +1,4 @@
+#!/bin/bash
 # LLM Client Configuration
 
 # Ollama settings
@@ -6,7 +7,7 @@ LLM_DEFAULT_MODEL=llama3
 
 # OpenRouter settings
 # Get your API key from https://openrouter.ai/keys
-OPENROUTER_API_KEY=your_api_key_here
+OPENROUTER_API_KEY="adfoj"
 
 # Default generation parameters
 DEFAULT_TEMPERATURE=0.7

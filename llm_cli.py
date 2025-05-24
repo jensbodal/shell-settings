@@ -12,10 +12,10 @@ from llm_client import LLMClient
 def parse_args():
     """Parse command line arguments."""
     parser = argparse.ArgumentParser(description="LLM CLI with fallback capability")
-    
+
     parser.add_argument("prompt", nargs="?", help="The prompt to send to the LLM")
     parser.add_argument(
-        "--model", "-m", 
+        "--model", "-m",
         default=os.environ.get("LLM_DEFAULT_MODEL", "llama3"),
         help="Model to use (default: llama3)"
     )
@@ -35,8 +35,8 @@ def parse_args():
     )
     parser.add_argument(
         "--ollama-url",
-        default=os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434"),
-        help="Ollama base URL (default: http://localhost:11434)"
+        default=os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
+        help="Ollama base URL (default: http://127.0.0.1:11434)"
     )
     parser.add_argument(
         "--openrouter-key", "-k",
@@ -48,13 +48,13 @@ def parse_args():
         action="store_true",
         help="Read prompt from stdin"
     )
-    
+
     return parser.parse_args()
 
 def main():
     """Main entry point."""
     args = parse_args()
-    
+
     # Get prompt from stdin if requested
     if args.stdin:
         prompt = sys.stdin.read().strip()
@@ -63,14 +63,14 @@ def main():
     else:
         print("Error: No prompt provided. Use positional argument or --stdin")
         sys.exit(1)
-    
+
     # Initialize client
     client = LLMClient(
         ollama_base_url=args.ollama_url,
         openrouter_api_key=args.openrouter_key,
         default_model=args.model
     )
-    
+
     try:
         # Generate response
         response = client.generate(
@@ -80,14 +80,14 @@ def main():
             temperature=args.temperature,
             max_tokens=args.max_tokens
         )
-        
+
         # Print provider info
         provider = "OpenRouter (fallback)" if client.using_fallback else "Ollama (local)"
         print(f"Using: {provider} with model: {response['model']}", file=sys.stderr)
-        
+
         # Print just the response text to stdout
         print(response["text"])
-        
+
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
