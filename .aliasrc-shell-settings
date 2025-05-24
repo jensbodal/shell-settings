@@ -4,6 +4,12 @@ DIR="$(dirname "$(readlink -f "$0")")"
 _LOG_PREFIX="${LOG_PREFIX:=}"
 LOG_PREFIX="[~/.aliasrc-shell-settings] "
 
+# TEMP _ REFACTOR
+alias ansible-galaxy="pkgx +ansible ansible-galaxy"
+alias ansible-playbook="pkgx +ansible ansible-playbook"
+alias ansible-vault="pkgx +ansible ansible-vault"
+# ###
+
 alias cds="cd $SHELL_SETTINGS_DIR"
 alias cdg="cd $HOME/github"
 alias pbc="pbcopy"

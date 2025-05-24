@@ -1,0 +1,26 @@
+#!/bin/bash
+
+GHDIR="$HOME/github"
+mkdir -p $GHDIR
+cd $GHDIR
+BINDIR="$GHDIR/chatgpt-shell"
+
+if [ ! -d "$BINDIR" ]; then
+  # 1. Clone the tool
+  git clone https://github.com/xenodium/chatgpt-shell.git
+fi
+
+export PATH="$BINDIR:$PATH"
+
+chatgpt-shell "$@"
+
+# 2. Add it to your PATH (optional but recommended)
+#echo 'export PATH="$HOME/.chatgpt-shell:$PATH"' >> ~/.bashrc  # or ~/.zshrc
+#source ~/.bashrc  # or source ~/.zshrc
+
+# 3. Set your OpenAI API key
+#export OPENAI_API_KEY="sk-..."  # ← paste your real key here or add it to ~/.bash_profile
+
+# 4. Run it!
+#chatgpt-shell
+

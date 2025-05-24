@@ -1,0 +1,27 @@
+# test-pve.yml
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    pve_host: "{{ pve_host }}"      # ← your Proxmox IP or hostname
+    pve_node: "{{ pve_node }}"           # ← your Proxmox node name
+    pve_user: "{{ pve_user }}"           # or "root@pam!ansible" if using API token
+    # Either:
+    #pve_password: "{{ vault_pve_password }}"  # from vault
+    # Or:
+    pve_token: "{{ vault_pve_token }}"      # if using token
+  tasks:
+    - name: Try retrieving VM info (should 404 if vmid doesn't exist, that's OK)
+      community.general.proxmox_kvm:
+        api_host: "{{ pve_host }}"
+        api_user: "{{ pve_user }}"
+        api_token_id: "{{ pve_token_id }}"
+        api_token_secret: "{{ pve_token_secret }}"
+        node: "{{ pve_node }}"
+        vmid: 9001
+        state: current
+      register: result
+
+    - name: Show API response
+      debug:
+        var: result
