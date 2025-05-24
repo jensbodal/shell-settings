@@ -1,3 +1,4 @@
+.envrc.local
 __pycache__/
 /.direnv/
 /.idea/

@@ -16,6 +16,6 @@ else
   echo "Pausing 1 seconds..."
   sleep 1
   curl -LsSf https://aider.chat/install.sh | sh
-  "$HOME/.local/bin/aider $@"
+  "$HOME/.local/bin/aider" "$@"
 fi
 

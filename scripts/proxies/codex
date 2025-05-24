@@ -1,0 +1,44 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+exists() {
+  if ! command -v "$1" 2>&1 > /dev/null; then
+    return 1
+  fi
+  return 0
+}
+
+doupgrade() {
+  return 0
+}
+
+main() {
+  if ! exists codex; then
+    log "Missing codex, attempting to install..."
+
+    if exists bun; then
+      bun install -g @openai/codex
+    else
+      die "Missing codex or codex auto-installation failed (or you just need to run this again and the script does not work right)"
+    fi
+  fi
+
+  if ! exists codex; then
+    die "Missing codex or codex auto-installation failed (or you just need to run this again and the script does not work right)"
+  fi
+
+  if doupgrade; then
+    codex --upgrade
+  fi
+}
+
+DEBUG_CODEX="${DEBUG_CODEX:-0}"
+
+if [ "$DEBUG_CODEX" -eq "1" ]; then
+  if [ "$#" -ne "0" ]; then
+    log "$@"
+  fi
+fi
+
+main "$@"

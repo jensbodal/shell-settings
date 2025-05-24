@@ -1,0 +1,12 @@
+⠙ ⠙ ⠹ ⠼ ⠼ ⠴ ⠦ ⠇ ⠇ ⠏ ⠙ ⠹ ⠸ ⠼ ⠴ 1 + 1 = 2
+
+
+total duration:       1.6439309s
+load duration:        1.4262612s
+prompt eval count:    15 token(s)
+prompt eval duration: 85.4191ms
+prompt eval rate:     175.60 tokens/s
+eval count:           9 token(s)
+eval duration:        131.2448ms
+eval rate:            68.57 tokens/s
+
