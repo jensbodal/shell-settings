@@ -1,28 +1,73 @@
 #!/bin/bash
-# install_litellm.sh – one-shot LiteLLM installer for macOS, Linux, WSL
+# litellm_setup.sh  —  install OR uninstall LiteLLM proxy as a user-service
 set -euo pipefail
+
+ACTION="install"
+[[ "${1:-}" == "--uninstall" ]] && ACTION="uninstall"
 
 LOG_DIR="$HOME/.local/lite-llm"
 CONFIG="$LOG_DIR/config.yaml"
 LOGFILE="$LOG_DIR/lite-llm.log"
 SERVICE_NAME="litellm"
 
-command -v python3 >/dev/null || { echo "python3 missing – install it first."; exit 1; }
+systemd_ok() { command -v systemctl >/dev/null && systemctl --user >/dev/null 2>&1; }
+macos_ok()   { [[ "$OSTYPE" == "darwin"* ]]; }
 
-python3 -m pip install --upgrade "litellm[proxy]"
-mkdir -p "$LOG_DIR"
+clean_transient_unit() {
+  TR_UNIT="/run/user/$(id -u)/systemd/transient/${SERVICE_NAME}.service"
+  [[ -e $TR_UNIT ]] && { systemctl --user stop "$SERVICE_NAME" || true; rm -f "$TR_UNIT"; }
+}
 
-# ---------------- interactive model setup -----------------------------------
-echo "Model setup:
-  1) Dummy test endpoint (offline)
-  2) OpenAI
-  3) Ollama local
-  4) Skeleton (edit later)"
-read -rp "Choose [1-4]: " OPT
+remove_systemd() {
+  clean_transient_unit
+  systemctl --user stop "$SERVICE_NAME" 2>/dev/null || true
+  systemctl --user disable "$SERVICE_NAME" 2>/dev/null || true
+  rm -f "$HOME/.config/systemd/user/${SERVICE_NAME}.service"
+  systemctl --user daemon-reload
+}
 
-case "$OPT" in
-  1)
-    cat >"$CONFIG" <<'YAML'
+remove_launchd() {
+  launchctl unload -w "$HOME/Library/LaunchAgents/com.${SERVICE_NAME}.plist" 2>/dev/null || true
+  rm -f "$HOME/Library/LaunchAgents/com.${SERVICE_NAME}.plist"
+}
+
+remove_nohup() {
+  pkill -f "litellm.*config.yaml" 2>/dev/null || true
+}
+
+case "$ACTION" in
+# =============================== UNINSTALL ==================================
+uninstall)
+  echo "Uninstalling LiteLLM user-service …"
+  if systemd_ok;      then remove_systemd
+  elif macos_ok;      then remove_launchd
+  else                     remove_nohup
+  fi
+
+  read -rp "Delete $LOG_DIR (config & logs)? [y/N]: " DEL
+  [[ "$DEL" =~ ^[Yy]$ ]] && rm -rf "$LOG_DIR"
+
+  read -rp "Remove litellm Python package? [y/N]: " DELPKG
+  [[ "$DELPKG" =~ ^[Yy]$ ]] && python3 -m pip uninstall -y litellm
+
+  echo "✅ LiteLLM service removed."
+  exit 0
+  ;;
+# =============================== INSTALL ====================================
+install)
+  command -v python3 >/dev/null || { echo "python3 missing – install it first."; exit 1; }
+  python3 -m pip install --upgrade "litellm[proxy]"
+  mkdir -p "$LOG_DIR"
+
+  # ---------- ask which models to pre-seed ----------
+  echo "Model setup:
+    1) Dummy test endpoint (offline)
+    2) OpenAI
+    3) Ollama local
+    4) Skeleton (edit later)"
+  read -rp "Choose [1-4]: " OPT
+  case "$OPT" in
+    1) cat >"$CONFIG" <<'YAML'
 model_list:
   - model_name: fake-openai-endpoint
     litellm_params:
@@ -30,75 +75,56 @@ model_list:
       api_key: fake-key
       api_base: https://exampleopenaiendpoint-production.up.railway.app/
 YAML
-    ;;
-  2)
-    read -rp "OpenAI API key (sk-…): " OAI_KEY
-    cat >"$CONFIG" <<YAML
+       ;;
+    2) read -rp "OpenAI API key (sk-…): " OAI_KEY
+       cat >"$CONFIG" <<YAML
 model_list:
   - model_name: openai/gpt-4o-mini
     litellm_params:
       model: gpt-4o-mini
       api_key: $OAI_KEY
 YAML
-    ;;
-  3)
-    read -rp "Ollama host [http://127.0.0.1:11434]: " O_HOST
-    O_HOST=${O_HOST:-http://127.0.0.1:11434}
-    cat >"$CONFIG" <<YAML
+       ;;
+    3) read -rp "Ollama host [http://127.0.0.1:11434]: " O_HOST
+       O_HOST=${O_HOST:-http://127.0.0.1:11434}
+       cat >"$CONFIG" <<YAML
 model_list:
   - model_name: ollama/mistral-7b
     litellm_params:
       model: mistral:7b-instruct
       api_base: $O_HOST
 YAML
-    ;;
-  4)
-    cat >"$CONFIG" <<'YAML'
+       ;;
+    4) cat >"$CONFIG" <<'YAML'
 # edit models here, then restart the service
 model_list: []
 YAML
-    ;;
-  *) echo "Invalid choice"; exit 1 ;;
-esac
+       ;;
+    *) echo "Invalid choice"; exit 1 ;;
+  esac
 
-# ---------------- service helpers -------------------------------------------
-clean_transient_unit() {
-  # Delete any transient unit file with the same name that systemd-run created
-  TR_UNIT="/run/user/$(id -u)/systemd/transient/${SERVICE_NAME}.service"
-  if [[ -e "$TR_UNIT" ]]; then
-    echo "Removing stale transient unit → $TR_UNIT"
-    systemctl --user stop  "$SERVICE_NAME" 2>/dev/null || true
-    rm -f "$TR_UNIT"
-    systemctl --user reset-failed "$SERVICE_NAME" 2>/dev/null || true
-  fi
-}
-
-start_with_systemd() {
-  clean_transient_unit
-  mkdir -p "$HOME/.config/systemd/user"
-
-  cat >"$HOME/.config/systemd/user/${SERVICE_NAME}.service" <<UNIT
+  # ---------- create + start service ----------
+  if systemd_ok; then
+    clean_transient_unit
+    mkdir -p "$HOME/.config/systemd/user"
+    cat >"$HOME/.config/systemd/user/${SERVICE_NAME}.service" <<UNIT
 [Unit]
 Description=LiteLLM proxy
 After=network.target
-
 [Service]
 ExecStart=$(command -v litellm) --config $CONFIG --host 0.0.0.0 --port 4000
 Restart=always
 StandardOutput=append:$LOGFILE
 StandardError=append:$LOGFILE
-
 [Install]
 WantedBy=default.target
 UNIT
+    systemctl --user daemon-reload
+    systemctl --user enable --now --force "$SERVICE_NAME"
 
-  systemctl --user daemon-reload
-  systemctl --user enable --now --force "$SERVICE_NAME"
-}
-
-start_with_launchd() {
-  AGENT="$HOME/Library/LaunchAgents/com.${SERVICE_NAME}.plist"
-  cat >"$AGENT" <<PLIST
+  elif macos_ok; then
+    AGENT="$HOME/Library/LaunchAgents/com.${SERVICE_NAME}.plist"
+    cat >"$AGENT" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -119,21 +145,16 @@ start_with_launchd() {
  </dict>
 </plist>
 PLIST
-  launchctl load -w "$AGENT"
-}
+    launchctl load -w "$AGENT"
 
-# ---------------- launch the service ----------------------------------------
-if command -v systemctl >/dev/null && systemctl --user >/dev/null 2>&1; then
-  start_with_systemd
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-  start_with_launchd
-else
-  nohup litellm --config "$CONFIG" --host 0.0.0.0 --port 4000 \
-       >>"$LOGFILE" 2>&1 &
-fi
+  else
+    nohup litellm --config "$CONFIG" --host 0.0.0.0 --port 4000 \
+         >>"$LOGFILE" 2>&1 &
+  fi
 
-# ---------------- smoke test -------------------------------------------------
-sleep 2
-curl -sf http://localhost:4000/health && echo "✅ LiteLLM healthy"
-echo "Logs → $LOGFILE"
+  sleep 2
+  curl -sf http://localhost:4000/health && echo "✅ LiteLLM healthy"
+  echo "Logs → $LOGFILE"
+  ;;
+esac
 
