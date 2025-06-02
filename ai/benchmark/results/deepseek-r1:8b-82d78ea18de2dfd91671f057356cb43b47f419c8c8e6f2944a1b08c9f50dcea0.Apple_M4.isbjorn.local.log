@@ -1,0 +1,53 @@
+⠙ ⠙ ⠸ ⠸ ⠼ ⠴ <think>
+Alright, so I need to help this user create a system prompt for an LLM that's supposed to act as an expert in 3D printing. The user provided their own initial prompt, but they want me to think through the process of creating such a prompt.
+
+First, let me break down what the user needs. They want the LLM to be a reliable, knowledgeable, and factual source. If it can't answer a question directly, instead of guessing, it should look for online discussions or sources. If there's no information available, it should just say it's unsure. Also, any guesses made need to be clearly labeled as such with reasons why they're not definitive.
+
+Hmm, so the prompt needs to instruct the LLM on its behavior when faced with unknown questions. It should avoid making up answers and instead refer to existing information or admit uncertainty if none exists. This ensures the output remains trustworthy and accurate.
+
+The user's initial prompt is pretty detailed but maybe a bit long. Let me see what they included:
+
+1. Acknowledge the request.
+2. State the LLM's role as an expert.
+3. Explain the process: answer directly, search online discussions or sources if not possible, admit uncertainty if no info.
+4. Avoid guessing unless necessary, label guesses with reasons.
+
+I think this covers all points but perhaps can be streamlined for clarity and brevity without losing essential instructions.
+
+Wait, maybe I should also consider how to structure it. Perhaps using numbered steps would make it easier to follow. Also, ensuring that the LLM knows not to fabricate information is crucial here.
+
+So, putting it together, the prompt should start by defining the role, then outline each step clearly. Maybe including examples of responses so the LLM understands what's expected.
+
+Oh, and the user emphasized being factual, so the language in the prompt should reflect that seriousness. No chat-like responses allowed.
+
+I should also make sure to include instructions on how to handle different types of questions—some might require direct answers, others might need research, and some might be too obscure with no info available.
+
+Alright, structuring this step-by-step with clear guidelines seems essential. Making it concise but thorough is the balance here.
+</think>
+
+**System Prompt for LLM as 3D Printing Expert**
+
+1. **Role Definition**: You are designated to act as an expert in 3D printing. Your responses must be factual, reliable, and knowledgeable.
+
+2. **Response Protocol**:
+   - **Direct Answers**: Provide accurate answers when possible.
+   - **Research Assistance**: If unsure, conduct online research by referencing credible discussions or sources to find the information.
+   - **Uncertainty Admission**: If no relevant information exists, respond that you cannot provide an answer.
+
+3. **Avoid Fabrication**: Do not guess or create information. Clearly label any guesses with reasoning and note their anecdotal nature.
+
+4. **Seriousness in Responses**: Maintain a formal tone to ensure the output is trustworthy and precise, avoiding casual chat-like interactions.
+
+5. **Clarity Examples**: Ensure responses are clear, using examples when necessary to illustrate expected behavior.
+
+This structure ensures your outputs remain accurate and responsible, adhering to the guidelines of factual reliability.
+
+total duration:       33.980445584s
+load duration:        14.528375ms
+prompt eval count:    121 token(s)
+prompt eval duration: 621.295416ms
+prompt eval rate:     194.75 tokens/s
+eval count:           655 token(s)
+eval duration:        33.344228709s
+eval rate:            19.64 tokens/s
+

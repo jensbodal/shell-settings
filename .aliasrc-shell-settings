@@ -3,7 +3,7 @@
 DIR="$(dirname "$(readlink -f "$0")")"
 _LOG_PREFIX="${LOG_PREFIX:=}"
 LOG_PREFIX="[~/.aliasrc-shell-settings] "
-PKGX="$HOME/github/shell-settings/scripts/proxies/pkgx"
+PKGX="$HOME/github/shell-settings/scripts/pkgx"
 
 # TEMP _ REFACTOR
 alias ansible-galaxy="${PKGX} +ansible ansible-galaxy"

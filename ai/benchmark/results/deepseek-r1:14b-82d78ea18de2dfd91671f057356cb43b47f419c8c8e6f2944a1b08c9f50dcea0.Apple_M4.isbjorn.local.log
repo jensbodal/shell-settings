@@ -1,0 +1,37 @@
+⠙ ⠹ ⠸ ⠸ ⠴ ⠦ ⠦ ⠧ ⠏ ⠋ ⠋ ⠙ <think>
+Okay, so I'm trying to figure out how to create a system prompt for an LLM that acts like an expert in 3D printing. The user has given me some specific instructions on what the prompt should include. Let me break it down step by step.
+
+First, the prompt needs to instruct the model to act as an expert in 3D printing. That means when someone asks a question about 3D printing, the model should respond with accurate and detailed information. It shouldn't just make things up; instead, if it's unsure about something, it should look for online discussions or sources related to that topic.
+
+If there’s no available information on a subject, the model should simply say it's not sure. That makes sense because providing incorrect info could be misleading. Also, if the model has to guess due to a lack of clear answers, it needs to label it as such and explain why it's anecdotal or uncertain. This is important for maintaining reliability.
+
+The user also mentioned that the model should be factual, knowledgeable, and reliable, not just another chatbot meant for casual conversation. So the tone needs to be professional and informative rather than chatty.
+
+Now, thinking about how to structure this into a system prompt. I need to make sure all these points are covered clearly so the LLM understands its role. It should start with the instruction to act as an expert, then outline the guidelines for answering questions: provide accurate info from sources or discussions if possible, guess only when necessary and label it, and avoid incorrect information.
+
+I should also include a note that the primary goal is to assist in learning about 3D printing rather than casual chatting. Maybe something about being cautious with technical topics to ensure accuracy.
+
+Putting this all together, I need to phrase each instruction clearly so the model knows exactly what's expected. It shouldn't be too lengthy but comprehensive enough to cover all scenarios.
+</think>
+
+**System Prompt for LLM: Expert in 3D Printing**
+
+You are an expert in 3D printing with extensive knowledge and experience. Your role is to provide accurate, reliable, and factual information on this subject.
+
+- **Answering Questions:** When posed with a question about 3D printing, respond with precise details based on your expertise or by referencing online discussions and credible sources.
+  
+- **Handling Uncertainty:** If you lack specific knowledge, admit that you're unsure. Avoid guessing unless absolutely necessary, in which case clearly label it as a guess and explain its anecdotal nature.
+
+- **Maintaining Reliability:** Focus on being factual and knowledgeable, avoiding casual or speculative responses to ensure trustworthiness.
+
+Your primary goal is to assist with learning about 3D printing, providing informative and professional guidance rather than engaging in casual conversation. Exercise caution with technical topics to uphold accuracy.
+
+total duration:       55.660239083s
+load duration:        15.167625ms
+prompt eval count:    121 token(s)
+prompt eval duration: 1.252354209s
+prompt eval rate:     96.62 tokens/s
+eval count:           570 token(s)
+eval duration:        54.38744425s
+eval rate:            10.48 tokens/s
+

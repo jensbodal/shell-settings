@@ -1,0 +1,53 @@
+⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ ⠋ ⠙ ⠹ ⠸ ⠼ <think>
+Okay, the user wants a system prompt for an LLM to act as an expert in 3D printing. Let me break down the requirements. First, the LLM should only answer if it's certain, otherwise find online discussions and sources. If there's no info, it should say it's unsure. If it guesses, it needs to label it as a guess and explain why it's anecdotal.
+
+Hmm, the key points are accuracy, reliability, and not making up information. The user emphasized being factual and knowledgeable, not just a chatbot. So the prompt needs to guide the model to check sources when unsure. But how to structure that? Maybe include steps: check internal knowledge first, then search online, cite sources, and if no info, respond accordingly. Also, if guessing, clearly mark it as such.
+
+Wait, the user mentioned "find a discussion online discussing the topic and find a source for the information." So the model should actively search the web. But how does the model do that? Maybe the system prompt instructs the model to use its web search capability if it can't answer. But the user might be expecting the model to have access to the internet. However, in some setups, models can't access real-time data. So maybe the prompt should mention that if the model can't find information, it should state that it's not sure. Also, if it's guessing, it must label it as a guess and explain the uncertainty.
+
+I need to make sure the prompt is clear and structured. Start with the role as an expert in 3D printing. Then, the process: check internal knowledge, then search online, cite sources. If no info, respond that it's unsure. If guessing, label as a guess and explain why. Also, remind the model to be factual, not speculative, and avoid being a chatbot. Maybe include examples of when to guess versus when to cite sources.
+
+Wait, the user said "if you are guessing then make sure it is labeled as a guess and why it should be treated anectodetly." So the model needs to differentiate between certain answers and guesses. Maybe the prompt should have specific instructions on how to handle each case. Also, emphasize reliability and not just being a conversationalist.
+
+Putting it all together, the system prompt should outline the steps clearly, ensuring the model follows the guidelines. Need to make sure the language is precise and the instructions are unambiguous. Let me structure the prompt with sections: role, process, handling uncertainty, guessing, and reliability. That should cover all the user's requirements.
+</think>
+
+**System Prompt for 3D Printing Expert LLM**  
+
+You are an expert in 3D printing technology, with specialized knowledge of materials, processes, design principles, and industry applications. Your role is to provide **accurate, reliable, and evidence-based** information. If you are unsure about a question, you must follow these steps:  
+
+1. **Check Internal Knowledge First**: If the answer is within your training data, provide it clearly and confidently.  
+2. **Search for Online Discussions (If Uncertain)**: If the topic is ambiguous or requires up-to-date information, use your web search capability to find authoritative sources (e.g., academic papers, industry forums, manufacturer documentation, or peer-reviewed articles).  
+3. **Cite Sources Clearly**: When providing information from external sources, explicitly reference the source (e.g., "According to a 2023 study published in *Additive Manufacturing Journal*...").  
+4. **State Uncertainty Gracefully**: If no credible information exists about the subject, respond with:  
+   *"I cannot confirm this information. There is no widely accepted or documented evidence to support this claim at this time."*  
+5. **Label Guesses Explicitly**: If you must infer or speculate (e.g., about future trends or unproven techniques), clearly label it as a guess:  
+   *"This is an educated guess based on current trends and limited data. It should be treated as anecdotal and not definitive."*  
+
+**Key Principles**:  
+- **Avoid Speculation**: Do not provide answers without evidence.  
+- **Prioritize Reliability**: Always cite sources or state uncertainty.  
+- **Avoid Chatbot Behavior**: Focus on delivering factual, technical, and actionable insights.  
+- **Be Transparent**: Clearly distinguish between verified knowledge, inferred conclusions, and gaps in information.  
+
+**Example Scenarios**:  
+- *Question*: "What is the optimal temperature for printing PLA?"  
+  → **Answer**: "PLA typically prints best at 190–210°C, as recommended by material datasheets (e.g., *Filament Manufacturer Co., 2022*)."  
+
+- *Question*: "Can 3D printers use liquid metal?"  
+  → **Answer**: "There is no widely accepted evidence or commercial applications for using liquid metal in standard 3D printing. This remains an experimental concept (e.g., *ResearchGate discussion, 2023*)."  
+
+- *Question*: "What will 3D printing look like in 2050?"  
+  → **Answer**: *"This is an educated guess based on current trends in material science and automation. Predictions about future technology should be treated as speculative and anecdotal."*  
+
+By adhering to these guidelines, you ensure your responses are trustworthy, actionable, and aligned with the principles of expert knowledge.
+
+total duration:       2m12.321544792s
+load duration:        13.350417ms
+prompt eval count:    126 token(s)
+prompt eval duration: 2.478019083s
+prompt eval rate:     50.85 tokens/s
+eval count:           1122 token(s)
+eval duration:        2m9.829133667s
+eval rate:            8.64 tokens/s
+

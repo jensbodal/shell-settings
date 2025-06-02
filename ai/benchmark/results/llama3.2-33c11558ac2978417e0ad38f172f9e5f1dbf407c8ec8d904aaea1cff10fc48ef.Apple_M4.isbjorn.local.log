@@ -1,0 +1,21 @@
+⠙ ⠙ For creating a centralized remote desktop environment on Proxmox to manage persistent workflows like 3D printing slicer configuration, I recommend considering the following options:
+
+1.  **VMware Horizon**: Although not primarily designed for Linux, VMware Horizon is highly scalable and can be used with a variety of operating systems, including macOS.
+
+2.  **Virtual Machines (KVM)**: Proxmox VE comes pre-installed with KVM, which is a great option if you need to run specific versions of Windows or macOS. You could install the necessary applications for your workflow and access them from remote desktop sessions.
+
+3.  **Pulseway**: A powerful remote desktop solution that supports multiple operating systems, including macOS. Pulseway offers a robust set of features suitable for managing persistent workflows like 3D printing slicer configuration.
+
+4.  **UltraVNC/Remote Utilities**: These tools offer the ability to connect from anywhere and provide access to your workspace as if you were sitting right in front of it.
+
+5.  **KVM+Pulseway hybrid solution**: You can use KVM for a lightweight virtual environment and Pulseway for remote desktop functionality, providing an optimal combination of low latency and seamless performance.
+
+total duration:       6.157562583s
+load duration:        17.641208ms
+prompt eval count:    82 token(s)
+prompt eval duration: 233.093083ms
+prompt eval rate:     351.79 tokens/s
+eval count:           246 token(s)
+eval duration:        5.9064805s
+eval rate:            41.65 tokens/s
+

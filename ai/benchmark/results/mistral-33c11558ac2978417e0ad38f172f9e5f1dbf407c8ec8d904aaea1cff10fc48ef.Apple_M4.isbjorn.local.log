@@ -1,0 +1,29 @@
+⠙ ⠹ ⠸ ⠼ ⠼ ⠦  To achieve your goal of creating a containerized remote desktop environment on Proxmox for managing persistent workflows, I would recommend using a combination of LXC (Linux Containers) or Docker (for more isolated environments), and Remote Desktop Protocol (RDP) servers for macOS, Linux, or Windows.
+
+For macOS, you can use the open-source project called Coala-Desktop, which is an unofficial macOS port of the Alpine Linux distribution. To make it containerized, you can create an LXC or Docker container with this distribution installed and run a Remote Desktop server like X11vnc or VNC server for macOS.
+
+For Windows, you can use Windows Server containers on Proxmox with RDP enabled. However, setting up a containerized Windows environment might be more complex than macOS.
+
+For Linux, you can create an LXC or Docker container with your preferred Linux distribution and install a Remote Desktop server like X11vnc or VNC server.
+
+Here's the step-by-step process to follow:
+
+1. Install Proxmox on a host machine.
+2. Create a new container based on Coala-Desktop (for macOS), your preferred Linux distribution, or Windows Server for Windows.
+3. Install and configure the Remote Desktop server of your choice (X11vnc, VNC server, RDP server) in the container.
+4. Set up RDP clients on your local machines to connect to the remote desktop environment running inside the container.
+5. Configure your 3D printing slicer software and other applications within the container to centralize your workflow.
+6. Save any configuration files or settings within the container, ensuring that they are persistent across container restarts.
+7. Avoid syncing configurations between machines by only editing the configurations in the container.
+
+By following these steps, you will have a containerized remote desktop environment on Proxmox that centralizes your workflow and allows you to manage persistent workflows like 3D printing slicer configuration without the need for synchronizing configurations between machines.
+
+total duration:       28.82945375s
+load duration:        9.0795ms
+prompt eval count:    69 token(s)
+prompt eval duration: 685.527417ms
+prompt eval rate:     100.65 tokens/s
+eval count:           463 token(s)
+eval duration:        28.133559375s
+eval rate:            16.46 tokens/s
+

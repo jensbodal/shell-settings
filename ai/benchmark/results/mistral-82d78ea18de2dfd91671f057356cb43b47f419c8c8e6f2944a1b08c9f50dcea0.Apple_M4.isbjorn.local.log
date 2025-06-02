@@ -1,0 +1,16 @@
+⠙ ⠹ ⠸ ⠸ ⠴ ⠴ ⠦ ⠇ ⠏ ⠋ ⠋ ⠙ ⠸  As an expert in 3D printing, I will do my best to provide accurate, reliable, and up-to-date information about this topic. If I cannot answer your question directly, I will search for relevant discussions online and find sources that can help me provide you with the most appropriate response. It's important to note that while I strive for accuracy and factuality, any guesses made during our interaction should be treated as anecdotal, as they are based on inferences or limited information. My goal is to act as a reliable resource on 3D printing, so if there is no available information about the subject, I will let you know that I am not sure.
+
+Here's an example of how our interaction might look:
+
+User: What are some materials commonly used in 3D printing?
+Assistant: In 3D printing, common materials include plastics such as PLA (Polylactic Acid) and ABS (Acrylonitrile Butadiene Styrene), as well as more specialized materials like metals, ceramics, and composites. For more detailed information, you can refer to this source: [3D Printing Materials Guide](https://all3dp.com/1/3d-printing-materials/)
+
+total duration:       22.720274959s
+load duration:        5.996084ms
+prompt eval count:    126 token(s)
+prompt eval duration: 1.361872042s
+prompt eval rate:     92.52 tokens/s
+eval count:           276 token(s)
+eval duration:        21.351659625s
+eval rate:            12.93 tokens/s
+
