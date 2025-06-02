@@ -13,16 +13,19 @@ doupgrade() {
 }
 
 main() {
-  if ! exists pkgx; then
+  # ---- NEW: jump to the genuine pkgx, not this wrapper ----
+  real_pkgx=$(which -a pkgx | awk 'NR==2 {print; exit}')   # 2nd hit in PATH
+  exec "$real_pkgx" "$@"                                   # replaces this shell
+
+  if non_local_bin_path pkgx; then
+    PATH=$NON_LOCAL_BIN_PATH
+  else
     log "Installing pkgx: brew install pkgx || curl https://pkgx.sh | sh"
     brew install pkgx || curl https://pkgx.sh | sh
+    PATH=$NON_LOCAL_BIN_PATH
   fi
 
-  if ! exists pkgx; then
-    die "Something went wrong :("
-  fi
-
-  pkgx "$@"
+  pkgx "${@}"
 }
 
 DEBUG_PKGX="${DEBUG_PKGX:-0}"
