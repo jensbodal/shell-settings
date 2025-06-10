@@ -1,0 +1,5 @@
+# one regex per line – no quotes or pipes
+\.direnv/
+\.venv/
+node_modules/
+site-packages/

@@ -19,3 +19,9 @@ macos/automator/testing.workflow/
 .aider*
 /ai/lib/
 vault.yml
+
+# deps we never want to scan or push
+.direnv/
+.venv/
+node_modules/
+site-packages/
