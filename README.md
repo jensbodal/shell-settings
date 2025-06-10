@@ -5,6 +5,17 @@
 3. Run setup script
 4. If npm not installed, install npm
 5. Run post setup instal script
+6. Install pre-commit (e.g. `pip install pre-commit` or via your OS package manager)
+
+## Git Hooks
+
+We use [pre-commit](https://pre-commit.com/) to manage Git hooks across environments. To install Git hooks, run:
+
+```bash
+pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push
+```
+
+If you use npm, the hooks are installed automatically on `npm install` via the `prepare` script in `package.json`.
 
 # Use absolute links when symlinking
 
