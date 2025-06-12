@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "prepare": "pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push"
+    "prepare": "pkgx pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push"
   },
   "devDependencies": {
     "@types/node": "^22.12.0",
