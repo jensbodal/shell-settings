@@ -12,7 +12,15 @@ main() {
     return 1
   fi
 
-  export GP_KEY_NAME="sk/litellm_master_$USER@$(hostname)" && gopass generate --print --symbols=false --force --clip "$GP_KEY_NAME" 51 > /dev/null && echo "sk-$(pbpaste)" | gopass insert --force "$GP_KEY_NAME" && gopass show "$GP_KEY_NAME"
+  local GP_KEY_NAME="sk/litellm_master_$USER@$(hostname)"
+
+  log "Creating ${GP_KEY_NAME}"
+
+  gopass generate --print --symbols=false --force --clip "$GP_KEY_NAME" 51
+
+  echo "sk-$(pbpaste)" | gopass insert --force "$GP_KEY_NAME" 2>&1
+
+  gopass show "$GP_KEY_NAME"
 }
 
 main "$@"
