@@ -13,6 +13,15 @@ doupgrade() {
 }
 
 main() {
+  if ! exists pkgm; then
+    if exists brew; then
+      brew uninstall pkgx || true
+      brew install pkgxdev/made/pkgm
+    else
+      curl https://pkgx.sh | sh
+    fi
+  fi
+
   # ---- NEW: jump to the genuine pkgx, not this wrapper ----
   real_pkgx=$(which -a pkgx | awk 'NR==2 {print; exit}')   # 2nd hit in PATH
   exec "$real_pkgx" "$@"                                   # replaces this shell
@@ -21,7 +30,7 @@ main() {
     PATH=$NON_LOCAL_BIN_PATH
   else
     log "Installing pkgx: brew install pkgx || curl https://pkgx.sh | sh"
-    brew install pkgx || curl https://pkgx.sh | sh
+    brew install pkgxdev/made/pkgm || curl https://pkgx.sh | sh
     PATH=$NON_LOCAL_BIN_PATH
   fi
 

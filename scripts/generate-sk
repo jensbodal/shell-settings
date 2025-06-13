@@ -1,0 +1,18 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+
+main() {
+  if ! command -v gopass 2>&1 > /dev/null; then
+    i gopass
+  fi
+
+  if ! command -v gopass 2>&1 > /dev/null; then
+    die "auto-installation failed; install gopass with pkgx, mise, apt, brew, etc. and make it available in your shell's PATH"
+    return 1
+  fi
+
+  export GP_KEY_NAME="sk/litellm_master_$USER@$(hostname)" && gopass generate --print --symbols=false --force --clip "$GP_KEY_NAME" 51 > /dev/null && echo "sk-$(pbpaste)" | gopass insert --force "$GP_KEY_NAME" && gopass show "$GP_KEY_NAME"
+}
+
+main "$@"

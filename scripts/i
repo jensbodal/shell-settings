@@ -11,6 +11,19 @@ __i() {
   local mgr=
   local pkgs="$@"
 
+  if exists pkgm; then
+    err=0
+    for pkg in "${pkgs[*]}"; do
+      echo "Executing [pkgm install \"$pkg\"]. Continue?"
+      read -r -p "Continue? [y/N] " ans && [[ $ans =~ ^[Yy]$ ]] || exit
+      pkgm install "$pkg"
+      err=$((err+1))
+    done
+
+    [ $err -gt 0 ] && return $err
+    log "Installed with pkgx!"
+  fi
+
   if exists brew; then
     mgr="brew install";
   fi
@@ -35,3 +48,8 @@ __i() {
 }
 
 __i "$@"
+err=$?
+
+if [ $err -gt 0 ]; then
+  printf "[i] pkgx has failed: Error code [%s]\n" $err
+fi

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if ! command -v pkgm; then
+  brew install pkgxdev/made/pkgm || curl https://pkgx.sh | sh
+else
+  pkgm "$@"
+fi
