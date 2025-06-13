@@ -2,6 +2,10 @@
 
 DIR="$(dirname "$(readlink -f "$0")")"
 
+log() {
+  printf "[i] %s\n" "$*"
+}
+
 __i() {
   if [ $# -eq 0 ]; then
     return 0
@@ -16,12 +20,13 @@ __i() {
     for pkg in "${pkgs[*]}"; do
       echo "Executing [pkgm install \"$pkg\"]. Continue?"
       read -r -p "Continue? [y/N] " ans && [[ $ans =~ ^[Yy]$ ]] || exit
-      pkgm install "$pkg"
-      err=$((err+1))
+      read -r -p "Use sudo? [y/N] " ans && [[ $ans =~ ^[Yy]$ ]] && sudo pkgm install "$pkg" || pkgm install "$pkg"
+      err=$((err+$?))
     done
 
     [ $err -gt 0 ] && return $err
     log "Installed with pkgx!"
+    return $?
   fi
 
   if exists brew; then
