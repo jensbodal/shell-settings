@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 # cached values older than this will be automatically refreshed in the background
 export BKT_STALE=${BKT_STALE:-1h}

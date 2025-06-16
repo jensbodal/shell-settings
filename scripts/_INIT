@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Include in your script with:
-# [ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+# [ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 # Adds default trap functions and helper scripts common global variables
 # Also ensures that all scripts in scripts folder are available to other scripts here
 # @TODO: Ensure that we also include the nodejs/mac/proxmox/etc. scripts where applicable

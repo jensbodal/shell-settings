@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/_INIT && export _INIT_COMPLETE=1
 
 git_dir=$HOME/github/shell-settings
 update_file=~/.config/shell-settings/last_updated

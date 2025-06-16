@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z "${SHELL_SETTINGS_INIT:-}" ]; then
-  source "$(dirname "${BASH_SOURCE[0]}")/.INIT"
+  source "$(dirname "${BASH_SOURCE[0]}")/_INIT"
 fi
 
 if non_local_bin_path true; then

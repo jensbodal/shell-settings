@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 check_install_mambaforge() {
   local bin_name="mambaforge"

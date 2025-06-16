@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 if ismac; then
   if [ ! -f /opt/homebrew/bin/pinentry-mac ]; then

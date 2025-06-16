@@ -2,7 +2,7 @@ repos:
   - repo: local
     hooks:
       - id: trufflehog
-        name: trufflehog (pkgx)
+        name: trufflehog (local)
         language: system          # pre-commit won’t try to pip-install
         entry: pkgx               # ↳ pkgx handles binaries & caching
         args:
@@ -18,8 +18,16 @@ repos:
         pass_filenames: false     # let the args decide scope
         stages: [pre-push]
 
-  - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.24.2
+  - repo: local
     hooks:
       - id: gitleaks
-        stages: [pre-push]
+        name: gitleaks (local)
+        language: system
+        entry: pkgx
+        args:
+          - gitleaks
+          - detect
+          - --source=.
+          - --verbose
+        pass_filenames: false     # let gitleaks handle file discovery
+        stages: [pre-commit,pre-push]

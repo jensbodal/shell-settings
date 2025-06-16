@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
+
+main() {
+  if ! exists pkgo; then
+    log "pkgo installation missing, running installer..."
+    curl -O https://raw.githubusercontent.com/pkgxdev/pkgo/refs/heads/main/entrypoint.ts
+    sudo install -m 755 entrypoint.ts /usr/local/bin/pkgo}
+  else
+    echo "fail"
+    #command pkgo "$@"
+  fi
+}
+
+main "$@"
