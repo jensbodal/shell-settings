@@ -16,4 +16,10 @@ repos:
           - --exclude-paths
           - trufflehog-exclude-paths.txt
         pass_filenames: false     # let the args decide scope
-        stages: [pre-commit, pre-push]  # new names  [oai_citation:2‡github.com](https://github.com/PyCQA/isort/issues/2294?utm_source=chatgpt.com)
+        stages: [pre-push]
+
+  - repo: https://github.com/zricethezav/gitleaks
+    rev: v8.24.2
+    hooks:
+      - id: gitleaks
+        stages: [pre-push]

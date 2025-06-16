@@ -1,6 +1,10 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+ROOT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+
+log() {
+  printf "[generate-sk] %s\n" "$*"
+}
 
 main() {
   if ! command -v gopass 2>&1 > /dev/null; then
@@ -14,7 +18,7 @@ main() {
 
   local GP_KEY_NAME="sk/litellm_master_$USER@$(hostname)"
 
-  log "Creating ${GP_KEY_NAME}"
+  log "Creating $GP_KEY_NAME"
 
   gopass generate --print --symbols=false --force --clip "$GP_KEY_NAME" 51
 
@@ -23,4 +27,5 @@ main() {
   gopass show "$GP_KEY_NAME"
 }
 
+cd "${ROOT_DIR}/../"
 main "$@"
