@@ -3,13 +3,16 @@
 [ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 main() {
-  if ! exists pkgo; then
+  if ! non_local_bin_path pkgo; then
     log "pkgo installation missing, running installer..."
-    curl -O https://raw.githubusercontent.com/pkgxdev/pkgo/refs/heads/main/entrypoint.ts
-    sudo install -m 755 entrypoint.ts /usr/local/bin/pkgo}
+    sudo pkgm install pkgo
+  fi
+
+  if non_local_bin_path pkgo; then
+    export PATH=$NON_LOCAL_BIN_PATH
+    pkgo "$@"
   else
-    echo "fail"
-    #command pkgo "$@"
+    die "Unable to install or locate pkgo"
   fi
 }
 

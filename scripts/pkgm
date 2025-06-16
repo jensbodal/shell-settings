@@ -1,7 +1,19 @@
 #!/bin/bash
 
-if ! command -v pkgm; then
-  brew install pkgxdev/made/pkgm || curl https://pkgx.sh | sh
-else
-  pkgm "$@"
-fi
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
+
+main() {
+  if ! non_local_bin_path pkgm; then
+    log "pkgm installation missing, running installer..."
+    brew install pkgxdev/made/pkgm || curl https://pkgx.sh | sh
+  fi
+
+  if non_local_bin_path pkgm; then
+    export PATH=$NON_LOCAL_BIN_PATH
+    pkgm "$@"
+  else
+    die "Unable to install or locate pkgm"
+  fi
+}
+
+main "$@"

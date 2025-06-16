@@ -15,7 +15,9 @@ __i() {
   local mgr=
   local pkgs="$@"
 
-  if exists pkgm; then
+  if exists brew; then
+    mgr="brew install";
+  elif exists pkgm; then
     err=0
     for pkg in "${pkgs[*]}"; do
       echo "Executing [pkgm install \"$pkg\"]. Continue?"
