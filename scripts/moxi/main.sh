@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # shellcheck disable=SC1091
-[ -z "$SHELL_SETTINGS_INIT" ] && source "$HOME/github/shell-settings/scripts/.INIT"
+[ -z "$SHELL_SETTINGS_INIT" ] && source "$HOME/github/shell-settings/scripts/_INIT"
 
 MOXI_BIN_DIR="${SCRIPTS_DIR}/moxi/bin"
 PATH="${MOXI_BIN_DIR}:$PATH"

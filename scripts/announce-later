@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # We don't want this in this script because we don't want to add the trap functionality
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 .main() {
   local sleep_wait_m=$1

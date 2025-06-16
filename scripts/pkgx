@@ -1,5 +1,5 @@
 #!/bin/bash
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 exists() {
   if ! command -v "$1" 2>&1 > /dev/null; then
@@ -46,4 +46,3 @@ if [ "$DEBUG_PKGX" -eq "1" ]; then
 fi
 
 main "$@"
-

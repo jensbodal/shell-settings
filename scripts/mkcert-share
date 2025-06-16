@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 CA_ROOT=`mkcert -CAROOT`
 ROOT_CA="$CA_ROOT/rootCA.pem"

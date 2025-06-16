@@ -9,11 +9,11 @@
 # die 15 "Custom error code"
 # die 0 "This will show invalid error code message"
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 trap __exit EXIT
 __exit() {
-  # Override trap function from .INIT so we don't error twice
+  # Override trap function from _INIT so we don't error twice
   return 0
 }
 

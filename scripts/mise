@@ -11,7 +11,7 @@ if [ $_ASK -eq 0 ]; then
   fi
 fi
 
-[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/.INIT
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
 
 __mise() {
   if non_local_bin_path mise; then

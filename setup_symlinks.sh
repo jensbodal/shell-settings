@@ -8,7 +8,7 @@
 # $SHELL_SETTINGS_DIR
 # $(.SCRIPT_DIR)
 # $(.SCRIPT_NAME)
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/_INIT && export _INIT_COMPLETE=1
 
 THIS_VIM_FOLDER="$SHELL_SETTINGS_DIR/.vim"
 

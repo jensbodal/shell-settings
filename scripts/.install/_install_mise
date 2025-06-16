@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/.INIT && export _INIT_COMPLETE=1
+[ ! "$_INIT_COMPLETE" ] && source $HOME/github/shell-settings/scripts/_INIT && export _INIT_COMPLETE=1
 
 main() {
   if ! command -v mise > /dev/null 2>&1; then
