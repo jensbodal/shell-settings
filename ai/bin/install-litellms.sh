@@ -1,9 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S pkgx +curl.se +gopass +postgresql.org bash>=5 -euo pipefail
 # ───────────────────────────  LiteLLM ▸ Container ▸ Postgres  ──────────────────────────
 # Container-based bootstrap — avoids all pipx/Prisma dependency issues
 # Uses official LiteLLM container with pre-built Prisma binaries
 
-set -euo pipefail
 
 # ╭─ CONFIG ───────────────────────────────────────────────────────────────────╮
 DB_HOST="$(gopass show db/rag_host)"           # Postgres host (Tailscale DNS)
@@ -87,45 +86,31 @@ ${GRN}Configuration${RST}
 
 ${GRN}Planned steps${RST}
   0. (optional) stop any running containers
-  1. Ensure required tools (gopass, psql client)
-  2. Fetch DB password from gopass
-  3. Create database if missing (owner = ${DB_USER})
-  4. Verify config file exists
-  5. Pull latest LiteLLM container image
-  6. Launch container with database and config
+  1. Retrieve DB password from gopass
+  2. Create database if missing (owner = ${DB_USER})
+  3. Verify config file exists
+  4. Pull latest LiteLLM container image
+  5. Launch container with database and config
 EOF
 read -rp "${YLW}Proceed? [y/N] ${RST}" confirm
 [[ ${confirm:-n} =~ ^[Yy]$ ]] || { say "Aborted."; exit 0; }
 
-# ── 1. Core prerequisites ─────────────────────────────────────────────────────
-for cmd in gopass; do
-  command -v "$cmd" &>/dev/null || { err "$cmd not found, aborting."; exit 1; }
-done
-
-# ── 2. Locate / provision psql client ─────────────────────────────────────────
-if command -v psql &>/dev/null; then
-  PSQL_CMD=("psql")
-else
-  command -v pkgx &>/dev/null || { err "pkgx not found and no psql in \$PATH"; exit 1; }
-  say "2️⃣  psql not found — using pkgx +postgresql.org…"
-  PSQL_CMD=("pkgx" "+postgresql.org" "psql")
-fi
-
-# ── 3. Retrieve password from gopass ──────────────────────────────────────────
-say "3️⃣  Retrieving DB password…"
+# ── 1. Retrieve password from gopass ──────────────────────────────────────────
+say "1️⃣  Retrieving DB password…"
 DB_PASS=$(gopass show -o "$GOPASS_PATH")
 
 DATABASE_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:5432/${DB_NAME}"
 
-# ── 4. Ensure database exists ────────────────────────────────────────────────
-say "4️⃣  Ensuring database '${DB_NAME}' exists…"
+# ── 2. Ensure database exists ────────────────────────────────────────────────
+say "2️⃣  Ensuring database '${DB_NAME}' exists…"
+PSQL_CMD=(psql)
 PGPASSWORD="$DB_PASS" "${PSQL_CMD[@]}" -h "$DB_HOST" -U "$DB_USER" \
   -tc "SELECT 1 FROM pg_database WHERE datname = '${DB_NAME}'" | grep -q 1 || \
   PGPASSWORD="$DB_PASS" "${PSQL_CMD[@]}" -h "$DB_HOST" -U "$DB_USER" \
   -c "CREATE DATABASE \"${DB_NAME}\" OWNER \"${DB_USER}\";"
 
-# ── 5. Verify config file exists ─────────────────────────────────────────────
-say "5️⃣  Verifying config file…"
+# ── 3. Verify config file exists ─────────────────────────────────────────────
+say "3️⃣  Verifying config file…"
 if [[ ! -f "$CONFIG_FILE" ]]; then
   err "Config file not found: $CONFIG_FILE"
   err "Please ensure the config file exists before running this script."
@@ -136,12 +121,12 @@ fi
 CONFIG_ABS_PATH=$(realpath "$CONFIG_FILE")
 say "   Config file: $CONFIG_ABS_PATH"
 
-# ── 6. Pull latest container image ───────────────────────────────────────────
-say "6️⃣  Pulling latest LiteLLM container image…"
+# ── 4. Pull latest container image ───────────────────────────────────────────
+say "4️⃣  Pulling latest LiteLLM container image…"
 $CONTAINER_CMD pull "$IMAGE"
 
-# ── 7. Launch container ──────────────────────────────────────────────────────
-say "7️⃣  Launching LiteLLM container…"
+# ── 5. Launch container ──────────────────────────────────────────────────────
+say "5️⃣  Launching LiteLLM container…"
 
 # Check if we need API keys from gopass
 OPENROUTER_KEY=""
@@ -166,8 +151,8 @@ $CONTAINER_CMD run -d \
   --port 4000 \
   --host 0.0.0.0
 
-# ── 8. Wait for startup and verify ───────────────────────────────────────────
-say "8️⃣  Waiting for container to start…"
+# ── 6. Wait for startup and verify ───────────────────────────────────────────
+say "6️⃣  Waiting for container to start…"
 sleep 5
 
 # Check if container is running
