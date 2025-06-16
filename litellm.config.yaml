@@ -1,0 +1,66 @@
+# can i pass envvars to xtitle or whatever the http params is how
+# uhh there was another comment
+litellm_settings:
+  default_team_settings:
+    - team_id: "3e18e7c0-7988-4b5d-8af6-92dbe31c2c41"
+      success_callback: ["prisma"]
+      failure_callback: ["prisma"] # add ?
+      #langfuse_public_key: os.environ/LANGFUSE_PUB_KEY_1 # Project 1
+      #langfuse_secret: os.environ/LANGFUSE_PRIVATE_KEY_1 # Project 1
+
+  default_team: "3e18e7c0-7988-4b5d-8af6-92dbe31c2c41"
+  success_callback: ["prisma"] # add langfuse and?
+  failure_callback: ["prisma"] # add ?
+  json_logs: true
+
+# OR_SITE_URL handled via docker
+# OR_APP_NAME handled via docker
+router_settings:
+    model_group_alias: {"auto": "openrouter/auto"} # all requests with `gpt-4` will be routed to models with `gpt-4o`
+
+general_settings:
+  litellm_key_header_name: 'Authorization'
+  # @AI can we use gopass _here_ ?
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  store_model_in_db: true
+  #alerting: ["slack"] # [OPTIONAL] If you want Slack Alerts for Hanging LLM requests, Slow llm responses, Budget Alerts. Make sure to set `SLACK_WEBHOOK_URL` in your env
+
+  # also curious about custom prompt template
+  # https://docs.litellm.ai/docs/completion/input#input-params-1:~:text=the%20completion%20call-,CUSTOM,-PROMPT%20TEMPLATE%20(See
+
+model_list:
+  - model_name: ora
+    litellm_params:
+      model: openrouter/openrouter/auto
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  - model_name: clitty
+    litellm_params:
+      model: openrouter/openrouter/auto:free
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  - model_name: free
+    litellm_params:
+      model: openrouter/google/gemini-2.0-flash-exp:free
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  #- model_name: gpt-4o-mini-2024-07-18
+  #  litellm_params:
+  #    model: openai/gpt-4o-mini-2024-07-18
+  #    api_key: os.environ/OPENROUTER_API_KEY
+  #    api_base: https://openrouter.ai/api/v1
+
+  #- model_name: openrouter/*
+  #  litellm_params:
+  #    model: openrouter/*
+  #    api_key: os.environ/OPENROUTER_API_KEY
+  #    api_base: https://openrouter.ai/api/v1
+
+  - model_name: "*"
+    litellm_params:
+      model: openrouter/openrouter/auto
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1

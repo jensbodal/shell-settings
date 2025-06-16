@@ -1,0 +1,43 @@
+#!/bin/bash
+#vim lite-llm-config-copy.yaml -p k14-container.sh &&  ./k14-container.sh && \
+
+LITELLM_MASTER_KEY="$(gopass show -o sk/litellm_master_$USER@$(hostname))"
+
+log() {
+  printf "[litellm-test] %s\n" "$*"
+}
+
+process() {
+  #if [ "$model" = "*" ]; then
+  #  log "here :)"
+  #  model="openrouter/auto"
+  #fi
+
+  message="ping"
+
+  log "Testing \"$model\" with \"$message\""
+
+  curl -s http://localhost:4000/v1/chat/completions \
+    -H "content-type: application/json" \
+    -H "Authorization: Bearer ${LITELLM_MASTER_KEY}" \
+    -d '{"model":"'${model}'","messages":[{"role":"user","content":"'${message}'"}]}' | jq
+}
+
+#for model in `echo "o3-mini"`; do
+#  process "$model"
+#done
+
+#curl -s -H "Authorization: Bearer ${LITELLM_MASTER_KEY}" http://localhost:4000/v1/models | jq '.data[].id'
+
+echo "----------------------------------------------------------------------------------------------------------------"
+
+for model in `curl -s -H "Authorization: Bearer ${LITELLM_MASTER_KEY}" http://localhost:4000/v1/models | jq -r '.data[].id'`; do
+  [[ -d "$model" ]] || [[ -f "$model" ]] && continue
+
+  echo ""
+  echo "# Model: \"$model\""
+  process $model
+  echo ""
+  echo "----------------------------------------------------------------------------------------------------------------"
+done
+

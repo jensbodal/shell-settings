@@ -2,6 +2,7 @@
 __pycache__/
 /.direnv/
 /.idea/
+/.trash/
 
 .private/.*.*
 .private/*.*

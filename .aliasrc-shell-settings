@@ -23,6 +23,7 @@ alias gd="git diff"
 alias gdh="gd HEAD"
 alias gds="gd --staged"
 alias gs="git status"
+alias grep="grep --color=always"
 alias hist="history -E"
 alias l='ls -la | grep "^d" && ls -la | grep -v "^d"'
 alias ll="ls -la"

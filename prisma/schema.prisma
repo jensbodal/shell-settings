@@ -1,0 +1,16 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-py"
+}
+
+model ProxyLog {
+  id          Int      @id @default(autoincrement())
+  route       String
+  statusCode  Int
+  durationMs  Int
+  createdAt   DateTime @default(now())
+}
