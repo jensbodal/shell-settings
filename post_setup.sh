@@ -177,7 +177,7 @@ install_brew_if_needed
 
 if havebrew; then
   brew tap mike-engel/jwt-cli
-  brew install fx fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar jwt-cli
+  brew install fx fzf gcc bat cmatrix coreutils gnupg gnu-sed gnu-tar jwt-cli rg
   if ismac; then
     brew install hyperfine switchaudio-osx make
   fi
