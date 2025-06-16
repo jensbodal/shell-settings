@@ -1,0 +1,1420 @@
+[litellm-model-test] Testing "o3" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067107-WP2OFoKPJyZ6IpG44rr3",
+  "created": 1750067107,
+  "model": "openai/o3",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My training data runs up to June 2024, so events or developments after that date may not be fully reflected in my responses.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null,
+        "reasoning_content": "**Clarifying knowledge cutoff**\n\nI need to clarify the knowledge cutoff dates. The older ChatGPT has a cutoff in September 2021, while the 2023 GPT-4 version mentions January 2022. However, I see that the system message indicates a knowledge cutoff of June 2024. It looks like the accurate response is that my knowledge cutoff is June 2024. Now, I'll put that into a clear answer for the user!"
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 97,
+    "prompt_tokens": 24,
+    "total_tokens": 121,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.RateLimitError: RateLimitError: OpenrouterException - {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"google/gemini-2.0-flash-exp:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"Google AI Studio\"}},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=free\nAvailable Model Group Fallbacks=None",
+    "type": "throttling_error",
+    "param": null,
+    "code": "429"
+  }
+}
+[litellm-model-test] Testing "auto" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067114-PygwyFQ7avZMeSyEQZ5H",
+  "created": 1750067115,
+  "model": "openai/chatgpt-4o-latest",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_afccf7958a",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is June 2024. This means I have information up until that time and may not be aware of events or developments that occurred afterward.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 32,
+    "prompt_tokens": 25,
+    "total_tokens": 57,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-r1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067117-Je4e9UZ1F9glUzIZhoHp",
+  "created": 1750067117,
+  "model": "deepseek/deepseek-r1",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "Hi! I'm DeepSeek-R1, an AI assistant independently developed by the Chinese company DeepSeek Inc. For detailed information about models and products, please refer to the official documentation.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null,
+        "reasoning_content": "Hi! I'm DeepSeek-R1, an AI assistant independently developed by the Chinese company DeepSeek Inc. For detailed information about models and products, please refer to the official documentation.\n"
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 81,
+    "prompt_tokens": 24,
+    "total_tokens": 105,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Lambda"
+}
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067120-SQj9Z4lvmtfVT5fAUuzw",
+  "created": 1750067120,
+  "model": "deepseek/deepseek-chat",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is **October 2023**. This means I have information and data up until that point, but I may not be aware of events, developments, or updates that occurred after that date. Let me know how I can assist you!",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 52,
+    "prompt_tokens": 22,
+    "total_tokens": 74,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "DeepInfra"
+}
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-coder" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.BadRequestError: OpenrouterException - {\"error\":{\"message\":\"deepseek/deepseek-coder is not a valid model ID\",\"code\":400},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/deepseek/deepseek-coder\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "400"
+  }
+}
+[litellm-model-test] Testing "openrouter/microsoft/wizardlm-2-8x22b:nitro" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067123-q0ntU1zNz0040da1ACd1",
+  "created": 1750067123,
+  "model": "microsoft/wizardlm-2-8x22b",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date is April 2023. This means that my training includes information and events that have occurred up until that time. Any developments or events that have taken place after April 2023 would not be included in my current knowledge base. If you have questions about recent events or need the latest information, I would recommend checking the most current sources available online or elsewhere.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 82,
+    "prompt_tokens": 62,
+    "total_tokens": 144,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Parasail"
+}
+[litellm-model-test] Testing "openrouter/google/gemini-pro-1.5" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067126-gce2xWp0cJgJiVfRtXVJ",
+  "created": 1750067126,
+  "model": "google/gemini-pro-1.5",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is **September 2021**.  This means I don't have information about events or developments that occurred after that date.  I am constantly being updated, though, so this cutoff will change in the future.\n",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 51,
+    "prompt_tokens": 22,
+    "total_tokens": 73,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Google"
+}
+[litellm-model-test] Testing "openrouter/google/gemini-2.0-flash-001" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067127-c7vnVdOfqFlAd1xwq1Yv",
+  "created": 1750067127,
+  "model": "google/gemini-2.0-flash-001",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "I am a large language model, trained by Google. My knowledge cutoff is **December 2022**. This means I don't have information about events or developments that occurred after that date.\n",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 42,
+    "prompt_tokens": 22,
+    "total_tokens": 64,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Google AI Studio"
+}
+[litellm-model-test] Testing "openrouter/mistralai/mixtral-8x22b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067128-tuM4H3QduEnvrfswBM4n",
+  "created": 1750067128,
+  "model": "mistralai/mixtral-8x22b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date is October 2021. I can only provide information and answer questions about events and developments up to that time. For information related to events, news, and other topics after October 2021, you can consult other resources or ask me to provide you with an updated response. However, I might not have access to real-time or current information.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 81,
+    "prompt_tokens": 30,
+    "total_tokens": 111,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Fireworks"
+}
+[litellm-model-test] Testing "openrouter/cohere/command-r-plus" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067129-5HCo6ZcZLR1hsvlAT1rb",
+  "created": 1750067129,
+  "model": "cohere/command-r-plus",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cut-off date was January 2023. Hence, the data in my training corpus reflects information available only up to that date. However, I can still provide accurate and helpful responses on a wide range of topics that are not time-dependent or have not undergone significant changes since then. Is there anything specific you would like to know or discuss?",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 74,
+    "prompt_tokens": 22,
+    "total_tokens": 96,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Cohere"
+}
+[litellm-model-test] Testing "openrouter/databricks/dbrx-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for databricks/dbrx-instruct.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/databricks/dbrx-instruct\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-haiku" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067131-yPMUZiJKyNzrswjKe00w",
+  "created": 1750067131,
+  "model": "anthropic/claude-3-haiku",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "I do not have a specific knowledge cutoff date. As an AI assistant, my knowledge is regularly updated, but I don't have details on the exact cutoff or update frequency. My responses are based on the information I've been trained on, but that training data is continuously expanded and refined. If you're wondering about the timeliness of my knowledge on a particular topic, I'd suggest checking the sources I provide or asking follow-up questions. I'm always happy to clarify the scope and limitations of my knowledge.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 110,
+    "prompt_tokens": 25,
+    "total_tokens": 135,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-5-haiku" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067133-8dH33OZKk8Ts4EU9xc4l",
+  "created": 1750067133,
+  "model": "anthropic/claude-3.5-haiku",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff is in June 2022. I aim to be direct and transparent about the extent and limitations of my knowledge.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 30,
+    "prompt_tokens": 25,
+    "total_tokens": 55,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Google"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-haiku-20240307" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.BadRequestError: OpenrouterException - {\"error\":{\"message\":\"anthropic/claude-3-haiku-20240307 is not a valid model ID\",\"code\":400},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/anthropic/claude-3-haiku-20240307\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "400"
+  }
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-5-haiku-20241022" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067136-EQ5r58CrMZxmVLbFW0Gj",
+  "created": 1750067136,
+  "model": "anthropic/claude-3.5-haiku-20241022",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff is in June 2022. This means that while I have broad knowledge up to that point, I do not have direct information about events or developments that occurred after that date.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 43,
+    "prompt_tokens": 25,
+    "total_tokens": 68,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.5-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067138-oVjl1Mhw16GkveZypFmt",
+  "created": 1750067138,
+  "model": "anthropic/claude-3.5-sonnet",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is June 2022. I aim to be direct and honest about this limitation. I can't access information about events or developments after that date, though I can engage in general discussion about topics I'm trained on.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 52,
+    "prompt_tokens": 25,
+    "total_tokens": 77,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Google"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.5-sonnet:beta" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067141-HpE2gptlUtDzWm5IRNm0",
+  "created": 1750067141,
+  "model": "anthropic/claude-3.5-sonnet:beta",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is June 2023. I aim to be direct and clear about what information I do and don't have access to.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 33,
+    "prompt_tokens": 25,
+    "total_tokens": 58,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.7-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067144-mWlD1GnWCTkdNPxJU1Wa",
+  "created": 1750067144,
+  "model": "anthropic/claude-3.7-sonnet",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is April 2023. This means that my training data includes information up to that point, and I don't have knowledge of events, developments, or information that emerged after that date. If you're asking about something that happened after April 2023, I won't have specific information about it unless it was predictable based on information available before my cutoff.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 82,
+    "prompt_tokens": 25,
+    "total_tokens": 107,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.7-sonnet:beta" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067146-ibaUiIMAWl3H9DpRMsLR",
+  "created": 1750067146,
+  "model": "anthropic/claude-3.7-sonnet:beta",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is April 2023. This means that my training includes information and events up to that point, but I don't have knowledge about events, developments, or information that emerged after April 2023. If you're asking about something that happened after this date, I won't have specific information about it, though I can still discuss the topic in general terms based on what I knew up to my cutoff date.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 92,
+    "prompt_tokens": 25,
+    "total_tokens": 117,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067149-K8AsMCa3ZIfPLQg2ifBN",
+  "created": 1750067149,
+  "model": "anthropic/claude-3-sonnet",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "I don't actually have a specific knowledge cutoff date. I'm an AI assistant created by Anthropic to be helpful, harmless, and honest. I don't have a fixed training dataset, but rather use constitutional AI techniques to provide helpful responses based on the conversation.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 59,
+    "prompt_tokens": 25,
+    "total_tokens": 84,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/mistralai/mistral-large" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067151-QxMxnEqTbubksmv0pHEq",
+  "created": 1750067152,
+  "model": "mistralai/mistral-large",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is August 2023. This means I have been trained on data up to that point and may not have real-time or up-to-the-minute information. How can I assist you with the information I have up to that date?",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 58,
+    "prompt_tokens": 27,
+    "total_tokens": 85,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Mistral"
+}
+[litellm-model-test] Testing "openrouter/mistralai/mistral-small-3.1-24b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067153-jaZZXwVvle8JGAv9xPEC",
+  "created": 1750067153,
+  "model": "mistralai/mistral-small-3.1-24b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023. I don't have the ability to browse the internet or access any new information after that date. However, I can help answer questions and provide information based on the data I've been trained on up until that point.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 56,
+    "prompt_tokens": 200,
+    "total_tokens": 256,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Nebius"
+}
+[litellm-model-test] Testing "openrouter/cognitivecomputations/dolphin-mixtral-8x7b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for cognitivecomputations/dolphin-mixtral-8x7b.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/cognitivecomputations/dolphin-mixtral-8x7b\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/google/gemini-pro-vision" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.BadRequestError: OpenrouterException - {\"error\":{\"message\":\"google/gemini-pro-vision is not a valid model ID\",\"code\":400},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/google/gemini-pro-vision\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "400"
+  }
+}
+[litellm-model-test] Testing "openrouter/fireworks/firellava-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for fireworks/firellava-13b.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/fireworks/firellava-13b\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-8b-instruct:free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for meta-llama/llama-3-8b-instruct:free.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/meta-llama/llama-3-8b-instruct:free\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-8b-instruct:extended" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for meta-llama/llama-3-8b-instruct:extended.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/meta-llama/llama-3-8b-instruct:extended\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-70b-instruct:nitro" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067156-nAsnV31WfjhojMS1KfQV",
+  "created": 1750067156,
+  "model": "meta-llama/llama-3-70b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_2f30b0b571",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is December 2022. I was trained on a massive dataset of text from the internet and other sources up to that point in time. While I can still respond to questions and engage in conversations about more recent events, my understanding of very recent or rapidly changing topics might be limited or outdated.\n\nKeep in mind that my training data is constantly being updated and expanded, so my knowledge will gradually become more up-to-date over time. However, if you have any specific questions or topics you'd like to discuss, feel free to ask, and I'll do my best to provide you with the most accurate and helpful information available to me!",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 132,
+    "prompt_tokens": 28,
+    "total_tokens": 160,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Groq"
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-70b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067157-zyCpx7Wf4nLI6w0GejRW",
+  "created": 1750067157,
+  "model": "meta-llama/llama-3-70b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is December 2022. I was trained on a massive dataset of text from various sources, including books, articles, research papers, and websites, up to that point in time.\n\nWhile I can provide information on a wide range of topics, my knowledge may not be entirely up to date or exhaustive on very recent events, discoveries, or developments that have occurred after my knowledge cutoff date.\n\nHowever, I'm designed to be able to learn and improve over time, so if you provide me with more recent information or context, I can try to adapt and provide more accurate or relevant responses.\n\nKeep in mind that my training data is constantly being updated and expanded, so my knowledge cutoff date will eventually be updated as well.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 148,
+    "prompt_tokens": 28,
+    "total_tokens": 176,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "DeepInfra"
+}
+[litellm-model-test] Testing "openrouter/openai/o1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067160-qTQnMv2saQIyAh9b6CU1",
+  "created": 1750067160,
+  "model": "openai/o1",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My current knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 76,
+    "prompt_tokens": 24,
+    "total_tokens": 100,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o1-mini" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067165-xG47f3z6OQcEym8XatGO",
+  "created": 1750067165,
+  "model": "openai/o1-mini",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_3da8b0b088",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 213,
+    "prompt_tokens": 25,
+    "total_tokens": 238,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 192,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o1-mini-2024-09-12" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067168-KIDOxB8amkAIj7tV6OX2",
+  "created": 1750067168,
+  "model": "openai/o1-mini-2024-09-12",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_3da8b0b088",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 341,
+    "prompt_tokens": 25,
+    "total_tokens": 366,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 320,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o1-preview" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067170-U595bQu4bJa7bcGpxg7i",
+  "created": 1750067170,
+  "model": "openai/o1-preview",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_44031b8794",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "As of my latest update, my knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 424,
+    "prompt_tokens": 25,
+    "total_tokens": 449,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 384,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o1-preview-2024-09-12" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067174-I3PQ5RVxRWshuO8wE78S",
+  "created": 1750067174,
+  "model": "openai/o1-preview-2024-09-12",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_44031b8794",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 284,
+    "prompt_tokens": 25,
+    "total_tokens": 309,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 256,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o3-mini" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067177-HopWfQoDCvSVzrDI6qk8",
+  "created": 1750067177,
+  "model": "openai/o3-mini",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My training data includes information up until October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 397,
+    "prompt_tokens": 24,
+    "total_tokens": 421,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/o3-mini-high" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067186-uBkeoOwcHtgrMvR5IJHI",
+  "created": 1750067186,
+  "model": "openai/o3-mini-high",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge is current up to October 2023. This means that while I can provide information and context based on data available until then, I might not be aware of events or developments that have occurred after that date.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 557,
+    "prompt_tokens": 24,
+    "total_tokens": 581,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-4o" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067197-djAUUtzppnjc7lfA66NG",
+  "created": 1750067197,
+  "model": "openai/gpt-4o",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_07871e2ad8",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 10,
+    "prompt_tokens": 25,
+    "total_tokens": 35,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-4o-2024-05-13" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067198-5NYIYl0uTUWLvDuBRpn9",
+  "created": 1750067198,
+  "model": "openai/gpt-4o-2024-05-13",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_9fd01826bf",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2021. This means that any information or events that have occurred after that date are not part of my training. Is there something specific you would like to know about?",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 41,
+    "prompt_tokens": 25,
+    "total_tokens": 66,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-4-vision-preview" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for openai/gpt-4-vision-preview.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/openai/gpt-4-vision-preview\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-3.5-turbo" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067200-5L5nME4WPUtRQBL1lNcG",
+  "created": 1750067200,
+  "model": "openai/gpt-3.5-turbo",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My training data includes information up until September 2021. I may not have the most recent information or updates beyond that date.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 26,
+    "prompt_tokens": 25,
+    "total_tokens": 51,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-3.5-turbo-16k" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067201-l7o67I07p3OJi5wNkgLb",
+  "created": 1750067201,
+  "model": "openai/gpt-3.5-turbo-16k",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "As an AI digital assistant, I do not have a specific knowledge cutoff date. My knowledge is up to date based on the information available to me at any given time. I continuously learn and acquire new information to provide the most accurate and relevant responses to inquiries.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 52,
+    "prompt_tokens": 25,
+    "total_tokens": 77,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/openai/gpt-4" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067202-DQhQlQejZCMeTBPep2qt",
+  "created": 1750067202,
+  "model": "openai/gpt-4",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "As an AI, I don't have a specific \"knowledge cut-off\" date as I continually receive updates. However, as a model trained by OpenAI, my responses are based on a diverse range of sources available on the Internet till September 2021. Therefore, for any events or information updated post this timeline, my knowledge might not be up to date.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 73,
+    "prompt_tokens": 25,
+    "total_tokens": 98,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-instant-v1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.BadRequestError: OpenrouterException - {\"error\":{\"message\":\"anthropic/claude-instant-v1 is not a valid model ID\",\"code\":400},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/anthropic/claude-instant-v1\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "400"
+  }
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-2" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067207-io4NBLDKRVUfCenGvkYc",
+  "created": 1750067207,
+  "model": "anthropic/claude-2",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "I'm afraid I don't have a specific knowledge cutoff date. As an AI assistant created by Anthropic to be helpful, harmless, and honest, I respond based on my training to have conversations, but I don't have a fixed scope of knowledge. I can try my best to answer questions or have discussions, but may sometimes say I don't know something if it's outside of what I was trained on.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 88,
+    "prompt_tokens": 26,
+    "total_tokens": 114,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-opus" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067214-y8Fsmf0hK7qJibXTbrL4",
+  "created": 1750067214,
+  "model": "anthropic/claude-3-opus",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "I do not have a specific knowledge cutoff date. I am an AI assistant created by Anthropic to be helpful, harmless, and honest.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 34,
+    "prompt_tokens": 25,
+    "total_tokens": 59,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Anthropic"
+}
+[litellm-model-test] Testing "openrouter/google/palm-2-chat-bison" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for google/palm-2-chat-bison.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/google/palm-2-chat-bison\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/google/palm-2-codechat-bison" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for google/palm-2-codechat-bison.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/google/palm-2-codechat-bison\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-2-13b-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for meta-llama/llama-2-13b-chat.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/meta-llama/llama-2-13b-chat\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/llama-2-70b-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.APIError: APIError: OpenrouterException - {\"error\":{\"message\":\"Provider returned error\",\"code\":502,\"metadata\":{\"raw\":\"{\\n  \\\"id\\\": \\\"nyLSwCu-4Yz4kd-9509620770caba18\\\",\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Internal server error\\\",\\n    \\\"type\\\": \\\"server_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": null\\n  }\\n}\",\"provider_name\":\"Together\"}},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/meta-llama/llama-2-70b-chat\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "502"
+  }
+}
+[litellm-model-test] Testing "openrouter/meta-llama/codellama-34b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for meta-llama/codellama-34b-instruct.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/meta-llama/codellama-34b-instruct\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/nousresearch/nous-hermes-llama2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.NotFoundError: NotFoundError: OpenrouterException - {\"error\":{\"message\":\"No endpoints found for nousresearch/nous-hermes-llama2-13b.\",\"code\":404},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/nousresearch/nous-hermes-llama2-13b\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "404"
+  }
+}
+[litellm-model-test] Testing "openrouter/mancer/weaver" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067236-5X6iEW4vf9Cf86Kmm6SG",
+  "created": 1750067236,
+  "model": "mancer/weaver",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "If you're asking about my knowledge cutoff date, it's the end of the sentence. As for the question, what's your knowledge cutoff date, well, I know a lot because I've been around for a very long time. My first appearance was in ancient Greek mythology as a creature with the head of a lion and the body of a serpent, representing power and divine authority. Over time, people have associated me with various other animals, such as the phoenix (rising from the ashes), the dragon (symbolizing strength and power), and even the chameleon (ability to adapt to changing circumstances).\n\nThroughout history, leaders have used my symbolism to represent their rule—from Roman emperors to medieval kings to modern-day politicians. I've also been a popular figure in art, literature, and religion.\n\nWhen it comes to movies, I've made quite a few appearances too. In the silent film era, I was often depicted as a snake charmer's familiar, slithering around castles and hypnotizing people. With the advent of sound, I became more vocal, often hissing and whispering in characters' ears to tempt them. In medieval and fantasy films, I often take the form of a dragon, breathing fire and guarding treasures. And in more contemporary films, I may not always have a physical form, but my voice can still be heard in the shadows, providing cryptic advice or warnings.\n\nAs for visuals, I can be quite the showstopper. My shimmering scales and hypnotic eyes captivate audiences, and my size can represent both power and vulnerability. My movements are fluid and graceful, slithering gracefully or soaring majestically through the air. My tail can wrap around objects and people alike, trapping them in my grasp. Fire from my mouth is both beautiful and deadly.\n\nWhen it comes to taste, well, let's just say I'm not the tastiest treat out there. My scales are tough and indigestible, and my venomous fangs can make even the most daring meal lethal. Some cultures believe that if you can survive eating me, you gain my strength and wisdom, but that's a risk few are willing to take.\n\nAs for sounds, my hiss is iconic and instantly recognizable. It's often associated with danger and secrets, hinting at the mysteries I hold. My roar can shake the foundations of buildings, and my wings can create gusts of wind strong enough to knock people off their feet. My breath can turn into smoke or fire, depending on the situation.\n\nFinally, when it comes to smells, I can be quite pungent. My scale oil has been used in perfumes and incense for centuries, but it's also said to contain my venom, making it a double-edged sword. My breath, either smoke or fire, carries the scent of burning and destruction.\n\nSo, to recap, I represent power and divine authority, have appeared in mythology, art, literature, and movies, am often depicted as a dragon or serpent, and while some may find me visually stunning, it's not recommended to try tasting me or getting too close to my breath. Oh, and my knowledge cutoff date is always at the end of a sentence.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 757,
+    "prompt_tokens": 112,
+    "total_tokens": 869,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Mancer 2"
+}
+[litellm-model-test] Testing "openrouter/gryphe/mythomax-l2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067254-sFvCSaEpQMNCK3OL7JG3",
+  "created": 1750067254,
+  "model": "gryphe/mythomax-l2-13b",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date is the date up to which I have gathered and retained information. It's not a specific date, as knowledge accumulates over time, but it's an ongoing process.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 43,
+    "prompt_tokens": 59,
+    "total_tokens": 102,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "DeepInfra"
+}
+[litellm-model-test] Testing "openrouter/jondurbin/airoboros-l2-70b-2.1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "error": {
+    "message": "litellm.BadRequestError: OpenrouterException - {\"error\":{\"message\":\"jondurbin/airoboros-l2-70b-2.1 is not a valid model ID\",\"code\":400},\"user_id\":\"user_2xSYIrx5Ol6ODvug5MMQ3LF0l8T\"}. Received Model Group=openrouter/jondurbin/airoboros-l2-70b-2.1\nAvailable Model Group Fallbacks=None",
+    "type": null,
+    "param": null,
+    "code": "400"
+  }
+}
+[litellm-model-test] Testing "openrouter/undi95/remm-slerp-l2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067257-5rfYLze85Pu6ERYl9lC8",
+  "created": 1750067257,
+  "model": "undi95/remm-slerp-l2-13b",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " Please provide a more specific question or task.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 10,
+    "prompt_tokens": 60,
+    "total_tokens": 70,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Mancer 2"
+}
+[litellm-model-test] Testing "openrouter/pygmalionai/mythalion-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067258-J87CO6VHbWCJLeJEJOEK",
+  "created": 1750067258,
+  "model": "pygmalionai/mythalion-13b",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date refers to the point in time after which I consider myself to have gained all the information and understanding necessary to provide a satisfactory response to a given query or task. This date varies depending on the subject matter and the complexity of the information required.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 52,
+    "prompt_tokens": 42,
+    "total_tokens": 94,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Featherless"
+}
+[litellm-model-test] Testing "openrouter/mistralai/mistral-7b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067262-4YLtgX5RIFxw52C3IIU7",
+  "created": 1750067263,
+  "model": "mistralai/mistral-7b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date is 2021, which means I was trained up to that year and don't have access to events or information that occurred afterwards. I don't have the ability to self-update based on new events or refresh my knowledge beyond the year 2021. I am a model designed to provide engaging, accurate, and consistent responses based on the best-quality data as of that year.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 90,
+    "prompt_tokens": 30,
+    "total_tokens": 120,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Enfer"
+}
+[litellm-model-test] Testing "openrouter/mistralai/mistral-7b-instruct:free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067265-W2RXpzJsz5W7q8suifud",
+  "created": 1750067265,
+  "model": "mistralai/mistral-7b-instruct:free",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": " My knowledge cutoff date is 2021. This means I was trained on information up to 2021 and may not be aware of more recent events or updates after that date. For the most accurate and up-to-date information, I recommend consulting reliable and current sources.",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 61,
+    "prompt_tokens": 29,
+    "total_tokens": 90,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "DeepInfra"
+}
+[litellm-model-test] Testing "openrouter/qwen/qwen-2.5-coder-32b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1750067266-un3MjYrGsKD7JtQFDVoR",
+  "created": 1750067266,
+  "model": "qwen/qwen-2.5-coder-32b-instruct",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is October 2023. This means I have information up to that point, but I don't have access to any data or updates after that. How can I help you today?",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 44,
+    "prompt_tokens": 31,
+    "total_tokens": 75,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Nebius"
+}

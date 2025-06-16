@@ -15,8 +15,7 @@ litellm_settings:
 
 # OR_SITE_URL handled via docker
 # OR_APP_NAME handled via docker
-router_settings:
-    model_group_alias: {"auto": "openrouter/auto"} # all requests with `gpt-4` will be routed to models with `gpt-4o`
+#router_settings:
 
 general_settings:
   litellm_key_header_name: 'Authorization'
@@ -30,15 +29,15 @@ general_settings:
   # https://docs.litellm.ai/docs/completion/input#input-params-1:~:text=the%20completion%20call-,CUSTOM,-PROMPT%20TEMPLATE%20(See
 
 model_list:
-  - model_name: ora
+  - model_name: auto
     litellm_params:
       model: openrouter/openrouter/auto
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
 
-  - model_name: clitty
+  - model_name: o3
     litellm_params:
-      model: openrouter/openrouter/auto:free
+      model: openrouter/openai/o3
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
 
@@ -47,17 +46,11 @@ model_list:
       model: openrouter/google/gemini-2.0-flash-exp:free
       api_key: os.environ/OPENROUTER_API_KEY
 
-  #- model_name: gpt-4o-mini-2024-07-18
-  #  litellm_params:
-  #    model: openai/gpt-4o-mini-2024-07-18
-  #    api_key: os.environ/OPENROUTER_API_KEY
-  #    api_base: https://openrouter.ai/api/v1
-
-  #- model_name: openrouter/*
-  #  litellm_params:
-  #    model: openrouter/*
-  #    api_key: os.environ/OPENROUTER_API_KEY
-  #    api_base: https://openrouter.ai/api/v1
+  - model_name: openrouter/*
+    litellm_params:
+      model: openrouter/*
+      api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
 
   - model_name: "*"
     litellm_params:
