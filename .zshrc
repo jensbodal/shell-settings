@@ -414,6 +414,10 @@ fi
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh" || touch "${HOME}/.zshrc.post.zsh"
 ###########################################################################################################################################
 
+if (command -v gh &>/dev/null && gh copilot &>/dev/null); then
+  eval "$(gh copilot alias -- zsh)"
+fi
+
 # Amazon Q post block. Keep at the bottom of this file.
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 [[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
