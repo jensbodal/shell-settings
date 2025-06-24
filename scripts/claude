@@ -6,9 +6,6 @@ if [ -z "${SHELL_SETTINGS_INIT:-}" ]; then
   source "$(dirname "${BASH_SOURCE[0]}")/_INIT"
 fi
 
-if non_local_bin_path; then
-  PATH=$NON_LOCAL_BIN_PATH
-fi
 
 exists() {
   if ! command -v "$1" 2>&1 > /dev/null; then
