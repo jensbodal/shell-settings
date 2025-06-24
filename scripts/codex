@@ -34,9 +34,7 @@ main() {
     die "Missing codex or codex auto-installation failed (or you just need to run this again and the script does not work right)"
   fi
 
-  if doupgrade; then
-    codex --upgrade
-  fi
+  codex "$@"
 }
 
 DEBUG_CODEX="${DEBUG_CODEX:-0}"
