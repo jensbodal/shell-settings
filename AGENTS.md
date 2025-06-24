@@ -1,5 +1,16 @@
 # AGENTS
 
+## Branch Naming Conventions
+
+Different AI coding tools and agents should use specific branch prefixes to maintain organization and avoid conflicts:
+
+- **Claude Code**: `claude/...` (e.g., `claude/add-feature`, `claude/fix-bug`)
+- **OpenAI Codex CLI**: `codexc/...` (e.g., `codexc/refactor-api`, `codexc/update-docs`)
+- **Codex Web**: `codexw/...` (e.g., `codexw/ui-improvements`, `codexw/add-component`)
+- **Aider**: `aider/...` (e.g., `aider/test-coverage`, `aider/performance-fix`)
+
+This convention helps track which tool created which changes and prevents branch naming conflicts when multiple AI tools are used on the same repository.
+
 ## Dev Container
 
 We use a devcontainer setup in `.devcontainer/devcontainer.json` with the following configuration:

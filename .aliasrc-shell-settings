@@ -9,6 +9,7 @@ PKGX="$HOME/github/shell-settings/scripts/pkgx"
 alias ansible-galaxy="${PKGX} +ansible ansible-galaxy"
 alias ansible-playbook="${PKGX} +ansible ansible-playbook"
 alias ansible-vault="${PKGX} +ansible ansible-vault"
+alias claude-yolo="claude -p --dangerously-skip-permissions"
 # ###
 
 #TESTING_NEW
