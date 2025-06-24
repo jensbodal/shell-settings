@@ -26,3 +26,6 @@ vault.yml
 .venv/
 node_modules/
 site-packages/
+
+# Claude Code local settings
+.claude/settings.local.json
