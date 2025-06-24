@@ -19,6 +19,12 @@ Before starting any work, agents should:
    - `.vibe/projects/create-foo-function/tasks/1719187200-implement-core-logic.task.md`
    - `.vibe/projects/create-foo-function/tasks/1719273600-add-error-handling.task.md`
    - `.vibe/projects/create-foo-function/tasks/1719360000-write-unit-tests.task.md`
+4. **Install Git hooks** as documented in the [README](README.md#git-hooks):
+   ```bash
+   pipx install pre-commit
+   pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push
+   ```
+   Or run `npm install` to automatically install pre-commit and hooks via the `prepare` script.
 
 ## Branch Naming Conventions
 

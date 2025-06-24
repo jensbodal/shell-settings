@@ -429,3 +429,8 @@ fi
 
 # Added by Windsurf
 [[ -d $HOME/.codeium/windsurf/bin ]] && export PATH="/Users/jensbodal/.codeium/windsurf/bin:$PATH"
+
+if [[ -f "$HOME/.claude/local/claude" ]]; then
+  alias claude="/home/jensbodal/.claude/local/claude"
+fi
+

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+_claude="$HOME/.claude/local/claude"
+
+if [ -z "${SHELL_SETTINGS_INIT:-}" ]; then
+  source "$(dirname "${BASH_SOURCE[0]}")/_INIT"
+fi
+
+if non_local_bin_path true; then
+  PATH=$NON_LOCAL_BIN_PATH
+fi
+
+exists() {
+  if ! command -v "$1" 2>&1 > /dev/null; then
+    return 1
+  fi
+  return 0
+}
+
+doupgrade() {
+  return 0
+}
+
+main() {
+  if [ ! -f "$_claude" ]; then
+    log "Missing claude local installation, attempting to install..."
+
+    if exists npx; then
+      npx @anthropic-ai/claude-code@latest migrate-installer
+    else
+      die "Missing claude or claude auto-installation failed (or you just need to run this again and the script does not work right)"
+    fi
+  fi
+
+
+  "$_claude" "$@"
+}
+
+DEBUG_CLAUDE="${DEBUG_CLAUDE:-0}"
+
+if [ "$DEBUG_CLAUDE" -eq "1" ]; then
+  if [ "$#" -ne "0" ]; then
+    log "$@"
+  fi
+fi
+
+main "$@"
