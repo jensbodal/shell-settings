@@ -431,6 +431,9 @@ fi
 [[ -d $HOME/.codeium/windsurf/bin ]] && export PATH="/Users/jensbodal/.codeium/windsurf/bin:$PATH"
 
 if [[ -f "$HOME/.claude/local/claude" ]]; then
-  alias claude="/home/jensbodal/.claude/local/claude"
+  alias claude="$HOME/.claude/local/claude"
 fi
 
+
+# Created by `pipx` on 2025-06-24 19:58:39
+export PATH="$PATH:/home/jensbodal/.local/bin"

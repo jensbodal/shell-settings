@@ -6,7 +6,7 @@ if [ -z "${SHELL_SETTINGS_INIT:-}" ]; then
   source "$(dirname "${BASH_SOURCE[0]}")/_INIT"
 fi
 
-if non_local_bin_path true; then
+if non_local_bin_path; then
   PATH=$NON_LOCAL_BIN_PATH
 fi
 
@@ -17,9 +17,6 @@ exists() {
   return 0
 }
 
-doupgrade() {
-  return 0
-}
 
 main() {
   if [ ! -f "$_claude" ]; then
