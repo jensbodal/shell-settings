@@ -1,3 +1,35 @@
+# Agent Configuration Files
+
+This repository uses several configuration files to guide AI agents and tools:
+
+## CLAUDE.md
+- **Purpose**: Project-specific instructions for Claude Code
+- **Contains**: Repository overview, setup commands, architecture details, testing procedures
+- **Usage**: Automatically loaded by Claude Code to understand project context and conventions
+
+## .claude/settings.json
+- **Purpose**: Default permissions for Claude Code (committed to repo)
+- **Contains**: Read-only permissions by default (safe for all users)
+- **Usage**: Provides baseline security - users override in local settings for write access
+
+## .claude/settings.local.json
+- **Purpose**: Personal Claude Code permissions (not committed)
+- **Contains**: User-specific permissions like `Edit(*)`, `Write(*)`, `Bash(*)`
+- **Usage**: Allows individual users to grant write permissions as needed
+
+## AGENTS.md
+- **Purpose**: Documentation for all AI agent tools and workflows
+- **Contains**: Branch naming conventions, dev container setup, general agent guidelines
+- **Usage**: Reference for maintaining consistency across different AI tools
+
+## .vibe/ Directory Structure
+- **Purpose**: Project and task management for AI agents
+- **Structure**:
+  - `.vibe/projects/<project-slug>/` - Main project folders
+  - `.vibe/projects/<project-slug>/<project-slug>.project.md` - Project overview
+  - `.vibe/projects/<project-slug>/tasks/<timestamp>-<task-slug>.task.md` - Individual tasks
+- **Usage**: Agents create projects here before starting work to track progress and maintain organization
+
 # Using Automated Scripts
 
 1. Install ZSH using your OS package manager or build from source
