@@ -1,1 +1,2 @@
 requests>=2.25.0
+trufflehog>=3.64.0
