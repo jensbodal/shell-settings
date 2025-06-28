@@ -3,7 +3,12 @@ GOOGLE_CLOUD_PROJECT = "bodal-dev"
 
 [tools]
 gopass = "latest"
+gh = "latest"
 node = "lts"
+pnpm = "latest"
+bun = "latest"
+npm = "latest"
 python = "3.11"
 rust = "latest"
 uv = "latest"
+gitleaks = "latest"
