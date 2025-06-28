@@ -39,5 +39,5 @@ By following these guidelines, I will ensure my contributions are consistent wit
 
 For certain development tasks, the following tools are required and can be installed via Homebrew:
 
-- `gitleaks`: `brew install gitleaks`
+- `gitleaks`: Installed via `mise` (see `.mise.toml`)
 
