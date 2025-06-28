@@ -34,3 +34,10 @@ Before committing, I will:
 2.  **Execute tests**: I will run the appropriate tests to ensure my changes haven't introduced any regressions. For Python code, this will typically involve running `pytest`.
 
 By following these guidelines, I will ensure my contributions are consistent with the project's standards.
+
+## Development Dependencies
+
+For certain development tasks, the following tools are required and can be installed via Homebrew:
+
+- `gitleaks`: `brew install gitleaks`
+

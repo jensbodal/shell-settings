@@ -1,7 +1,11 @@
 [tools]
-1password = "latest"
+# node / npm / pnpm / bun
+gh = "latest"
 node = "lts"
+pnpm = "latest"
+bun = "latest"
+npm = "latest"
 python = "3.11"
 rust = "latest"
 gitleaks = "latest"
-trufflehog = "latest"
+gopass = "latest"
