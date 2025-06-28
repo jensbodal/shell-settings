@@ -1,0 +1,9 @@
+#!/bin/bash
+
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
+
+if [ $# -eq 0 ]; then
+  bunx @google/gemini-cli@latest
+else
+  bunx @google/gemini-cli@latest "$@"
+fi

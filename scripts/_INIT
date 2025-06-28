@@ -80,6 +80,7 @@ log() {
 
 # if non_local_bin_path mise; echo "mise is installed"; fi
 non_local_bin_path() {
+  local OG_PATH="$PATH"
   # remove shell-settings/script paths from PATH since we care if we have the actual binary available"
   local PATH=`echo $PATH | tr ":" "\n" | sort | uniq | grep -v "shell-settings/script" | tr "\n" ":" | sed 's/.$//'`
 
@@ -87,12 +88,13 @@ non_local_bin_path() {
     export NON_LOCAL_BIN_PATH=$PATH
     return 0
   else
+    export NON_LOCAL_BIN_PATH="$OG_PATH"
     return 1
   fi
 }
 
 .non_local_bin_path() {
-  non_local_bin_path "${@}"
+  non_local_bin_path "$@"
 }
 
 ismac() {
