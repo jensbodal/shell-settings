@@ -2,32 +2,29 @@ repos:
   - repo: local
     hooks:
       - id: trufflehog
-        name: trufflehog (local)
-        language: system          # pre-commit won’t try to pip-install
-        entry: pkgx               # ↳ pkgx handles binaries & caching
+        name: trufflehog
+        language: system
+        entry: trufflehog
         args:
-          - trufflehog@3.89.1     # pin CLI release
           - git
           - file://.
-          - --since-commit        # scan only what you’re adding
+          - --since-commit
           - HEAD
-          - --only-verified       # cut false-positives
-          - --fail                # non-zero exit on leak
+          - --only-verified
+          - --fail
           - --exclude-paths
           - trufflehog-exclude-paths.txt
-        pass_filenames: false     # let the args decide scope
+        pass_filenames: false
         stages: [pre-push]
 
   - repo: local
     hooks:
       - id: gitleaks
-        name: gitleaks (local)
+        name: gitleaks
         language: system
-        entry: pkgx
+        entry: gitleaks
         args:
-          - gitleaks
-          - detect
-          - --source=.
-          - --verbose
-        pass_filenames: false     # let gitleaks handle file discovery
+          - protect
+          - --staged
+        pass_filenames: false
         stages: [pre-commit,pre-push]
