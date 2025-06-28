@@ -3,3 +3,5 @@
 node = "lts"
 python = "3.11"
 rust = "latest"
+gitleaks = "latest"
+trufflehog = "latest"
