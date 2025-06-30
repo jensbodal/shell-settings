@@ -1,0 +1,35 @@
+# .github/workflows/python-quality.yml
+name: python-quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install mise
+        uses: jdx/mise-action@v2
+
+      - name: Install Python dependencies
+        run: uv sync
+
+      - name: Check Python formatting with black
+        run: uv run black --check --diff .
+
+      - name: Check import sorting with isort
+        run: uv run isort --check-only --diff .
+
+      - name: Run Python tests
+        run: uv run pytest -v
