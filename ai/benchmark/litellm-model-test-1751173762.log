@@ -1,0 +1,133 @@
+[litellm-model-test] Testing "auto" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1751173762-5riGCPru9y3uhv58ItFo",
+  "created": 1751173763,
+  "model": "openai/chatgpt-4o-latest",
+  "object": "chat.completion",
+  "system_fingerprint": "fp_afccf7958a",
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is April 2024. That means my information is current up to that point. Let me know how I can help!",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      },
+      "provider_specific_fields": {
+        "native_finish_reason": "stop"
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 29,
+    "prompt_tokens": 25,
+    "total_tokens": 54,
+    "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 0,
+      "rejected_prediction_tokens": null
+    },
+    "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0
+    }
+  },
+  "provider": "OpenAI"
+}
+[litellm-model-test] Testing "free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+{
+  "id": "gen-1751173764-IwF6u95M0IWImp1aggE1",
+  "created": 1751173764,
+  "model": "google/gemini-2.0-flash-exp:free",
+  "object": "chat.completion",
+  "system_fingerprint": null,
+  "choices": [
+    {
+      "finish_reason": "stop",
+      "index": 0,
+      "message": {
+        "content": "My knowledge cutoff date is **September 2021**. This means I was trained on a massive dataset of text and code that was available up to that point. I don't have information on events or changes that occurred after that date.\n",
+        "role": "assistant",
+        "tool_calls": null,
+        "function_call": null
+      },
+      "provider_specific_fields": {
+        "native_finish_reason": "STOP"
+      }
+    }
+  ],
+  "usage": {
+    "completion_tokens": 51,
+    "prompt_tokens": 22,
+    "total_tokens": 73,
+    "completion_tokens_details": null,
+    "prompt_tokens_details": null
+  },
+  "provider": "Google"
+}
+[litellm-model-test] Testing "o3" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-r1-0528" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-r1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/deepseek/deepseek-coder" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/microsoft/wizardlm-2-8x22b:nitro" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/gemini-2.5-pro" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/gemini-pro-1.5" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/gemini-2.0-flash-001" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/gemini-2.5-flash" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mixtral-8x22b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/cohere/command-r-plus" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/databricks/dbrx-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-haiku" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-5-haiku" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-haiku-20240307" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-5-haiku-20241022" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.5-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.5-sonnet:beta" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.7-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3.7-sonnet:beta" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-sonnet" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-sonnet-4" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mistral-large" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mistral-small-3.1-24b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mistral-small-3.2-24b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/cognitivecomputations/dolphin-mixtral-8x7b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/gemini-pro-vision" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/fireworks/firellava-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-8b-instruct:free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-8b-instruct:extended" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-70b-instruct:nitro" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-3-70b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o1-mini" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o1-mini-2024-09-12" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o1-preview" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o1-preview-2024-09-12" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o3-mini" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/o3-mini-high" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-4o" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-4o-2024-05-13" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-4-vision-preview" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-3.5-turbo" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-3.5-turbo-16k" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/openai/gpt-4" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-instant-v1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-2" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/anthropic/claude-3-opus" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/palm-2-chat-bison" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/google/palm-2-codechat-bison" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-2-13b-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/llama-2-70b-chat" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/meta-llama/codellama-34b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/nousresearch/nous-hermes-llama2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mancer/weaver" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/gryphe/mythomax-l2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/jondurbin/airoboros-l2-70b-2.1" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/undi95/remm-slerp-l2-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/pygmalionai/mythalion-13b" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mistral-7b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/mistralai/mistral-7b-instruct:free" with "What%20is%20your%20knowledge%20cutoff%20date??"
+[litellm-model-test] Testing "openrouter/qwen/qwen-2.5-coder-32b-instruct" with "What%20is%20your%20knowledge%20cutoff%20date??"

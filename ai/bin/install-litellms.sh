@@ -141,7 +141,9 @@ $CONTAINER_CMD run -d \
   --name "$CONTAINER_NAME" \
   --restart unless-stopped \
   -p "${PORT}:4000" \
+  -e "LITELLM_LOG=INFO" \
   -e "DATABASE_URL=${DATABASE_URL}" \
+  -e "LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY}" \
   -e "OPENROUTER_API_KEY=${OPENROUTER_KEY}" \
   -e "OR_SITE_URL=https://github.com/jensbodal/shell-settings" \
   -e "OR_APP_NAME=${OR_APP_NAME}" \
@@ -200,7 +202,16 @@ ${BOLD}Useful Commands:${RST}
   Remove:       $CONTAINER_CMD rm -f $CONTAINER_NAME
 
 ${BOLD}Test the proxy:${RST}
-  curl http://localhost:$PORT/v1/models
-  curl http://localhost:$PORT/health
+  # Health check (uses master key, retrieve from gopass)
+  echo "Health check command:"
+  echo "curl -H \"Authorization: Bearer $(gopass show -o sk/litellm_master_$USER@$(hostname))\" http://localhost:$PORT/health"
+
+  # List models (uses virtual key from litellm.config.yaml)
+  echo "\nList models command:"
+  echo "curl -H \"Authorization: Bearer sk-my-virtual-key\" http://localhost:$PORT/v1/models"
+
+  # Test a model completion (e.g., llama3-8b)
+  echo "\nTest completion command:"
+  echo "curl http://localhost:$PORT/v1/chat/completions -H \"Content-Type: application/json\" -H \"Authorization: Bearer sk-my-virtual-key\" -d '{ \"model\": \"llama3-8b\", \"messages\": [{\"role\": \"user\", \"content\": \"Hello!\"}] }'"
 
 EOF
