@@ -1,3 +1,5 @@
 #!/bin/bash
 
-pkgx gopass "$@"
+[ -z $SHELL_SETTINGS_INIT ] && source $HOME/github/shell-settings/scripts/_INIT
+
+exists_run gopass "$@"

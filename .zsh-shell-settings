@@ -1,0 +1,11 @@
+#vi: set ft sh
+
+exists() {
+  if command -v "$1" 2>&1 >/dev/null; then
+    return 0
+  fi
+}
+
+exists brew && eval "$(/opt/homebrew/bin/brew shellenv)"
+exists gopass && source $(gopass completion zsh)
+

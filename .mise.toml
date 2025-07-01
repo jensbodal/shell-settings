@@ -1,5 +1,6 @@
 [tools]
-1password = "latest"
+gopass = "latest"
 node = "lts"
 python = "3.11"
 rust = "latest"
+uv = "latest"
