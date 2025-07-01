@@ -4,7 +4,7 @@ const { existsSync, writeFileSync } = require('fs');
 const { execSync } = require('child_process');
 
 if (process.argv.length !== 3) {
-  new Error("Please pass either a single package or a file to a newline separated list of packages")
+  throw new Error("Please pass either a single package or a file to a newline separated list of packages");
 }
 
 const [,,input] = process.argv;
