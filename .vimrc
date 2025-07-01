@@ -301,3 +301,8 @@ xnoremap N Nzt
 nnoremap <M-j> :windo normal <C-e><CR>
 " Map Alt+k to scroll all windows up one line
 nnoremap <M-k> :windo normal <C-y><CR>
+
+" Updates 06-30-2025
+" https://stackoverflow.com/a/526940/679716
+set wildmode=longest,list,full
+set wildmenu

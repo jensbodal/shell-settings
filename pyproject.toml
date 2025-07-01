@@ -7,9 +7,10 @@ name = "llm-client"
 version = "0.1.0"
 description = "A client for interacting with LLMs with automatic fallback capability"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 license = {text = "MIT"}
 dependencies = [
+    "crawl4ai",
     "requests",
     "python-dotenv",
 ]
@@ -23,7 +24,7 @@ dev = [
 
 [tool.black]
 line-length = 88
-target-version = ["py38"]
+target-version = ["py311"]
 
 [tool.isort]
 profile = "black"

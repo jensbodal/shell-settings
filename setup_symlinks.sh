@@ -24,6 +24,7 @@ createsymlink() {
 
 log -d "Checking for symlink update..."
 createsymlink ${SHELL_SETTINGS_DIR}/.zshrc $HOME/.zshrc
+createsymlink ${SHELL_SETTINGS_DIR}/.zsh-shell-settings $HOME/.zshrc-shell-settings
 createsymlink ${SHELL_SETTINGS_DIR}/.aliasrc-shell-settings $HOME/.aliasrc-shell-settings
 createsymlink ${SHELL_SETTINGS_DIR}/.zsh_completions $HOME/.zsh_completions
 createsymlink ${SHELL_SETTINGS_DIR}/.vimrc $HOME/.vimrc

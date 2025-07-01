@@ -4,6 +4,10 @@
 
 _PATH="$PATH"
 
+run_installer() {
+  echo "Just kidding"
+}
+
 __exists() {
   _PATH=""
 
@@ -22,4 +26,10 @@ __exists() {
   return 1
 }
 
-__exists "$@"
+if ! __exists "$1"; then
+  die "\"$1\" does not exist"
+fi
+
+cmd="$1"
+shift
+"$cmd" "$@"
