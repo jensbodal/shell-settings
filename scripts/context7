@@ -12,7 +12,7 @@ const [,,input] = process.argv;
 const [org, pkg] = input.split('/').filter(Boolean);
 
 if (!org || !pkg) {
-  new Error(`Missing org or pkg: ${JSON.stringify({org, pkg})}`);
+  throw new Error(`Missing org or pkg: ${JSON.stringify({org, pkg})}`);
 }
 
 const pkgSlug = `/${org}/${pkg}`;
