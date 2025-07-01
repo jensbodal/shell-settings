@@ -414,9 +414,6 @@ path_add "$HOME/.local/bin"
 path_add "$HOME/.lmstudio/bin"
 path_add "$HOME/.codeium/windsurf/bin"
 
-if [[ -f "$HOME/.claude/local/claude" ]]; then
-fi
-
 ###########################################################################################################################################
 # .zshrc.post.zsh
 # TOOD: Remove -- here to support moving to one way of doing post/pre
@@ -436,8 +433,6 @@ fi
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh" || touch "${HOME}/.zshrc.post.zsh"
 ###########################################################################################################################################
 
-<<<<<<< Updated upstream
-=======
 if (command -v gh &>/dev/null && gh copilot &>/dev/null); then
   eval "$(gh copilot alias -- zsh)"
 fi
@@ -454,10 +449,5 @@ fi
 # Added by Windsurf
 [[ -d $HOME/.codeium/windsurf/bin ]] && export PATH="/Users/jensbodal/.codeium/windsurf/bin:$PATH"
 
-if [[ -f "$HOME/.claude/local/claude" ]]; then
-fi
-
-
 # Created by `pipx` on 2025-06-24 19:58:39
 export PATH="$PATH:/home/jensbodal/.local/bin"
->>>>>>> Stashed changes

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+const { existsSync, writeFileSync } = require('fs');
+const { execSync } = require('child_process');
+
 if (process.argv.length !== 3) {
   new Error("Please pass either a single package or a file to a newline separated list of packages")
 }
@@ -8,10 +11,23 @@ const [,,input] = process.argv;
 
 const [org, pkg] = input.split('/').filter(Boolean);
 
-console.log({org, pkg});
+if (!org || !pkg) {
+  new Error(`Missing org or pkg: ${JSON.stringify({org, pkg})}`);
+}
 
-const output = require('child_process').execSync(`
-  bunx @modelcontextprotocol/inspector bunx @upstash/context7-mcp --cli --method tools/call --tool-name get-library-docs --tool-arg context7CompatibleLibraryID="/${org}/${pkg}"
+const pkgSlug = `/${org}/${pkg}`;
+const fileSlug = `${org}_${pkg}`;
+
+console.log(`Fetching "${pkgSlug}" ${JSON.stringify({org, pkg})}`);
+
+
+
+const output = execSync(`
+  bunx @modelcontextprotocol/inspector bunx --node-options='-o md-fit' @upstash/context7-mcp --cli --method tools/call --tool-name get-library-docs --tool-arg context7CompatibleLibraryID="${pkgSlug}"
 `).toString();
 
-require('fs').writeFileSync(`./.docs/${org}_${pkg}.c7.json`, output);
+writeFileSync(`./.docs/${fileSlug}.c7.json`, output);
+
+execSync(`cat ./.docs/${fileSlug}.c7.json | jq -r '.content[].text' | tee ./.docs/${fileSlug}.c7.md`);
+
+execSync(`rm './.docs/${fileSlug}.c7.json'`);
