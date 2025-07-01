@@ -415,7 +415,6 @@ path_add "$HOME/.lmstudio/bin"
 path_add "$HOME/.codeium/windsurf/bin"
 
 if [[ -f "$HOME/.claude/local/claude" ]]; then
-  alias claude="$HOME/.claude/local/claude"
 fi
 
 ###########################################################################################################################################
@@ -437,3 +436,28 @@ fi
 [[ -f "${HOME}/.zshrc.post.zsh" ]] && builtin source "${HOME}/.zshrc.post.zsh" || touch "${HOME}/.zshrc.post.zsh"
 ###########################################################################################################################################
 
+<<<<<<< Updated upstream
+=======
+if (command -v gh &>/dev/null && gh copilot &>/dev/null); then
+  eval "$(gh copilot alias -- zsh)"
+fi
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+[[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Added by LM Studio CLI (lms)
+[[ -d $HOME/.lmstudio/bin ]] && export PATH="$PATH:/Users/jensbodal/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+# Added by Windsurf
+[[ -d $HOME/.codeium/windsurf/bin ]] && export PATH="/Users/jensbodal/.codeium/windsurf/bin:$PATH"
+
+if [[ -f "$HOME/.claude/local/claude" ]]; then
+fi
+
+
+# Created by `pipx` on 2025-06-24 19:58:39
+export PATH="$PATH:/home/jensbodal/.local/bin"
+>>>>>>> Stashed changes

@@ -9,9 +9,10 @@ litellm_settings:
       #langfuse_secret: os.environ/LANGFUSE_PRIVATE_KEY_1 # Project 1
 
   default_team: "3e18e7c0-7988-4b5d-8af6-92dbe31c2c41"
-  success_callback: ["prisma"] # add langfuse and?
-  failure_callback: ["prisma"] # add ?
+  #success_callback: ["prisma"] # add langfuse and?
+  #failure_callback: ["prisma"] # add ?
   json_logs: true
+  #set_verbose: true # deprecated - use os.environ["LITELLM_LOG"] = "DEBUG" instead
 
 # OR_SITE_URL handled via docker
 # OR_APP_NAME handled via docker
@@ -41,10 +42,21 @@ model_list:
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
 
-  - model_name: free
+  - model_name: mistral24bfree
     litellm_params:
-      model: openrouter/google/gemini-2.0-flash-exp:free
+      model: mistralai/mistral-small-3.2-24b-instruct:free
       api_key: os.environ/OPENROUTER_API_KEY
+      api_base: https://openrouter.ai/api/v1
+
+  - model_name: llama3-8b
+    litellm_params:
+      model: openrouter/meta-llama/llama-3-8b-instruct
+      api_key: os.environ/OPENROUTER_API_KEY
+
+  - model_name: bodal/qwen3         # <provider>/<model-tag>
+    litellm_params:
+      api_base:  http://localhost:11434   # Ollama REST endpoint
+      model:     qwen3:latest                  # the tag you’ve pulled (e.g. llama2, mistral, phi3, …)
 
   - model_name: openrouter/*
     litellm_params:
@@ -57,3 +69,8 @@ model_list:
       model: openrouter/openrouter/auto
       api_key: os.environ/OPENROUTER_API_KEY
       api_base: https://openrouter.ai/api/v1
+
+virtual_key_list:
+  - api_key: sk-my-virtual-key
+    user_id: "jensbodal"
+    team_id: "3e18e7c0-7988-4b5d-8af6-92dbe31c2c41"

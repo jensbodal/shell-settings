@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "prepare": "pipx install pre-commit && pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push"
+    "prepare": "uvx pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-push && uv sync"
   },
   "devDependencies": {
     "@types/node": "^22.12.0",

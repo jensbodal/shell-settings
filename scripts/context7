@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+if (process.argv.length !== 3) {
+  new Error("Please pass either a single package or a file to a newline separated list of packages")
+}
+
+const [,,input] = process.argv;
+
+const [org, pkg] = input.split('/').filter(Boolean);
+
+console.log({org, pkg});
+
+const output = require('child_process').execSync(`
+  bunx @modelcontextprotocol/inspector bunx @upstash/context7-mcp --cli --method tools/call --tool-name get-library-docs --tool-arg context7CompatibleLibraryID="/${org}/${pkg}"
+`).toString();
+
+require('fs').writeFileSync(`./.docs/${org}_${pkg}.c7.json`, output);

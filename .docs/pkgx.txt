@@ -1,0 +1,10 @@
+/punkpeye/awesome-mcp-clients
+/huggingface/smolagents
+/sigoden/llm-functions
+/sigoden/llm-functions/tree/main/mcp/bridge
+/sigoden/aichat
+/loopwork-ai/emcee
+/ggml-org/whisper.cpp
+/run-llama/llama_index
+/ollama/ollama
+/nrwl/nx
