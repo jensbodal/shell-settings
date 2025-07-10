@@ -1,9 +1,11 @@
+import json
 import os
 import sys
-import requests
-import json
 import time
-from typing import Dict, List, Optional, Union, Any
+from typing import Any, Dict, List, Optional, Union
+
+import requests
+
 
 class LLMClient:
     """
@@ -11,11 +13,13 @@ class LLMClient:
     Tries local Ollama first, then falls back to OpenRouter if local is unavailable.
     """
 
-    def __init__(self,
-                 ollama_base_url: str = "http://127.0.0.1:11434",
-                 openrouter_api_key: Optional[str] = None,
-                 default_model: str = "llama3",
-                 timeout: int = 5):
+    def __init__(
+        self,
+        ollama_base_url: str = "http://127.0.0.1:11434",
+        openrouter_api_key: Optional[str] = None,
+        default_model: str = "llama3",
+        timeout: int = 5,
+    ):
         """
         Initialize the LLM client with fallback capability.
 
@@ -26,7 +30,9 @@ class LLMClient:
             timeout: Timeout in seconds for checking if Ollama is available
         """
         self.ollama_base_url = ollama_base_url
-        self.openrouter_api_key = openrouter_api_key or os.environ.get("OPENROUTER_API_KEY")
+        self.openrouter_api_key = openrouter_api_key or os.environ.get(
+            "OPENROUTER_API_KEY"
+        )
         self.default_model = default_model
         self.timeout = timeout
         self.using_fallback = False
@@ -43,12 +49,16 @@ class LLMClient:
 
         # Check if OpenRouter API key is available when needed
         if not self.openrouter_api_key:
-            print("Warning: OPENROUTER_API_KEY not set. Fallback will not be available.")
+            print(
+                "Warning: OPENROUTER_API_KEY not set. Fallback will not be available."
+            )
 
     def is_ollama_available(self) -> bool:
         """Check if Ollama is available by making a simple request."""
         try:
-            response = requests.get(f"{self.ollama_base_url}/api/tags", timeout=self.timeout)
+            response = requests.get(
+                f"{self.ollama_base_url}/api/tags", timeout=self.timeout
+            )
             return response.status_code == 200
         except (requests.RequestException, ConnectionError):
             return False
@@ -57,12 +67,14 @@ class LLMClient:
         """Map Ollama model name to OpenRouter equivalent."""
         return self.model_mapping.get(ollama_model, "anthropic/claude-3-sonnet:beta")
 
-    def generate(self,
-                prompt: str,
-                model: Optional[str] = None,
-                system_prompt: Optional[str] = None,
-                temperature: float = 0.7,
-                max_tokens: int = 1024) -> Dict[str, Any]:
+    def generate(
+        self,
+        prompt: str,
+        model: Optional[str] = None,
+        system_prompt: Optional[str] = None,
+        temperature: float = 0.7,
+        max_tokens: int = 1024,
+    ) -> Dict[str, Any]:
         """
         Generate text from the LLM with automatic fallback.
 
@@ -82,11 +94,15 @@ class LLMClient:
         if self.is_ollama_available():
             self.using_fallback = False
             try:
-                return self._generate_ollama(prompt, model, system_prompt, temperature, max_tokens)
+                return self._generate_ollama(
+                    prompt, model, system_prompt, temperature, max_tokens
+                )
             except Exception as e:
                 print(f"Ollama generation failed: {e}")
                 if not self.openrouter_api_key:
-                    raise Exception("Ollama failed and OpenRouter API key not available")
+                    raise Exception(
+                        "Ollama failed and OpenRouter API key not available"
+                    )
                 self.using_fallback = True
         else:
             if not self.openrouter_api_key:
@@ -94,14 +110,18 @@ class LLMClient:
             self.using_fallback = True
 
         # Fallback to OpenRouter
-        return self._generate_openrouter(prompt, model, system_prompt, temperature, max_tokens)
+        return self._generate_openrouter(
+            prompt, model, system_prompt, temperature, max_tokens
+        )
 
-    def _generate_ollama(self,
-                        prompt: str,
-                        model: str,
-                        system_prompt: Optional[str],
-                        temperature: float,
-                        max_tokens: int) -> Dict[str, Any]:
+    def _generate_ollama(
+        self,
+        prompt: str,
+        model: str,
+        system_prompt: Optional[str],
+        temperature: float,
+        max_tokens: int,
+    ) -> Dict[str, Any]:
         """Generate text using Ollama."""
         url = f"{self.ollama_base_url}/api/generate"
 
@@ -122,15 +142,17 @@ class LLMClient:
             "text": response.json().get("response", ""),
             "model": model,
             "provider": "ollama",
-            "raw_response": response.json()
+            "raw_response": response.json(),
         }
 
-    def _generate_openrouter(self,
-                           prompt: str,
-                           ollama_model: str,
-                           system_prompt: Optional[str],
-                           temperature: float,
-                           max_tokens: int) -> Dict[str, Any]:
+    def _generate_openrouter(
+        self,
+        prompt: str,
+        ollama_model: str,
+        system_prompt: Optional[str],
+        temperature: float,
+        max_tokens: int,
+    ) -> Dict[str, Any]:
         """Generate text using OpenRouter as fallback."""
         openrouter_model = self.get_openrouter_model(ollama_model)
         url = "https://openrouter.ai/api/v1/chat/completions"
@@ -159,11 +181,14 @@ class LLMClient:
         response_json = response.json()
 
         return {
-            "text": response_json.get("choices", [{}])[0].get("message", {}).get("content", ""),
+            "text": response_json.get("choices", [{}])[0]
+            .get("message", {})
+            .get("content", ""),
             "model": openrouter_model,
             "provider": "openrouter",
-            "raw_response": response_json
+            "raw_response": response_json,
         }
+
 
 # Example usage
 if __name__ == "__main__":
@@ -172,7 +197,7 @@ if __name__ == "__main__":
     try:
         response = client.generate(
             prompt="Explain quantum computing in simple terms",
-            system_prompt="You are a helpful assistant that explains complex topics simply."
+            system_prompt="You are a helpful assistant that explains complex topics simply.",
         )
 
         provider = "OpenRouter" if client.using_fallback else "Ollama"

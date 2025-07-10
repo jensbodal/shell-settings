@@ -227,6 +227,7 @@ if install_mise; then
   mise-install nodejs
   mise-install pnpm
   mise-install python
+  mise-install uv
   mise-install rust
 
   #mise direnv setup --shell zsh --version latest

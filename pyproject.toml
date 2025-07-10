@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "llm-client"
@@ -9,6 +9,7 @@ description = "A client for interacting with LLMs with automatic fallback capabi
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
+#license = {text = "MIT"}
 dependencies = [
     "crawl4ai",
     "openai",
@@ -32,3 +33,10 @@ target-version = ["py311"]
 [tool.isort]
 profile = "black"
 line_length = 88
+
+[tool.uv]
+dev-dependencies = [
+    "pytest",
+    "black",
+    "isort",
+]

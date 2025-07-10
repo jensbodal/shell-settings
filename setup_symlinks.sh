@@ -29,6 +29,7 @@ createsymlink ${SHELL_SETTINGS_DIR}/.aliasrc-shell-settings $HOME/.aliasrc-shell
 createsymlink ${SHELL_SETTINGS_DIR}/.zsh_completions $HOME/.zsh_completions
 createsymlink ${SHELL_SETTINGS_DIR}/.vimrc $HOME/.vimrc
 createsymlink ${SHELL_SETTINGS_DIR}/.direnvrc $HOME/.direnvrc
+createsymlink ${SHELL_SETTINGS_DIR}/.mise.toml $HOME/.config/mise/config.toml
 
 createsymlink ${SHELL_SETTINGS_DIR}/jens-disagrees.zsh-theme $HOME/.oh-my-zsh/themes/jens-disagrees.zsh-theme
 

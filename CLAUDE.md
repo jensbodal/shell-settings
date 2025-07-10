@@ -24,11 +24,11 @@ npm install              # Install Node.js dependencies and setup pre-commit hoo
 
 ### Python Development
 ```bash
-# Install Python dependencies
-pip install -e .[dev]    # Install package in development mode with dev dependencies
-pytest                   # Run Python tests
-black .                  # Format Python code
-isort .                  # Sort imports
+# Install Python dependencies using uv (managed via mise)
+uv sync                  # Install dependencies and dev dependencies from pyproject.toml
+uv run pytest           # Run Python tests
+uv run black .           # Format Python code
+uv run isort .           # Sort imports
 ```
 
 ### Git Hooks
@@ -49,6 +49,7 @@ pkgx pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-p
 
 **Package Management Strategy**
 - Uses `mise` (formerly rtx) for runtime version management
+- `uv` for Python package management and virtual environments
 - Falls back to native package managers (brew, apt, pacman)
 - Custom `pkgx` integration for reproducible tooling
 - Maintains `~/local/` prefix for user-installed binaries
@@ -66,6 +67,7 @@ pkgx pre-commit install --install-hooks --hook-type pre-commit --hook-type pre-p
 - Automatic fallback capability between different LLM providers
 - Configurable model selection and parameters
 - Environment variable driven configuration
+- Managed with `uv` for fast, reliable dependency resolution
 
 **AI Benchmarking (`ai/benchmark/`)**
 - Systematic benchmarking across different LLM models
@@ -108,7 +110,7 @@ When scripts source `_INIT`, these variables become available:
 
 ## Testing
 
-- Python tests: `pytest` (test files: `test_*.py`)
+- Python tests: `uv run pytest` (test files: `test_*.py`)
 - Manual testing: `integration_test.py` for LLM client functionality
 - No automated test runners configured - tests run manually
 
