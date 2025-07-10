@@ -451,5 +451,3 @@ fi
 
 # Created by `pipx` on 2025-06-24 19:58:39
 export PATH="$PATH:/home/jensbodal/.local/bin"
-
-alias claude="/Users/jensbodal/.claude/local/claude"

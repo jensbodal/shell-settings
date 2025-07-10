@@ -2,6 +2,8 @@
 GOOGLE_CLOUD_PROJECT = "bodal-dev"
 
 [tools]
+"npm:@anthropic-ai/claude-code" = "latest"
+"npm:@google/gemini-cli" = "latest"
 gopass = "latest"
 gh = "latest"
 node = "lts"
